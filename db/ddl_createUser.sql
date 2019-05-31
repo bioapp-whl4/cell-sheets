@@ -3,13 +3,14 @@ DROP TABLE IF EXISTS ba.user_role;
 DROP TABLE IF EXISTS ivideo.role;
 
 
-CREATE TABLE ba.user_login
-( user_id serial NOT NULL,
-  username varchar(255),
-  password varchar(255),
-      inserted_at timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP,
-    updated_at timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP,
-  CONSTRAINT pk_user_login PRIMARY KEY (id))
+   CREATE TABLE ba.user_login
+(
+	id serial NOT NULL, 
+    user_id integer,
+    username character varying(255) COLLATE pg_catalog."default",
+    password character varying(255) COLLATE pg_catalog."default",
+    CONSTRAINT pk_user_login PRIMARY KEY (id)
+	)
   
   -- Table: user 
 CREATE TABLE ba."user" 
@@ -32,4 +33,12 @@ CREATE TABLE ba.user_role
      inserted_at timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL, 
      updated_at  timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL, 
      CONSTRAINT pk_user_role PRIMARY KEY ( user_id, role_id ) 
+  );
+  CREATE TABLE ba.role 
+  ( 
+     id          serial NOT NULL, 
+     NAME        varchar(255), 
+     inserted_at timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL, 
+     updated_at  timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL, 
+     CONSTRAINT pk_roles PRIMARY KEY ( id ) 
   );
