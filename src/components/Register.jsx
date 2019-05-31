@@ -18,7 +18,7 @@ class Register extends Component{
 
     handleSubmit = async event => {
         event.preventDefault()
-        // check that passwords match. if not, notify user and clear  password fields
+        // check that passwords match. if not, notify user and clear password fields
         if (this.state.password !== this.state.confirm_password){
             Swal.fire({
                 type: 'error',
