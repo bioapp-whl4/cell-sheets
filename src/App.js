@@ -1,13 +1,10 @@
 import React from 'react';
-import Sample from './components/Sample'
-import Square from './components/Square'
+import Register from './Components/Register'
 
 function App() {
   return (
     <div>
-      <Square>
-        <Sample/>
-      </Square>
+      <Register/>
     </div>
   );
 }
