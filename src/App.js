@@ -1,11 +1,14 @@
-import React from 'react';
-import Register from './Componenets/Register'
+import React from "react";
+import store from "./redux/store";
+import Register from "./Componenets/Register";
 
 function App() {
   return (
-    <div>
-      <Register/>
-    </div>
+    <Provider store={store}>
+      <div>
+        <Register />
+      </div>
+    </Provider>
   );
 }
 
