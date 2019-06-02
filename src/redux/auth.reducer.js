@@ -1,13 +1,10 @@
 const initialState = {
   user_id: null,
   username: "",
-  firstname: "",
-  lastname: "",
+  first_name: "",
+  last_name: "",
   email: "",
-  authenticated: false,
-  videos: [],
-  cart: [],
-  cartTotal: 0
+  sample: []
 };
 //AUTH
 const UPDATE_USER_ID = "UPDATE_USER_ID";
@@ -37,8 +34,8 @@ export default function reducer(state = initialState, action) {
     case UPDATE_USERNAME:
       return { ...state, username: payload };
     case UPDATE_USER_DETAILS:
-      const { firstname, lastname, email } = payload;
-      return { ...state, firstname, lastname, email };
+      const { first_name, last_name, email } = payload;
+      return { ...state, first_name, last_name, email };
     case GET_USER + "_FULFILLED":
       const { user_id } = payload;
       return { ...state, user_id };
