@@ -1,11 +1,15 @@
 import React from 'react';
-import Register from './Componenets/Register'
+import router from './router'
+import {HashRouter} from 'react-router-dom'
 
 function App() {
   return (
+    <HashRouter>
     <div>
-      <Register/>
+     
+      {router}
     </div>
+    </HashRouter>
   );
 }
 
