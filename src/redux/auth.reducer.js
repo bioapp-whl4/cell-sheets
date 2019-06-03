@@ -5,7 +5,12 @@ const initialState = {
   firstname: "",
   lastname: "",
   email: "",
-  sample: []
+  sample: [],
+  // freezer info
+  freezer: [],
+  freezercane: [],
+  freezerbox: [],
+  box: []
 };
 //AUTH
 const UPDATE_USER_ID = "UPDATE_USER_ID";
@@ -14,7 +19,36 @@ const UPDATE_USER_DETAILS = "UPDATE_USER_DETAILS";
 const GET_USER = "GET_USER_DETAILS";
 const ADD_SAMPLE = "ADD_SAMPLE";
 //const UPDATE_SAMPLE = "UPDATE_SAMPLE";
-
+//freezer info
+const UPDATE_FREEZER = 'UPDATE_FREEZER'
+const UPDATE_FREEZERCANE = 'UPDATE_FREEZERCANE'
+const UPDATE_FREEZERBOX = 'UPDATE_FREEZERBOX'
+const UPDATE_BOX = 'UPDATE_BOX'
+// freezer info export functions
+export function updateFreezer(freezer) {
+  return {
+    type: UPDATE_FREEZER,
+    payload: freezer
+  }
+}
+export function updateFreezerCane(freezercane) {
+  return {
+    type: UPDATE_FREEZERCANE,
+    payload: freezercane
+  }
+}
+export function updateFreezerBox(freezerbox) {
+  return {
+    type: UPDATE_FREEZERBOX,
+    payload: freezerbox
+  }
+}
+export function updateBox (box) {
+  return {
+    type: UPDATE_BOX,
+    payload: box
+  }
+}
 export function updateUserId(id) {
   return {
     type: UPDATE_USER_ID,
@@ -52,6 +86,15 @@ export default function reducer(state = initialState, action) {
         cart: payload.cart,
         total: payload.total
       });
+    //Freezer locations
+    case UPDATE_FREEZER:
+    return {...state,freezer: payload}
+    case UPDATE_FREEZERCANE:
+    return {...state,freezercane: payload}
+    case UPDATE_FREEZERBOX:
+    return {...state,freezerbox: payload}
+    case UPDATE_BOX:
+    return {...state,box: payload}
     default:
       return state;
   }

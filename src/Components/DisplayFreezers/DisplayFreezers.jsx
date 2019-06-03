@@ -1,8 +1,10 @@
 import React, { Component} from 'react'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
+import {updateFreezer} from '../../redux/auth.reducer'
+import {connect} from 'react-redux'
 
-class Display extends Component {
+class DisplayFreezers extends Component {
     constructor() {
         super();
         this.state = {
@@ -38,5 +40,8 @@ class Display extends Component {
         )
     }
 }
+const mapStateToProps = {
+    updateFreezer
+}
 
-export default Display
+export default connect(null,mapStateToProps)(DisplayFreezers)
