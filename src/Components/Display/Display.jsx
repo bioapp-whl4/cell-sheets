@@ -20,6 +20,7 @@ class Display extends Component {
         let displayFreezer = this.state.freezer.map((elem,i)=>{
             return <Link to={`/freezer/${elem.id}`}><div key={i}>
             <h3>{elem.freezer_name}</h3>
+            <i class="fas fa-temperature-low"></i>
             <h4>{elem.freezer_location}</h4>
             <h4>{elem.freezer_type}</h4>
             </div></Link>
@@ -29,6 +30,7 @@ class Display extends Component {
             <div className='contents'>
             <h1 className='CellInventory'>Cell Inventory</h1>
                 <h3 className='category'>Freezers</h3>
+                <i class="fas fa-snowflake cold"></i>
                 <div className='displayContents'>{displayFreezer}</div>
             </div>
                 
