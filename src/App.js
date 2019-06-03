@@ -1,7 +1,7 @@
 import React from "react";
 import store from "./redux/store";
 import { Provider } from "react-redux";
-import Register from "./components/Register";
+import Register from "./Components/Register";
 import { HashRouter } from "react-router-dom";
 
 function App() {
