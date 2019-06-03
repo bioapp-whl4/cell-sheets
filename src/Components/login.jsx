@@ -1,5 +1,5 @@
 import React, { Component} from 'react'
-import {Link} from 'react-router-dom'
+import {Link, withRouter} from 'react-router-dom'
 import axios from 'axios'
 
 class Login extends Component {
@@ -21,7 +21,7 @@ class Login extends Component {
         this.setState({loginError: false})
         console.log('submitted successful',this.state.loginError)
         //     this.props.updateAuthenticated(user.data.authenticated)
-        //     this.props.history.push('/dashboard')
+            this.props.history.push('/dashboard')
         }
 
         catch(err) {this.setState({ email: '', password: '', loginError: true, authenticated: false })
@@ -51,4 +51,4 @@ render() {
 //     updateAuthenticated
 // }
 // export default connect(null, mapDispatchToProps)(withRouter(Login))
-export default Login
+export default withRouter(Login)
