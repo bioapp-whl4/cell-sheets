@@ -1,5 +1,5 @@
 import React from 'react';
-import Register from './Componenets/Register'
+import Register from './components/Register'
 
 function App() {
   return (
@@ -8,5 +8,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
