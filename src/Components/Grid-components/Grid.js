@@ -1,8 +1,6 @@
 import React from 'react'
 import Sample from './Sample'
 import Square from './Square'
-import {DragAndDropContext} from 'react-dnd'
-import HTML5Backend from 'react-dnd-html5-backend'
 
 export default function Grid(props){
     function setColor(j){
@@ -23,12 +21,12 @@ export default function Grid(props){
             }
         }
 
-        const item = occupied ? <Sample color ={color} number={index}/> : null
-        const func = item ? () => props.select(index) : () => props.move([x,y])
-        
+        const sample = occupied ? <Sample color ={color} index={index} get={props.get}/> : null
+
         return(
-            <div key={i} onClick={func}>
-                <Square>{item}</Square>
+            // onClick={() => props.move(x,y,index)}
+            <div key={i}>
+                <Square move={props.move} index={index} x={x} y={y}>{sample}</Square>
             </div>
         )
     }
@@ -45,7 +43,7 @@ export default function Grid(props){
             width: '920px',
             height: '920px'
         }}>
-        {squares}
+            {squares}
         </div>
     )
 }
