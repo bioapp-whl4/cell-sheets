@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
+import axios from 'axios'
+import {Link} from 'react-router-dom'
 import Swal from 'sweetalert2'
 
-class Register extends Component{
+class Register extends Component {
     state = {
-        first_name: '',
-        last_name: '',
+        firstname: '',
+        lastname: '',
         email: '',
         password: '',
         confirm_password: ''
@@ -24,25 +26,38 @@ class Register extends Component{
                 type: 'error',
                 title: 'Oops...',
                 text: 'Your passwords do not match'
-              })
+            })
             this.setState({
                 password: '',
                 confirm_password: ''
             })
-            return
-        }
+
+        } else {
+        const { firstname, lastname, email, password } = this.state
+        await axios.post('/auth/register', { firstname, lastname, email, password })
+        this.setState({
+            firstname: '',
+            lastname: '',
+            email: '',
+            password: '',
+            confirm_password: ''
+        })
+        console.log('Submitted Successfully')
+        
     }
+}
 
-    render(){
+    render() {
 
-        return(
+        return (
             <form onSubmit={this.handleSubmit}>
-                <input onChange={this.handleChange} type="text" name='first_name' placeholder='First Name'/>
-                <input onChange={this.handleChange} type="text" name='last_name' placeholder='Last Name'/>
-                <input onChange={this.handleChange} type="text" name='email' placeholder='Email'/>
-                <input onChange={this.handleChange} type="password" name='password' placeholder='Password' value={this.state.password}/>
-                <input onChange={this.handleChange} type="password" name='confirm_password' placeholder='Confirm Password' value={this.state.confirm_password}/>
-                <button>Register</button>
+                <input onChange={this.handleChange} type="text" name='firstname' placeholder='First Name' value={this.state.firstname} />
+                <input onChange={this.handleChange} type="text" name='lastname' placeholder='Last Name' value={this.state.lastname}/>
+                <input onChange={this.handleChange} type="text" name='email' placeholder='Email' value={this.state.email}/>
+                <input onChange={this.handleChange} type="password" name='password' placeholder='Password' value={this.state.password} />
+                <input onChange={this.handleChange} type="password" name='confirm_password' placeholder='Confirm Password' value={this.state.confirm_password} />
+                <button onClick={this.handleSubmit}>Register</button>
+                <Link to='/'><button>Back</button></Link>
             </form>
         )
     }
