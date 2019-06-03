@@ -32,7 +32,7 @@ class Register extends Component {
                 confirm_password: ''
             })
 
-        }
+        } else {
         const { firstname, lastname, email, password } = this.state
         await axios.post('/auth/register', { firstname, lastname, email, password })
         this.setState({
@@ -42,16 +42,18 @@ class Register extends Component {
             password: '',
             confirm_password: ''
         })
+        console.log('Submitted Successfully')
         
     }
+}
 
     render() {
 
         return (
             <form onSubmit={this.handleSubmit}>
-                <input onChange={this.handleChange} type="text" name='firstname' placeholder='First Name' />
-                <input onChange={this.handleChange} type="text" name='lastname' placeholder='Last Name' />
-                <input onChange={this.handleChange} type="text" name='email' placeholder='Email' />
+                <input onChange={this.handleChange} type="text" name='firstname' placeholder='First Name' value={this.state.firstname} />
+                <input onChange={this.handleChange} type="text" name='lastname' placeholder='Last Name' value={this.state.lastname}/>
+                <input onChange={this.handleChange} type="text" name='email' placeholder='Email' value={this.state.email}/>
                 <input onChange={this.handleChange} type="password" name='password' placeholder='Password' value={this.state.password} />
                 <input onChange={this.handleChange} type="password" name='confirm_password' placeholder='Confirm Password' value={this.state.confirm_password} />
                 <button onClick={this.handleSubmit}>Register</button>
