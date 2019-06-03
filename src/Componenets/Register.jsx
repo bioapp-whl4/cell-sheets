@@ -42,7 +42,7 @@ class Register extends Component {
             password: '',
             confirm_password: ''
         })
-        console.log('submiting registration')
+        
     }
 
     render() {
