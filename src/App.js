@@ -1,16 +1,19 @@
-import React from 'react';
-import router from './router'
-import {HashRouter} from 'react-router-dom'
-
+import React from "react";
+import store from "./redux/store";
+import { Provider } from "react-redux";
+import Register from "./components/Register";
+import { HashRouter } from "react-router-dom";
 
 function App() {
   return (
-    <HashRouter>
-    <div>
-     
-      {router}
-    </div>
-    </HashRouter>
+    <Provider store={store}>
+      <HashRouter>
+        <div>
+          <Register />
+        </div>
+      </HashRouter>
+    </Provider>
   );
 }
+
 export default App;
