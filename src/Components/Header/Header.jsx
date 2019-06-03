@@ -5,8 +5,10 @@ class Header extends Component {
         return(
             <div className='Header'>
             <div className='BlueBar'></div>
-            <h3 className='AppName'>CELL SHEETS</h3>
             <h4 className='logout'>LOG OUT</h4>
+            <i className="fas fa-search search"></i>
+            <h3 className='AppName'>CELL SHEETS</h3>
+            
             </div>
         )
     }

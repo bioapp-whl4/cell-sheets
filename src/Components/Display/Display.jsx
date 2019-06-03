@@ -27,9 +27,9 @@ class Display extends Component {
         return (
             <div className='display'>
             <div className='contents'>
-            <h1>Cell Inventory</h1>
-                <h3>Freezers</h3>
-                {displayFreezer}
+            <h1 className='CellInventory'>Cell Inventory</h1>
+                <h3 className='category'>Freezers</h3>
+                <div className='displayContents'>{displayFreezer}</div>
             </div>
                 
             </div>
