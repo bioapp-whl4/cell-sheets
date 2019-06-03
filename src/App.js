@@ -2,6 +2,7 @@ import React from 'react';
 import router from './router'
 import {HashRouter} from 'react-router-dom'
 
+
 function App() {
   return (
     <HashRouter>
@@ -12,5 +13,4 @@ function App() {
     </HashRouter>
   );
 }
-
 export default App;
