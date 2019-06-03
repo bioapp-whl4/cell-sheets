@@ -2,10 +2,13 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
-import { updateUserId, updateUsername } from "../../redux/auth.reducer";
+import { connect } from "react-redux";
+//import { withRouter } from "react-router-dom";
+import { updateUserId, updateFirstname } from "../../src/redux/auth.reducer";
 
 class Register extends Component {
   state = {
+    user_id: null,
     firstname: "",
     lastname: "",
     email: "",
@@ -33,8 +36,9 @@ class Register extends Component {
         confirm_password: ""
       });
     } else {
+      console.log("mystate", this.state);
       const { firstname, lastname, email, password } = this.state;
-      await axios.post("/auth/register", {
+      const res = await axios.post("/auth/register", {
         firstname,
         lastname,
         email,
@@ -47,10 +51,11 @@ class Register extends Component {
         password: "",
         confirm_password: ""
       });
+      console.log("my user_id", res.data.user_id);
+      this.props.updateFirstname(firstname);
+      this.props.updateUserId(res.data.user_id);
       console.log("Submitted Successfully");
     }
-    this.props.updateUsername(username);
-    this.props.updateUserId(res.data.user_id);
   };
 
   render() {
@@ -104,12 +109,11 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-  updateUsername,
+  updateFirstname,
   updateUserId
 };
-c;
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withRouter(Register));
+)(Register);

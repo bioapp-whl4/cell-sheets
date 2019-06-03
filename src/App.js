@@ -1,13 +1,17 @@
 import React from "react";
 import store from "./redux/store";
-import Register from "./Componenets/Register";
+import { Provider } from "react-redux";
+import Register from "./components/Register";
+import { HashRouter } from "react-router-dom";
 
 function App() {
   return (
     <Provider store={store}>
-      <div>
-        <Register />
-      </div>
+      <HashRouter>
+        <div>
+          <Register />
+        </div>
+      </HashRouter>
     </Provider>
   );
 }
