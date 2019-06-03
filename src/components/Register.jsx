@@ -1,11 +1,13 @@
 import React, { Component } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { updateUserId, updateUsername } from "../../redux/auth.reducer";
 
 class Register extends Component {
   state = {
-    first_name: "",
-    last_name: "",
+    firstname: "",
+    lastname: "",
     email: "",
     password: "",
     confirm_password: ""
@@ -19,7 +21,7 @@ class Register extends Component {
 
   handleSubmit = async event => {
     event.preventDefault();
-    // check that passwords match. if not, notify user and clear  password fields
+    // check that passwords match. if not, notify user and clear password fields
     if (this.state.password !== this.state.confirm_password) {
       Swal.fire({
         type: "error",
@@ -30,10 +32,25 @@ class Register extends Component {
         password: "",
         confirm_password: ""
       });
-      this.props.updateUsername(username);
-      this.props.updateUserId(res.data.user_id);
-      return;
+    } else {
+      const { firstname, lastname, email, password } = this.state;
+      await axios.post("/auth/register", {
+        firstname,
+        lastname,
+        email,
+        password
+      });
+      this.setState({
+        firstname: "",
+        lastname: "",
+        email: "",
+        password: "",
+        confirm_password: ""
+      });
+      console.log("Submitted Successfully");
     }
+    this.props.updateUsername(username);
+    this.props.updateUserId(res.data.user_id);
   };
 
   render() {
@@ -42,20 +59,23 @@ class Register extends Component {
         <input
           onChange={this.handleChange}
           type="text"
-          name="first_name"
+          name="firstname"
           placeholder="First Name"
+          value={this.state.firstname}
         />
         <input
           onChange={this.handleChange}
           type="text"
-          name="last_name"
+          name="lastname"
           placeholder="Last Name"
+          value={this.state.lastname}
         />
         <input
           onChange={this.handleChange}
           type="text"
           name="email"
           placeholder="Email"
+          value={this.state.email}
         />
         <input
           onChange={this.handleChange}
@@ -71,7 +91,10 @@ class Register extends Component {
           placeholder="Confirm Password"
           value={this.state.confirm_password}
         />
-        <button>Register</button>
+        <button onClick={this.handleSubmit}>Register</button>
+        <Link to="/">
+          <button>Back</button>
+        </Link>
       </form>
     );
   }
