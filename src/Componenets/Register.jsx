@@ -84,6 +84,7 @@ const mapDispatchToProps = {
   updateUsername,
   updateUserId
 };
+c;
 
 export default connect(
   mapStateToProps,
