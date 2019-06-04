@@ -17,15 +17,15 @@ class DisplayFreezers extends Component {
     getFreezers = async () => {
        let res = await axios.get('/api/freezers')
        this.setState({freezers: res.data})
-       this.props.updateFreezer(res.data)
+       this.props.updateFreezers(res.data)
     }
     render() {
         let displayFreezers = this.state.freezers.map((elem,i)=>{
             return <Link to={`/api/freezercanes/${elem.id}`}><div key={i}>
-            <h3>{elem.name}</h3>
+            <h3>{elem.freezer_name}</h3>
             <i class="fas fa-temperature-low"></i>
             <h4>{elem.temperature}</h4>
-            <h4>{elem.freezer_name}</h4>
+            <h4>{elem.freezer_type}</h4>
             </div></Link>
         })
         return (
