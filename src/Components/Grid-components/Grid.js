@@ -7,14 +7,19 @@ export default function Grid(props){
         if(j % 2 === 0) return 'red'
         else return 'blue'
     }
-    function renderSquare(i, position){
+
+    function showData(specimen, index){
+        return index !== undefined ? console.log(specimen) : null
+    }
+
+    function renderSquare(i, specimens){
         const x = i % 9
         const y = Math.floor(i / 9)
         var occupied
         var index
         var color
-        for(let j = 0; j < position.length; j++){
-            if(x === position[j][0] && y === position[j][1]){
+        for(let j = 0; j < specimens.length; j++){
+            if(x === specimens[j].location[0] && y === specimens[j].location[1]){
                 occupied = true
                 index = j
                 color = setColor(j)
@@ -24,8 +29,7 @@ export default function Grid(props){
         const sample = occupied ? <Sample color ={color} index={index} get={props.get}/> : null
 
         return(
-            // onClick={() => props.move(x,y,index)}
-            <div key={i}>
+            <div key={i} onMouseOver={() => showData(specimens[index], index)}>
                 <Square move={props.move} index={index} x={x} y={y}>{sample}</Square>
             </div>
         )
@@ -33,7 +37,7 @@ export default function Grid(props){
     
     var squares = []
     for(let i = 0; i < 81; i++){
-        squares.push(renderSquare(i, props.positions))
+        squares.push(renderSquare(i, props.specimens))
     }
 
     return(
