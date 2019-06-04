@@ -36,9 +36,9 @@ CREATE TABLE ba.freezer (
     id serial NOT NULL  ,
     name varchar(255)  ,
     temperature decimal(10,2)  ,
-    freezer_id int  ,
+	hierarchy_id int default 3, 
     inserted_at timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL  ,
-    updated_at int  ,
+    updated_at int,
     CONSTRAINT pk_freezer PRIMARY KEY (id)
 );
 
@@ -138,7 +138,7 @@ CREATE TABLE ba.sample (
     name varchar(100)  ,
     description text  ,
     freeze_date timestamp  ,
-    cell_vial int  ,
+    cell_vial int  , --cell count
     experiment_id int  ,
     freeezer_id int  ,
     location_id int  ,
@@ -219,3 +219,21 @@ CREATE TABLE user_role (
     updated_at  timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL  ,
     CONSTRAINT pk_user_role PRIMARY KEY (user_id,role_id)
 );
+
+DROP TABLE ba.hierarchy
+
+CREATE TABLE ba.hierarchy (
+   hierarchy_id int  NOT NULL,
+   name varchar(30)  NOT NULL,
+   parent_id int  NULL,
+   CONSTRAINT hierarchy_pk PRIMARY KEY (hierarchy_id)
+);
+
+INSERT INTO ba.hierarchy(
+	hierarchy_id, name, parent_id)
+	VALUES (1, 'location', null),
+	(2, 'lab', 1), 
+	(3, 'freezer', 2), 
+	(4, 'cane', 3), 
+	(5, 'box', 4), 
+	(6, 'sample', 5)
