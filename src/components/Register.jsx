@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { connect } from "react-redux";
 //import { withRouter } from "react-router-dom";
-import { updateUserId, updateFirstname } from "../../src/redux/auth.reducer";
+import { updateUserId, updateFirstname } from "../redux/auth.reducer";
 
 class Register extends Component {
   state = {
