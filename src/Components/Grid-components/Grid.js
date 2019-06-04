@@ -8,10 +8,6 @@ export default function Grid(props){
         else return 'blue'
     }
 
-    function showData(specimen, index){
-        return index !== undefined ? console.log(specimen) : null
-    }
-
     function renderSquare(i, specimens){
         const x = i % 9
         const y = Math.floor(i / 9)
@@ -29,7 +25,7 @@ export default function Grid(props){
         const sample = occupied ? <Sample color ={color} index={index} get={props.get}/> : null
 
         return(
-            <div key={i} onMouseOver={() => showData(specimens[index], index)}>
+            <div key={i} onMouseOver={() => props.showData(specimens[index])} onMouseOut={props.hideData}>
                 <Square move={props.move} index={index} x={x} y={y}>{sample}</Square>
             </div>
         )
