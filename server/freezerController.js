@@ -24,5 +24,47 @@ module.exports = {
     } catch (err) {
       console.sendStatus(500);
     }
+  },
+  getCane: async (req, res) => {
+    const db = req.app.get("db");
+    const cane_id = parseInt(req.query.id);
+    try {
+      const data = await db.getCane({ cane_id });
+      res.status(200).send(data);
+    } catch (err) {
+      res.sendStatus(500);
+    }
+  },
+  getBoxesByCaneId: async (req, res) => {
+    const db = req.app.get("db");
+    const cane_id = parseInt(req.query.id);
+    try {
+      const data = await db.getBoxesByCaneId({ cane_id });
+      res.status(200).send(data);
+    } catch (err) {
+      console.sendStatus(500);
+    }
+  },
+  getBox: async (req, res) => {
+    const db = req.app.get("db");
+    const box_id = parseInt(req.query.id);
+    console.log("box_id", box_id);
+    try {
+      const data = await db.getBox({ box_id });
+      res.status(200).send(data);
+    } catch (err) {
+      console.log(err);
+      res.sendStatus(500);
+    }
+  },
+  getSamplesByBoxId: async (req, res) => {
+    const db = req.app.get("db");
+    const box_id = parseInt(req.query.id);
+    try {
+      const data = await db.getSamplesByBoxId({ box_id });
+      res.status(200).send(data);
+    } catch (err) {
+      console.sendStatus(500);
+    }
   }
 };
