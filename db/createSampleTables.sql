@@ -3,95 +3,97 @@
 
 -- tables
 -- Table: box
-CREATE TABLE box (
+CREATE TABLE ba.box (
     id serial NOT NULL  ,
     name varchar(255),
-    inserted_at timestamp,
-    updated_at timestamp,
-    CONSTRAINT pk_tag PRIMARY KEY (id)
+    inserted_at timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at  timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    CONSTRAINT pk_box PRIMARY KEY (id)
 );
 
 -- Table: cane
-CREATE TABLE cane (
+CREATE TABLE ba.cane (
     id serial NOT NULL  ,
     name varchar(255) ,
-    inserted_at timestamp ,
-    updated_at timestamp ,
-    CONSTRAINT pk_tag PRIMARY KEY (id)
+    inserted_at timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL ,
+    updated_at  timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL ,
+    CONSTRAINT pk_cane PRIMARY KEY (id)
 );
 
 -- Table: experiment
-CREATE TABLE experiment (
+CREATE TABLE ba.experiment (
     id serial NOT NULL  ,
     name varchar(255)  ,
-    inserted_at timestamp  ,
-    updated_at timestamp  ,
-    CONSTRAINT pk_tag PRIMARY KEY (id)
+    experiment_id varchar(200), 
+    scientist_user_id int,
+    inserted_at timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL  ,
+    updated_at  timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL  ,
+    CONSTRAINT pk_experiment PRIMARY KEY (id)
 );
 
 -- Table: freezer
-CREATE TABLE freezer (
+CREATE TABLE ba.freezer (
     id serial NOT NULL  ,
     name varchar(255)  ,
     temperature decimal(10,2)  ,
     freezer_id int  ,
-    inserted_at timestamp  ,
+    inserted_at timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL  ,
     updated_at int  ,
-    CONSTRAINT pk_tag PRIMARY KEY (id)
+    CONSTRAINT pk_freezer PRIMARY KEY (id)
 );
 
 -- Table: freezer_type
-CREATE TABLE freezer_type (
+CREATE TABLE ba.freezer_type (
     id serial NOT NULL  ,
     name varchar(255)  ,
-    inserted_at timestamp  ,
-    updated_at timestamp  ,
+    inserted_at timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL  ,
+    updated_at  timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL  ,
     freezer_id int  ,
-    CONSTRAINT pk_tag PRIMARY KEY (id)
+    CONSTRAINT pk_freezer_type PRIMARY KEY (id)
 );
 
 -- Table: freezing_medium
-CREATE TABLE freezing_medium (
+CREATE TABLE ba.freezing_medium (
     id serial NOT NULL  ,
     name varchar(255)  ,
-    inserted_at timestamp  ,
-    updated_at timestamp  ,
-    CONSTRAINT pk_tag PRIMARY KEY (id)
+    inserted_at timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL  ,
+    updated_at  timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL  ,
+    CONSTRAINT pk_freezing_medium PRIMARY KEY (id)
 );
 
 -- Table: lab
-CREATE TABLE lab (
+CREATE TABLE ba.lab (
     id serial NOT NULL  ,
     name varchar(255)  ,
-    inserted_at timestamp  ,
-    updated_at timestamp  ,
+    inserted_at timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL  ,
+    updated_at  timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL  ,
     freezer_id int  ,
     location_id int  ,
     freezer_2_id int  ,
-    CONSTRAINT pk_tag PRIMARY KEY (id)
+    CONSTRAINT pk_lab PRIMARY KEY (id)
 );
 
 -- Table: location
-CREATE TABLE location (
+CREATE TABLE ba.location (
     id serial NOT NULL  ,
     name varchar(255)  ,
     state varchar(200)  ,
-    inserted_at timestamp  ,
+    inserted_at timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL  ,
     city varchar(200)  ,
-    CONSTRAINT pk_tag PRIMARY KEY (id)
+    CONSTRAINT pk_location PRIMARY KEY (id)
 );
 
 -- Table: order_item
-CREATE TABLE order_item (
+CREATE TABLE ba.order_item (
     id serial NOT NULL  ,
     pick_list_id int  ,
     sample_id int  ,
     quantity int  ,
-    CONSTRAINT order_item_pk PRIMARY KEY (id)
+    CONSTRAINT pk_order_item PRIMARY KEY (id)
 );
 
 -- Table: pick_item
-CREATE TABLE pick_item (
+CREATE TABLE ba.pick_item (
     id serial NOT NULL  ,
     pick_list_id int  ,
     sample_id int  ,
@@ -100,37 +102,37 @@ CREATE TABLE pick_item (
 );
 
 -- Table: pick_list
-CREATE TABLE pick_list (
+CREATE TABLE ba.pick_list (
     id serial NOT NULL  ,
     user_id int  ,
-    inserted_at timestamp  ,
-    updated_at timestamp  ,
+    inserted_at timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL  ,
+    updated_at  timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL  ,
     checked_out timestamp  ,
     CONSTRAINT pick_list_pk PRIMARY KEY (id)
 );
 
 -- Table: pick_order
-CREATE TABLE pick_order (
+CREATE TABLE ba.pick_order (
     id serial NOT NULL  ,
     session_id varchar(255)  ,
     user_id integer  ,
-    inserted_at timestamp  ,
-    updated_at timestamp  ,
+    inserted_at timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL  ,
+    updated_at  timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL  ,
     pick_list_id int  ,
-    CONSTRAINT pk_subscription_order PRIMARY KEY (id)
+    CONSTRAINT pk_pick_order PRIMARY KEY (id)
 );
 
 -- Table: role
-CREATE TABLE role (
+CREATE TABLE ba.role (
     id serial NOT NULL  ,
     name varchar(255)  ,
-    inserted_at timestamp  ,
-    updated_at timestamp  ,
+    inserted_at timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL  ,
+    updated_at  timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL  ,
     CONSTRAINT pk_roles PRIMARY KEY (id)
 );
 
 -- Table: sample
-CREATE TABLE sample (
+CREATE TABLE ba.sample (
     id serial NOT NULL  ,
     user_key varchar(200)  ,
     name varchar(100)  ,
@@ -141,7 +143,8 @@ CREATE TABLE sample (
     freeezer_id int  ,
     location_id int  ,
     cane_id int  ,
-    box_position int  ,
+    box_id int, 
+    box_position integer[1][1],
     culture_condition varchar(250)  ,
     freezing_medium_id int  ,
     expanded_note text  ,
@@ -152,63 +155,59 @@ CREATE TABLE sample (
     add5 varchar(200)  ,
     pick_order_id int  ,
     order_item_id int  ,
-    inserted_at timestamp  ,
-    updated_at timestamp  ,
-    experiment_2_id int  ,
-    freezer_id int  ,
-    location_2_id int  ,
-    box_id int  ,
-    CONSTRAINT sample_pk PRIMARY KEY (id)
+    inserted_at timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL  ,
+    updated_at  timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL ,
+    CONSTRAINT bsample_pk PRIMARY KEY (id)
 );
 
 -- Table: sample_tag
-CREATE TABLE sample_tag (
+CREATE TABLE ba.sample_tag (
     tag_id integer  ,
-    inserted_at timestamp  ,
-    updated_at timestamp  ,
+    inserted_at timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL  ,
+    updated_at  timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL  ,
     sample_id int  ,
-    CONSTRAINT pk_product_tag PRIMARY KEY (tag_id)
+    CONSTRAINT pk_sample_tag PRIMARY KEY (tag_id)
 );
 
 -- Table: sample_type
-CREATE TABLE sample_type (
+CREATE TABLE ba.sample_type (
     id serial NOT NULL  ,
     pick_order_id int  ,
     sku varchar(255)  ,
     name varchar(255)  NULL,
     description text  ,
-    inserted_at timestamp  ,
-    updated_at timestamp  ,
-    CONSTRAINT pk_product PRIMARY KEY (id)
+    inserted_at timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL  ,
+    updated_at  timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL  ,
+    CONSTRAINT pk_sample_type PRIMARY KEY (id)
 );
 
 -- Table: session
-CREATE TABLE session (
+CREATE TABLE ba.session (
     id varchar(255)  ,
     data text  ,
-    inserted_at timestamp  ,
-    updated_at timestamp  ,
+    inserted_at timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL  ,
+    updated_at  timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL  ,
     CONSTRAINT pk_sessions PRIMARY KEY (id)
 );
 
 -- Table: tag
-CREATE TABLE tag (
+CREATE TABLE ba.tag (
     id serial NOT NULL  ,
     name varchar(255)  ,
-    inserted_at timestamp  ,
-    updated_at timestamp  ,
+    inserted_at timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL  ,
+    updated_at  timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL  ,
     CONSTRAINT pk_tag PRIMARY KEY (id)
 );
 
 -- Table: user
-CREATE TABLE "user" (
+CREATE TABLE ba."user" (
     id serial NOT NULL  ,
     email varchar(255)  ,
     first_name varchar(255)  ,
     last_name varchar(255)  ,
     active boolean   DEFAULT true,
-    inserted_at timestamp  ,
-    updated_at timestamp  ,
+    inserted_at timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL  ,
+    updated_at  timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL  ,
     CONSTRAINT pk_user PRIMARY KEY (id)
 );
 
@@ -216,7 +215,7 @@ CREATE TABLE "user" (
 CREATE TABLE user_role (
     user_id integer  ,
     role_id integer  ,
-    inserted_at timestamp  ,
-    updated_at timestamp  ,
+    inserted_at timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL  ,
+    updated_at  timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL  ,
     CONSTRAINT pk_user_role PRIMARY KEY (user_id,role_id)
 );

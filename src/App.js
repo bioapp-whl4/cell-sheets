@@ -1,17 +1,18 @@
-import React from "react";
+import React from 'react';
+import router from './router';
+import {HashRouter} from 'react-router-dom';
 import store from "./redux/store";
 import { Provider } from "react-redux";
-import Register from "./components/Register";
 import { HashRouter } from "react-router-dom";
-import GridContextProvider from './components/GridContextProvider'
+import './App.scss'
+
 
 function App() {
   return (
     <Provider store={store}>
       <HashRouter>
         <div>
-          <Register />
-          <GridContextProvider/>
+          {router}
         </div>
       </HashRouter>
     </Provider>

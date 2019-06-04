@@ -3,6 +3,7 @@ const massive = require("massive");
 const session = require("express-session");
 const express = require("express");
 const controller = require("./controller");
+const sampleCtrl = require("./sampleController");
 const { CONNECTION_STRING, SESSION_SECRET, SERVER_PORT } = process.env;
 const app = express();
 
@@ -34,3 +35,5 @@ app.post("/auth/login", controller.login);
 app.post("/auth/register", controller.register);
 // app.get('/auth/logout',controller.logout)
 // app.get('/auth/session',controller.session)
+//SAMPLE-CONTROLLER
+app.get("/api/samples", sampleCtrl.getSamples);
