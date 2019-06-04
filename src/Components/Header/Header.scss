@@ -1,0 +1,33 @@
+.Header {
+    display: flex;
+    background-color: blue;
+    height: 9em;
+    width: 100vw;
+    opacity: .6;
+}
+// .BlueBar {
+//     background-color: blue;
+//     height: 9em;
+//     width: 100vw;
+//     opacity: .6;
+// }
+.AppName {
+    color: white;
+    position: relative;
+    top: .5em;
+    left: 1em;
+    font-size: 35px;
+}
+.logout {
+    color: white;
+    position: relative;
+    top:2%;
+    left: 90%;
+}
+.search {
+    color: white;
+    font-size: 30px;
+    position: relative;
+    top: 60%;
+    left: 80%;
+}
