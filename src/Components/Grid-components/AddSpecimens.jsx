@@ -2,12 +2,15 @@ import React, { Component } from 'react'
 import Swal from 'sweetalert2';
 
 class Filter extends Component{
-    state = {
-        specimens: [],
-        rows: 0,
-        columns: 0,
-        row_to_edit: 0,       
-        column_to_edit: 0
+    constructor(props){
+        super(props)
+        this.state = {
+            specimens: [],
+            rows: 0,
+            columns: 0,
+            row_to_edit: 0,
+            column_to_edit: 0
+        }
     }
 
     handleChange = (e) => {
@@ -43,7 +46,7 @@ class Filter extends Component{
         for (let i = 0; i < this.state.rows; i++){
             for (let j = 0; j < this.state.columns; j++){
                 let new_specimen = {
-                    location: [i, j],
+                    location: [j, i],
                     experiment_id,
                     specimen_id,
                     freeze_date,
@@ -52,9 +55,16 @@ class Filter extends Component{
                 specimens.push(new_specimen)
             }
         }
-        this.setState({
+        await this.setState({
             specimens
         })
+
+        this.props.getSpecimens(this.state.specimens)
+    }
+
+    editRowsColumns = (rows, columns) => {
+        rows.forEach(this.editRow)
+        columns.forEach(this.editColumn)
     }
 
     // [row, column]
@@ -79,7 +89,7 @@ class Filter extends Component{
             })
         let row_to_edit = this.state.row_to_edit - 1
         let new_specimens = this.state.specimens.map(spec => {
-            if (spec.location[0] === row_to_edit){
+            if (spec.location[1] === row_to_edit){
                 let updated_spec = {
                     ...spec,
                     [field_to_edit]: new_value
@@ -89,9 +99,11 @@ class Filter extends Component{
                 return spec
             }
         })
-        this.setState({
+        await this.setState({
             specimens: new_specimens
         })
+
+        this.props.getSpecimens(this.state.specimens)
     }
 
     editColumn = async (e) => {
@@ -115,7 +127,7 @@ class Filter extends Component{
             })
         let column_to_edit = this.state.column_to_edit - 1
         let new_specimens = this.state.specimens.map(spec => {
-            if (spec.location[1] === column_to_edit){
+            if (spec.location[0] === column_to_edit){
                 let updated_spec = {
                     ...spec,
                     [field_to_edit]: new_value
@@ -128,6 +140,8 @@ class Filter extends Component{
         this.setState({
             specimens: new_specimens
         })
+
+        this.props.getSpecimens(this.state.specimens)
     }
 
     showGrid = () => {

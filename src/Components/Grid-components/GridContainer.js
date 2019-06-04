@@ -1,14 +1,21 @@
 import React, {Component} from 'react';
 import Grid from './Grid'
+import AddSpecimens  from './AddSpecimens'
 
 export default class GridContainer extends Component {
   constructor(){
     super()
     this.state = {
-      positions: [[7,4],[3,6],[1,2],[0,0],[1,1],[4,3]],
+      specimens: [],
       originIndex: null,
     }
     this.moveItem = this.moveItem.bind(this)
+  }
+
+  getSpecimens = (specimens) => {
+    this.setState({
+      specimens
+    })
   }
 
   getIndex = (index) => {
@@ -19,31 +26,34 @@ export default class GridContainer extends Component {
 
   moveItem(x, y, index){
     let targetIndex = -1
-    for(let i = 0; i < this.state.positions.length; i++){
-      if(this.state.positions[i][0] === x && this.state.positions[i][1] === y){
+    for(let i = 0; i < this.state.specimens.length; i++){
+      if(this.state.specimens[i].location[0] === x && this.state.specimens[i].location[1] === y){
         targetIndex = i
       }
     }
-    let tempArr = this.state.positions
+    let tempArr = this.state.specimens
     if(targetIndex !== -1){
-      const target = this.state.positions[targetIndex]
-      const origin = this.state.positions[this.state.originIndex]
+      const target = this.state.specimens[targetIndex]
+      const origin = this.state.specimens[this.state.originIndex]
       tempArr[this.state.originIndex] = target
       tempArr[index] = origin
     }
     else{
-      tempArr[this.state.originIndex] = [x,y]
+      tempArr[this.state.originIndex].location = [x,y]
     }
 
     this.setState({
-      positions: tempArr,
+      specimens: tempArr,
       originIndex: null
     })
   }
   
   render(){
     return (
-        <Grid move={this.moveItem} get={this.getIndex} positions={this.state.positions}/>
+      <>
+        <Grid move={this.moveItem} get={this.getIndex} specimens={this.state.specimens}/>
+        <AddSpecimens getSpecimens={this.getSpecimens}/>
+      </>
     );
   }
 }
