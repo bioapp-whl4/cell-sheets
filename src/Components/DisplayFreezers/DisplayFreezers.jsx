@@ -1,31 +1,31 @@
 import React, { Component} from 'react'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
-import {updateFreezer} from '../../redux/auth.reducer'
+import {updateFreezers} from '../../redux/auth.reducer'
 import {connect} from 'react-redux'
 
 class DisplayFreezers extends Component {
     constructor() {
         super();
         this.state = {
-            freezer: []
+            freezers: []
         }
     }
     async componentDidMount() {
-        await this.getFreezer()
+        await this.getFreezers()
     }
-    getFreezer = async () => {
-       let res = await axios.get('/freezer')
-       this.setState({freezer: res.data})
+    getFreezers = async () => {
+       let res = await axios.get('/api/freezers')
+       this.setState({freezers: res.data})
        this.props.updateFreezer(res.data)
     }
     render() {
-        let displayFreezer = this.state.freezer.map((elem,i)=>{
-            return <Link to={`/freezercane/${elem.id}`}><div key={i}>
-            <h3>{elem.freezer_name}</h3>
+        let displayFreezers = this.state.freezers.map((elem,i)=>{
+            return <Link to={`/api/freezercanes/${elem.id}`}><div key={i}>
+            <h3>{elem.name}</h3>
             <i class="fas fa-temperature-low"></i>
-            <h4>{elem.freezer_location}</h4>
-            <h4>{elem.freezer_type}</h4>
+            <h4>{elem.temperature}</h4>
+            <h4>{elem.freezer_name}</h4>
             </div></Link>
         })
         return (
@@ -34,7 +34,7 @@ class DisplayFreezers extends Component {
             <h1 className='CellInventory'>Cell Inventory</h1>
                 <h3 className='category'>Freezers</h3>
                 <i class="fas fa-snowflake cold"></i>
-                <div className='displayContents'>{displayFreezer}</div>
+                <div className='displayContents'>{displayFreezers}</div>
             </div>
                 
             </div>
@@ -42,7 +42,7 @@ class DisplayFreezers extends Component {
     }
 }
 const mapDispatchToProps = {
-    updateFreezer
+    updateFreezers
 }
 
 export default connect(null,mapDispatchToProps)(DisplayFreezers)

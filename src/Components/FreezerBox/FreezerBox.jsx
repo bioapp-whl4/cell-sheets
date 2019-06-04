@@ -2,26 +2,26 @@ import React, {Component} from 'react'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {updateFreezerBox} from '../../redux/auth.reducer'
+import {updateFreezerBoxes} from '../../redux/auth.reducer'
 
 class FreezerBox extends Component {
     constructor() {
         super();
         this.state = {
-            freezerBox: []
+            freezerBoxes: []
         }
     }
     async componentDidMount() {
-        await this.getFreezerBox()
+        await this.getFreezerBoxes()
     }
-    getFreezerBox = async () => {
-        let res = await axios.get(`/freezerbox/${this.props.match.params.id}`)
+    getFreezerBoxes = async () => {
+        let res = await axios.get(`/api/freezerbox/${this.props.match.params.id}`)
         this.setState({freezerBox: res.data})
         this.props.updateFreezerBox(res.data)
     }
     render() {
-        let displayFreezerBox = this.state.freezerBox.map((elem,i)=> {
-            return <Link to={`/box/${elem.id}`}>
+        let displayFreezerBoxes = this.state.freezerBox.map((elem,i)=> {
+            return <Link to={`/api/box/${elem.id}`}>
             <div key={i}>
             <h4>{elem.name}</h4>
             </div>
@@ -29,13 +29,13 @@ class FreezerBox extends Component {
         })
         return(
             <div>   
-            <h4>Freezer Box</h4>
-            <div>{displayFreezerBox}</div>
+            <h4>Freezer Boxes</h4>
+            <div>{displayFreezerBoxes}</div>
             </div>
         )
     }
 }
 const mapDispatchToProps = {
-    updateFreezerBox
+    updateFreezerBoxes
 }
 export default connect(null,mapDispatchToProps)(FreezerBox)
