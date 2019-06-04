@@ -3,9 +3,7 @@ import router from './router';
 import {HashRouter} from 'react-router-dom';
 import store from "./redux/store";
 import { Provider } from "react-redux";
-import { HashRouter } from "react-router-dom";
 import './App.scss'
-
 
 function App() {
   return (

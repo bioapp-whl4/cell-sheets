@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Grid from './Grid'
-import AddSpecimens  from '../AddSpecimens'
+import AddSpecimens  from './AddSpecimens'
 
 export default class GridContainer extends Component {
   constructor(){
@@ -11,9 +11,6 @@ export default class GridContainer extends Component {
     }
     this.moveItem = this.moveItem.bind(this)
   }
-
-  //dummy data
-  //{location: [7,4], description: 'test1'}, {location: [1,2], description: 'test2'}, {location: [3,4], description: 'test3'}
 
   getSpecimens = (specimens) => {
     this.setState({

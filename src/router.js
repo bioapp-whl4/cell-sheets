@@ -1,8 +1,8 @@
 import React from 'react'
 import {Switch,Route} from 'react-router-dom'
-import Login from './Components/login'
-import Register from './Components/Register'
-import Dashboard from './Components/Dashboard/Dashboard'
+import Login from './components/login'
+import Register from './components/Register'
+import Dashboard from './components/Dashboard/Dashboard'
 
 export default (
     <Switch>
