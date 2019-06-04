@@ -2,12 +2,15 @@ import React, { Component } from 'react'
 import Swal from 'sweetalert2';
 
 class Filter extends Component{
-    state = {
-        specimens: [],
-        rows: 0,
-        columns: 0,
-        row_to_edit: 0,       
-        column_to_edit: 0
+    constructor(props){
+        super(props)
+        this.state = {
+            specimens: [],
+            rows: 0,
+            columns: 0,
+            row_to_edit: 0,
+            column_to_edit: 0
+        }
     }
 
     handleChange = (e) => {
@@ -52,9 +55,11 @@ class Filter extends Component{
                 specimens.push(new_specimen)
             }
         }
-        this.setState({
+        await this.setState({
             specimens
         })
+
+        this.props.getSpecimens(this.state.specimens)
     }
 
     // [row, column]
@@ -89,9 +94,11 @@ class Filter extends Component{
                 return spec
             }
         })
-        this.setState({
+        await this.setState({
             specimens: new_specimens
         })
+
+        this.props.getSpecimens(this.state.specimens)
     }
 
     editColumn = async (e) => {
@@ -128,6 +135,8 @@ class Filter extends Component{
         this.setState({
             specimens: new_specimens
         })
+
+        this.props.getSpecimens(this.state.specimens)
     }
 
     showGrid = () => {
