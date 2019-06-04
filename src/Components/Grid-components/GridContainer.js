@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Grid from './Grid'
-import AddSpecimens  from './AddSpecimens'
+import AddSpecimens from './AddSpecimens'
+import SampleList from './SampleList'
 
 export default class GridContainer extends Component {
   constructor(){
@@ -8,13 +9,27 @@ export default class GridContainer extends Component {
     this.state = {
       specimens: [],
       originIndex: null,
+      showData: null
     }
     this.moveItem = this.moveItem.bind(this)
+    this.getSpecimens = this.getSpecimens.bind(this)
   }
 
-  getSpecimens = (specimens) => {
-    this.setState({
+  async getSpecimens(specimens){
+    await this.setState({
       specimens
+    })
+  }
+
+  showData = (specimen) => {
+    this.setState({
+      showData: specimen
+    })
+  }
+
+  hideData = () => {
+    this.setState({
+      showData: null
     })
   }
 
@@ -51,8 +66,9 @@ export default class GridContainer extends Component {
   render(){
     return (
       <>
-        <Grid move={this.moveItem} get={this.getIndex} specimens={this.state.specimens}/>
+        <Grid move={this.moveItem} get={this.getIndex} showData={this.showData} hideData={this.hideData} specimens={this.state.specimens}/>
         <AddSpecimens getSpecimens={this.getSpecimens}/>
+        <SampleList specimens={this.state.specimens}/>
       </>
     );
   }
