@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import {connect} from 'react-redux'
+import Popup from 'react-popup'
 import {updateFreezers,updateFreezerCanes,updateFreezerBoxes,updateBoxes} from '../../redux/auth.reducer'
 
 class AddLocation extends Component {
@@ -9,8 +10,8 @@ class AddLocation extends Component {
         this.state = {
             freezer: '',
             freezercane: '',
-            feezerbox:'',
-            box:'',
+            feezerbox:''
+            
         }
     }
     componentDidMount() {
@@ -39,13 +40,35 @@ class AddLocation extends Component {
         let freezerCanes = this.props.freezercanes.map((elem,i)=> {
             return <option value={elem.name} key={i}>{elem.name}</option>
         })
+        let freezerBoxes = this.props.freezerboxes.map((elem,i)=>{
+            return <option value={elem.name} key={i}>{elem.name}</option>
+        })
         return(
             <div>
                 <h3>Location</h3>
-               <h4>freezers</h4>
+               <h4>Freezers</h4>
+               <Popup trigger={<button>Add New Freezer</button>} modal>
+                            {close => (
+                                <div className="modal">
+                                    <button onClick={close} className="close">&times;</button>
+                                    <div className="PopUpheader" > Add New Freezer </div>
+                                    <div className="PopUpcontent" >
+                                        
+                                    </div>
+                                    <div className="PopUpactions" >
+                                        <button className="PopUpcancel" onClick={() => { console.log('modal closed '); close() }}>Cancel</button>
+                                    </div>
+                                </div>
+                            )}
+                        </Popup>
+               
                 <select name='freezer' onChange={this.handleChange}><option value=''>Choose a Freezer</option>{freezers}</select>
-                <h4>freezerCane</h4>
-                <select name='freezerCane' onChange={this.handleChange}><option value=''>Choose a Freezercane</option>{this.props.freezerCanes && freezerCanes}</select>
+                <h4>FreezerCane</h4>
+                <button>Add New Freezercane</button>
+                <select name='freezercane' onChange={this.handleChange}><option value=''>Choose a Freezercane</option>{freezerCanes}</select>
+                <h4>Freezer Boxes</h4>
+                <button>Add New Box</button>
+                <select name='freezerbox' onChange={this.handleChange}><option value=''>Choose a Freezer Box</option>{freezerBoxes}</select>
             </div>
         )
     }
