@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import {connect} from 'react-redux'
-import Popup from 'react-popup'
+import Popup from 'reactjs-popup'
 import {updateFreezers,updateFreezerCanes,updateFreezerBoxes,updateBoxes} from '../../redux/auth.reducer'
 
 class AddLocation extends Component {
@@ -10,7 +10,10 @@ class AddLocation extends Component {
         this.state = {
             freezer: '',
             freezercane: '',
-            feezerbox:''
+            feezerbox:'',
+            // adding Freezer
+            freezer_name: '',
+            freezer_type: ''
             
         }
     }
@@ -53,7 +56,10 @@ class AddLocation extends Component {
                                     <button onClick={close} className="close">&times;</button>
                                     <div className="PopUpheader" > Add New Freezer </div>
                                     <div className="PopUpcontent" >
-                                        
+                                    <h4>Freezer Name</h4>
+                                        <input placeholder='Freezer Name'name='freezer_name'/>
+                                    <h4>Freezer Type</h4>
+                                        <input placeholder='Freezer Type' name='freezer_type'/>
                                     </div>
                                     <div className="PopUpactions" >
                                         <button className="PopUpcancel" onClick={() => { console.log('modal closed '); close() }}>Cancel</button>
