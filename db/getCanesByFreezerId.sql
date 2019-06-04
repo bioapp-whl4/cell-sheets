@@ -1,5 +1,5 @@
 SELECT distinct  
-c.id, c.name as cane FROM 
+f.id as freezer_id, c.id as cane_id, c.name as cane FROM 
 ba.freezer f
 JOIN ba.hierarchy h ON h.parent_id = 3
 JOIN ba.cane c ON c.hierarchy_id = h.hierarchy_id
