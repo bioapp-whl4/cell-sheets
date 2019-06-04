@@ -41,3 +41,5 @@ app.get("/api/samples", sampleCtrl.getSamples);
 
 //FREEZER-CONTROLLER
 app.get("/api/freezers", freezerCtrl.getFreezers);
+app.get("/api/freezer", freezerCtrl.getFreezer);
+app.get("/api/freezer/canes", freezerCtrl.getCanesByFID);
