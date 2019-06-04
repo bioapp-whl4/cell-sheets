@@ -14,9 +14,10 @@ class DisplayFreezers extends Component {
     async componentDidMount() {
         await this.getFreezer()
     }
-    getFreezer = () => {
-        axios.get('/freezer').then(res=> this.setState({freezer: res.data}))
-        .catch(err=> console.log('error on freezer location',err))
+    getFreezer = async () => {
+       let res = await axios.get('/freezer')
+       this.setState({freezer: res.data})
+       this.props.updateFreezer(res.data)
     }
     render() {
         let displayFreezer = this.state.freezer.map((elem,i)=>{
@@ -40,8 +41,8 @@ class DisplayFreezers extends Component {
         )
     }
 }
-const mapStateToProps = {
+const mapDispatchToProps = {
     updateFreezer
 }
 
-export default connect(null,mapStateToProps)(DisplayFreezers)
+export default connect(null,mapDispatchToProps)(DisplayFreezers)

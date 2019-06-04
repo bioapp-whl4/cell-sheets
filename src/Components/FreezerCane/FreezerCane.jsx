@@ -1,7 +1,9 @@
 import React, {Component} from 'react'
 import axios from 'axios'
+import {connect} from 'react-redux'
+import {updateFreezerCane} from '../../redux/auth.reducer'
 
-class FreezerRacks extends Component {
+class FreezerCane extends Component {
     constructor() {
         super();
         this.state = {
@@ -29,4 +31,8 @@ class FreezerRacks extends Component {
         )
     }
 }
-export default Freezer
+
+const mapDispatchToProps = {
+    updateFreezerCane
+}
+export default connect(null,mapDispatchToProps)(FreezerCane)

@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
+import {connect} from 'react-redux'
+import {updateFreezerBox} from '../../redux/auth.reducer'
 
 class FreezerBox extends Component {
     constructor() {
@@ -12,9 +14,10 @@ class FreezerBox extends Component {
     async componentDidMount() {
         await this.getFreezerBox()
     }
-    getFreezerBox = () => {
-        axios.get(`/freezerbox/${this.props.match.params.id}`).then(res=> this.setState({freezerBox: res.data}))
-        .catch(err=>console.log('error on getting freezer box',err))
+    getFreezerBox = async () => {
+        let res = await axios.get(`/freezerbox/${this.props.match.params.id}`)
+        this.setState({freezerBox: res.data})
+        this.props.updateFreezerBox(res.data)
     }
     render() {
         let displayFreezerBox = this.state.freezerBox.map((elem,i)=> {
@@ -32,4 +35,7 @@ class FreezerBox extends Component {
         )
     }
 }
-export default FreezerBox
+const mapDispatchToProps = {
+    updateFreezerBox
+}
+export default connect(null,mapDispatchToProps)(FreezerBox)
