@@ -6,7 +6,7 @@ const initialState = {
   lastname: "",
   email: "",
   sample: [],
-  // freezer info
+  // Add New Sample freezer adding location
   freezers: [],
   freezercanes: [],
   freezerboxes: [],
