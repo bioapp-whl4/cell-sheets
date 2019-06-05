@@ -10,7 +10,8 @@ export default class GridContainer extends Component {
     this.state = {
       specimens: [],
       originIndex: null,
-      showData: null
+      showData: null,
+      addSample: false
     }
     this.componentDidMount = this.componentDidMount.bind(this)
     this.moveItem = this.moveItem.bind(this)
@@ -29,7 +30,6 @@ export default class GridContainer extends Component {
     catch(err){
       console.log(err)
     }
-    
   }
 
   async getSpecimens(specimens){
@@ -87,6 +87,7 @@ export default class GridContainer extends Component {
         <Grid move={this.moveItem} get={this.getIndex} showData={this.showData} hideData={this.hideData} specimens={this.state.specimens}/>
         {/* <AddSpecimens getSpecimens={this.getSpecimens}/> */}
         <SampleList specimens={this.state.specimens}/>
+        <button>Add a sample</button>
       </>
     );
   }
