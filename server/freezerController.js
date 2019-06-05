@@ -66,5 +66,15 @@ module.exports = {
     } catch (err) {
       console.sendStatus(500);
     }
+  },
+  getGridSamplesByBoxId: async (req, res) => {
+    const db = req.app.get("db");
+    const box_id = parseInt(req.query.id);
+    try {
+      const data = await db.getGridSamplesByBoxId({ box_id });
+      res.status(200).send(data);
+    } catch (err) {
+      console.sendStatus(500);
+    }
   }
 };
