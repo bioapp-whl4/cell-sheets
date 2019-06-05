@@ -142,7 +142,7 @@ CREATE TABLE ba.sample (
     freeze_date timestamp  ,
     cell_vial int  , --cell count
     experiment_id int  ,
-    freeezer_id int  ,
+    freezer_id int  ,
     location_id int  ,
     cane_id int  ,
     box_id int, 
