@@ -2,6 +2,7 @@ module.exports = {
   getFreezers: (req, res) => {
     const db = req.app.get("db");
     db.getFreezers().then(data => {
+      console.log(`DB response from getFreezers`, data)
       res.status(200).send(data);
     });
   },
@@ -75,6 +76,61 @@ module.exports = {
       res.status(200).send(data);
     } catch (err) {
       console.sendStatus(500);
+    }
+  },
+  addSample: async (req, res) => {
+    const {
+      user_id,
+      user_key,
+      name,
+      description,
+      freeze_date,
+      cell_vial,
+      freezer_id,
+      experiment_name, //generate experiment_id
+      location_id,
+      cane_id,
+      box_id,
+      box_position,
+      culture_condition,
+      freezing_medium_id,
+      expanded_note,
+      add1,
+      add2,
+      add3,
+      add4,
+      add5
+    } = req.body;
+    console.log(req.body);
+
+    const db = req.app.get("db");
+    try {
+      await db.addSample({
+        user_id,
+        user_key,
+        name,
+        description,
+        freeze_date,
+        cell_vial,
+        freezer_id,
+        experiment_name,
+        location_id,
+        cane_id,
+        box_id,
+        box_position,
+        culture_condition,
+        freezing_medium_id,
+        expanded_note,
+        add1,
+        add2,
+        add3,
+        add4,
+        add5
+      });
+      res.sendStatus(200); //send data for web visual of cart ?
+    } catch (err) {
+      console.log(err);
+      res.sendStatus(500);
     }
   }
 };
