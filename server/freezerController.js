@@ -2,6 +2,7 @@ module.exports = {
   getFreezers: (req, res) => {
     const db = req.app.get("db");
     db.getFreezers().then(data => {
+      console.log(`DB response from getFreezers`, data)
       res.status(200).send(data);
     });
   },

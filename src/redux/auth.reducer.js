@@ -10,7 +10,8 @@ const initialState = {
   freezers: [],
   freezercanes: [],
   freezerboxes: [],
-  boxes: []
+  boxes: [],
+  everything: {}
 };
 //AUTH
 const UPDATE_USER_ID = "UPDATE_USER_ID";
@@ -20,6 +21,7 @@ const GET_USER = "GET_USER_DETAILS";
 const ADD_SAMPLE = "ADD_SAMPLE";
 //const UPDATE_SAMPLE = "UPDATE_SAMPLE";
 //freezer info
+const UPDATE_EVERYTHING = 'UPDATE_EVERYTHING'
 const UPDATE_FREEZERS = 'UPDATE_FREEZERS'
 const UPDATE_FREEZERCANES = 'UPDATE_FREEZERCANES'
 const UPDATE_FREEZERBOXES = 'UPDATE_FREEZERBOXES'
@@ -67,6 +69,12 @@ export function updateUserDetails(obj) {
     payload: obj
   };
 }
+export function updateEverything(array) {
+  return {
+    type: UPDATE_EVERYTHING,
+    payload: array
+  };
+}
 export default function reducer(state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
@@ -88,13 +96,15 @@ export default function reducer(state = initialState, action) {
       });
     //Freezer locations
     case UPDATE_FREEZERS:
-    return {...state,freezers: payload}
+      return {...state,freezers: payload}
     case UPDATE_FREEZERCANES:
-    return {...state,freezercanes: payload}
+      return {...state,freezercanes: payload}
     case UPDATE_FREEZERBOXES:
-    return {...state,freezerboxes: payload}
+      return {...state,freezerboxes: payload}
     case UPDATE_BOXES:
-    return {...state,boxes: payload}
+      return {...state,boxes: payload}
+    case UPDATE_EVERYTHING:
+      return {...state,everything: payload}
     default:
       return state;
   }

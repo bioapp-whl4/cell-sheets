@@ -19,7 +19,6 @@ class Login extends Component {
         try {
         await axios.post('/auth/login',{email,password})
         this.setState({loginError: false})
-        console.log('submitted successful',this.state.loginError)
         //     this.props.updateAuthenticated(user.data.authenticated)
             this.props.history.push('/dashboard')
         }
