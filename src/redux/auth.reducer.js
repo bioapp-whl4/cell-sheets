@@ -7,10 +7,11 @@ const initialState = {
   email: "",
   sample: [],
   // freezer info
-  freezer: [],
-  freezercane: [],
-  freezerbox: [],
-  box: []
+  freezers: [],
+  freezercanes: [],
+  freezerboxes: [],
+  boxes: [],
+  everything: {}
 };
 //AUTH
 const UPDATE_USER_ID = "UPDATE_USER_ID";
@@ -20,33 +21,34 @@ const GET_USER = "GET_USER_DETAILS";
 const ADD_SAMPLE = "ADD_SAMPLE";
 //const UPDATE_SAMPLE = "UPDATE_SAMPLE";
 //freezer info
-const UPDATE_FREEZER = 'UPDATE_FREEZER'
-const UPDATE_FREEZERCANE = 'UPDATE_FREEZERCANE'
-const UPDATE_FREEZERBOX = 'UPDATE_FREEZERBOX'
-const UPDATE_BOX = 'UPDATE_BOX'
+const UPDATE_EVERYTHING = 'UPDATE_EVERYTHING'
+const UPDATE_FREEZERS = 'UPDATE_FREEZERS'
+const UPDATE_FREEZERCANES = 'UPDATE_FREEZERCANES'
+const UPDATE_FREEZERBOXES = 'UPDATE_FREEZERBOXES'
+const UPDATE_BOXES = 'UPDATE_BOXES'
 // freezer info export functions
-export function updateFreezer(freezer) {
+export function updateFreezers(freezers) {
   return {
-    type: UPDATE_FREEZER,
-    payload: freezer
+    type: UPDATE_FREEZERS,
+    payload: freezers
   }
 }
-export function updateFreezerCane(freezercane) {
+export function updateFreezerCanes(freezercanes) {
   return {
-    type: UPDATE_FREEZERCANE,
-    payload: freezercane
+    type: UPDATE_FREEZERCANES,
+    payload: freezercanes
   }
 }
-export function updateFreezerBox(freezerbox) {
+export function updateFreezerBoxes(freezerboxes) {
   return {
-    type: UPDATE_FREEZERBOX,
-    payload: freezerbox
+    type: UPDATE_FREEZERBOXES,
+    payload: freezerboxes
   }
 }
-export function updateBox (box) {
+export function updateBoxes (boxes) {
   return {
-    type: UPDATE_BOX,
-    payload: box
+    type: UPDATE_BOXES,
+    payload: boxes
   }
 }
 export function updateUserId(id) {
@@ -65,6 +67,12 @@ export function updateUserDetails(obj) {
   return {
     type: UPDATE_USER_DETAILS,
     payload: obj
+  };
+}
+export function updateEverything(array) {
+  return {
+    type: UPDATE_EVERYTHING,
+    payload: array
   };
 }
 export default function reducer(state = initialState, action) {
@@ -87,14 +95,16 @@ export default function reducer(state = initialState, action) {
         total: payload.total
       });
     //Freezer locations
-    case UPDATE_FREEZER:
-    return {...state,freezer: payload}
-    case UPDATE_FREEZERCANE:
-    return {...state,freezercane: payload}
-    case UPDATE_FREEZERBOX:
-    return {...state,freezerbox: payload}
-    case UPDATE_BOX:
-    return {...state,box: payload}
+    case UPDATE_FREEZERS:
+      return {...state,freezers: payload}
+    case UPDATE_FREEZERCANES:
+      return {...state,freezercanes: payload}
+    case UPDATE_FREEZERBOXES:
+      return {...state,freezerboxes: payload}
+    case UPDATE_BOXES:
+      return {...state,boxes: payload}
+    case UPDATE_EVERYTHING:
+      return {...state,everything: payload}
     default:
       return state;
   }

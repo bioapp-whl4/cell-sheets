@@ -6,7 +6,7 @@ import HTML5Backend from 'react-dnd-html5-backend'
 export default function ContextProvider(){
     return(
         <DragDropContextProvider backend={HTML5Backend}>
-            <GridContainer/>
+            <GridContainer box_id={1}/>
         </DragDropContextProvider>
     )
 }
