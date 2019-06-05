@@ -26,8 +26,14 @@ class FreezerCane extends Component {
                 <i class="fas fa-layer-group cane"></i>
                 </div></Link>
         })
+        let freezerInfo = this.props.freezers.filter(elem=>{
+            return elem.freezer_id === this.props.match.params.id
+        })
+        console.log('freezer info',this.props.freezers)
+        console.log(freezerInfo)
         return(
             <div>
+                
                 <h4>Freezer Canes</h4>
                 {displayFreezerCanes}
             </div>
@@ -38,4 +44,8 @@ class FreezerCane extends Component {
 const mapDispatchToProps = {
     updateFreezerCanes
 }
-export default connect(null,mapDispatchToProps)(FreezerCane)
+function mapStateToProps (state) {
+   return { freezers: state.freezers
+}
+}
+export default connect(mapStateToProps,mapDispatchToProps)(FreezerCane)
