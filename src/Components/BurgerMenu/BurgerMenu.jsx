@@ -2,23 +2,21 @@ import React, {Component} from 'react'
 import { slide as Menu } from 'react-burger-menu'
 import {decorator as reduxBurgerMenu} from 'redux-burger-menu';
 import {action as toggleMenu} from 'redux-burger-menu';
-import { connect } from 'react-redux'
 import store from '../../redux/store'
 
 class BurgerMenu extends Component {
 
     toggleBurger = () => {
         console.log('firing')
-        const isOpen = true
-        store.dispatch(toggleMenu(isOpen));
+        store.dispatch(toggleMenu(!this.props.isOpen));
     }
 
   render () {
       console.log(this.props)
     return (
-        <div>
+        <div className='burger-menu'>
         <button onClick={this.toggleBurger}>Toggle Burger Menu</button>
-        <Menu>
+        <Menu isOpen={this.props.isOpen}>
             <div>test</div>
             <div>test</div>
             <div>test</div>
@@ -28,16 +26,5 @@ class BurgerMenu extends Component {
   }
 }
 
-// const mapStateToProps = (reduxState) => {
-//     console.log(`reduxState`, reduxState)
-//     const { isOpen } = reduxState
-//     return { isOpen } 
-// }
-
-// const mapDispatchToProps = {
-//     toggleMenu
-// }
-
 export default reduxBurgerMenu(BurgerMenu)
-// export default connect(mapStateToProps, mapDispatchToProps)(BurgerMenu)
-// export default connect(mapStateToProps, mapDispatchToProps)(reduxBurgerMenu(BurgerMenu))
+

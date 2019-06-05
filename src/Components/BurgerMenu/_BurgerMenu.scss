@@ -1,0 +1,17 @@
+$h-indent: 15px;
+
+
+.bm-burger-button{
+    button{
+        height: 0;
+        width: 0;
+        position: relative;
+    }
+}
+
+.burger-menu {
+    position: relative;
+    width: 0;
+    height: 0;
+}
+
