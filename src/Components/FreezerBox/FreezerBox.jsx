@@ -15,21 +15,25 @@ class FreezerBox extends Component {
         await this.getFreezerBoxes()
     }
     getFreezerBoxes = async () => {
-        let res = await axios.get(`/api/freezerbox/${this.props.match.params.id}`)
-        this.setState({freezerBox: res.data})
-        this.props.updateFreezerBox(res.data)
+        let res = await axios.get(`/api/cane/boxes?id=${this.props.match.params.id}`)
+        this.setState({freezerBoxes: res.data})
+        this.props.updateFreezerBoxes(res.data)
     }
     render() {
-        let displayFreezerBoxes = this.state.freezerBox.map((elem,i)=> {
-            return <Link to={`/api/box/${elem.id}`}>
+        let displayFreezerBoxes = this.state.freezerBoxes.map((elem,i)=> {
+            return <Link to={`/api/box/${elem.box_id}`}>
             <div key={i}>
-            <h4>{elem.name}</h4>
+            <h4>Box: {elem.box_name}</h4>
+            <i class="fas fa-box"></i>
             </div>
             </Link>
         })
+      
+        console.log(this.state.freezerBoxes)
         return(
             <div>   
             <h4>Freezer Boxes</h4>
+            
             <div>{displayFreezerBoxes}</div>
             </div>
         )

@@ -11,6 +11,7 @@ class Dashboard extends Component {
             <div><DisplayFreezers/></div>
             
             <Link to='/addlocation'>ADD STUFF</Link>
+            <Link to='/api/test'>SINGLE VIEW</Link>
         </div>)
     }
 }

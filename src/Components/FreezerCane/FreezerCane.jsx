@@ -21,7 +21,7 @@ class FreezerCane extends Component {
     }
     render() {
         let displayFreezerCanes = this.state.freezerCanes.map((elem,i)=>{
-            return <Link to={`/api/freezerboxes/${elem.cane_id}`}><div key={i}>
+            return <Link to={`/api/cane/boxes/${elem.cane_id}`}><div key={i}>
                 <h4>Cane {elem.cane}</h4>
                 <i class="fas fa-layer-group cane"></i>
                 </div></Link>
