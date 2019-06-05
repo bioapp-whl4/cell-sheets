@@ -9,12 +9,6 @@ import { updateEverything } from '../../redux/auth.reducer'
 
 
 class BurgerMenu extends Component {
-    state = {
-        freezers: [],
-        canes: [],
-        boxes: [],
-        grids: []
-    }
 
     componentWillMount(){
         this.getData()
@@ -37,7 +31,6 @@ class BurgerMenu extends Component {
             })
              freezers.push(freezer)
             })
-            console.log(`111111`, freezers, typeof freezers)
             this.props.updateEverything(freezers)
     }
 
@@ -47,14 +40,41 @@ class BurgerMenu extends Component {
     }
 
   render () {
-      console.log(`render`, this.props)
+    console.log(`this.props`, this.props)
+    let freezers = this.props.everything.map(freezer => {
+        return (
+            <li>
+                {freezer.freezer_name}
+                <ul>
+                    {freezer.canes.map(cane => {
+                        return (
+                            <li>
+                                {cane.cane}
+                                <ul>
+                                    {cane.boxes.map(box => {
+                                        return (
+                                            <li>
+                                                {box.box_name}
+                                            </li>
+                                        )
+                                    })}
+                                </ul>
+                            </li>
+                        )
+                    })}
+                </ul>
+            </li>
+        )
+    })
+
+
     return (
         <div className='burger-menu'>
         <button onClick={this.toggleBurger}>Toggle Burger Menu</button>
         <Menu isOpen={this.props.isOpen}>
-            <div>test</div>
-            <div>test</div>
-            <div>test</div>
+            <ul>
+                {freezers}
+            </ul>
         </Menu>
       </div>
     );
@@ -62,8 +82,8 @@ class BurgerMenu extends Component {
 }
 
 const mapStateToProps = (reduxState) => {
-    const { freezers, freezercanes, freezerboxes, boxes } = reduxState.reducer
-    return { freezers, freezercanes, freezerboxes, boxes } 
+    const { everything } = reduxState.reducer
+    return { everything } 
 }
 
 const mapDispatchToProps = {
