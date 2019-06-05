@@ -5,6 +5,8 @@ import {action as toggleMenu} from 'redux-burger-menu';
 import store from '../../redux/store'
 import {connect} from 'react-redux'
 import axios from 'axios'
+import { updateEverything } from '../../redux/auth.reducer'
+
 
 class BurgerMenu extends Component {
     state = {
@@ -14,21 +16,29 @@ class BurgerMenu extends Component {
         grids: []
     }
 
-    componentWillUpdate(){
+    componentWillMount(){
+        this.getData()
     }
     
-    getFreezers = async () => {
-        let res = await axios.get('/api/freezers')
-        this.setState({ freezers: res.data })
-        this.props.updateFreezers(res.data)
-    }
-    getFreezerCane = async (freezer_id) => {
-        let res = await axios.get(`/api/freezer/canes?id=${freezer_id}`)
-        this.setState({ freezer_id: freezer_id, cane_id: '', freezercanes: res.data })
-    }
-    getFreezerBox = async (cane_id) => {
-        let res = await axios.get(`/api/cane/boxes?id=${cane_id}`)
-        this.setState({ freezerboxes: res.data, cane_id: cane_id })
+    getData = async () => {
+        //get freezers and put onto state
+        let res1 = await axios.get('/api/freezers')
+        // get canes for each freezer
+        let freezers = []
+         res1.data.map( async (freezer) => {
+            let res2 = await axios.get(`/api/freezer/canes?id=${freezer.freezer_id}`)
+            // add the canes array to the freezer object
+            freezer.canes = res2.data
+            // get the boxes for each cane
+            freezer.canes.forEach( async (cane) => {
+                let res3 = await axios.get(`/api/cane/boxes?id=${cane.cane_id}`)
+                // console.log(`res3` , res3 )
+                cane.boxes = res3.data
+            })
+             freezers.push(freezer)
+            })
+            console.log(`111111`, freezers, typeof freezers)
+            this.props.updateEverything(freezers)
     }
 
     toggleBurger = () => {
@@ -56,5 +66,9 @@ const mapStateToProps = (reduxState) => {
     return { freezers, freezercanes, freezerboxes, boxes } 
 }
 
-export default connect(mapStateToProps, null)(reduxBurgerMenu(BurgerMenu))
+const mapDispatchToProps = {
+    updateEverything
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(reduxBurgerMenu(BurgerMenu))
 
