@@ -9,11 +9,9 @@ import { updateEverything } from '../../redux/auth.reducer'
 
 
 class BurgerMenu extends Component {
-
     componentWillMount(){
         this.getData()
     }
-    
     getData = async () => {
         //get freezers and put onto state
         let res1 = await axios.get('/api/freezers')
@@ -33,49 +31,49 @@ class BurgerMenu extends Component {
             })
             this.props.updateEverything(freezers)
     }
-
     toggleBurger = () => {
-        console.log('firing')
         store.dispatch(toggleMenu(!this.props.isOpen));
     }
 
   render () {
-    console.log(`this.props`, this.props)
-    let freezers = this.props.everything.map(freezer => {
-        return (
-            <li>
-                {freezer.freezer_name}
-                <ul>
-                    {freezer.canes.map(cane => {
-                        return (
-                            <li>
-                                {cane.cane}
-                                <ul>
-                                    {cane.boxes.map(box => {
-                                        return (
-                                            <li>
-                                                {box.box_name}
-                                            </li>
-                                        )
-                                    })}
-                                </ul>
-                            </li>
-                        )
-                    })}
-                </ul>
-            </li>
-        )
-    })
 
+    let freezers = (
+        <ul>
+            {this.props.everything.map(freezer => {
+                return (
+                    <li>
+                        {freezer.freezer_name}
+                        <ul>
+                            {freezer.canes.map(cane => {
+                                return (
+                                    <li>
+                                        {cane.cane}
+                                        <ul>
+                                            {cane.boxes.map(box => {
+                                                return (
+                                                    <li>
+                                                        {box.box_name}
+                                                    </li>
+                                                )
+                                            })}
+                                        </ul>
+                                    </li>
+                                )
+                            })}
+                        </ul>
+                    </li>
+                )
+            })}
+        </ul>
+    )
+    
 
     return (
         <div className='burger-menu'>
-        <button onClick={this.toggleBurger}>Toggle Burger Menu</button>
-        <Menu isOpen={this.props.isOpen}>
-            <ul>
+            <button onClick={this.toggleBurger}>Toggle Burger Menu</button>
+            <Menu isOpen={this.props.isOpen}>
                 {freezers}
-            </ul>
-        </Menu>
+            </Menu>
       </div>
     );
   }
@@ -85,10 +83,8 @@ const mapStateToProps = (reduxState) => {
     const { everything } = reduxState.reducer
     return { everything } 
 }
-
 const mapDispatchToProps = {
     updateEverything
 }
-
 export default connect(mapStateToProps, mapDispatchToProps)(reduxBurgerMenu(BurgerMenu))
 
