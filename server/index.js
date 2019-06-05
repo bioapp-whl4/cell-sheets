@@ -25,7 +25,7 @@ massive(CONNECTION_STRING)
   .then(db => {
     app.set("db", db);
     console.log(`DATABASE: Connected`);
-    console.log(db.listTables());
+    //console.log(db.listTables());
     app.listen(SERVER_PORT, () => {
       console.log(`SERVER_PORT: ${SERVER_PORT}`);
     });
@@ -43,3 +43,7 @@ app.get("/api/samples", sampleCtrl.getSamples);
 app.get("/api/freezers", freezerCtrl.getFreezers);
 app.get("/api/freezer", freezerCtrl.getFreezer);
 app.get("/api/freezer/canes", freezerCtrl.getCanesByFID);
+app.get("/api/cane", freezerCtrl.getCane);
+app.get("/api/cane/boxes", freezerCtrl.getBoxesByCaneId);
+app.get("/api/box", freezerCtrl.getBox);
+app.get("/api/box/samples", freezerCtrl.getSamplesByBoxId);

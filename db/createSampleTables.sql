@@ -6,6 +6,7 @@
 CREATE TABLE ba.box (
     id serial NOT NULL  ,
     name varchar(255),
+    hierarchy_id int default 5,
     inserted_at timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     updated_at  timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     CONSTRAINT pk_box PRIMARY KEY (id)
@@ -15,6 +16,7 @@ CREATE TABLE ba.box (
 CREATE TABLE ba.cane (
     id serial NOT NULL  ,
     name varchar(255) ,
+    hierarchy_id int default 4,
     inserted_at timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL ,
     updated_at  timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL ,
     CONSTRAINT pk_cane PRIMARY KEY (id)
@@ -155,6 +157,7 @@ CREATE TABLE ba.sample (
     add5 varchar(200)  ,
     pick_order_id int  ,
     order_item_id int  ,
+    heriarch_id int default 6,
     inserted_at timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL  ,
     updated_at  timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL ,
     CONSTRAINT bsample_pk PRIMARY KEY (id)
