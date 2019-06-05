@@ -1,7 +1,7 @@
 import React from 'react'
 
 export default function SampleList(props){
-    const samples = JSON.parse(JSON.stringify(props.specimens))
+    var samples = JSON.parse(JSON.stringify(props.specimens))
     samples.forEach((sample) => {
         sample.location[1] += 1
         switch(sample.location[0]){
@@ -40,6 +40,10 @@ export default function SampleList(props){
     const compare = (a,b) => {
         if(a.location[0] > b.location[0]) return 1
         if(a.location[0] < b.location[0]) return -1
+        if(a.location[0] === b.location[0]){
+            if(a.location[1] < b.location[1]) return -1
+            if(a.location[1] > b.location[1]) return 1
+        }
         return 0
     }
 
@@ -48,8 +52,10 @@ export default function SampleList(props){
     const displaySamples = samples.map((sample, i) => (
         <div key={i}>
             <h3>{sample.location}</h3>
-            <p>Sample ID: {sample.specimen_id}</p>
+            <p>Sample ID: {sample.sample_name}</p>
             <p>Experiment ID: {sample.experiment_id}</p>
+            <p>Culture Conditions: {sample.culture_condition}</p>
+            <p>Cells/Vial: {sample.cell_vial}</p>
             <p>Freeze Date: {sample.freeze_date}</p>
             <p>Description: {sample.description}</p>
         </div>
