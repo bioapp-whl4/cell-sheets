@@ -1,7 +1,7 @@
 SELECT b.id as box_id, s.id as specimen_id, 
 s.name as sample_name, 
 s.description,
-s.box_position,
+s.box_position as location,
 s.experiment_id, 
 s.freeze_date, 
 s.culture_condition, 

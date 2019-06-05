@@ -144,11 +144,6 @@ class Filter extends Component{
         this.props.getSpecimens(this.state.specimens)
     }
 
-    showGrid = () => {
-        console.log(this.state.specimens)
-    }
-
-
     render(){
         return(
             <div>
@@ -184,7 +179,6 @@ class Filter extends Component{
                     </div>
                     <button>Edit Column</button>
                 </form>
-                <button onClick={this.showGrid}> Show me the grid!</button>
             </div>
         )
     }
