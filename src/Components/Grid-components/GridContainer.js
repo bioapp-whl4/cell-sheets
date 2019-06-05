@@ -29,7 +29,6 @@ export default class GridContainer extends Component {
     catch(err){
       console.log(err)
     }
-    
   }
 
   async getSpecimens(specimens){
