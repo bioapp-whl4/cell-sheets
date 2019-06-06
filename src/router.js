@@ -7,7 +7,7 @@ import AddLocation from './Components/AddLocation/AddLocation'
 import FreezerCane from './Components/FreezerCane/FreezerCane'
 import FreezerBox from './Components/FreezerBox/FreezerBox'
 
-import DisplayInventory from './Components/TEST Component/Refactoring single display'
+
 
 
 
@@ -20,7 +20,7 @@ export default (
         <Route path='/addlocation' component={AddLocation}/>
         <Route path='/api/cane/boxes/:id' component={FreezerBox}/>
 
-        <Route path='/api/test' component={DisplayInventory}/>
+      
       
         
     </Switch>

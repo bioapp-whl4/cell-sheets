@@ -34,7 +34,7 @@ class DisplayFreezers extends Component {
             </div>
         })
         return (
-            <div className='display'>
+            <div className='app'>
             <div className='contents'>
             <h1 className='CellInventory'>Cell Inventory</h1>
                 <h3 className='category'>Freezers</h3>
