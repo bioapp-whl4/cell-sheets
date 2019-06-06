@@ -1,18 +1,35 @@
 import React, {Component} from 'react';
 import Grid from './Grid'
-import AddSpecimens from './AddSpecimens'
+// import AddSpecimens from './AddSpecimens'
 import SampleList from './SampleList'
+import axios from 'axios'
 
 export default class GridContainer extends Component {
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
     this.state = {
       specimens: [],
       originIndex: null,
       showData: null
     }
+    this.componentDidMount = this.componentDidMount.bind(this)
     this.moveItem = this.moveItem.bind(this)
     this.getSpecimens = this.getSpecimens.bind(this)
+  }
+
+  async componentDidMount(){
+    const {box_id} = this.props
+    const response = await axios.get(`/api/boxgrid/samples?id=${box_id}`)
+    try{
+      const {data} = response
+      this.setState({
+        specimens: data
+      })
+    }
+    catch(err){
+      console.log(err)
+    }
+    
   }
 
   async getSpecimens(specimens){
@@ -22,6 +39,7 @@ export default class GridContainer extends Component {
   }
 
   showData = (specimen) => {
+    if(!specimen) return
     this.setState({
       showData: specimen
     })
@@ -67,7 +85,7 @@ export default class GridContainer extends Component {
     return (
       <>
         <Grid move={this.moveItem} get={this.getIndex} showData={this.showData} hideData={this.hideData} specimens={this.state.specimens}/>
-        <AddSpecimens getSpecimens={this.getSpecimens}/>
+        {/* <AddSpecimens getSpecimens={this.getSpecimens}/> */}
         <SampleList specimens={this.state.specimens}/>
       </>
     );
