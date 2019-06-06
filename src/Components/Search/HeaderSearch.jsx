@@ -1,17 +1,25 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { getUserData } from "../../redux/reducer";
-import ItemWizardIcons from "./ItemWizardIcon";
-
+import { updateSamples } from "../../redux/auth.reducer";
+import { Link } from "react-router-dom";
+import axios from "axios";
 class HeaderSearch extends Component {
   constructor() {
     super();
     this.state = {
-      filterValue: ""
+      filterValue: "",
+      samples: []
     };
   }
-
+  async componentDidMount() {
+    await this.getSamples();
+  }
+  getSamples = async () => {
+    let res = await axios.get("/api/samples");
+    this.setState({ samples: res.data });
+    this.props.updateSamples(res.data);
+  };
   // track user inputs via local state
   handleInput = event => {
     let { name, value } = event.target;
@@ -21,52 +29,40 @@ class HeaderSearch extends Component {
   };
 
   render() {
-    let items_list;
-    // filter our items
-    if (this.state.filterValue !== "") {
-      items_list = this.props.items.filter(item => {
-        let searchFor = this.state.filterValue.toLowerCase();
-        let searchIn = item.description ? item.description.toLowerCase() : "";
-        searchIn += item.name ? item.name.toLowerCase() : "";
-        searchIn += item.tags ? item.tags.toLowerCase() : "";
-        return searchIn.includes(searchFor);
-      });
-    } else {
-      items_list = this.props.items;
-    }
-    let items = items_list.map((item, index) => (
-      <li key={item.item_id}>
-        <ItemWizardIcons item={item}> </ItemWizardIcons>
-      </li>
-    ));
-
+    let displaySamples = this.state.samples.map((elem, i) => {
+      return (
+        <Link to={`/api/sample/results${elem.freezer_id}`}>
+          <div key={i}>
+            <h3>{elem.freezer_name}</h3>
+            <i class="fas fa-temperature-low" />
+            <h4>{elem.temperature}</h4>
+            <h4>{elem.freezer_type}</h4>
+          </div>
+        </Link>
+      );
+    });
     return (
-      <div className="lists-item-wizard">
-        <div className="lists-item-wizard-header">
-          <span> Add Items:</span>
-          <input
-            onChange={this.handleInput}
-            type="text"
-            name="filterValue"
-            placeholder="Search"
-          />
+      <div className="display">
+        <div className="contents">
+          <h1 className="CellInventory">Cell Inventory</h1>
+          <h3 className="category">Samples</h3>
+          <i class="fas fa-snowflake cold" />
+          <div className="displayContents">{displaySamples}</div>
         </div>
-        <ul className="lists-item-wizard-items">{items}</ul>
       </div>
     );
   }
 }
-
 const mapStateToProps = reduxState => {
-  const { user_id, items, authenticated } = reduxState;
-  return { user_id, items, authenticated };
+  const { user_id, samples, authenticated } = reduxState;
+  return { user_id, samples, authenticated };
 };
 
 const mapDispatchToProps = {
-  getUserData
+  updateSamples
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withRouter(ItemWizard));
+)(withRouter(HeaderSearch));

@@ -6,6 +6,7 @@ const initialState = {
   lastname: "",
   email: "",
   sample: [],
+  samples: [],
   // Add New Sample freezer adding location
   freezers: [],
   freezercanes: [],
@@ -19,37 +20,38 @@ const UPDATE_FIRSTNAME = "UPDATE_FIRSTNAME";
 const UPDATE_USER_DETAILS = "UPDATE_USER_DETAILS";
 const GET_USER = "GET_USER_DETAILS";
 const ADD_SAMPLE = "ADD_SAMPLE";
+const UPDATE_SAMPLES = "UPDATE_SAMPLES";
 //const UPDATE_SAMPLE = "UPDATE_SAMPLE";
 //freezer info
-const UPDATE_EVERYTHING = 'UPDATE_EVERYTHING'
-const UPDATE_FREEZERS = 'UPDATE_FREEZERS'
-const UPDATE_FREEZERCANES = 'UPDATE_FREEZERCANES'
-const UPDATE_FREEZERBOXES = 'UPDATE_FREEZERBOXES'
-const UPDATE_BOXES = 'UPDATE_BOXES'
+const UPDATE_EVERYTHING = "UPDATE_EVERYTHING";
+const UPDATE_FREEZERS = "UPDATE_FREEZERS";
+const UPDATE_FREEZERCANES = "UPDATE_FREEZERCANES";
+const UPDATE_FREEZERBOXES = "UPDATE_FREEZERBOXES";
+const UPDATE_BOXES = "UPDATE_BOXES";
 // freezer info export functions
 export function updateFreezers(freezers) {
   return {
     type: UPDATE_FREEZERS,
     payload: freezers
-  }
+  };
 }
 export function updateFreezerCanes(freezercanes) {
   return {
     type: UPDATE_FREEZERCANES,
     payload: freezercanes
-  }
+  };
 }
 export function updateFreezerBoxes(freezerboxes) {
   return {
     type: UPDATE_FREEZERBOXES,
     payload: freezerboxes
-  }
+  };
 }
-export function updateBoxes (boxes) {
+export function updateBoxes(boxes) {
   return {
     type: UPDATE_BOXES,
     payload: boxes
-  }
+  };
 }
 export function updateUserId(id) {
   return {
@@ -75,6 +77,12 @@ export function updateEverything(array) {
     payload: array
   };
 }
+export function updateSamples(array) {
+  return {
+    type: UPDATE_SAMPLES,
+    payload: array
+  };
+}
 export default function reducer(state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
@@ -96,15 +104,17 @@ export default function reducer(state = initialState, action) {
       });
     //Freezer locations
     case UPDATE_FREEZERS:
-      return {...state,freezers: payload}
+      return { ...state, freezers: payload };
     case UPDATE_FREEZERCANES:
-      return {...state,freezercanes: payload}
+      return { ...state, freezercanes: payload };
     case UPDATE_FREEZERBOXES:
-      return {...state,freezerboxes: payload}
+      return { ...state, freezerboxes: payload };
     case UPDATE_BOXES:
-      return {...state,boxes: payload}
+      return { ...state, boxes: payload };
     case UPDATE_EVERYTHING:
-      return {...state,everything: payload}
+      return { ...state, everything: payload };
+    case UPDATE_SAMPLES:
+      return { ...state, samples: payload };
     default:
       return state;
   }
