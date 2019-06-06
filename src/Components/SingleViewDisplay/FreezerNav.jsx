@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { updateFreezers } from '../../redux/auth.reducer'
 import { connect } from 'react-redux'
+import GridContextProvider from '../GridContextProvider'
 
 class FreezerNav extends Component {
     constructor() {
@@ -12,9 +13,9 @@ class FreezerNav extends Component {
             freezerboxes: [],
             //tier display
 
-            freezer_id: '',
-            cane_id: '',
-            box_id:''
+            freezer_id: null,
+            cane_id: null,
+            box_id: null
 
         }
     }
@@ -23,12 +24,12 @@ class FreezerNav extends Component {
     }
     getFreezers = async () => {
         let res = await axios.get('/api/freezers')
-        this.setState({ freezers: res.data })
+        this.setState({ freezers: res.data})
         this.props.updateFreezers(res.data)
     }
     getFreezerCane = async (freezer_id) => {
         let res = await axios.get(`/api/freezer/canes?id=${freezer_id}`)
-        this.setState({ freezer_id: freezer_id, cane_id: '', freezercanes: res.data })
+        this.setState({ freezer_id: freezer_id,box_id: null, cane_id: null, freezercanes: res.data })
 
     }
     getFreezerBox = async (cane_id) => {
@@ -37,12 +38,14 @@ class FreezerNav extends Component {
 
     }
     clearFreezers = () => {
-        this.setState({ freezer_id: '',cane_id: ''})
+        this.setState({ freezer_id: null,cane_id: null,box_id:null})
     }
     clearCanes = () => {
-        this.setState({cane_id: ''})
+        this.setState({cane_id: null,box_id:null})
     }
-    
+    clearBoxes = () => {
+        this.setState({box_id: null})
+    }
     render() {
         let displayFreezers = this.state.freezers.map((elem, i) => {
             return <button onClick={() => this.getFreezerCane(elem.freezer_id)} key={i}>
@@ -59,7 +62,7 @@ class FreezerNav extends Component {
             </button>
         })
         let displayFreezerBoxes = this.state.freezerboxes.map((elem, i) => {
-            return <button key={i}>
+            return <button onClick={()=> this.setState({box_id:elem.box_id})}key={i}>
                 <div >
                     <h4>Box: {elem.box_name}</h4>
                     <i class="fas fa-box"></i>
@@ -77,13 +80,14 @@ class FreezerNav extends Component {
                     <i class="fas fa-snowflake cold"></i>
                     <div className='displayContents'>{displayFreezers}</div>
                     
-                    {this.state.freezer_id && <div>
+                    {this.state.freezer_id !== null && <div>
                         <h4 onClick={()=>this.clearCanes()}>Freezer Canes</h4>
                         {displayFreezerCanes}</div>}
 
-                    {this.state.cane_id && <div> <h4>Freezer Boxes</h4>
+                    {this.state.cane_id !== null && <div> <h4 onClick={()=>this.clearBoxes()}>Freezer Boxes</h4>
                         {displayFreezerBoxes}
                     </div>}
+                    {this.state.box_id !== null && <div><h4>Box</h4><GridContextProvider box_id={this.state.box_id}/></div>}
 
 
                 </div>

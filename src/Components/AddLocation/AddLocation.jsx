@@ -185,7 +185,7 @@ class AddLocation extends Component {
                                 {this.state.custom_size && 
                                 <div>
                                     <h3>How many Rows</h3>
-                                    <input onChange={this.handleChange} type='number' placeholder='Enter in Rows' name='x' />
+                                    <input onChange={this.handleChange} type='number'  placeholder='Enter in Rows' name='x' />
                                     <h3>How many Columns</h3>
                                     <input onChange={this.handleChange} type='number' placeholder='Enter in Columns' name='y' />
                                 </div>}
