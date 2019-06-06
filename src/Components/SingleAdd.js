@@ -18,17 +18,41 @@ export default class SingleAdd extends Component{
             add1: '',
             add2: '',
             add3: '',
-            locations: []
+            locations: [],
+            availableLocations: null,
+            x: null,
+            y: null
         }
+        this.componentDidMount = this.componentDidMount.bind(this)
     }
 
-    componentDidMount(){
+    async componentDidMount(){
         var samples = this.props.specimens.map(sample => (
             sample.location
         ))
-        this.setState({
-            locations: samples
+        const {x,y} = this.props
+        let tempArr = []
+        const totalSpaces = x * y
+        await this.setState({
+            locations: samples,
         })
+        for(let i = 0; i < totalSpaces; i++){
+            let tempX = i % x
+            let tempY = Math.floor(i / x)
+            var occupied = false
+            for(let j = 0; j < this.state.locations.length; j++){
+                if(tempX === this.state.locations[j][0] && tempY === this.state.locations[j][1]){
+                    occupied = true
+                }
+            }
+            if(!occupied){
+                tempArr.push([tempX, tempY])
+            }
+        }
+        this.setState({
+            availableLocations: tempArr
+        })
+
     }
 
     //axios.post("/api/sample")

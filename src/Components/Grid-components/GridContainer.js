@@ -95,7 +95,7 @@ export default class GridContainer extends Component {
         {/* <AddSpecimens getSpecimens={this.getSpecimens}/> */}
         <SampleList specimens={this.state.specimens}/>
         <button onClick={this.addSample}>Add a sample</button>
-        {this.state.addSample && <SingleAdd specimens={this.state.specimens}/>}
+        {this.state.addSample && <SingleAdd specimens={this.state.specimens} x={9} y={9}/>}
       </>
     );
   }
