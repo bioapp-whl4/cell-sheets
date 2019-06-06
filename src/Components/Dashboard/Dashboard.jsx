@@ -11,6 +11,7 @@ class Dashboard extends Component {
         <img className='BG'alt='labratory'src='http://news.efinancialcareers.com/binaries/content/gallery/efinancial-careers/articles/2018/11/lab.jpg'/>
             <Header/>
             <div className='display'><DisplayInventory/></div>
+            <Link to='/api/hierarchy'>HIERARCHY TEST</Link>
             <Link to='/addlocation'>ADD STUFF</Link>
             <Link to='/api/test'>SINGLE VIEW</Link>
             <BurgerMenu/>
