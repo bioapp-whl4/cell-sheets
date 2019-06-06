@@ -15,6 +15,7 @@ class AddLocation extends Component {
             freezer_id: '',
             freezercane_id: '',
             freezerbox_id: '',
+            box_id: '',
             // adding Freezer
             freezer_name: '',
             temperature: '',
@@ -24,6 +25,7 @@ class AddLocation extends Component {
             // adding freezercane
             cane: '',
             // adding freezerbox
+            box_name:''
 
 
 
@@ -42,7 +44,7 @@ class AddLocation extends Component {
 
         await this.setState({ [e.target.name]: e.target.value, freezercane_id: '', freezerbox_id: '' })
         if (+this.state.freezer_id < 0) {
-            this.setState({ freezer_id: '', freezerboxes: [], freezercanes: [] })
+            this.setState({ freezer_id: '', freezercane_id: '', freezerboxes: [], freezercanes: [] })
         } else {
             let res = await axios.get(`/api/freezer/canes?id=${this.state.freezer_id}`)
             this.setState({ freezercanes: res.data, freezerboxes: [] })
@@ -50,9 +52,9 @@ class AddLocation extends Component {
     }
 
     handleCane = async (e) => {
-        await this.setState({ [e.target.name]: e.target.value, freezerbox: '' })
+        await this.setState({ [e.target.name]: e.target.value, freezerboxes: [],freezerbox_id: '' })
         if (+this.state.freezercane_id < 0) {
-            this.setState({ freezerboxes: [], freezercane_id: '' })
+            this.setState({ freezerboxes: [], freezercane_id: '',freezerbox_id: ''})
         } else {
             let res = await axios.get(`/api/cane/boxes?id=${this.state.freezercane_id}`)
             this.setState({ freezerboxes: res.data })
@@ -61,7 +63,13 @@ class AddLocation extends Component {
 
     }
     handleBox = async (e) => {
-        await this.setState({ [e.target.name]: e.target.value })
+        await this.setState({ [e.target.name]: e.target.value,box: '' })
+        if (+this.state.freezerbox_id < 0) {
+            this.setState({ freezerboxes: [], box_id: '',freezerbox_id: ''})
+        } else {
+            let res = await axios.get(`/api/cane/boxes?id=${this.state.freezercane_id}`)
+            this.setState({ freezerboxes: res.data })
+        }
 
     }
     //Adding New Freezers
@@ -71,7 +79,7 @@ class AddLocation extends Component {
         } else if (e.target.value === 'default') {
             this.setState({ [e.target.name]: '', [field]: false })
         }
-        else { this.setState({ [field]: true }) }
+        else { this.setState({ [e.target.name]:'',[field]: true }) }
     }
     handleChange = (e) => {
         this.setState({ [e.target.name]: e.target.value })
@@ -79,8 +87,9 @@ class AddLocation extends Component {
     }
 
     render() {
-        console.log('this is the STATE', this.state)
-        console.log(this.state.freezercanes)
+        console.log('freezer_id', this.state.freezer_type)
+        console.log('CANE',this.state.cane)
+        console.log('BOX',this.state.box_name)
         let freezers = this.state.freezers.map((elem, i) => {
             return <option value={elem.freezer_id} key={i}>{`${elem.freezer_name}: ${elem.freezer_type}`}</option>
         })
@@ -121,7 +130,7 @@ class AddLocation extends Component {
                                 {this.state.custom_temp && <input onChange={this.handleChange} placeholder='Custom Temperature' name='temperature' />}
                             </div>
                             <div className="PopUpactions" >
-                                <button className="PopUpcancel" onClick={() => { console.log('modal closed '); close() }}>Cancel</button>
+                                <button className="PopUpcancel" onClick={() => { this.setState({freezer_type:'',temperature:'', freezer_name:''}) ;console.log('modal closed '); close() }}>Cancel</button>
                             </div>
                         </div>
                     )}
@@ -136,7 +145,7 @@ class AddLocation extends Component {
                             <div className="PopUpcontent" >
                                 <h4>Freezer Cane Name</h4>
                                 <input onChange={this.handleChange} placeholder='Freezer Cane Name' name='cane' value={this.state.cane} />
-                                <button className="PopUpcancel" onClick={() => { console.log('modal closed '); close() }}>Cancel</button>
+                                <button className="PopUpcancel" onClick={() => { this.setState({cane:''});console.log('modal closed '); close() }}>Cancel</button>
                             </div>
                         </div>
                     )}
@@ -151,13 +160,13 @@ class AddLocation extends Component {
                             <div className="PopUpheader" > Add New Box </div>
                             <div className="PopUpcontent" >
                                 <h4>Freezer Box</h4>
-                                <input onChange={this.handleChange} placeholder='Box Name' name='cane' value={this.state.cane} />
-                                <button className="PopUpcancel" onClick={() => { console.log('modal closed '); close() }}>Cancel</button>
+                                <input onChange={this.handleChange} placeholder='Box Name' name='box_name'  />
+                                <button className="PopUpcancel" onClick={() => { this.setState({box_name: ''}); console.log('modal closed '); close() }}>Cancel</button>
                             </div>
                         </div>
                     )}
                 </Popup>}
-                <select name='freezerbox_id' onChange={this.handleChange}><option value='-1'>Choose a Freezer Box</option>{freezerBoxes}</select>
+                <select name='freezerbox_id' onChange={this.handleBox}><option value='-1'>Choose a Freezer Box</option>{freezerBoxes}</select>
             </div>
         )
     }
