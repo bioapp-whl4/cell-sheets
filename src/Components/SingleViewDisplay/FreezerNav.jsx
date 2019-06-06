@@ -50,7 +50,7 @@ class FreezerNav extends Component {
         let displayFreezers = this.state.freezers.map((elem, i) => {
             return <button onClick={() => this.getFreezerCane(elem.freezer_id)} key={i}>
                 <h3>{elem.freezer_name}</h3>
-                <i class="fas fa-temperature-low"></i>
+                <i className="fas fa-temperature-low"></i>
                 <h4>{elem.temperature}</h4>
                 <h4>{elem.freezer_type}</h4>
             </button>
@@ -58,14 +58,14 @@ class FreezerNav extends Component {
         let displayFreezerCanes = this.state.freezercanes.map((elem, i) => {
             return <button onClick={() => this.getFreezerBox(elem.cane_id)} key={i}>
                 <h4>Cane {elem.cane}</h4>
-                <i class="fas fa-layer-group cane"></i>
+                <i className="fas fa-layer-group cane"></i>
             </button>
         })
         let displayFreezerBoxes = this.state.freezerboxes.map((elem, i) => {
             return <button onClick={()=> this.setState({box_id:elem.box_id})}key={i}>
                 <div >
                     <h4>Box: {elem.box_name}</h4>
-                    <i class="fas fa-box"></i>
+                    <i className="fas fa-box"></i>
                 </div>
             </button>
         })
@@ -77,7 +77,7 @@ class FreezerNav extends Component {
                     <h1 className='CellInventory'>Cell Inventory</h1>
 
                     <h4 onClick={()=>this.clearFreezers()}>Freezers</h4>
-                    <i class="fas fa-snowflake cold"></i>
+                    <i className="fas fa-snowflake cold"></i>
                     <div className='displayContents'>{displayFreezers}</div>
                     
                     {this.state.freezer_id !== null && <div>
