@@ -27,7 +27,7 @@ export default class SingleAdd extends Component{
     }
 
     async componentDidMount(){
-        var samples = this.props.specimens.map(sample => (
+        let samples = this.props.specimens.map(sample => (
             sample.location
         ))
         const {x,y} = this.props
@@ -52,7 +52,6 @@ export default class SingleAdd extends Component{
         this.setState({
             availableLocations: tempArr
         })
-
     }
 
     //axios.post("/api/sample")
