@@ -20,7 +20,6 @@ class HeaderSearch extends Component {
     this.setState({ samples: res.data });
     this.props.updateSamples(res.data);
   };
-  // track user inputs via local state
   handleInput = event => {
     let { name, value } = event.target;
     this.setState({
@@ -29,25 +28,42 @@ class HeaderSearch extends Component {
   };
 
   render() {
-    let displaySamples = this.state.samples.map((elem, i) => {
-      return (
-        <Link to={`/api/test`}>
-          <div key={i}>
-            <h3>{elem.freezer_name}</h3>
-            <i class="fas fa-temperature-low" />
-            <h4>{elem.temperature}</h4>
-            <h4>{elem.freezer_type}</h4>
-          </div>
-        </Link>
-      );
-    });
-    return (
-      <div className="display">
-        <div className="contents">
-          <h4 className="category">Samples</h4>
-          <i class="fas fa-snowflake cold" />
-          <div className="displayContents">{displaySamples}</div>
+    let samples;
+    if (this.state.filterValue !== "") {
+      samples = this.state.samples.filter(sample => {
+        let searchFor = this.state.filterValue.toLowerCase();
+        let searchIn = sample.description
+          ? sample.description.toLowerCase()
+          : "";
+        searchIn += sample.sample_name ? sample.sample_name.toLowerCase() : "";
+        return searchIn.includes(searchFor);
+      });
+    } else {
+      samples = this.state.samples;
+    }
+    let allSamples = samples.map((elem, i) => (
+      <Link to={`/api/test/${elem.sample_id}`}>
+        <div key={i}>
+          <h4>Sample{elem.sample_name}</h4>
+          <i class="fas fa-layer-group cane" />
         </div>
+      </Link>
+    ));
+    return (
+      <div>
+        <div className="lists-sample-header">
+          <span> Search Samples:</span>
+          <input
+            onChange={this.handleInput}
+            type="text"
+            name="filterValue"
+            placeholder="Search"
+          />
+        </div>
+        <ul className="list_samples">
+          <h4>Samples</h4>
+          {allSamples}
+        </ul>
       </div>
     );
   }
