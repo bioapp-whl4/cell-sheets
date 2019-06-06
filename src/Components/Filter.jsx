@@ -9,8 +9,9 @@ class Filter extends Component {
         description: true,
         sample_id: true,
         experiment_id: true,
-        start_date: '',
-        end_date: '',
+        date: false,
+        start_date: '2000-01-01',
+        end_date: '2000-01-01',
         dateContext: '',
         inventory: [],
         samples: []
@@ -70,16 +71,47 @@ class Filter extends Component {
     }
 
     render(){
+        let results
         if (this.state.search_value){
-            let results = this.state.samples.filter(sample => {
+            results = this.state.samples.filter(sample => {
+                console.log(`sample.freeze_date`, sample.freeze_date)
                 let search_within = ''
                 search_within += this.state.description && sample.description ? sample.description.toLowerCase() : ''
                 search_within += this.state.experiment_id && sample.experiment_name ? sample.experiment_name.toLowerCase() : ''
                 search_within += this.state.sample_id && sample.sample_name ? sample.sample_name.toLowerCase() : ''
                 return search_within.includes(this.state.search_value.toLowerCase())
             })
-            console.log(`results`, results)
+        } else {
+            results = this.state.samples
         }
+
+        if (this.state.date){
+            let start_date = new Date(this.state.start_date)
+            let end_date = new Date(this.state.end_date)
+
+            if (this.state.dateContext === `before`) {
+                console.log(`before`)
+                results = results.filter(sample => {
+                    let sample_date = new Date(sample.freeze_date) 
+                    return start_date - sample_date > 0
+              })
+
+            } else if(this.state.dateContext === `after`){
+                console.log(`after`)
+                results = results.filter(sample => {
+                    let sample_date = new Date(sample.freeze_date) 
+                    return start_date - sample_date < 0
+                })
+
+            } else if(this.state.dateContext === `between`){
+                console.log(`between`)
+                results = results.filter(sample => {
+                    let sample_date = new Date(sample.freeze_date) 
+                    return ((sample_date - start_date > 0) && (end_date - sample_date > 0))
+                })
+            }
+        }
+        console.log(`results`, results)
 
         return(
             <div>
@@ -101,6 +133,10 @@ class Filter extends Component {
                     <input type="date" name="start_date" value={this.state.start_date} onChange={this.handleDate}>
                     </input>        
                 </div> 
+                <div>
+                    <input type="checkbox" name="date" onClick={this.handleCheck} />
+                    <label>Filter by Date </label>
+                </div>  
                 <div>
                     <input type="radio" name="drone" id='before' onClick={this.dateContext}/>
                     <label>Before</label>
