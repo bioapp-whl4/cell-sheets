@@ -3,7 +3,7 @@ module.exports = {
   register: async (req, res) => {
     const db = req.app.get("db");
     const { email, firstname, lastname, password } = req.body;
-    console.log("req .body", req.body);
+    //console.log("req .body", req.body);
     const { session } = req;
     let username = email;
 
@@ -17,13 +17,13 @@ module.exports = {
       // }
       const salt = bcrypt.genSaltSync(10);
       const hash = bcrypt.hashSync(password, salt);
-      console.log(`{username,firstname,lastname,email,hash}`, {
-        username,
-        firstname,
-        lastname,
-        email,
-        hash
-      });
+      // console.log(`{username,firstname,lastname,email,hash}`, {
+      //   username,
+      //   firstname,
+      //   lastname,
+      //   email,
+      //   hash
+      // });
       let response_1 = await db.register({
         username,
         firstname,
@@ -31,17 +31,17 @@ module.exports = {
         email,
         hash
       });
-      console.log(`response 1`, response_1);
+      // console.log(`response 1`, response_1);
       const user_id = await db.login({ username });
       session.user = {
         username,
         user_id
       };
-      console.log("success register on db");
-      console.log(session.user.user_id[0]);
+      // console.log("success register on db");
+      // console.log(session.user.user_id[0]);
       res.status(200).send(session.user.user_id[0]);
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       res.sendStatus(409);
     }
   },
@@ -61,7 +61,7 @@ module.exports = {
       session.user.authenticated = authenticated;
 
       if (authenticated) {
-        console.log(session);
+        // console.log(session);
         res
           .status(200)
           .send({ authenticated, id: user[0].id, admin: user[0].admin });
