@@ -8,27 +8,7 @@ import FreezerCane from "./Components/FreezerCane/FreezerCane";
 import FreezerBox from "./Components/FreezerBox/FreezerBox";
 import HeaderSearch from "./Components/Search/HeaderSearch";
 
-<<<<<<< HEAD
 
-
-
-
-export default (
-    <Switch>
-        <Route path='/register' component={Register}/>
-        <Route exact path='/' component={Login}/>
-        <Route path='/dashboard' component={Dashboard}/>
-        <Route path='/api/freezer/canes/:id' component={FreezerCane}/>
-        <Route path='/addlocation' component={AddLocation}/>
-        <Route path='/api/cane/boxes/:id' component={FreezerBox}/>
-
-      
-      
-        
-    </Switch>
-)
-=======
-import FreezerNav from "./Components/SingleViewDisplay/FreezerNav";
 
 export default (
   <Switch>
@@ -42,4 +22,3 @@ export default (
     <Route path="/api/test" component={HeaderSearch} />
   </Switch>
 );
->>>>>>> master
