@@ -8,9 +8,12 @@ import FreezerCane from './Components/FreezerCane/FreezerCane'
 import FreezerBox from './Components/FreezerBox/FreezerBox'
 
 import FreezerNav from './Components/SingleViewDisplay/FreezerNav'
+import Filter from './Components/Filter'
+
 
 export default (
     <Switch>
+        <Route path='/filter' component={Filter}/>
         <Route path='/register' component={Register}/>
         <Route exact path='/' component={Login}/>
         <Route path='/dashboard' component={Dashboard}/>
