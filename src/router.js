@@ -8,7 +8,7 @@ import FreezerCane from "./Components/FreezerCane/FreezerCane";
 import FreezerBox from "./Components/FreezerBox/FreezerBox";
 import HeaderSearch from "./Components/Search/HeaderSearch";
 
-import FreezerNav from "./Components/SingleViewDisplay/FreezerNav";
+
 
 export default (
   <Switch>
