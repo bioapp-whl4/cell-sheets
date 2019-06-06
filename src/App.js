@@ -11,6 +11,7 @@ function App() {
       <HashRouter>
         <div>
           {router}
+         
         </div>
       </HashRouter>
     </Provider>

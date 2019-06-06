@@ -9,66 +9,82 @@ import { updateEverything } from '../../redux/auth.reducer'
 
 
 class BurgerMenu extends Component {
-    state = {
-        freezers: [],
-        canes: [],
-        boxes: [],
-        grids: []
-    }
-
     componentWillMount(){
         this.getData()
     }
-    
     getData = async () => {
-        //get freezers and put onto state
-        let res1 = await axios.get('/api/freezers')
-        // get canes for each freezer
         let freezers = []
-         res1.data.map( async (freezer) => {
+        let res1 = await axios.get('/api/freezers')
+        res1.data.map( async (freezer) => {
             let res2 = await axios.get(`/api/freezer/canes?id=${freezer.freezer_id}`)
-            // add the canes array to the freezer object
-            freezer.canes = res2.data
-            // get the boxes for each cane
-            freezer.canes.forEach( async (cane) => {
+            freezer.canes = res2.data  // add the canes array to the freezer object
+            freezer.canes.forEach( async (cane) => { // get the boxes for each cane
                 let res3 = await axios.get(`/api/cane/boxes?id=${cane.cane_id}`)
-                // console.log(`res3` , res3 )
-                cane.boxes = res3.data
+                cane.boxes = res3.data // add the boxes to the cane object
+                cane.boxes.forEach( async (box) => {
+                    let res4 = await axios.get(`/api/samples`)
+                    box.samples = res4.data
+                })
             })
-             freezers.push(freezer)
-            })
-            console.log(`111111`, freezers, typeof freezers)
-            this.props.updateEverything(freezers)
+                freezers.push(freezer) //add each freezer to the freezer array
+        })
+        this.props.updateEverything(freezers) // send data to redux
     }
 
     toggleBurger = () => {
-        console.log('firing')
         store.dispatch(toggleMenu(!this.props.isOpen));
     }
 
   render () {
-      console.log(`render`, this.props)
+
+    let freezers = (
+        <ul>
+            {this.props.everything.map(freezer => {
+                return (
+                    <li>
+                        {freezer.freezer_name}
+                        <ul>
+                            {freezer.canes.map(cane => {
+                                return (
+                                    <li>
+                                        {cane.cane}
+                                        <ul>
+                                            {cane.boxes.map(box => {
+                                                return (
+                                                    <li>
+                                                        {box.box_name}
+                                                    </li>
+                                                )
+                                            })}
+                                        </ul>
+                                    </li>
+                                )
+                            })}
+                        </ul>
+                    </li>
+                )
+            })}
+        </ul>
+    )
+    
+
     return (
         <div className='burger-menu'>
-        <button onClick={this.toggleBurger}>Toggle Burger Menu</button>
-        <Menu isOpen={this.props.isOpen}>
-            <div>test</div>
-            <div>test</div>
-            <div>test</div>
-        </Menu>
+            <button onClick={this.toggleBurger}>Toggle Burger Menu</button>
+            <Menu isOpen={this.props.isOpen}>
+                {freezers}
+            </Menu>
       </div>
     );
   }
 }
 
 const mapStateToProps = (reduxState) => {
-    const { freezers, freezercanes, freezerboxes, boxes } = reduxState.reducer
-    return { freezers, freezercanes, freezerboxes, boxes } 
+    const { everything } = reduxState.reducer
+    return { everything } 
 }
-
 const mapDispatchToProps = {
     updateEverything
 }
-
 export default connect(mapStateToProps, mapDispatchToProps)(reduxBurgerMenu(BurgerMenu))
 
