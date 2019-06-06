@@ -4,7 +4,7 @@ import {HashRouter} from 'react-router-dom';
 import store from "./redux/store";
 import { Provider } from "react-redux";
 import './App.scss'
-import GridContextProvider from './components/GridContextProvider'
+
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
       <HashRouter>
         <div>
           {router}
-          <GridContextProvider/>
+         
         </div>
       </HashRouter>
     </Provider>
