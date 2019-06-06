@@ -14,6 +14,6 @@ s.updated_at
 	LEFT JOIN ba.experiment e ON s.experiment_id = e.id
 	LEFT JOIN ba.box b ON box_id = b.id
 	LEFT JOIN ba.cane c ON cane_id = c.id
-	LEFT JOIN ba.freezer f ON f.freezer_id = f.id
-	LEFT JOIN ba.freezer_type ft ON f.freeezer_id = ft.freezer_id
+	LEFT JOIN ba.freezer f ON s.freeezer_id = f.id
+	LEFT JOIN ba.freezer_type ft ON f.id = ft.freezer_id
 	--JOIN ba.freezing_medium fm ON freezing_medium_id = fm.id
