@@ -17,4 +17,4 @@ class Dashboard extends Component {
         </div>)
     }
 }
-export default Dashboard
+export default Dashboard;

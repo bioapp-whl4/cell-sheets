@@ -7,6 +7,8 @@ CREATE TABLE ba.box (
     id serial NOT NULL  ,
     name varchar(255),
     hierarchy_id int default 5,
+    size_x int default 9,
+    size_y int default 9,
     inserted_at timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     updated_at  timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     CONSTRAINT pk_box PRIMARY KEY (id)
