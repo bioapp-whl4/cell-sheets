@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import DisplayFreezers from '../DisplayFreezers/DisplayFreezers'
 import FreezerBox from '../FreezerBox/FreezerBox'
 import FreezerCane from '../FreezerCane/FreezerCane'
+import Box from '../GridContextProvider'
 import {updateFreezerId,updateCaneId,updateBoxId,updateDisplayFreezer,
     updateDisplayCane,updateDisplayBoxes, updateDisplayBox} from '../../redux/display.reducer'
 
@@ -15,11 +16,16 @@ class DisplayInventory extends Component {
         
         
     }
-    backToCane = async () => {
+    backToCane = () => {
         this.props.updateDisplayBoxes(false)
         this.props.updateDisplayCane(true)
         this.props.updateCaneId(null)
 
+    }
+    backToBox = () => {
+        this.props.updateDisplayBox(false)
+        this.props.updateDisplayBoxes(true)
+        this.props.updateBoxId(null)
     }
     render (){
         
@@ -28,6 +34,7 @@ class DisplayInventory extends Component {
                 {this.props.freezer && <div><DisplayFreezers/></div>}
                {this.props.cane && <div><FreezerCane/> <button onClick={this.backToFreezer}>Back to Freezers</button></div>}
                {this.props.boxes && <div><FreezerBox/><button onClick={this.backToCane}>Back to Canes</button></div>}
+               {this.props.box && <div><Box/><button onClick={this.backToBox}>Back to Boxes</button></div>}
                
             </div>
         )

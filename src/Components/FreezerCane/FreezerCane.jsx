@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import {connect} from 'react-redux'
-import {updateCaneId} from '../../redux/display.reducer'
+import {updateCaneId,updateDisplayCane,updateDisplayBoxes} from '../../redux/display.reducer'
 
 class FreezerCane extends Component {
     constructor() {
@@ -19,9 +19,14 @@ class FreezerCane extends Component {
      this.setState({freezerCanes:res.data})
    
     }
+    updateDisplay = (id) => {
+        this.props.updateCaneId(id)
+        this.props.updateDisplayCane(false)
+        this.props.updateDisplayBoxes(true)
+    } 
     render() {
         let displayFreezerCanes = this.state.freezerCanes.map((elem,i)=>{
-            return <div onClick={()=> this.props.updateCaneId(elem.cane_id)} key={i}>
+            return <div onClick={()=> this.updateDisplay(elem.cane_id)} key={i}>
                 <h4>Cane {elem.cane}</h4>
                 <i class="fas fa-layer-group cane"></i>
                 </div>
@@ -38,7 +43,9 @@ class FreezerCane extends Component {
 }
 
 const mapDispatchToProps = {
-    updateCaneId
+    updateCaneId,
+    updateDisplayCane,
+    updateDisplayBoxes
 }
 function mapStateToProps (state) {
    return { freezer_id: state.display.freezer_id
