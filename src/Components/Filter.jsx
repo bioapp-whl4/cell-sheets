@@ -5,9 +5,14 @@ class Filter extends Component {
 
     }
 
+    handleInput = event => {
+        this.setState({
+            [event.target.name]: event.target.value
+        })}
+
     return(){
         render(
-            <form action=""></form>
+            <input type="text"/>
         )
     }
 }
