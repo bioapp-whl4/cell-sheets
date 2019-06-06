@@ -26,9 +26,10 @@ class AddLocation extends Component {
             cane: '',
             // adding freezerbox
             box_name:'',
+            custom_size: false,
             //box size
             x: 0,
-            y: 0
+            y:0
 
 
 
@@ -84,15 +85,25 @@ class AddLocation extends Component {
         }
         else { this.setState({ [e.target.name]:'',[field]: true }) }
     }
+    selectBox = (e, field) => {
+        if (e.target.value !== 'custom' && e.target.value !== 'default') {
+            let z = e.target.value.split(',')
+            let x = +z[0]
+            let y = +z[1]
+            this.setState({ x: x, y:y, [field]: false })
+        } else if (e.target.value === 'default') {
+            this.setState({ x:0,y:0, [field]: false })
+        }
+        else { this.setState({ x:0,y:0,[field]: true }) }
+    }
+    //Handles custom inputs
     handleChange = (e) => {
         this.setState({ [e.target.name]: e.target.value })
 
     }
 
     render() {
-        console.log('freezer_id', this.state.freezer_id)
-        console.log('CANE',this.state.freezercane_id)
-        console.log('BOX',this.state.freezerbox_id)
+       
         let freezers = this.state.freezers.map((elem, i) => {
             return <option value={elem.freezer_id} key={i}>{`${elem.freezer_name}: ${elem.freezer_type}`}</option>
         })
@@ -164,15 +175,22 @@ class AddLocation extends Component {
                             <div className="PopUpcontent" >
                                 <h4>Freezer Box</h4>
                                 <input onChange={this.handleChange} placeholder='Box Name' name='box_name'  />
-                                <select name='box_size' onChange={(e) => this.selectChange(e, 'custom_temp')}>
-                                    <option value='default'>Choose A Temperature</option>
-                                    <option value='-39C'>-39C</option>
-                                    <option value='-40C'>-40C</option>
-                                    <option value='custom'>Custom Temperature</option>
+                                <select name='box_size' onChange={(e) => this.selectBox(e, 'custom_size')}>
+                                    <option value='default'>Choose A Size</option>
+                                    <option value='9,9'>9X9</option>
+                                    <option value='10,10'>10X10</option>
+                                    <option value='8,12'>8X12</option>
+                                    <option value='custom'>Custom size</option>
                                 </select>
-                                {this.state.custom_temp && <input onChange={this.handleChange} placeholder='Custom Temperature' name='temperature' />}
+                                {this.state.custom_size && 
+                                <div>
+                                    <h3>How many Rows</h3>
+                                    <input onChange={this.handleChange} type='number' placeholder='Enter in Rows' name='x' />
+                                    <h3>How many Columns</h3>
+                                    <input onChange={this.handleChange} type='number' placeholder='Enter in Columns' name='y' />
+                                </div>}
 
-                                <button className="PopUpcancel" onClick={() => { this.setState({box_name: ''}); console.log('modal closed '); close() }}>Cancel</button>
+                                <button className="PopUpcancel" onClick={() => { this.setState({box_name: '',x:0,y:0}); console.log('modal closed '); close() }}>Cancel</button>
                             </div>
                         </div>
                     )}
