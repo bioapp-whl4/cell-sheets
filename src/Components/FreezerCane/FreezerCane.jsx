@@ -1,8 +1,7 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
-import {updateFreezerCanes} from '../../redux/auth.reducer'
+import {updateCaneId} from '../../redux/display.reducer'
 
 class FreezerCane extends Component {
     constructor() {
@@ -12,19 +11,20 @@ class FreezerCane extends Component {
         }
     }
    async componentDidMount() {
-    await this.getFreezerCanes()
+    if(this.props.freezer_id !== null) 
+    { this.getFreezerCanes()}
     }
     getFreezerCanes = async () => {
-     let res = await axios.get(`/api/freezer/canes?id=${this.props.match.params.id}`)
+     let res = await axios.get(`/api/freezer/canes?id=${this.props.freezer_id}`)
      this.setState({freezerCanes:res.data})
-     this.props.updateFreezerCanes(res.data)
+   
     }
     render() {
         let displayFreezerCanes = this.state.freezerCanes.map((elem,i)=>{
-            return <Link to={`/api/cane/boxes/${elem.cane_id}`}><div key={i}>
+            return <div onClick={()=> this.props.updateCaneId(elem.cane_id)} key={i}>
                 <h4>Cane {elem.cane}</h4>
                 <i class="fas fa-layer-group cane"></i>
-                </div></Link>
+                </div>
         })
         
         return(
@@ -38,10 +38,10 @@ class FreezerCane extends Component {
 }
 
 const mapDispatchToProps = {
-    updateFreezerCanes
+    updateCaneId
 }
 function mapStateToProps (state) {
-   return { freezers: state.freezers
+   return { freezer_id: state.display.freezer_id
 }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(FreezerCane)
