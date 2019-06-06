@@ -1,4 +1,4 @@
-SELECT s.id as sample_id, user_key, s.name as sample_name, description, freeze_date, cell_vial, 
+SELECT distinct s.id as sample_id, user_key, s.name as sample_name, description, freeze_date, cell_vial, 
 e.id as experiment_id, e.name as experiment_name,
 f.id as freezer_id, f.name as freezer_name,
 l.id as location_id, l.name as location_name, l.state as state_name,

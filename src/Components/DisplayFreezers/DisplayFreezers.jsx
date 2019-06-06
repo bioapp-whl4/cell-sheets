@@ -21,19 +21,21 @@ class DisplayFreezers extends Component {
     }
     render() {
         let displayFreezers = this.state.freezers.map((elem,i)=>{
-            return <Link to={`/api/freezer/canes/${elem.freezer_id}`}><div key={i}>
-            <h3>{elem.freezer_name}</h3>
-            <i class="fas fa-temperature-low"></i>
-            <h4>{elem.temperature}</h4>
-            <h4>{elem.freezer_type}</h4>
-            </div></Link>
+            return <Link to={`/api/freezer/canes/${elem.freezer_id}`} key={i}>
+            <div>
+                <h3>{elem.freezer_name}</h3>
+                <i className="fas fa-temperature-low"></i>
+                <h4>{elem.temperature}</h4>
+                <h4>{elem.freezer_type}</h4>
+            </div>
+            </Link>
         })
         return (
             <div className='display'>
             <div className='contents'>
             <h1 className='CellInventory'>Cell Inventory</h1>
                 <h3 className='category'>Freezers</h3>
-                <i class="fas fa-snowflake cold"></i>
+                <i className="fas fa-snowflake cold"></i>
                 <div className='displayContents'>{displayFreezers}</div>
             </div>
                 
