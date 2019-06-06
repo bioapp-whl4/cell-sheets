@@ -26,11 +26,7 @@ class FreezerCane extends Component {
                 <i class="fas fa-layer-group cane"></i>
                 </div></Link>
         })
-        let freezerInfo = this.props.freezers.filter(elem=>{
-            return elem.freezer_id === this.props.match.params.id
-        })
-        console.log('freezer info',this.props.freezers)
-        console.log(freezerInfo)
+        
         return(
             <div>
                 
