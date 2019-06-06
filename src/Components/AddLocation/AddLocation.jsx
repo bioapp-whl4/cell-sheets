@@ -25,7 +25,10 @@ class AddLocation extends Component {
             // adding freezercane
             cane: '',
             // adding freezerbox
-            box_name:''
+            box_name:'',
+            //box size
+            x: 0,
+            y: 0
 
 
 
@@ -87,9 +90,9 @@ class AddLocation extends Component {
     }
 
     render() {
-        console.log('freezer_id', this.state.freezer_type)
-        console.log('CANE',this.state.cane)
-        console.log('BOX',this.state.box_name)
+        console.log('freezer_id', this.state.freezer_id)
+        console.log('CANE',this.state.freezercane_id)
+        console.log('BOX',this.state.freezerbox_id)
         let freezers = this.state.freezers.map((elem, i) => {
             return <option value={elem.freezer_id} key={i}>{`${elem.freezer_name}: ${elem.freezer_type}`}</option>
         })
@@ -161,6 +164,14 @@ class AddLocation extends Component {
                             <div className="PopUpcontent" >
                                 <h4>Freezer Box</h4>
                                 <input onChange={this.handleChange} placeholder='Box Name' name='box_name'  />
+                                <select name='box_size' onChange={(e) => this.selectChange(e, 'custom_temp')}>
+                                    <option value='default'>Choose A Temperature</option>
+                                    <option value='-39C'>-39C</option>
+                                    <option value='-40C'>-40C</option>
+                                    <option value='custom'>Custom Temperature</option>
+                                </select>
+                                {this.state.custom_temp && <input onChange={this.handleChange} placeholder='Custom Temperature' name='temperature' />}
+
                                 <button className="PopUpcancel" onClick={() => { this.setState({box_name: ''}); console.log('modal closed '); close() }}>Cancel</button>
                             </div>
                         </div>
