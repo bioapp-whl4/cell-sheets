@@ -13,24 +13,24 @@ class BurgerMenu extends Component {
         this.getData()
     }
     getData = async () => {
-        //get freezers and put onto state
-        let res1 = await axios.get('/api/freezers')
-        // get canes for each freezer
         let freezers = []
-         res1.data.map( async (freezer) => {
+        let res1 = await axios.get('/api/freezers')
+        res1.data.map( async (freezer) => {
             let res2 = await axios.get(`/api/freezer/canes?id=${freezer.freezer_id}`)
-            // add the canes array to the freezer object
-            freezer.canes = res2.data
-            // get the boxes for each cane
-            freezer.canes.forEach( async (cane) => {
+            freezer.canes = res2.data  // add the canes array to the freezer object
+            freezer.canes.forEach( async (cane) => { // get the boxes for each cane
                 let res3 = await axios.get(`/api/cane/boxes?id=${cane.cane_id}`)
-                // console.log(`res3` , res3 )
-                cane.boxes = res3.data
+                cane.boxes = res3.data // add the boxes to the cane object
+                cane.boxes.forEach( async (box) => {
+                    let res4 = await axios.get(`/api/samples`)
+                    box.samples = res4.data
+                })
             })
-             freezers.push(freezer)
-            })
-            this.props.updateEverything(freezers)
+                freezers.push(freezer) //add each freezer to the freezer array
+        })
+        this.props.updateEverything(freezers) // send data to redux
     }
+
     toggleBurger = () => {
         store.dispatch(toggleMenu(!this.props.isOpen));
     }
