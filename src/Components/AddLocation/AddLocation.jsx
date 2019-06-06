@@ -24,7 +24,7 @@ class AddLocation extends Component {
             // adding freezercane
             cane: '',
             // adding freezerbox
-            
+
 
 
         }
@@ -41,40 +41,43 @@ class AddLocation extends Component {
     handleFreezer = async (e) => {
 
         await this.setState({ [e.target.name]: e.target.value, freezercane_id: '', freezerbox_id: '' })
-        if(+this.state.freezer_id < 0) {
-            this.setState({freezer_id: '',freezerboxes:[], freezercanes:[]})
+        if (+this.state.freezer_id < 0) {
+            this.setState({ freezer_id: '', freezerboxes: [], freezercanes: [] })
         } else {
-        let res = await axios.get(`/api/freezer/canes?id=${this.state.freezer_id}`)
-        this.setState({ freezercanes: res.data, freezerboxes: [] })}
+            let res = await axios.get(`/api/freezer/canes?id=${this.state.freezer_id}`)
+            this.setState({ freezercanes: res.data, freezerboxes: [] })
         }
+    }
 
     handleCane = async (e) => {
         await this.setState({ [e.target.name]: e.target.value, freezerbox: '' })
-        let res = await axios.get(`/api/cane/boxes?id=${this.state.freezercane_id}`)
-        this.setState({ freezerboxes: res.data })
+        if (+this.state.freezercane_id < 0) {
+            this.setState({ freezerboxes: [], freezercane_id: '' })
+        } else {
+            let res = await axios.get(`/api/cane/boxes?id=${this.state.freezercane_id}`)
+            this.setState({ freezerboxes: res.data })
+        }
 
 
     }
     handleBox = async (e) => {
-        await this.setState({[e.target.name]: e.target.value})
+        await this.setState({ [e.target.name]: e.target.value })
+
     }
     //Adding New Freezers
-    selectChange = (e,field) => {
+    selectChange = (e, field) => {
         if (e.target.value !== 'custom' && e.target.value !== 'default') {
             this.setState({ [e.target.name]: e.target.value, [field]: false })
         } else if (e.target.value === 'default') {
-            this.setState({[e.target.name]: '',[field]: false})
-        }  
-        else {this.setState({[field]: true})}
+            this.setState({ [e.target.name]: '', [field]: false })
+        }
+        else { this.setState({ [field]: true }) }
     }
     handleChange = (e) => {
-        this.setState({ [e.target.name]: e.target.value})
+        this.setState({ [e.target.name]: e.target.value })
 
     }
-    // //<h3>{elem.freezer_name}</h3>
-    // <i class="fas fa-temperature-low"></i>
-    // <h4>{elem.temperature}</h4>
-    // <h4>{elem.freezer_type}</h4>
+
     render() {
         console.log('this is the STATE', this.state)
         console.log(this.state.freezercanes)
@@ -102,14 +105,14 @@ class AddLocation extends Component {
                                 <h4>Freezer Name</h4>
                                 <input onChange={this.handleChange} placeholder='Freezer Name' name='freezer_name' value={this.state.freezer_name} />
                                 <h4>Freezer Type</h4>
-                                <select name='freezer_type' onChange={(e)=>this.selectChange(e,'custom_type')}>
+                                <select name='freezer_type' onChange={(e) => this.selectChange(e, 'custom_type')}>
                                     <option value='default'>Choose Freezer Type</option>
                                     <option value='Liquid Nitrogen'>Liquid Nitrogen</option>
                                     <option value='custom'>Custom</option>
                                 </select>
                                 {this.state.custom_type && <input onChange={this.handleChange} placeholder='Freezer Type' name='freezer_type' />}
                                 <h4>Freezer Temperature</h4>
-                                <select name='temperature' onChange={(e)=>this.selectChange(e,'custom_temp')}>
+                                <select name='temperature' onChange={(e) => this.selectChange(e, 'custom_temp')}>
                                     <option value='default'>Choose A Temperature</option>
                                     <option value='-39C'>-39C</option>
                                     <option value='-40C'>-40C</option>
@@ -138,10 +141,10 @@ class AddLocation extends Component {
                         </div>
                     )}
                 </Popup>}
-                
+
                 <select name='freezercane_id' onChange={this.handleCane}><option value='-1'>Choose a Freezercane</option>{freezerCanes}</select>
                 <h4>Freezer Boxes</h4>
-                <Popup trigger={<button>Add New Freezer Box</button>} modal>
+                {this.state.freezercane_id && <Popup trigger={<button>Add New Freezer Box</button>} modal>
                     {close => (
                         <div className="modal">
                             <button onClick={close} className="close">&times;</button>
