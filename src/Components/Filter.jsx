@@ -6,9 +6,9 @@ import axios from 'axios'
 class Filter extends Component {
     state = {
         search_value: '',
-        description: false,
-        sample_id: false,
-        experiment_id: false,
+        description: true,
+        sample_id: true,
+        experiment_id: true,
         start_date: '',
         end_date: '',
         dateContext: '',
@@ -70,24 +70,30 @@ class Filter extends Component {
     }
 
     render(){
-
-        let results = this.state.samples.filter(sample => {
-            
-        })
+        if (this.state.search_value){
+            let results = this.state.samples.filter(sample => {
+                let search_within = ''
+                search_within += this.state.description && sample.description ? sample.description.toLowerCase() : ''
+                search_within += this.state.experiment_id && sample.experiment_name ? sample.experiment_name.toLowerCase() : ''
+                search_within += this.state.sample_id && sample.sample_name ? sample.sample_name.toLowerCase() : ''
+                return search_within.includes(this.state.search_value.toLowerCase())
+            })
+            console.log(`results`, results)
+        }
 
         return(
             <div>
                 <input type="text" name='search_value' placeholder='Search for...' onChange={this.handleInput}/>
                 <div>
-                    <input type="checkbox" name="description" onClick={this.handleCheck}/>
+                    <input type="checkbox" name="description" onClick={this.handleCheck} defaultChecked/>
                     <label>Description</label>
                 </div>            
                 <div>
-                    <input type="checkbox" name="sample_id" onClick={this.handleCheck}/>
+                    <input type="checkbox" name="sample_id" onClick={this.handleCheck} defaultChecked/>
                     <label>Sample ID</label>
                 </div>            
                 <div>
-                    <input type="checkbox" name="experiment_id" onClick={this.handleCheck}/>
+                    <input type="checkbox" name="experiment_id" onClick={this.handleCheck} defaultChecked/>
                     <label>Experiment ID</label>
                 </div>  
                 <div>
