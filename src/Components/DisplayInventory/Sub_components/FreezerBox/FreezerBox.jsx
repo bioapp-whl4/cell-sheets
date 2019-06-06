@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import axios from 'axios'
 
 import {connect} from 'react-redux'
-import {updateBoxId,updateDisplayBoxes,updateDisplayBox} from '../../redux/display.reducer'
+import {updateBoxId,updateDisplayBoxes,updateDisplayBox} from '../../../../redux/display.reducer'
 
 class FreezerBox extends Component {
     constructor() {

@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import {connect} from 'react-redux'
-import {updateCaneId,updateDisplayCane,updateDisplayBoxes} from '../../redux/display.reducer'
+import {updateCaneId,updateDisplayCane,updateDisplayBoxes} from '../../../../redux/display.reducer'
 
 class FreezerCane extends Component {
     constructor() {

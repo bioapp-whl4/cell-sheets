@@ -1,6 +1,6 @@
 import React, { Component} from 'react'
 import axios from 'axios'
-import {updateFreezerId,updateDisplayFreezer,updateDisplayCane} from '../../redux/display.reducer'
+import {updateFreezerId,updateDisplayFreezer,updateDisplayCane} from '../../../../redux/display.reducer'
 import {connect} from 'react-redux'
 
 class DisplayFreezers extends Component {

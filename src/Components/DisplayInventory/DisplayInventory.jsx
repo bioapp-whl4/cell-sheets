@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import DisplayFreezers from '../DisplayFreezers/DisplayFreezers'
-import FreezerBox from '../FreezerBox/FreezerBox'
-import FreezerCane from '../FreezerCane/FreezerCane'
+import DisplayFreezers from './Sub_components/DisplayFreezers/DisplayFreezers'
+import FreezerBox from './Sub_components/FreezerBox/FreezerBox'
+import FreezerCane from './Sub_components/FreezerCane/FreezerCane'
 import Box from '../GridContextProvider'
 import {updateFreezerId,updateCaneId,updateBoxId,updateDisplayFreezer,
     updateDisplayCane,updateDisplayBoxes, updateDisplayBox} from '../../redux/display.reducer'
