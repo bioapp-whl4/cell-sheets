@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 
 export default class SingleAdd extends Component{
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
         this.state = {
             name: '',
             description: '',
@@ -17,8 +17,18 @@ export default class SingleAdd extends Component{
             show3: false,
             add1: '',
             add2: '',
-            add3: ''
+            add3: '',
+            locations: []
         }
+    }
+
+    componentDidMount(){
+        var samples = this.props.specimens.map(sample => (
+            sample.location
+        ))
+        this.setState({
+            locations: samples
+        })
     }
 
     //axios.post("/api/sample")
