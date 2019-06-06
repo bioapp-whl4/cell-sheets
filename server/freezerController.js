@@ -2,6 +2,7 @@ module.exports = {
   getFreezers: (req, res) => {
     const db = req.app.get("db");
     db.getFreezers().then(data => {
+      console.log(`DB response from getFreezers`, data);
       res.status(200).send(data);
     });
   },
@@ -100,7 +101,6 @@ module.exports = {
       add4,
       add5
     } = req.body;
-    console.log(req.body);
 
     const db = req.app.get("db");
     try {
@@ -128,8 +128,14 @@ module.exports = {
       });
       res.sendStatus(200); //send data for web visual of cart ?
     } catch (err) {
-      console.log(err);
       res.sendStatus(500);
     }
+  },
+  getSamples: (req, res) => {
+    const db = req.app.get("db");
+    db.getSamples().then(data => {
+      console.log(`DB response from getSamples`, data);
+      res.status(200).send(data);
+    });
   }
 };
