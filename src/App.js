@@ -11,10 +11,7 @@ function App() {
   return (
     <Provider store={store}>
       <HashRouter>
-        <div>
-          <HeaderSearch />
-          <GridContextProvider />
-        </div>
+        <div>{router}</div>
       </HashRouter>
     </Provider>
   );

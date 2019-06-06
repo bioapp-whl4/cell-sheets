@@ -31,7 +31,7 @@ class HeaderSearch extends Component {
   render() {
     let displaySamples = this.state.samples.map((elem, i) => {
       return (
-        <Link to={`/api/sample/results${elem.freezer_id}`}>
+        <Link to={`/api/test`}>
           <div key={i}>
             <h3>{elem.freezer_name}</h3>
             <i class="fas fa-temperature-low" />
@@ -44,8 +44,7 @@ class HeaderSearch extends Component {
     return (
       <div className="display">
         <div className="contents">
-          <h1 className="CellInventory">Cell Inventory</h1>
-          <h3 className="category">Samples</h3>
+          <h4 className="category">Samples</h4>
           <i class="fas fa-snowflake cold" />
           <div className="displayContents">{displaySamples}</div>
         </div>

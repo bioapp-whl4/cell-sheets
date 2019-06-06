@@ -12,7 +12,7 @@ const initialState = {
   freezercanes: [],
   freezerboxes: [],
   boxes: [],
-  everything: {}
+  everything: []
 };
 //AUTH
 const UPDATE_USER_ID = "UPDATE_USER_ID";

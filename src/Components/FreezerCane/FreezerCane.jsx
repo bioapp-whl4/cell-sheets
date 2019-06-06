@@ -24,7 +24,7 @@ class FreezerCane extends Component {
   render() {
     let displayFreezerCanes = this.state.freezerCanes.map((elem, i) => {
       return (
-        <Link to={`/api/cane/boxes${elem.cane_id}`}>
+        <Link to={`/api/cane/boxes/${elem.cane_id}`}>
           <div key={i}>
             <h4>Cane {elem.cane}</h4>
             <i class="fas fa-layer-group cane" />
@@ -32,11 +32,7 @@ class FreezerCane extends Component {
         </Link>
       );
     });
-    let freezerInfo = this.props.freezers.filter(elem => {
-      return elem.freezer_id === this.props.match.params.id;
-    });
-    console.log("freezer info", this.props.freezers);
-    console.log(freezerInfo);
+
     return (
       <div>
         <h4>Freezer Canes</h4>
