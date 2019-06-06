@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Grid from './Grid'
 // import AddSpecimens from './AddSpecimens'
 import SampleList from './SampleList'
+import SingleAdd from '../SingleAdd'
 import axios from 'axios'
 
 export default class GridContainer extends Component {
@@ -10,7 +11,8 @@ export default class GridContainer extends Component {
     this.state = {
       specimens: [],
       originIndex: null,
-      showData: null
+      showData: null,
+      addSample: false
     }
     this.componentDidMount = this.componentDidMount.bind(this)
     this.moveItem = this.moveItem.bind(this)
@@ -29,12 +31,17 @@ export default class GridContainer extends Component {
     catch(err){
       console.log(err)
     }
-    
   }
 
   async getSpecimens(specimens){
     await this.setState({
       specimens
+    })
+  }
+
+  addSample =() => {
+    this.setState({
+      addSample: !this.state.addSample
     })
   }
 
@@ -87,6 +94,8 @@ export default class GridContainer extends Component {
         <Grid move={this.moveItem} get={this.getIndex} showData={this.showData} hideData={this.hideData} specimens={this.state.specimens}/>
         {/* <AddSpecimens getSpecimens={this.getSpecimens}/> */}
         <SampleList specimens={this.state.specimens}/>
+        <button onClick={this.addSample}>Add a sample</button>
+        {this.state.addSample && <SingleAdd specimens={this.state.specimens}/>}
       </>
     );
   }

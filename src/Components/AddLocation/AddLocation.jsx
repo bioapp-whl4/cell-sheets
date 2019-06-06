@@ -1,98 +1,178 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import axios from 'axios'
-import {connect} from 'react-redux'
 import Popup from 'reactjs-popup'
-import {updateFreezers,updateFreezerCanes,updateFreezerBoxes,updateBoxes} from '../../redux/auth.reducer'
+
 
 class AddLocation extends Component {
     constructor() {
         super();
         this.state = {
-            freezer: '',
-            freezercane: '',
-            feezerbox:'',
+            //Axios info
+            freezers: [],
+            freezercanes: [],
+            freezerboxes: [],
+            box: [],
+            freezer_id: '',
+            freezercane_id: '',
+            freezerbox_id: '',
+            box_id: '',
             // adding Freezer
             freezer_name: '',
-            freezer_type: ''
-            
+            temperature: '',
+            freezer_type: '',
+            custom_temp: false,
+            custom_type: false,
+            // adding freezercane
+            cane: '',
+            // adding freezerbox
+            box_name:''
+
+
+
         }
     }
     componentDidMount() {
-        this.updatingRedux()
+        this.getAllFreezers()
     }
-    updatingRedux = () => {
-        axios.get('/api/freezers').then(res=>this.props.updateFreezers(res.data))
-        .catch(err=>console.log('error updating freezers on redux',err))
-        axios.get('/api/freezercanes').then(res=> this.props.updateFreezerCanes(res.data))
-        .catch(err=>console.log('error updating freezercanes on redux',err))
-        axios.get('/api/freezerboxes').then(res=> this.props.updateFreezerBoxes(res.data))
-        .catch(err=>console.log('error updating freezerboxes on redux',err))
-        axios.get('/api/boxes').then(res=>this.props.updateBoxes(res.data))
-        .catch(err=>console.log('error updating boxes on redux',err))
+    //Dynamic Selection Options 
+    getAllFreezers = () => {
+        axios.get('/api/freezers').then(res => this.setState({ freezers: res.data }))
+            .catch(err => console.log('get freezers in adding', err))
+
+    }
+    handleFreezer = async (e) => {
+
+        await this.setState({ [e.target.name]: e.target.value, freezercane_id: '', freezerbox_id: '' })
+        if (+this.state.freezer_id < 0) {
+            this.setState({ freezer_id: '', freezercane_id: '', freezerboxes: [], freezercanes: [] })
+        } else {
+            let res = await axios.get(`/api/freezer/canes?id=${this.state.freezer_id}`)
+            this.setState({ freezercanes: res.data, freezerboxes: [] })
+        }
+    }
+
+    handleCane = async (e) => {
+        await this.setState({ [e.target.name]: e.target.value, freezerboxes: [],freezerbox_id: '' })
+        if (+this.state.freezercane_id < 0) {
+            this.setState({ freezerboxes: [], freezercane_id: '',freezerbox_id: ''})
+        } else {
+            let res = await axios.get(`/api/cane/boxes?id=${this.state.freezercane_id}`)
+            this.setState({ freezerboxes: res.data })
+        }
+
+
+    }
+    handleBox = async (e) => {
+        await this.setState({ [e.target.name]: e.target.value,box: '' })
+        if (+this.state.freezerbox_id < 0) {
+            this.setState({ freezerboxes: [], box_id: '',freezerbox_id: ''})
+        } else {
+            let res = await axios.get(`/api/cane/boxes?id=${this.state.freezercane_id}`)
+            this.setState({ freezerboxes: res.data })
+        }
+
+    }
+    //Adding New Freezers
+    selectChange = (e, field) => {
+        if (e.target.value !== 'custom' && e.target.value !== 'default') {
+            this.setState({ [e.target.name]: e.target.value, [field]: false })
+        } else if (e.target.value === 'default') {
+            this.setState({ [e.target.name]: '', [field]: false })
+        }
+        else { this.setState({ [e.target.name]:'',[field]: true }) }
     }
     handleChange = (e) => {
-        this.setState({[e.target.name]:e.target.value})
-        
+        this.setState({ [e.target.name]: e.target.value })
+
     }
+
     render() {
-        console.log(this.state)
-        let freezers = this.props.freezers.map((elem,i)=> {
-            return <option value={elem.freezer_name} key={i}>{`${elem.freezer_name}: ${elem.freezer_type}`}</option>
+        console.log('freezer_id', this.state.freezer_type)
+        console.log('CANE',this.state.cane)
+        console.log('BOX',this.state.box_name)
+        let freezers = this.state.freezers.map((elem, i) => {
+            return <option value={elem.freezer_id} key={i}>{`${elem.freezer_name}: ${elem.freezer_type}`}</option>
         })
-        
-        let freezerCanes = this.props.freezercanes.map((elem,i)=> {
-            return <option value={elem.name} key={i}>{elem.name}</option>
+
+
+        let freezerCanes = this.state.freezercanes.map((elem, i) => {
+            return <option value={elem.cane_id} key={i}>Cane: {elem.cane}</option>
         })
-        let freezerBoxes = this.props.freezerboxes.map((elem,i)=>{
-            return <option value={elem.name} key={i}>{elem.name}</option>
+        let freezerBoxes = this.state.freezerboxes.map((elem, i) => {
+            return <option value={elem.box_id} key={i}>{elem.box_name}</option>
         })
-        return(
+        return (
             <div>
                 <h3>Location</h3>
-               <h4>Freezers</h4>
-               <Popup trigger={<button>Add New Freezer</button>} modal>
-                            {close => (
-                                <div className="modal">
-                                    <button onClick={close} className="close">&times;</button>
-                                    <div className="PopUpheader" > Add New Freezer </div>
-                                    <div className="PopUpcontent" >
-                                    <h4>Freezer Name</h4>
-                                        <input placeholder='Freezer Name'name='freezer_name'/>
-                                    <h4>Freezer Type</h4>
-                                        <input placeholder='Freezer Type' name='freezer_type'/>
-                                    </div>
-                                    <div className="PopUpactions" >
-                                        <button className="PopUpcancel" onClick={() => { console.log('modal closed '); close() }}>Cancel</button>
-                                    </div>
-                                </div>
-                            )}
-                        </Popup>
-               
-                <select name='freezer' onChange={this.handleChange}><option value=''>Choose a Freezer</option>{freezers}</select>
-                <h4>FreezerCane</h4>
-                <button>Add New Freezercane</button>
-                <select name='freezercane' onChange={this.handleChange}><option value=''>Choose a Freezercane</option>{freezerCanes}</select>
+                <h4>Freezers</h4>
+                <Popup trigger={<button>Add New Freezer</button>} modal>
+                    {close => (
+                        <div className="modal">
+                            <button onClick={close} className="close">&times;</button>
+                            <div className="PopUpheader" > Add New Freezer </div>
+                            <div className="PopUpcontent" >
+                                <h4>Freezer Name</h4>
+                                <input onChange={this.handleChange} placeholder='Freezer Name' name='freezer_name' value={this.state.freezer_name} />
+                                <h4>Freezer Type</h4>
+                                <select name='freezer_type' onChange={(e) => this.selectChange(e, 'custom_type')}>
+                                    <option value='default'>Choose Freezer Type</option>
+                                    <option value='Liquid Nitrogen'>Liquid Nitrogen</option>
+                                    <option value='custom'>Custom</option>
+                                </select>
+                                {this.state.custom_type && <input onChange={this.handleChange} placeholder='Freezer Type' name='freezer_type' />}
+                                <h4>Freezer Temperature</h4>
+                                <select name='temperature' onChange={(e) => this.selectChange(e, 'custom_temp')}>
+                                    <option value='default'>Choose A Temperature</option>
+                                    <option value='-39C'>-39C</option>
+                                    <option value='-40C'>-40C</option>
+                                    <option value='custom'>Custom Temperature</option>
+                                </select>
+                                {this.state.custom_temp && <input onChange={this.handleChange} placeholder='Custom Temperature' name='temperature' />}
+                            </div>
+                            <div className="PopUpactions" >
+                                <button className="PopUpcancel" onClick={() => { this.setState({freezer_type:'',temperature:'', freezer_name:''}) ;console.log('modal closed '); close() }}>Cancel</button>
+                            </div>
+                        </div>
+                    )}
+                </Popup>
+                <select name='freezer_id' onChange={this.handleFreezer}><option value='-1'>Choose a Freezer</option>{freezers}</select>
+                <h4>Freezer Cane</h4>
+                {this.state.freezer_id && <Popup trigger={<button>Add New Freezer Cane</button>} modal>
+                    {close => (
+                        <div className="modal">
+                            <button onClick={close} className="close">&times;</button>
+                            <div className="PopUpheader" > Add New Freezer Cane </div>
+                            <div className="PopUpcontent" >
+                                <h4>Freezer Cane Name</h4>
+                                <input onChange={this.handleChange} placeholder='Freezer Cane Name' name='cane' value={this.state.cane} />
+                                <button className="PopUpcancel" onClick={() => { this.setState({cane:''});console.log('modal closed '); close() }}>Cancel</button>
+                            </div>
+                        </div>
+                    )}
+                </Popup>}
+
+                <select name='freezercane_id' onChange={this.handleCane}><option value='-1'>Choose a Freezercane</option>{freezerCanes}</select>
                 <h4>Freezer Boxes</h4>
-                <button>Add New Box</button>
-                <select name='freezerbox' onChange={this.handleChange}><option value=''>Choose a Freezer Box</option>{freezerBoxes}</select>
+                {this.state.freezercane_id && <Popup trigger={<button>Add New Freezer Box</button>} modal>
+                    {close => (
+                        <div className="modal">
+                            <button onClick={close} className="close">&times;</button>
+                            <div className="PopUpheader" > Add New Box </div>
+                            <div className="PopUpcontent" >
+                                <h4>Freezer Box</h4>
+                                <input onChange={this.handleChange} placeholder='Box Name' name='box_name'  />
+                                <button className="PopUpcancel" onClick={() => { this.setState({box_name: ''}); console.log('modal closed '); close() }}>Cancel</button>
+                            </div>
+                        </div>
+                    )}
+                </Popup>}
+                <select name='freezerbox_id' onChange={this.handleBox}><option value='-1'>Choose a Freezer Box</option>{freezerBoxes}</select>
             </div>
         )
     }
 
 }
-const mapDispatchToProps = {
-    updateBoxes,
-    updateFreezerCanes,
-    updateFreezerBoxes,
-    updateFreezers
-}
-function mapStateToProps(state) {
-    return {
-        freezers: state.freezers,
-        freezercanes: state.freezercanes,
-        freezerboxes: state.freezerboxes,
-        boxes: state.boxes
-    }
-}
 
-export default connect(mapStateToProps,mapDispatchToProps)(AddLocation)
+
+
+export default AddLocation
