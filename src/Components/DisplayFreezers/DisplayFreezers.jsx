@@ -38,7 +38,7 @@ class DisplayFreezers extends Component {
             <div className='contents'>
             <h1 className='CellInventory'>Cell Inventory</h1>
                 <h3 className='category'>Freezers</h3>
-                <i class="fas fa-snowflake cold"></i>
+                <i className="fas fa-snowflake cold"></i>
                 <div className='displayContents'>{displayFreezers}</div>
             </div>
                 
