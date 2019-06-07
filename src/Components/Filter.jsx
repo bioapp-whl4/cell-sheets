@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import { updateEverything } from '../redux/auth.reducer'
 import axios from 'axios'
+import {withRouter} from 'react-router-dom'
 
 class Filter extends Component {
     state = {
@@ -74,7 +75,6 @@ class Filter extends Component {
         let results
         if (this.state.search_value){
             results = this.state.samples.filter(sample => {
-                console.log(`sample.freeze_date`, sample.freeze_date)
                 let search_within = ''
                 search_within += this.state.description && sample.description ? sample.description.toLowerCase() : ''
                 search_within += this.state.experiment_id && sample.experiment_name ? sample.experiment_name.toLowerCase() : ''
@@ -85,42 +85,43 @@ class Filter extends Component {
             results = this.state.samples
         }
 
-        console.log(`results`, results)
-
-
         if (this.state.date){
             let start_date = Date.parse(new Date(this.state.start_date))
             let end_date = Date.parse(new Date(this.state.end_date))
-            console.log(`start_date`, start_date)
-            console.log(`end_date`, end_date)
 
             if (this.state.dateContext === `before`) {
-                console.log(`before`)
                 results = results.filter(sample => {
                     let sample_date = Date.parse(new Date(sample.freeze_date))
-                    console.log(`start_date - sample_date > 0`, start_date - sample_date)
                     return start_date - sample_date > 0
               })
 
             } else if(this.state.dateContext === `after`){
-                console.log(`after`)
                 results = results.filter(sample => {
                     let sample_date = Date.parse(new Date(sample.freeze_date))
-                    console.log(`start_date - sample_date < 0`, start_date - sample_date)
                     return start_date - sample_date < 0
                 })
 
             } else if(this.state.dateContext === `between`){
-                console.log(`between`)
                 results = results.filter(sample => {
                     let sample_date = Date.parse(new Date(sample.freeze_date))
-                    console.log(`(sample_date - start_date > 0) && (end_date - sample_date > 0)`, sample_date - start_date, end_date - sample_date)
                     return ((sample_date - start_date > 0) && (end_date - sample_date > 0))
                 })
             }
-            console.log(`results`, results)
-
         }
+
+        let results_display = results.map((sample, i) => {
+            return (
+                <div key={i} onClick={() => {this.props.history.push(`/api/cane/boxes/${sample.box_id}`)}}>
+                    <h6>{sample.sample_name}</h6>
+                    <ul>
+                        <li>Description: {sample.description}</li>
+                        <li>Freeze Date: {sample.freeze_date}</li>
+                        <li>Experiment ID: {sample.experiment_name}</li>
+                    </ul>
+        
+                </div>
+            )
+        })
 
         return(
             <div>
@@ -166,7 +167,9 @@ class Filter extends Component {
                         </input>        
                     </div>  
                 )}
-
+                <div>
+                    {results_display}
+                </div>
             </div>
         )
     }
@@ -179,4 +182,4 @@ const mapStateToProps = (reduxState) => {
 const mapDispatchToProps = {
     updateEverything
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Filter)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter((Filter)))
