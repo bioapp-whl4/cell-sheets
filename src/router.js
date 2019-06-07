@@ -5,7 +5,7 @@ import Register from "./Components/Register";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import AddLocation from "./Components/AddLocation/AddLocation";
 import HeaderSearch from "./Components/Search/HeaderSearch";
-import Filter from './Components/Filter'
+import Filter from './Components/AdvanceSearch/AdvanceSearch'
 
 
 // Test Hierarchy

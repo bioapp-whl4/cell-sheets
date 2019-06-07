@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import { updateEverything, store_filter_results } from '../redux/auth.reducer'
+import { updateEverything, store_filter_results } from '../../redux/auth.reducer'
 import axios from 'axios'
 import {withRouter} from 'react-router-dom'
 

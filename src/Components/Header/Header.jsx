@@ -17,7 +17,7 @@ class Header extends Component {
                 <div className='nav-links'>
                     <h4 className='logout'>LOG OUT</h4>
                     <i className="fas fa-search search"></i>
-                    <div onClick={this.navigate}>Advanced Search</div>
+                    <div className='advance' onClick={this.navigate}>Advanced Search</div>
                 </div>
             </header>
         )

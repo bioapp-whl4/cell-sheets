@@ -15,17 +15,24 @@
     font-size: 35px;
 }
 .logout {
+    position: absolute;
     color: white;
-    position: relative;
-    top:2%;
-    left: 90%;
+    top:.3%;
+    right:1%;
+   
 }
 .search {
     color: white;
     font-size: 30px;
-    position: relative;
-    top: 60%;
-    left: 80%;
+    position: absolute;
+    top: 8%;
+    right:15%;
+}
+.advance {
+    color: white;
+    position: absolute;
+    top:12%;
+    right:6.5%;
 }
 
 .nav-links{
