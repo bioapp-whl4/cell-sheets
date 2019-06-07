@@ -5,6 +5,8 @@ import {action as toggleMenu} from 'redux-burger-menu';
 import store from '../../redux/store'
 import {connect} from 'react-redux'
 import axios from 'axios'
+import {updateFreezerId,updateCaneId,updateBoxId,updateDisplayFreezer,
+    updateDisplayCane,updateDisplayBoxes, updateDisplayBox} from '../../redux/display.reducer'
 import { updateEverything } from '../../redux/auth.reducer'
 
 
@@ -39,25 +41,51 @@ class BurgerMenu extends Component {
     toggleBurger = () => {
         store.dispatch(toggleMenu(!this.props.isOpen));
     }
-
+    handleFreezer = (id) => {
+        this.props.updateDisplayFreezer(false)
+        this.props.updateDisplayCane(true)
+        this.props.updateDisplayBoxes(false)
+        this.props.updateDisplayBox(false)
+        this.props.updateFreezerId(id)
+        this.props.updateCaneId(null)
+        this.props.updateBoxId(null)
+    }
+    handleCane = (freeze_id,cane_id) => {
+        this.props.updateDisplayFreezer(false)
+        this.props.updateDisplayCane(false)
+        this.props.updateDisplayBoxes(true)
+        this.props.updateDisplayBox(false)
+        this.props.updateFreezerId(freeze_id)
+        this.props.updateCaneId(cane_id)
+        this.props.updateBoxId(null)
+    }
+    handleBox = (freeze_id,cane_id,box_id) => {
+        this.props.updateDisplayFreezer(false)
+        this.props.updateDisplayCane(false)
+        this.props.updateDisplayBoxes(false)
+        this.props.updateDisplayBox(true)
+        this.props.updateFreezerId(freeze_id)
+        this.props.updateCaneId(cane_id)
+        this.props.updateBoxId(box_id)
+    }
   render () {
-
+    
     let freezers = (
         <ul>
             {this.props.everything.map((freezer, i) => {
                 return (
-                    <li key={i}>
-                        {freezer.freezer_name}
+                    <li>
+                        <h5 onClick={()=>this.handleFreezer(freezer.freezer_id)}>{freezer.freezer_name} : {freezer.freezer_type}</h5>
                         <ul>
                             {freezer.canes.map((cane, i) => {
                                 return (
-                                    <li key={i}>
-                                        {cane.cane}
+                                    <li >
+                                        <h6 onClick={()=>this.handleCane(freezer.freezer_id,cane.cane_id)}> Cane: {cane.cane}</h6>
                                         <ul>
                                             {cane.boxes.map((box, i) => {
                                                 return (
-                                                    <li key={i}>
-                                                        {box.box_name}
+                                                    <li>
+                                                       <h6 onClick={()=>this.handleBox(freezer.freezer_id,cane.cane_id,box.box_id)}>Box:{box.box_name}</h6> 
                                                     </li>
                                                 )
                                             })}
@@ -89,7 +117,16 @@ const mapStateToProps = (reduxState) => {
     return { everything } 
 }
 const mapDispatchToProps = {
-    updateEverything
+    updateEverything,
+     //update ids
+     updateFreezerId,
+     updateCaneId,
+     updateBoxId,
+     // updateDisplays
+     updateDisplayFreezer,
+     updateDisplayCane,
+     updateDisplayBoxes,
+     updateDisplayBox
 }
 export default connect(mapStateToProps, mapDispatchToProps)(reduxBurgerMenu(BurgerMenu))
 

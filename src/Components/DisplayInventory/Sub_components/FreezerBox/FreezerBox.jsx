@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import axios from 'axios'
 
 import {connect} from 'react-redux'
-import {updateBoxId,updateDisplayBoxes,updateDisplayBox} from '../../redux/display.reducer'
+import {updateBoxId,updateDisplayBoxes,updateDisplayBox} from '../../../../redux/display.reducer'
 
 class FreezerBox extends Component {
     constructor() {
@@ -16,6 +16,11 @@ class FreezerBox extends Component {
         this.getFreezerBoxes()
     }
 }
+    componentDidUpdate(prevProps) {
+        if(this.props.cane_id !== prevProps.cane_id) {
+            this.getFreezerBoxes()
+        }
+    }
     getFreezerBoxes = async () => {
         let res = await axios.get(`/api/cane/boxes?id=${this.props.cane_id}`)
         this.setState({freezerBoxes: res.data})
@@ -38,6 +43,7 @@ class FreezerBox extends Component {
         console.log(this.state.freezerBoxes)
         return(
             <div>   
+            <h3>Freezer Cane: {this.props.cane_id}</h3>
             <h4>Freezer Boxes</h4>
             
             <div>{displayFreezerBoxes}</div>

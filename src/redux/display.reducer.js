@@ -1,7 +1,9 @@
 const initialState = {
+    //updating id
     freezer_id: null,
     cane_id: null,
     box_id: null,
+    //displays
     freezer: true,
     cane: false,
     boxes: false,

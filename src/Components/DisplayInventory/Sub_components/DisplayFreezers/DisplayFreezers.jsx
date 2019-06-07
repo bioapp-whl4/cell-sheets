@@ -1,6 +1,6 @@
 import React, { Component} from 'react'
 import axios from 'axios'
-import {updateFreezerId,updateDisplayFreezer,updateDisplayCane} from '../../redux/display.reducer'
+import {updateFreezerId,updateDisplayFreezer,updateDisplayCane} from '../../../../redux/display.reducer'
 import {connect} from 'react-redux'
 
 class DisplayFreezers extends Component {
@@ -8,11 +8,14 @@ class DisplayFreezers extends Component {
         super();
         this.state = {
             freezers: []
+           
         }
     }
     async componentDidMount() {
         await this.getFreezers()
     }
+
+
     getFreezers = async () => {
        let res = await axios.get('/api/freezers')
        this.setState({freezers: res.data})
@@ -51,5 +54,6 @@ const mapDispatchToProps = {
     updateDisplayFreezer,
     updateDisplayCane
 }
+
 
 export default connect(null,mapDispatchToProps)(DisplayFreezers)
