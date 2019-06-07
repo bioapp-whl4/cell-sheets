@@ -1,16 +1,12 @@
 .Header {
     display: flex;
+    justify-content: space-between;
     background-color: blue;
     height: 9em;
     width: 100vw;
     opacity: .6;
 }
-// .BlueBar {
-//     background-color: blue;
-//     height: 9em;
-//     width: 100vw;
-//     opacity: .6;
-// }
+
 .AppName {
     color: white;
     position: relative;
@@ -30,4 +26,8 @@
     position: relative;
     top: 60%;
     left: 80%;
+}
+
+.nav-links{
+    justify-items: left;
 }

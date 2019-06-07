@@ -1,18 +1,35 @@
 import React, {Component} from 'react'
+import {withRouter} from 'react-router-dom'
+import {connect} from 'react-redux'
+import {displayFilter} from '../../redux/display.reducer'
+
 
 class Header extends Component {
     
-    this
+    navigate = () => {
+        this.props.displayFilter(!this.props.advancedSearch)
+    }
+
     render() {
         return(
-            <div className='Header'>
-            <div className='BlueBar'></div>
-            <h4 className='logout'>LOG OUT</h4>
-            <i className="fas fa-search search"></i>
-            <h3 className='AppName'>CELL SHEETS</h3>
-            
-            </div>
+            <header className='Header'>
+                <h3 className='AppName'>CELL SHEETS</h3>
+                <div className='nav-links'>
+                    <h4 className='logout'>LOG OUT</h4>
+                    <i className="fas fa-search search"></i>
+                    <div onClick={this.navigate}>Advanced Search</div>
+                </div>
+            </header>
         )
     }
 }
-export default Header
+
+const mapDispatchToProps = {displayFilter}
+
+function mapStateToProps(state) {
+    return {
+        advancedSearch: state.display.advancedSearch
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Header))

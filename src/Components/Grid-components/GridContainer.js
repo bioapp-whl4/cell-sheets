@@ -5,6 +5,7 @@ import SampleList from './SampleList'
 import AddSamples from '../AddSamples'
 import axios from 'axios'
 
+
 export default class GridContainer extends Component {
   constructor(props){
     super(props)
@@ -33,6 +34,25 @@ export default class GridContainer extends Component {
       console.log(err)
     }
   }
+  componentDidUpdate(prevProps) {
+    if(prevProps.box_id !== this.props.box_id) {
+      this.getData()
+    }
+  }
+  
+getData = async () => {
+  const {box_id} = this.props
+  const response = await axios.get(`/api/boxgrid/samples?id=${box_id}`)
+  try{
+    const {data} = response
+    this.setState({
+      specimens: data
+    })
+  }
+  catch(err){
+    console.log(err)
+  }
+}
 
   async getSpecimens(specimens){
     await this.setState({
