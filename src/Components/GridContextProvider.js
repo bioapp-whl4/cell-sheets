@@ -1,41 +1,25 @@
-import React, { Component } from 'react'
+import React from 'react'
 import GridContainer from './Grid-components/GridContainer'
-import { DragDropContextProvider } from 'react-dnd'
-import HTML5Backend from 'react-dnd-html5-backend'
+
 import { updateDisplayBoxes, updateDisplayBox } from '../redux/display.reducer'
 import { connect } from 'react-redux';
 
-class ContextProvider extends Component {
-    constructor() {
-        super();
-        this.state = {
-            displayBox: false
+export function ContextProvider (props) {
+   
+        if (props.box_id) {
+            props.updateDisplayBox(true)
+          props.updateDisplayBoxes(false)
+           
         }
-    }
-
-    componentDidMount() {
-        if (this.props.box_id) {
-            this.props.updateDisplayBox(true)
-            this.props.updateDisplayBoxes(false)
-            this.setState({displayBox: true})
-        }
-    }
-    async componentDidUpdate(prevProps) {
-        if(prevProps.box_id !== this.props.box_id) {
-            this.props.updateDisplayBox(true)
-            this.setState({displayBox: true})
-            
-        }
-    }
-    render() {
+    
         return (<div>
-           {this.state.displayBox &&  <DragDropContextProvider backend={HTML5Backend}>
-                <h3>Box: {this.props.box_id}</h3>
-                <GridContainer box_id={this.props.box_id} />
-            </DragDropContextProvider>}
+          
+                <h3>Box: {props.box_id}</h3>
+                <GridContainer box_id={props.box_id} />
+            
             </div>
         )
-    }
+    
 }
 
 const mapDispatchtoProps = {
