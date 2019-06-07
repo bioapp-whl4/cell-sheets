@@ -85,33 +85,42 @@ class Filter extends Component {
             results = this.state.samples
         }
 
+        console.log(`results`, results)
+
+
         if (this.state.date){
-            let start_date = new Date(this.state.start_date)
-            let end_date = new Date(this.state.end_date)
+            let start_date = Date.parse(new Date(this.state.start_date))
+            let end_date = Date.parse(new Date(this.state.end_date))
+            console.log(`start_date`, start_date)
+            console.log(`end_date`, end_date)
 
             if (this.state.dateContext === `before`) {
                 console.log(`before`)
                 results = results.filter(sample => {
-                    let sample_date = new Date(sample.freeze_date) 
+                    let sample_date = Date.parse(new Date(sample.freeze_date))
+                    console.log(`start_date - sample_date > 0`, start_date - sample_date)
                     return start_date - sample_date > 0
               })
 
             } else if(this.state.dateContext === `after`){
                 console.log(`after`)
                 results = results.filter(sample => {
-                    let sample_date = new Date(sample.freeze_date) 
+                    let sample_date = Date.parse(new Date(sample.freeze_date))
+                    console.log(`start_date - sample_date < 0`, start_date - sample_date)
                     return start_date - sample_date < 0
                 })
 
             } else if(this.state.dateContext === `between`){
                 console.log(`between`)
                 results = results.filter(sample => {
-                    let sample_date = new Date(sample.freeze_date) 
+                    let sample_date = Date.parse(new Date(sample.freeze_date))
+                    console.log(`(sample_date - start_date > 0) && (end_date - sample_date > 0)`, sample_date - start_date, end_date - sample_date)
                     return ((sample_date - start_date > 0) && (end_date - sample_date > 0))
                 })
             }
+            console.log(`results`, results)
+
         }
-        console.log(`results`, results)
 
         return(
             <div>
