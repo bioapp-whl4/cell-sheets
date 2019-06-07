@@ -128,6 +128,7 @@ module.exports = {
       });
       res.sendStatus(200); //send data for web visual of cart ?
     } catch (err) {
+      console.log(err)
       res.sendStatus(500);
     }
   },
