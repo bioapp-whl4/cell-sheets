@@ -48,24 +48,24 @@ class FreezerNav extends Component {
     }
     render() {
         let displayFreezers = this.state.freezers.map((elem, i) => {
-            return <button onClick={() => this.getFreezerCane(elem.freezer_id)} key={i}>
-                <h3>{elem.freezer_name}</h3>
-                <i class="fas fa-temperature-low"></i>
-                <h4>{elem.temperature}</h4>
-                <h4>{elem.freezer_type}</h4>
-            </button>
+            return <div className='displayFreezers'onClick={() => this.getFreezerCane(elem.freezer_id)} key={i}>
+                <h5>{elem.freezer_name}</h5>
+                <i className="fas fa-temperature-low"></i>
+                <h6>{elem.temperature}</h6>
+                <h6>{elem.freezer_type}</h6>
+            </div>
         })
         let displayFreezerCanes = this.state.freezercanes.map((elem, i) => {
             return <button onClick={() => this.getFreezerBox(elem.cane_id)} key={i}>
                 <h4>Cane {elem.cane}</h4>
-                <i class="fas fa-layer-group cane"></i>
+                <i className="fas fa-layer-group cane"></i>
             </button>
         })
         let displayFreezerBoxes = this.state.freezerboxes.map((elem, i) => {
             return <button onClick={()=> this.setState({box_id:elem.box_id})}key={i}>
                 <div >
                     <h4>Box: {elem.box_name}</h4>
-                    <i class="fas fa-box"></i>
+                    <i className="fas fa-box"></i>
                 </div>
             </button>
         })
@@ -74,10 +74,10 @@ class FreezerNav extends Component {
         return (
             <div className='display'>
                 <div className='contents'>
-                    <h1 className='CellInventory'>Cell Inventory</h1>
+                    <h3 className='CellInventory'>Cell Inventory</h3>
 
                     <h4 onClick={()=>this.clearFreezers()}>Freezers</h4>
-                    <i class="fas fa-snowflake cold"></i>
+                    <i className="fas fa-snowflake cold"></i>
                     <div className='displayContents'>{displayFreezers}</div>
                     
                     {this.state.freezer_id !== null && <div>
