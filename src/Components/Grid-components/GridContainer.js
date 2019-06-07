@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Grid from './Grid'
 // import AddSpecimens from './AddSpecimens'
 import SampleList from './SampleList'
-import SingleAdd from '../SingleAdd'
+import AddSamples from '../AddSamples'
 import axios from 'axios'
 
 export default class GridContainer extends Component {
@@ -17,6 +17,7 @@ export default class GridContainer extends Component {
     this.componentDidMount = this.componentDidMount.bind(this)
     this.moveItem = this.moveItem.bind(this)
     this.getSpecimens = this.getSpecimens.bind(this)
+    this.updateSamples = this.updateSamples.bind(this)
   }
 
   async componentDidMount(){
@@ -43,6 +44,20 @@ export default class GridContainer extends Component {
     this.setState({
       addSample: !this.state.addSample
     })
+  }
+
+  async updateSamples(){
+    const{box_id} = this.props
+    const response = await axios.get(`/api/boxgrid/samples?id=${box_id}`)
+    try{
+      const {data} = response
+      this.setState({
+        specimens: data
+      })
+    }
+    catch(err){
+      console.log(err)
+    }
   }
 
   showData = (specimen) => {
@@ -92,10 +107,9 @@ export default class GridContainer extends Component {
     return (
       <>
         <Grid move={this.moveItem} get={this.getIndex} showData={this.showData} hideData={this.hideData} specimens={this.state.specimens}/>
-        {/* <AddSpecimens getSpecimens={this.getSpecimens}/> */}
         <SampleList specimens={this.state.specimens}/>
         <button onClick={this.addSample}>Add a sample</button>
-        {this.state.addSample && <SingleAdd specimens={this.state.specimens} x={9} y={9} box_id={this.props.box_id}/>}
+        {this.state.addSample && <AddSamples specimens={this.state.specimens} x={9} y={9} box_id={this.props.box_id} updateSamples={this.updateSamples}/>}
       </>
     );
   }
