@@ -5,7 +5,8 @@ const initialState = {
     freezer: true,
     cane: false,
     boxes: false,
-    box: false
+    box: false,
+    advancedSearch: false
 };
 
 const UPDATE_DISPLAY_FREEZER = 'UPDATE_DISPLAY_FREEZER'
@@ -15,6 +16,7 @@ const UPDATE_DISPLAY_BOX = 'UPDATE_DISPLAY_BOX'
 const UPDATE_FREEZER_ID = 'UPDATE_FREEZER_ID'
 const UPDATE_CANE_ID = 'UPDATE_CANE_ID'
 const UPDATE_BOX_ID = 'UPDATE_BOX_ID'
+const ADVANCED_SEARCH = 'ADVANCED_SEARCH'
 
 export function updateDisplayFreezer (boolean) {
     return {
@@ -58,6 +60,12 @@ export function updateBoxId(id) {
         payload: id
     }
 }
+export function displayFilter(bool) {
+    return{
+        type: ADVANCED_SEARCH,
+        payload: bool
+    }
+}
 
 export default function display(state = initialState, action) {
     const { type, payload } = action
@@ -77,6 +85,8 @@ export default function display(state = initialState, action) {
             return {...state,boxes: payload}
         case UPDATE_DISPLAY_BOX:
             return {...state,box: payload}
+        case ADVANCED_SEARCH:
+            return{...state, advancedSearch: payload}
         default:
             return state
     }
