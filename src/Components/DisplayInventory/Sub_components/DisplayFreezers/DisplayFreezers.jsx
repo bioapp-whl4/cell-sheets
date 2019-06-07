@@ -8,11 +8,14 @@ class DisplayFreezers extends Component {
         super();
         this.state = {
             freezers: []
+           
         }
     }
     async componentDidMount() {
         await this.getFreezers()
     }
+
+
     getFreezers = async () => {
        let res = await axios.get('/api/freezers')
        this.setState({freezers: res.data})
@@ -51,5 +54,6 @@ const mapDispatchToProps = {
     updateDisplayFreezer,
     updateDisplayCane
 }
+
 
 export default connect(null,mapDispatchToProps)(DisplayFreezers)

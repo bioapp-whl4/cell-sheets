@@ -70,12 +70,12 @@ class BurgerMenu extends Component {
             {this.props.everything.map(freezer => {
                 return (
                     <li>
-                        <h4 onClick={()=>this.handleFreezer(freezer.freezer_id)}>{freezer.freezer_name} : {freezer.freezer_type}</h4>
+                        <h5 onClick={()=>this.handleFreezer(freezer.freezer_id)}>{freezer.freezer_name} : {freezer.freezer_type}</h5>
                         <ul>
                             {freezer.canes.map(cane => {
                                 return (
                                     <li >
-                                        <h5 onClick={()=>this.handleCane(freezer.freezer_id,cane.cane_id)}> Cane: {cane.cane}</h5>
+                                        <h6 onClick={()=>this.handleCane(freezer.freezer_id,cane.cane_id)}> Cane: {cane.cane}</h6>
                                         <ul>
                                             {cane.boxes.map(box => {
                                                 return (

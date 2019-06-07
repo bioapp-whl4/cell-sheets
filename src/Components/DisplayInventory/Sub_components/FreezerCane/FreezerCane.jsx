@@ -8,12 +8,19 @@ class FreezerCane extends Component {
         super();
         this.state = {
             freezerCanes: []
+            
         }
     }
    async componentDidMount() {
     if(this.props.freezer_id !== null) 
     { this.getFreezerCanes()}
     }
+  componentDidUpdate(prevProps) {
+     if(this.props.freezer_id !== prevProps.freezer_id) {
+        this.getFreezerCanes()
+     }
+  }
+    
     getFreezerCanes = async () => {
      let res = await axios.get(`/api/freezer/canes?id=${this.props.freezer_id}`)
      this.setState({freezerCanes:res.data})
@@ -25,6 +32,7 @@ class FreezerCane extends Component {
         this.props.updateDisplayBoxes(true)
     } 
     render() {
+        
         let displayFreezerCanes = this.state.freezerCanes.map((elem,i)=>{
             return <div onClick={()=> this.updateDisplay(elem.cane_id)} key={i}>
                 <h4>Cane {elem.cane}</h4>
@@ -34,7 +42,7 @@ class FreezerCane extends Component {
         
         return(
             <div>
-                
+                <h3>Freezer: {this.props.freezer_id}</h3>
                 <h4>Freezer Canes</h4>
                 {displayFreezerCanes}
             </div>
