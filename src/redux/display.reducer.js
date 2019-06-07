@@ -8,7 +8,8 @@ const initialState = {
     cane: false,
     boxes: false,
     box: false,
-    advancedSearch: false
+    advancedSearch: false,
+    picklist: []
 };
 
 const UPDATE_DISPLAY_FREEZER = 'UPDATE_DISPLAY_FREEZER'
@@ -19,6 +20,7 @@ const UPDATE_FREEZER_ID = 'UPDATE_FREEZER_ID'
 const UPDATE_CANE_ID = 'UPDATE_CANE_ID'
 const UPDATE_BOX_ID = 'UPDATE_BOX_ID'
 const ADVANCED_SEARCH = 'ADVANCED_SEARCH'
+const PICKLIST = 'PICKLIST'
 
 export function updateDisplayFreezer (boolean) {
     return {
@@ -68,6 +70,12 @@ export function displayFilter(bool) {
         payload: bool
     }
 }
+export function submit_picklist(array){
+    return {
+        type: PICKLIST,
+        payload: array
+    }
+}
 
 export default function display(state = initialState, action) {
     const { type, payload } = action
@@ -89,6 +97,8 @@ export default function display(state = initialState, action) {
             return {...state,box: payload}
         case ADVANCED_SEARCH:
             return{...state, advancedSearch: payload}
+        case PICKLIST:
+            return { ...state, picklist: payload}
         default:
             return state
     }

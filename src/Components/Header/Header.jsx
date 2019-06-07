@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {displayFilter} from '../../redux/display.reducer'
+import Picklist_Icon from '../Picklist_Icon'
 
 
 class Header extends Component {
@@ -17,6 +18,7 @@ class Header extends Component {
                 <div className='nav-links'>
                     <h4 className='logout'>LOG OUT</h4>
                     <i className="fas fa-search search"></i>
+                    <Picklist_Icon/>
                     <div onClick={this.navigate}>Advanced Search</div>
                 </div>
             </header>
