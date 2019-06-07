@@ -13,7 +13,11 @@ class DisplayInventory extends Component {
     backToFreezer = async () => {
         this.props.updateDisplayCane(false)
         this.props.updateDisplayFreezer(true)
+        this.props.updateDisplayBoxes(false)
+        this.props.updateDisplayBox(false)
         this.props.updateFreezerId(null)
+        this.props.updateCaneId(null)
+        this.props.updateBoxId(null)
         
         
     }
@@ -35,8 +39,8 @@ class DisplayInventory extends Component {
                 {this.props.advancedSearch && <div > <Filter/></div>}
                {this.props.freezer && <div><DisplayFreezers/></div>}
                {this.props.cane && <div><FreezerCane/> <button onClick={this.backToFreezer}>Back to Freezers</button></div>}
-               {this.props.boxes && <div><FreezerBox/><button onClick={this.backToCane}>Back to Canes</button></div>}
-               {this.props.box && <div><Box/><button onClick={this.backToBox}>Back to Boxes</button></div>}
+               {this.props.boxes && <div><FreezerBox/><button onClick={this.backToCane}>Back to Canes</button> <button onClick={this.backToFreezer}>Back to Inventory</button></div>}
+               {this.props.box && <div><Box/><button onClick={this.backToBox}>Back to Boxes</button> <button onClick={this.backToFreezer}>Back to Inventory</button></div>}
                
             </div>
         )
