@@ -9,7 +9,7 @@ export default class SingleAdd extends Component{
             description: '',
             box_position: null,
             freeze_date: '',
-            cell_vial: '',
+            cell_vial: null,
             culture_condition: '',
             freezing_medium_id: null,
             expanded_note: '',
@@ -19,6 +19,8 @@ export default class SingleAdd extends Component{
             add1: '',
             add2: '',
             add3: '',
+            add4: '',
+            add5: '',
             locations: [],
             availableLocations: [],
             x: null,
@@ -59,22 +61,34 @@ export default class SingleAdd extends Component{
     async submitForm(e){
         e.preventDefault()
         
+        //test data
+        const user_key = 'Test'
+        const location_id = 1
+        const cane_id = 1
+        const freezer_id = 1
+        //const user_id = 1
+        //const experiment_name = 'test experiment'
+        //test data
         const {box_id} = this.props.box_id
-        const {name, description, box_position, freeze_date, cell_vial, culture_condition, freezing_medium_id, expanded_note, add1, add2, add3} = this.state
-        await axios.post("/api/sample", {name, description, box_id, box_position, freeze_date, cell_vial, culture_condition, freezing_medium_id, expanded_note, add1, add2, add3})
+        const {name, description, box_position, freeze_date, cell_vial, culture_condition, freezing_medium_id, expanded_note, add1, add2, add3, add4, add5} = this.state
+        await axios.post("/api/sample", {name, description, box_id, box_position, freeze_date, cell_vial, culture_condition, freezing_medium_id, expanded_note, add1, add2, add3, add4, add5, /*test data*/ user_key, location_id, freezer_id, cane_id, /*user_id, experiment_name*/})
+
+        this.props.updateSamples()
 
         this.setState({
             name: '',
             description: '',
-            box_position: [],
+            box_position: null,
             freeze_date: '',
-            cell_vial: '',
+            cell_vial: null,
             culture_condition: '',
             freezing_medium_id: null,
             expanded_note: '',
             add1: '',
             add2: '',
-            add3: ''
+            add3: '',
+            add4: '',
+            add5: ''
         })
     }
 
@@ -89,6 +103,14 @@ export default class SingleAdd extends Component{
         }
         if(!this.state.show3){
             this.setState({show3: true})
+            return
+        }
+        if(!this.state.show4){
+            this.setState({show4: true})
+            return
+        }
+        if(!this.state.show5){
+            this.setState({show5: true})
             return
         }
     }
@@ -108,14 +130,14 @@ export default class SingleAdd extends Component{
             return
         }
         if(e.target.name === "box_position"){
-            var tempValue = value.split(',').map(Number)
+            let tempValue = value.split(',').map(Number)
             this.setState({
                 box_position: tempValue
             })
             return
         }
         if(e.target.name === 'freezing_medium_id'){
-            var tempValue = Number(value)
+            let tempValue = Number(value)
             this.setState({
                 freezing_medium_id: tempValue
             })
@@ -190,20 +212,21 @@ export default class SingleAdd extends Component{
                 <option value='null'>Position</option>
                 {options}
             </select>
-            <input onChange={this.handleInput} value={this.state.freeze_date} placeholder='Freeze Date' name='freeze_date'/>
+            <input type='date' onChange={this.handleInput} value={this.state.freeze_date} name='freeze_date'/>
             <input onChange={this.handleInput} value={this.state.cell_vial} placeholder='Culture Size' name='cell_vial'/>
             <input onChange={this.handleInput} value={this.state.culture_condition} placeholder='Culture Conditions' name='culture_condition'/>
             <select name='freezing_medium_id' onChange={this.handleInput} value={this.state.freezing_medium_id}>
                 <option value='null'>Freezing Medium</option>
-                <option value={0}>Cryostor 100%</option>
+                <option value={1}>Cryostor 100%</option>
             </select>
-            {/* <input onChange={this.handleInput} value={this.state.freezing_medium_id} placeholder='Freezing Medium' name='freezing_medium_id'/> */}
             <input onChange={this.handleInput} value={this.state.description} placeholder='Description' name='description'/>
             <input onChange={this.handleInput} value={this.state.expanded_note} placeholder='Additional Notes' name='expanded_note'/>
             {this.state.show1 && <input onChange={this.handleInput} value={this.state.add1} placeholder='Additional Field 1' name='add1'/>}
             {this.state.show2 && <input onChange={this.handleInput} value={this.state.add2} placeholder='Additional Field 2' name='add2'/>}
             {this.state.show3 && <input onChange={this.handleInput} value={this.state.add3} placeholder='Additional Field 3' name='add3'/>}
-            {!this.state.show3 && <p style={{color:'blue', textDecorationLine: 'underline', cursor: 'pointer', width: 'fit-content'}} onClick={this.addField}>Add field</p>}
+            {this.state.show4 && <input onChange={this.handleInput} value={this.state.add4} placeholder='Additional Field 4' name='add4'/>}
+            {this.state.show5 && <input onChange={this.handleInput} value={this.state.add5} placeholder='Additional Field 5' name='add5'/>}
+            {!this.state.show5 && <p style={{color:'blue', textDecorationLine: 'underline', cursor: 'pointer', width: 'fit-content'}} onClick={this.addField}>Add field</p>}
             <button>Submit</button>
         </form>
         </>

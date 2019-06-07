@@ -31,7 +31,7 @@ class DisplayFreezers extends Component {
         let displayFreezers = this.state.freezers.map((elem,i)=>{
             return <div onClick={()=>this.updateDisplay(elem.freezer_id)}key={i}>
             <h3>{elem.freezer_name}</h3>
-            <i class="fas fa-temperature-low"></i>
+            <i className="fas fa-temperature-low"></i>
             <h4>{elem.temperature}</h4>
             <h4>{elem.freezer_type}</h4>
             </div>
