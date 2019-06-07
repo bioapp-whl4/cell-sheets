@@ -12,25 +12,30 @@ import { updateEverything } from '../../redux/auth.reducer'
 
 class BurgerMenu extends Component {
     componentWillMount(){
-        this.getData()
+        this.getInventory()
     }
-    getData = async () => {
+
+    getInventory = async () => {
         let freezers = []
-        let res1 = await axios.get('/api/freezers')
-        res1.data.map( async (freezer) => {
-            let res2 = await axios.get(`/api/freezer/canes?id=${freezer.freezer_id}`)
-            freezer.canes = res2.data  // add the canes array to the freezer object
-            freezer.canes.forEach( async (cane) => { // get the boxes for each cane
-                let res3 = await axios.get(`/api/cane/boxes?id=${cane.cane_id}`)
-                cane.boxes = res3.data // add the boxes to the cane object
-                cane.boxes.forEach( async (box) => {
-                    let res4 = await axios.get(`/api/samples`)
-                    box.samples = res4.data
+        try{
+            let res1 = await axios.get('/api/freezers')
+            res1.data.map( async (freezer) => {
+                let res2 = await axios.get(`/api/freezer/canes?id=${freezer.freezer_id}`)
+                freezer.canes = res2.data  // add the canes array to the freezer object
+                freezer.canes.forEach( async (cane) => { // get the boxes for each cane
+                    let res3 = await axios.get(`/api/cane/boxes?id=${cane.cane_id}`)
+                    cane.boxes = res3.data // add the boxes to the cane object
+                    cane.boxes.forEach( async (box) => {
+                        let res4 = await axios.get(`/api/samples`)
+                        box.samples = res4.data
+                    })
                 })
+                    freezers.push(freezer) //add each freezer to the freezer array
             })
-                freezers.push(freezer) //add each freezer to the freezer array
-        })
-        this.props.updateEverything(freezers) // send data to redux
+            this.props.updateEverything(freezers) // send data to redux
+        } catch(err){
+            alert(`Something is wrong`)
+        }
     }
 
     toggleBurger = () => {
@@ -67,17 +72,17 @@ class BurgerMenu extends Component {
     
     let freezers = (
         <ul>
-            {this.props.everything.map(freezer => {
+            {this.props.everything.map((freezer, i) => {
                 return (
                     <li>
                         <h5 onClick={()=>this.handleFreezer(freezer.freezer_id)}>{freezer.freezer_name} : {freezer.freezer_type}</h5>
                         <ul>
-                            {freezer.canes.map(cane => {
+                            {freezer.canes.map((cane, i) => {
                                 return (
                                     <li >
                                         <h6 onClick={()=>this.handleCane(freezer.freezer_id,cane.cane_id)}> Cane: {cane.cane}</h6>
                                         <ul>
-                                            {cane.boxes.map(box => {
+                                            {cane.boxes.map((box, i) => {
                                                 return (
                                                     <li>
                                                        <h6 onClick={()=>this.handleBox(freezer.freezer_id,cane.cane_id,box.box_id)}>Box:{box.box_name}</h6> 

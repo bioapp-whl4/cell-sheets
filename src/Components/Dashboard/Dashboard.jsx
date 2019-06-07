@@ -7,8 +7,9 @@ import BurgerMenu from '../BurgerMenu/BurgerMenu'
 
 class Dashboard extends Component {
     render() {
-        return (<div className='app'>
-        <img className='BG'alt='labratory'src='http://news.efinancialcareers.com/binaries/content/gallery/efinancial-careers/articles/2018/11/lab.jpg'/>
+        return (
+        <div className='app'>
+            <img className='BG'alt='labratory'src='http://news.efinancialcareers.com/binaries/content/gallery/efinancial-careers/articles/2018/11/lab.jpg'/>
             <Header/>
             <div className='display'><DisplayInventory/></div>
             
