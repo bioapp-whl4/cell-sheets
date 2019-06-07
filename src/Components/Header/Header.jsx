@@ -1,13 +1,16 @@
 import React, {Component} from 'react'
-import {withRouter} from 'react-router-dom'
+// import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {displayFilter} from '../../redux/display.reducer'
+import  {updateAdvanceSearch} from '../../redux/display.reducer'
+
 
 
 class Header extends Component {
     
     navigate = () => {
-        this.props.displayFilter(!this.props.advancedSearch)
+        if(!this.props.advancedSearch) {
+            this.props.updateAdvanceSearch(true)
+        } else {this.props.updateAdvanceSearch(false)}
     }
 
     render() {
@@ -24,7 +27,7 @@ class Header extends Component {
     }
 }
 
-const mapDispatchToProps = {displayFilter}
+const mapDispatchToProps = {updateAdvanceSearch}
 
 function mapStateToProps(state) {
     return {
@@ -32,4 +35,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Header))
+export default connect(mapStateToProps,mapDispatchToProps)(Header)

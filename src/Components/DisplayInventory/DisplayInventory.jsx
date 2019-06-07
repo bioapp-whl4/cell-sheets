@@ -5,7 +5,7 @@ import FreezerBox from './Sub_components/FreezerBox/FreezerBox'
 import FreezerCane from './Sub_components/FreezerCane/FreezerCane'
 import Box from '../GridContextProvider'
 //Advance Search Display
-
+import AdvanceSearchDisplay from '../AdvanceSearch/AdvanceSearchResults'
 import {updateFreezerId,updateCaneId,updateBoxId,updateDisplayFreezer,
     updateDisplayCane,updateDisplayBoxes, updateDisplayBox} from '../../redux/display.reducer'
 
@@ -37,7 +37,7 @@ class DisplayInventory extends Component {
         
         return (
             <div>
-               
+               {this.props.advancedSearch && <div><h3>Advance Search Results</h3><AdvanceSearchDisplay/></div>}
                {this.props.freezer && <div><DisplayFreezers/></div>}
                {this.props.cane && <div><FreezerCane/> <button onClick={this.backToFreezer}>Back to Freezers</button></div>}
                {this.props.boxes && <div><FreezerBox/><button onClick={this.backToCane}>Back to Canes</button> <button onClick={this.backToFreezer}>Back to Inventory</button></div>}
@@ -69,7 +69,8 @@ function mapStateToProps(state) {
         freezer_id: state.display.freezer_id,
         cane_id: state.display.cane_id,
         box_id: state.display.box_id,
-        // advancedSearch: state.display.advancedSearch
+        // Advance Search Results
+        advancedSearch: state.display.advancedSearch
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(DisplayInventory)

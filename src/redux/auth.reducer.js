@@ -13,7 +13,7 @@ const initialState = {
   freezerboxes: [],
   boxes: [],
   everything: [],
-  filter_results: []
+  filter_results: null
 };
 //AUTH
 const UPDATE_USER_ID = "UPDATE_USER_ID";

@@ -62,10 +62,10 @@ export function updateBoxId(id) {
         payload: id
     }
 }
-export function displayFilter(bool) {
+export function updateAdvanceSearch(boolean) {
     return{
         type: ADVANCED_SEARCH,
-        payload: bool
+        payload: boolean
     }
 }
 
