@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import { updateEverything } from '../redux/auth.reducer'
+import { updateEverything, store_filter_results } from '../redux/auth.reducer'
 import axios from 'axios'
 import {withRouter} from 'react-router-dom'
 
@@ -109,19 +109,24 @@ class Filter extends Component {
             }
         }
 
-        let results_display = results.map((sample, i) => {
-            return (
-                <div key={i} onClick={() => {this.props.history.push(`/api/cane/boxes/${sample.box_id}`)}}>
-                    <h6>{sample.sample_name}</h6>
-                    <ul>
-                        <li>Description: {sample.description}</li>
-                        <li>Freeze Date: {sample.freeze_date}</li>
-                        <li>Experiment ID: {sample.experiment_name}</li>
-                    </ul>
+        // store filter results in redux
+        this.props.store_filter_results(results)
+
+        // let results_display = results.map((sample, i) => {
+        //     return (
+        //         <div key={i} onClick={() => {this.props.history.push(`/api/cane/boxes/${sample.box_id}`)}}>
+        //             <h6>{sample.sample_name}</h6>
+        //             <ul>
+        //                 <li>Description: {sample.description}</li>
+        //                 <li>Freeze Date: {sample.freeze_date}</li>
+        //                 <li>Experiment ID: {sample.experiment_name}</li>
+        //             </ul>
         
-                </div>
-            )
-        })
+        //         </div>
+        //     )
+        // })
+
+        console.log(this.state.samples.length)
 
         return(
             <div>
@@ -167,9 +172,7 @@ class Filter extends Component {
                         </input>        
                     </div>  
                 )}
-                <div>
-                    {results_display}
-                </div>
+
             </div>
         )
     }
@@ -180,6 +183,7 @@ const mapStateToProps = (reduxState) => {
     return { everything, user_id } 
 }
 const mapDispatchToProps = {
-    updateEverything
+    updateEverything,
+    store_filter_results
 }
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter((Filter)))
