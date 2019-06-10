@@ -42,9 +42,11 @@ class FreezerCane extends Component {
         
         return(
             <div>
+                <div className='freezersList'>
                 <h3>Freezer: {this.props.freezer_id}</h3>
                 <h4>Freezer Canes</h4>
-                {displayFreezerCanes}
+                <div className='displayContents'>{displayFreezerCanes}</div>
+                </div>
             </div>
         )
     }

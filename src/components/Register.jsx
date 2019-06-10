@@ -60,7 +60,12 @@ class Register extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <div>
+      <div className='registerBG'></div>
+      <img className='BG'alt='labratory'src='http://news.efinancialcareers.com/binaries/content/gallery/efinancial-careers/articles/2018/11/lab.jpg'/>
+      <form className='registerForm'onSubmit={this.handleSubmit}>
+        <h1 className='RegisterTitle'>Register</h1>
+        <h3>First Name</h3>
         <input
           onChange={this.handleChange}
           type="text"
@@ -68,6 +73,7 @@ class Register extends Component {
           placeholder="First Name"
           value={this.state.firstname}
         />
+        <h3>Last Name</h3>
         <input
           onChange={this.handleChange}
           type="text"
@@ -75,6 +81,7 @@ class Register extends Component {
           placeholder="Last Name"
           value={this.state.lastname}
         />
+        <h3>Email</h3>
         <input
           onChange={this.handleChange}
           type="text"
@@ -82,6 +89,7 @@ class Register extends Component {
           placeholder="Email"
           value={this.state.email}
         />
+        <h3>Password</h3>
         <input
           onChange={this.handleChange}
           type="password"
@@ -89,6 +97,7 @@ class Register extends Component {
           placeholder="Password"
           value={this.state.password}
         />
+        <h3>Confirm Password</h3>
         <input
           onChange={this.handleChange}
           type="password"
@@ -96,11 +105,12 @@ class Register extends Component {
           placeholder="Confirm Password"
           value={this.state.confirm_password}
         />
-        <button onClick={this.handleSubmit}>Register</button>
+        <button className='registerButton' onClick={this.handleSubmit}>Register</button>
         <Link to="/">
-          <button>Back</button>
+          <button className='backButton'>Back</button>
         </Link>
       </form>
+      </div>
     );
   }
 }
