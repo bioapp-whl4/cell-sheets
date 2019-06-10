@@ -1,54 +1,53 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
-import { updateFilterTerm } from "../../redux/auth.reducer";
-import { Link } from "react-router-dom";
-class Header extends Component {
-  constructor() {
-    super();
-    this.state = {
-      filterValue: ""
-    };
-  }
-  handleInput = event => {
-    let { name, value } = event.target;
-    this.setState({
-      [name]: value
-    });
-    this.props.updateFilterTerm(value);
-  };
+import React, {Component} from 'react'
+// import {withRouter} from 'react-router-dom'
+import {connect} from 'react-redux'
+import  {updateAdvanceSearch,updateDisplayFreezer,updateDisplayCane,updateDisplayBoxes, updateDisplayBox} from '../../redux/display.reducer'
 
-  render() {
-    return (
-      <div className="Header">
-        <div className="BlueBar" />
-        <h4 className="logout">LOG OUT</h4>
-        <div className="fas fa-search search">
-          <div className="lists-sample-header">
-            <span>Search Samples:</span>
-            <input
-              onChange={this.handleInput}
-              type="text"
-              name="filterValue"
-              placeholder="Search"
-            />
-          </div>
-        </div>
-        <h3 className="AppName">CELL SHEETS</h3>
-      </div>
-    );
-  }
+
+
+class Header extends Component {
+    
+    navigate = () => {
+        if(!this.props.advancedSearch) {
+            this.props.updateDisplayFreezer(false)
+            this.props.updateDisplayCane(false)
+            this.props.updateDisplayBoxes(false)
+            this.props.updateDisplayBox(false)
+            this.props.updateAdvanceSearch(true)
+        } else {this.props.updateAdvanceSearch(false)
+            this.props.updateDisplayFreezer(true)
+            this.props.updateDisplayCane(false)
+            this.props.updateDisplayBoxes(false)
+            this.props.updateDisplayBox(false)
+            this.props.updateAdvanceSearch(false)
+                }
+    }
+
+    render() {
+        return(
+            <header className='Header'>
+                <h3 className='AppName'>CELL SHEETS</h3>
+                <div className='nav-links'>
+                    <h4 className='logout'>LOG OUT</h4>
+                    <i className="fas fa-search search"></i>
+                    <div className='advance' onClick={this.navigate}>Advanced Search</div>
+                </div>
+            </header>
+        )
+    }
 }
 const mapStateToProps = reduxState => {
+  const {advancedSearch} = reduxState.display;
   const { user_id, samples, authenticated } = reduxState;
   return { user_id, samples, authenticated };
 };
 
 const mapDispatchToProps = {
-  updateFilterTerm
-};
+    updateAdvanceSearch,
+    updateDisplayFreezer,
+    updateDisplayCane,
+    updateDisplayBoxes, 
+    updateDisplayBox}
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRouter(Header));
+
+export default connect(mapStateToProps,mapDispatchToProps)(Header)

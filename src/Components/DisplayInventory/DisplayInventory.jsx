@@ -4,7 +4,8 @@ import DisplayFreezers from './Sub_components/DisplayFreezers/DisplayFreezers'
 import FreezerBox from './Sub_components/FreezerBox/FreezerBox'
 import FreezerCane from './Sub_components/FreezerCane/FreezerCane'
 import Box from '../GridContextProvider'
-import Filter from '../Filter'
+//Advance Search Display
+import AdvanceSearchDisplay from '../AdvanceSearch/AdvanceSearchResults'
 import {updateFreezerId,updateCaneId,updateBoxId,updateDisplayFreezer,
     updateDisplayCane,updateDisplayBoxes, updateDisplayBox} from '../../redux/display.reducer'
 
@@ -13,7 +14,11 @@ class DisplayInventory extends Component {
     backToFreezer = async () => {
         this.props.updateDisplayCane(false)
         this.props.updateDisplayFreezer(true)
+        this.props.updateDisplayBoxes(false)
+        this.props.updateDisplayBox(false)
         this.props.updateFreezerId(null)
+        this.props.updateCaneId(null)
+        this.props.updateBoxId(null)
         
         
     }
@@ -31,12 +36,12 @@ class DisplayInventory extends Component {
     render (){
         
         return (
-            <div>
-                {this.props.advancedSearch && <div > <Filter/></div>}
-               {this.props.freezer && <div><DisplayFreezers/></div>}
-               {this.props.cane && <div><FreezerCane/> <button onClick={this.backToFreezer}>Back to Freezers</button></div>}
-               {this.props.boxes && <div><FreezerBox/><button onClick={this.backToCane}>Back to Canes</button></div>}
-               {this.props.box && <div><Box/><button onClick={this.backToBox}>Back to Boxes</button></div>}
+            <div className='displayInventory'>
+               {this.props.advancedSearch && <div><h3>Advance Search Results</h3><AdvanceSearchDisplay/></div>}
+               {this.props.freezer && <div className='freezers'><DisplayFreezers/></div>}
+               {this.props.cane && <div><FreezerCane/> <button className='NavigateBack'onClick={this.backToFreezer}>Back to Freezers</button></div>}
+               {this.props.boxes && <div><FreezerBox/><button className='NavigateBack' onClick={this.backToCane}>Back to Canes</button> <button className='BackToInventory' onClick={this.backToFreezer}>Back to Inventory</button></div>}
+               {this.props.box && <div><Box/><button className='NavigateBack' onClick={this.backToBox}>Back to Boxes</button> <button className='BackToInventory' onClick={this.backToFreezer}>Back to Inventory</button></div>}
                
             </div>
         )
@@ -64,6 +69,7 @@ function mapStateToProps(state) {
         freezer_id: state.display.freezer_id,
         cane_id: state.display.cane_id,
         box_id: state.display.box_id,
+        // Advance Search Results
         advancedSearch: state.display.advancedSearch
     }
 }

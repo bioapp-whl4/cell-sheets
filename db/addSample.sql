@@ -10,7 +10,7 @@ INSERT INTO ba.sample
              description, 
              freeze_date, 
              cell_vial, 
-			 freeezer_id,             
+			      freeezer_id,             
              experiment_id, 
              location_id, 
              cane_id, 

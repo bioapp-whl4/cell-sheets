@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import { updateEverything, store_filter_results } from '../redux/auth.reducer'
+import { updateEverything, store_filter_results } from '../../redux/auth.reducer'
+import {updateAdvanceSearch,updateFreezerId,updateCaneId,updateBoxId,updateDisplayFreezer,updateDisplayCane,updateDisplayBoxes,updateDisplayBox} from '../../redux/display.reducer'
 import axios from 'axios'
 import {withRouter} from 'react-router-dom'
 
@@ -50,6 +51,27 @@ class Filter extends Component {
         this.setState({
             inventory: this.props.everything
         })
+    }
+    // Added Clear Search as well as close display
+    closeDisplay = () => {
+        this.props.updateFreezerId(null)
+        this.props.updateCaneId(null)
+        this.props.updateBoxId(null)
+        this.props.updateDisplayFreezer(true)
+        this.props.updateDisplayCane(false)
+        this.props.updateDisplayBoxes(false)
+        this.props.updateDisplayBox(false)
+        this.props.updateAdvanceSearch(false)
+    }
+    resetSearch = () => {
+        this.setState({search_value: '',
+        description: true,
+        sample_id: true,
+        experiment_id: true,
+        date: false,
+        start_date: '2000-01-01',
+        end_date: '2000-01-01',
+        dateContext: '',})
     }
     handleInput = event => {
         this.setState({
@@ -130,9 +152,11 @@ class Filter extends Component {
 
         return(
             <div>
-                <input type="text" name='search_value' placeholder='Search for...' onChange={this.handleInput}/>
+                <i onClick={this.closeDisplay} className="fas fa-times exit"></i>
+
+                <input type="text" name='search_value' value={this.state.search_value} placeholder='Search for...' onChange={this.handleInput}/>
                 <div>
-                    <input type="checkbox" name="description" onClick={this.handleCheck} defaultChecked/>
+                    <input type="checkbox" name="description"  onClick={this.handleCheck} defaultChecked/>
                     <label>Description</label>
                 </div>            
                 <div>
@@ -172,6 +196,7 @@ class Filter extends Component {
                         </input>        
                     </div>  
                 )}
+                <button onClick={this.resetSearch}>Clear Search</button>
 
             </div>
         )
@@ -184,6 +209,14 @@ const mapStateToProps = (reduxState) => {
 }
 const mapDispatchToProps = {
     updateEverything,
-    store_filter_results
+    store_filter_results,
+    updateFreezerId,
+    updateCaneId,
+    updateBoxId,
+    updateDisplayFreezer,
+    updateDisplayCane,
+    updateDisplayBoxes,
+    updateDisplayBox,
+    updateAdvanceSearch
 }
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter((Filter)))

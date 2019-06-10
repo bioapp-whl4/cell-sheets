@@ -31,16 +31,19 @@ class Login extends Component {
 render() {
     console.log('the state of things',this.state)
     return(
-        <div>
-            <div>
+        <div className='login'>
+            <div className='loginBG'></div>
+            <img className='BG'alt='labratory'src='http://news.efinancialcareers.com/binaries/content/gallery/efinancial-careers/articles/2018/11/lab.jpg'/>
+                <div className='loginContents'>
+                <h1>Cell Sheets</h1>
                 <h3>Email</h3>
                 <input value={this.state.email} placeholder='Email' name='email'onChange={this.handleChange}/>
                 <h3>Password</h3>
                 <input value={this.state.password} placeholder='Password' type='password' name='password' onChange={this.handleChange}/>
-                <button onClick={this.handleSubmit}>Submit</button>
-                <Link to='/register'><button>Register</button></Link>
+                <button className='loginSubmit' onClick={this.handleSubmit}>Submit</button>
+                <Link to='/register'><button className='loginRegister'>Register</button></Link>
                 {this.state.loginError && <h3>{this.state.loginErrorMessage}</h3>}
-            </div>
+                </div> 
         </div>
     )
 }
