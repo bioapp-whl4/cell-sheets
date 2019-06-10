@@ -1,33 +1,33 @@
 .Header {
-    display: flex;
-    justify-content: space-between;
-    background-color: blue;
-    height: 9em;
-    width: 100vw;
-    opacity: .6;
+  display: flex;
+  justify-content: space-between;
+  background-color: blue;
+  height: 9em;
+  width: 100vw;
+  opacity: 0.6;
 }
 
 .AppName {
-    color: white;
-    position: relative;
-    top: .5em;
-    left: 1em;
-    font-size: 35px;
+  color: white;
+  position: relative;
+  top: 0.5em;
+  left: 1em;
+  font-size: 35px;
 }
 .logout {
-    color: white;
-    position: relative;
-    top:2%;
-    left: 90%;
+  color: white;
+  position: relative;
+  top: 2%;
+  left: 90%;
 }
 .search {
-    color: white;
-    font-size: 30px;
-    position: relative;
-    top: 60%;
-    left: 80%;
+  color: white;
+  font-size: 30px;
+  position: relative;
+  top: 60%;
+  left: 80%;
 }
 
-.nav-links{
-    justify-items: left;
+.nav-links {
+  justify-items: left;
 }

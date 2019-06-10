@@ -1,18 +1,19 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { updateSamples } from "../../redux/auth.reducer";
+import { updateSamples, updateFilterTerm } from "../../redux/auth.reducer";
 import { Link } from "react-router-dom";
 import axios from "axios";
 class HeaderSearch extends Component {
   constructor() {
     super();
     this.state = {
-      filterValue: "",
-      samples: []
+      samples: [],
+      filterValue: ""
     };
   }
   async componentDidMount() {
+    this.setState({ filterValue: this.props.filterTerm });
     await this.getSamples();
   }
   getSamples = async () => {
@@ -20,22 +21,19 @@ class HeaderSearch extends Component {
     this.setState({ samples: res.data });
     this.props.updateSamples(res.data);
   };
-  handleInput = event => {
-    let { name, value } = event.target;
-    this.setState({
-      [name]: value
-    });
-  };
 
+  //
   render() {
     let samples;
-    if (this.state.filterValue !== "") {
+    if (this.props.filterTerm !== "") {
       samples = this.state.samples.filter(sample => {
-        let searchFor = this.state.filterValue.toLowerCase();
+        let searchFor = this.props.filterTerm.toLowerCase();
         let searchIn = sample.description
           ? sample.description.toLowerCase()
           : "";
         searchIn += sample.sample_name ? sample.sample_name.toLowerCase() : "";
+        searchIn += sample.sample_id ? sample.sample_id : "";
+        searchIn += sample.experiment_id ? sample.experiment_id : "";
         return searchIn.includes(searchFor);
       });
     } else {
@@ -45,20 +43,24 @@ class HeaderSearch extends Component {
       <Link to={`/api/test/${elem.sample_id}`}>
         <div key={i}>
           <h4>Sample{elem.sample_name}</h4>
-          <i class="fas fa-layer-group cane" />
+          <h4>Experiment id{elem.experiment_id}</h4>
+          <h4>Sample id{elem.sample_id}</h4>
         </div>
       </Link>
     ));
     return (
       <div>
-        <div className="lists-sample-header">
-          <span> Search Samples:</span>
-          <input
-            onChange={this.handleInput}
-            type="text"
-            name="filterValue"
-            placeholder="Search"
-          />
+        {" "}
+        <div className="fas fa-search search">
+          <div className="lists-sample-header">
+            <span>Search Samples:</span>
+            <input
+              onChange={this.handleInput}
+              type="text"
+              name="filterValue"
+              placeholder="Search"
+            />
+          </div>
         </div>
         <ul className="list_samples">
           <h4>Samples</h4>
@@ -69,12 +71,12 @@ class HeaderSearch extends Component {
   }
 }
 const mapStateToProps = reduxState => {
-  const { user_id, samples, authenticated } = reduxState;
-  return { user_id, samples, authenticated };
+  const { user_id, samples, authenticated, filterTerm } = reduxState;
+  return { filterTerm, user_id, samples, authenticated };
 };
-
 const mapDispatchToProps = {
-  updateSamples
+  updateSamples,
+  updateFilterTerm
 };
 
 export default connect(
