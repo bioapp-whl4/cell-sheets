@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import axios from 'axios'
+import AddLocation from '../AddLocation/AddLocation'
 class AddSpecimen extends Component {
     constructor() {
         super();
@@ -20,17 +21,24 @@ class AddSpecimen extends Component {
             add1: '',
             add2: '',
             add3: '',
-            locations: [],
-            availableLocations: [],
+            location_id: null, 
+            cane_id: null, 
+            box_id: null, 
+            box_position: null
+           
         }
     }
     componentDidMount() {
 
     }
-    addNewField = () => {
-        if(!this.state.field1) {
-            this.setState({field1:true})
-        } else {this.setState({field1:false})}
+    cancelField = (add,field) => {
+        this.setState({[add]: '',[field]: false})
+
+    }
+    addNewField = (field) => {
+        if(!this.state[field]) {
+            this.setState({[field]:true})
+        } else {this.setState({[field]:false})}
     }
     handleChange = (e) => {
         this.setState({[e.target.name]:e.target.value})
@@ -40,6 +48,7 @@ class AddSpecimen extends Component {
         .catch(err=>console.log('err getting freezer mediums',err))
     }
     render () {
+        console.log('aaaaaddddd',this.state.add1)
         let freezingOptions = this.state.freezingMediums.map((elem,i)=>{
             return <option value={elem.freezing_medium_id} key={i}>{elem.freezingMedium}</option>
         })
@@ -80,11 +89,24 @@ class AddSpecimen extends Component {
                 <h3>Expanded Notes</h3>
                 <input name='expanded_note' value={this.state.expanded_note} onChange={this.handleChange}/>
                 <button name='field1' value={this.state.field1} >
-                {!this.state.field1 && <h3>ADD NEW FIELD</h3>}
-                {this.state.field1 && <h3>Cancel</h3>}
+                {!this.state.field1 && <h3 onClick={()=>this.addNewField('field1')}>ADD NEW FIELD</h3>}
+                {this.state.field1 && <h3  onClick={()=>this.cancelField('add1','field1')}>Cancel</h3>}
                 </button>
-
+                {this.state.field1 &&  <div><h3>Add New Field</h3><input name='add1'onChange={this.handleChange}/></div>}
                 
+                <button name='field2' value={this.state.field2} >
+                {!this.state.field2 && <h3 onClick={()=>this.addNewField('field2')}>Add Second Field</h3>}
+                {this.state.field2 && <h3 onClick={()=>this.cancelField('add2','field2')}>Cancel Second Field</h3>}
+                </button>
+                {this.state.field2 &&  <div><h3>Add Second Field</h3><input name='add2'onChange={this.handleChange}/></div>}
+
+                <button name='field3' value={this.state.field3} >
+                {!this.state.field3 && <h3 onClick={()=>this.addNewField('field3')}>Add Third Field</h3>}
+                {this.state.field3 && <h3 onClick={()=>this.cancelField('add3','field3')}>Cancel Third Field</h3>}
+                </button>
+                {this.state.field3 &&  <div><h3>Add Third Field</h3><input name='add3'onChange={this.handleChange}/></div>}
+
+                <AddLocation/>
             </div>
         )
     }

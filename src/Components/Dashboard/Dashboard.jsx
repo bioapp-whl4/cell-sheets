@@ -19,7 +19,7 @@ class Dashboard extends Component {
             <div className='advanceSearch'><AdvanceSearch/></div>
             <div className='display'><DisplayInventory/></div>
            
-            
+            <Link to='/addspecimen'>Add</Link>
             <Link to='/api/hierarchy'>HIERARCHY TEST</Link>
             <Link to='/addlocation'>ADD STUFF</Link>
             <Link to='/api/test'>SINGLE VIEW</Link>
