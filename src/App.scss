@@ -1,7 +1,8 @@
 @import './SassReference.scss';
 @import './Components/Dashboard/Dashboard';
-@import './Components/DisplayFreezers/DisplayFreezers.scss';
+@import './Components//DisplayInventory/Sub_components/DisplayFreezers/DisplayFreezers.scss';
 @import './Components/Header/Header.scss';
-@import './Components/FreezerCane/FreezerCane.scss';
+@import './Components/DisplayInventory/Sub_components/FreezerCane/FreezerCane.scss';
 @import './Components/BurgerMenu/BurgerMenu';
 @import './Components/SingleViewDisplay/FreezerNav.scss';
+@import './Components/DisplayInventory/Hierarcchy.scss';
