@@ -21,11 +21,14 @@
   left: 90%;
 }
 .search {
+  display: flex;
+  justify-content: flex-start;
+  align-content: flex-start;
   color: white;
   font-size: 30px;
   position: relative;
   top: 60%;
-  left: 80%;
+  left: 1em;
 }
 
 .nav-links {
