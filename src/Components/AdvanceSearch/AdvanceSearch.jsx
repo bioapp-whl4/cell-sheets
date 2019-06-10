@@ -136,15 +136,15 @@ class Filter extends Component {
 
         // let results_display = results.map((sample, i) => {
         //     return (
-        //         <div key={i} onClick={() => {this.props.history.push(`/api/cane/boxes/${sample.box_id}`)}}>
-        //             <h6>{sample.sample_name}</h6>
-        //             <ul>
-        //                 <li>Description: {sample.description}</li>
-        //                 <li>Freeze Date: {sample.freeze_date}</li>
-        //                 <li>Experiment ID: {sample.experiment_name}</li>
-        //             </ul>
+                // <div key={i} onClick={() => {this.props.history.push(`/api/cane/boxes/${sample.box_id}`)}}>
+                //     <h6>{sample.sample_name}</h6>
+                //     <ul>
+                //         <li>Description: {sample.description}</li>
+                //         <li>Freeze Date: {sample.freeze_date}</li>
+                //         <li>Experiment ID: {sample.experiment_name}</li>
+                //     </ul>
         
-        //         </div>
+                // </div>
         //     )
         // })
 

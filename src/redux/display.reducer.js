@@ -9,10 +9,15 @@ const initialState = {
     boxes: false,
     box: false,
     advancedSearch: false,
+<<<<<<< HEAD
     //Adding Specimen
     addFreezerId: null,
     addCaneId: null,
     addBoxId: null
+=======
+    picklist: []
+};
+>>>>>>> master
 
 };
 //Adding Specimen
@@ -27,6 +32,7 @@ const UPDATE_FREEZER_ID = 'UPDATE_FREEZER_ID'
 const UPDATE_CANE_ID = 'UPDATE_CANE_ID'
 const UPDATE_BOX_ID = 'UPDATE_BOX_ID'
 const ADVANCED_SEARCH = 'ADVANCED_SEARCH'
+const PICKLIST = 'PICKLIST'
 
 export function addFreezerId (id) {
     return {
@@ -94,6 +100,12 @@ export function updateAdvanceSearch(boolean) {
         payload: boolean
     }
 }
+export function submit_picklist(array){
+    return {
+        type: PICKLIST,
+        payload: array
+    }
+}
 
 export default function display(state = initialState, action) {
     const { type, payload } = action
@@ -121,6 +133,8 @@ export default function display(state = initialState, action) {
             return {...state,box: payload}
         case ADVANCED_SEARCH:
             return{...state, advancedSearch: payload}
+        case PICKLIST:
+            return { ...state, picklist: payload}
         default:
             return state
     }

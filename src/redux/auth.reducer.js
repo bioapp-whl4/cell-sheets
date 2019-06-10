@@ -13,7 +13,8 @@ const initialState = {
   freezerboxes: [],
   boxes: [],
   everything: [],
-  filter_results: null
+  filterTerm: "",
+  filter_results: []
 };
 //AUTH
 const UPDATE_USER_ID = "UPDATE_USER_ID";
@@ -22,6 +23,7 @@ const UPDATE_USER_DETAILS = "UPDATE_USER_DETAILS";
 const GET_USER = "GET_USER_DETAILS";
 const ADD_SAMPLE = "ADD_SAMPLE";
 const UPDATE_SAMPLES = "UPDATE_SAMPLES";
+const UPDATE_FILTERTERM = "UPDATE_FILTERTERM";
 //const UPDATE_SAMPLE = "UPDATE_SAMPLE";
 //freezer info
 const FILTER_RESULTS = 'FILTER_RESULTS'
@@ -85,6 +87,11 @@ export function updateSamples(array) {
     payload: array
   };
 }
+export function updateFilterTerm(value) {
+  return {
+    type: UPDATE_FILTERTERM,
+    payload: value
+  };
 export function store_filter_results(array) {
   return {
     type: FILTER_RESULTS,
@@ -123,6 +130,8 @@ export default function reducer(state = initialState, action) {
       return { ...state, everything: payload };
     case UPDATE_SAMPLES:
       return { ...state, samples: payload };
+    case UPDATE_FILTERTERM:
+      return { ...state, filterTerm: payload };
     case FILTER_RESULTS:
       return {...state, filter_results: payload}
     default:

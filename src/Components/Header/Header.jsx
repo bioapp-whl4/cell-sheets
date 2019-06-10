@@ -36,6 +36,10 @@ class Header extends Component {
         )
     }
 }
+const mapStateToProps = reduxState => {
+  const { user_id, samples, authenticated } = reduxState;
+  return { user_id, samples, authenticated };
+};
 
 const mapDispatchToProps = {
     updateAdvanceSearch,
