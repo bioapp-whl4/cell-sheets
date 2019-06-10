@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 // import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
-import  {updateAdvanceSearch} from '../../redux/display.reducer'
+import  {updateAdvanceSearch,updateDisplayFreezer,updateDisplayCane,updateDisplayBoxes, updateDisplayBox} from '../../redux/display.reducer'
 
 
 
@@ -9,8 +9,18 @@ class Header extends Component {
     
     navigate = () => {
         if(!this.props.advancedSearch) {
+            this.props.updateDisplayFreezer(false)
+            this.props.updateDisplayCane(false)
+            this.props.updateDisplayBoxes(false)
+            this.props.updateDisplayBox(false)
             this.props.updateAdvanceSearch(true)
-        } else {this.props.updateAdvanceSearch(false)}
+        } else {this.props.updateAdvanceSearch(false)
+            this.props.updateDisplayFreezer(true)
+            this.props.updateDisplayCane(false)
+            this.props.updateDisplayBoxes(false)
+            this.props.updateDisplayBox(false)
+            this.props.updateAdvanceSearch(false)
+                }
     }
 
     render() {
@@ -27,7 +37,12 @@ class Header extends Component {
     }
 }
 
-const mapDispatchToProps = {updateAdvanceSearch}
+const mapDispatchToProps = {
+    updateAdvanceSearch,
+    updateDisplayFreezer,
+    updateDisplayCane,
+    updateDisplayBoxes, 
+    updateDisplayBox}
 
 function mapStateToProps(state) {
     return {

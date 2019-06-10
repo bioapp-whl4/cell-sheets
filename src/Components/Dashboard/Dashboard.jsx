@@ -7,6 +7,8 @@ import HTML5Backend from 'react-dnd-html5-backend'
 import BurgerMenu from '../BurgerMenu/BurgerMenu'
 import AdvanceSearch from '../AdvanceSearch/AdvanceSearch' 
 
+
+
 class Dashboard extends Component {
     render() {
         return (
@@ -27,4 +29,5 @@ class Dashboard extends Component {
         )
     }
 }
-export default Dashboard;
+
+export default Dashboard
