@@ -2,6 +2,7 @@ import React from 'react'
 
 export default function SampleList(props){
     var samples = JSON.parse(JSON.stringify(props.specimens))
+
     samples.forEach((sample) => {
         sample.location[1] += 1
         switch(sample.location[0]){
@@ -51,7 +52,7 @@ export default function SampleList(props){
 
     const displaySamples = samples.map((sample, i) => (
         <div key={i}>
-            <h3>{sample.location}</h3>
+            <h3>{sample.location}</h3> 
             <p>Sample ID: {sample.sample_name}</p>
             <p>Experiment ID: {sample.experiment_id}</p>
             <p>Culture Conditions: {sample.culture_condition}</p>

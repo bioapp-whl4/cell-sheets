@@ -124,7 +124,6 @@ getData = async () => {
   }
   
   render(){
-    console.log(`specimens`, this.state.specimens)
     return (
       <>
         <Grid move={this.moveItem} get={this.getIndex} showData={this.showData} hideData={this.hideData} specimens={this.state.specimens}/>
