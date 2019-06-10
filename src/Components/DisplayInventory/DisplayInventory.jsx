@@ -36,12 +36,12 @@ class DisplayInventory extends Component {
     render (){
         
         return (
-            <div>
+            <div className='displayInventory'>
                {this.props.advancedSearch && <div><h3>Advance Search Results</h3><AdvanceSearchDisplay/></div>}
-               {this.props.freezer && <div><DisplayFreezers/></div>}
-               {this.props.cane && <div><FreezerCane/> <button onClick={this.backToFreezer}>Back to Freezers</button></div>}
-               {this.props.boxes && <div><FreezerBox/><button onClick={this.backToCane}>Back to Canes</button> <button onClick={this.backToFreezer}>Back to Inventory</button></div>}
-               {this.props.box && <div><Box/><button onClick={this.backToBox}>Back to Boxes</button> <button onClick={this.backToFreezer}>Back to Inventory</button></div>}
+               {this.props.freezer && <div className='freezers'><DisplayFreezers/></div>}
+               {this.props.cane && <div><FreezerCane/> <button className='NavigateBack'onClick={this.backToFreezer}>Back to Freezers</button></div>}
+               {this.props.boxes && <div><FreezerBox/><button className='NavigateBack' onClick={this.backToCane}>Back to Canes</button> <button className='BackToInventory' onClick={this.backToFreezer}>Back to Inventory</button></div>}
+               {this.props.box && <div><Box/><button className='NavigateBack' onClick={this.backToBox}>Back to Boxes</button> <button className='BackToInventory' onClick={this.backToFreezer}>Back to Inventory</button></div>}
                
             </div>
         )

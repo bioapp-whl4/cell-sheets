@@ -5,14 +5,23 @@
     height: 50vh;
     left: 26vw;
     top: 20vh;
-    opacity: .8;
+    opacity: .9;
     z-index: -1;
     
 }
 
+ input {
+        margin-top: 0;
+        height:30px;
+        border: none;
+        border-bottom: 1px solid black;
+        
+      }
+      
+
 .loginContents {
     position: relative;
-    text-align: center;
+    text-align: left;
     width: 30vw;
     top:25vh;
     left: 34vw;
@@ -39,6 +48,8 @@
 
 .loginRegister {
     background-color: green;
+    position: relative;
+    left: 20%;
     width:60%;
     border: none;
     color: white;

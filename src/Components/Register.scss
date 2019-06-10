@@ -1,7 +1,7 @@
 .registerForm {
-    font-size: 12px;
+    font-size: 11px;
    position: relative;
-   text-align: center;
+   text-align: left;
    top: 22vh;
     left: 33vw;
     height: 60vh;
@@ -13,10 +13,10 @@
     position: absolute;
     background-color: white;
     width: 45%;
-    height: 60vh;
+    height: 62vh;
     left: 26vw;
     top: 20vh;
-    opacity: .8;
+    opacity: .9;
     z-index: -1;
 }
 .registerButton {
@@ -37,9 +37,10 @@
 
 .backButton {
     position: relative;
+    left: 20%;
     background-color: red;
     width:60%;
-    margin-top: .5em;
+    margin-top: 0;
     margin-bottom: .5em;
   border: none;
   color: white;
