@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import Popup from 'reactjs-popup'
+import {addFreezerId,addCaneId,addBoxId} from '../../redux/display.reducer'
+import {connect} from 'react-redux'
 
 
 class AddLocation extends Component {
@@ -15,7 +17,7 @@ class AddLocation extends Component {
             freezer_id: '',
             freezercane_id: '',
             freezerbox_id: '',
-            box_id: '',
+           
             // adding Freezer
             freezer_name: '',
             temperature: '',
@@ -49,9 +51,11 @@ class AddLocation extends Component {
         await this.setState({ [e.target.name]: e.target.value, freezercane_id: '', freezerbox_id: '' })
         if (+this.state.freezer_id < 0) {
             this.setState({ freezer_id: '', freezercane_id: '', freezerboxes: [], freezercanes: [] })
+            this.props.addFreezerId(null)
         } else {
             let res = await axios.get(`/api/freezer/canes?id=${this.state.freezer_id}`)
             this.setState({ freezercanes: res.data, freezerboxes: [] })
+            this.props.addFreezerId(this.state.freezer_id)
         }
     }
 
@@ -59,9 +63,11 @@ class AddLocation extends Component {
         await this.setState({ [e.target.name]: e.target.value, freezerboxes: [],freezerbox_id: '' })
         if (+this.state.freezercane_id < 0) {
             this.setState({ freezerboxes: [], freezercane_id: '',freezerbox_id: ''})
+            this.props.addCaneId(null)
         } else {
             let res = await axios.get(`/api/cane/boxes?id=${this.state.freezercane_id}`)
             this.setState({ freezerboxes: res.data })
+            this.props.addCaneId(this.state.freezercane_id)
         }
 
 
@@ -70,9 +76,12 @@ class AddLocation extends Component {
         await this.setState({ [e.target.name]: e.target.value,box: '' })
         if (+this.state.freezerbox_id < 0) {
             this.setState({ freezerboxes: [], box_id: '',freezerbox_id: ''})
+            this.props.addBoxId(null)
         } else {
             let res = await axios.get(`/api/cane/boxes?id=${this.state.freezercane_id}`)
             this.setState({ freezerboxes: res.data })
+            this.props.addBoxId(this.state.freezerbox_id)
+            
         }
 
     }
@@ -107,7 +116,6 @@ class AddLocation extends Component {
         let freezers = this.state.freezers.map((elem, i) => {
             return <option value={elem.freezer_id} key={i}>{`${elem.freezer_name}: ${elem.freezer_type}`}</option>
         })
-
 
         let freezerCanes = this.state.freezercanes.map((elem, i) => {
             return <option value={elem.cane_id} key={i}>Cane: {elem.cane}</option>
@@ -201,7 +209,12 @@ class AddLocation extends Component {
     }
 
 }
+const mapDispatchToProps = {
+    addFreezerId,
+    addCaneId,
+    addBoxId
+}
 
 
 
-export default AddLocation
+export default connect(null,mapDispatchToProps)(AddLocation)

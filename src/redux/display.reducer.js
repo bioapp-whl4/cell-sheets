@@ -8,9 +8,17 @@ const initialState = {
     cane: false,
     boxes: false,
     box: false,
-    advancedSearch: false
-};
+    advancedSearch: false,
+    //Adding Specimen
+    addFreezerId: null,
+    addCaneId: null,
+    addBoxId: null
 
+};
+//Adding Specimen
+const ADDFREEZERID = 'ADDFREEZERID'
+const ADDCANEID = 'ADDCANEID'
+const ADDBOXID = 'ADDBOXID'
 const UPDATE_DISPLAY_FREEZER = 'UPDATE_DISPLAY_FREEZER'
 const UPDATE_DISPLAY_CANE = 'UPDATE_DISPLAY_CANE'
 const UPDATE_DISPLAY_BOXES = 'UPDATE_DISPLAY_BOXES'
@@ -20,6 +28,24 @@ const UPDATE_CANE_ID = 'UPDATE_CANE_ID'
 const UPDATE_BOX_ID = 'UPDATE_BOX_ID'
 const ADVANCED_SEARCH = 'ADVANCED_SEARCH'
 
+export function addFreezerId (id) {
+    return {
+        type: ADDFREEZERID,
+        payload: id
+    }
+}
+export function addCaneId (id) {
+    return {
+        type: ADDCANEID,
+        payload: id
+    }
+}
+export function addBoxId (id) {
+    return {
+        type: ADDBOXID,
+        payload: id
+    }
+}
 export function updateDisplayFreezer (boolean) {
     return {
         type: UPDATE_DISPLAY_FREEZER,
@@ -73,6 +99,12 @@ export default function display(state = initialState, action) {
     const { type, payload } = action
 
     switch (type) {
+        case ADDFREEZERID:
+            return {...state,addFreezerId:payload}
+        case ADDCANEID:
+            return {...state,addCaneId:payload}
+        case ADDBOXID:
+            return {...state,addBoxId:payload}
         case UPDATE_FREEZER_ID:
             return { ...state, freezer_id: payload }
         case UPDATE_CANE_ID:
