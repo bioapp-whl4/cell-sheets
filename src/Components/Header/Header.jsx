@@ -39,7 +39,7 @@ class Header extends Component {
 const mapStateToProps = reduxState => {
   const {advancedSearch} = reduxState.display;
   const { user_id, samples, authenticated } = reduxState;
-  return { user_id, samples, authenticated };
+  return { user_id, samples, authenticated,advancedSearch };
 };
 
 const mapDispatchToProps = {

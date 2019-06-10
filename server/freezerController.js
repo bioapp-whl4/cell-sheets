@@ -23,7 +23,7 @@ module.exports = {
       const data = await db.getCanesByFreezerId({ freezer_id });
       res.status(200).send(data);
     } catch (err) {
-      console.sendStatus(500);
+      res.sendStatus(500);
     }
   },
   getCane: async (req, res) => {
@@ -43,7 +43,7 @@ module.exports = {
       const data = await db.getBoxesByCaneId({ cane_id });
       res.status(200).send(data);
     } catch (err) {
-      console.sendStatus(500);
+      res.sendStatus(500);
     }
   },
   getBox: async (req, res) => {
@@ -65,7 +65,7 @@ module.exports = {
       const data = await db.getSamplesByBoxId({ box_id });
       res.status(200).send(data);
     } catch (err) {
-      console.sendStatus(500);
+      res.sendStatus(500);
     }
   },
   getGridSamplesByBoxId: async (req, res) => {
@@ -75,7 +75,7 @@ module.exports = {
       const data = await db.getGridSamplesByBoxId({ box_id });
       res.status(200).send(data);
     } catch (err) {
-      console.sendStatus(500);
+      res.sendStatus(500);
     }
   },
   addSample: async (req, res) => {
