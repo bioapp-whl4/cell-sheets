@@ -19,11 +19,6 @@ function collect(connect, monitor){
     }
 }
 
-function picklist(props){
-    console.log(`picklist`, props)
-
-}
-
 function Square(props){
     const {connectDropTarget, children} = props
     return connectDropTarget(
@@ -34,10 +29,7 @@ function Square(props){
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center'
-        }}>
-            <span>
-                <input type="checkbox" onClick={picklist}/>
-            </span> 
+            }}>
             {children}
         </div>
     )

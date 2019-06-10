@@ -1,4 +1,6 @@
 import React from 'react'
+import {submit_picklist} from '../../redux/display.reducer'
+
 
 export default function SampleList(props){
     var samples = JSON.parse(JSON.stringify(props.specimens))
@@ -50,9 +52,18 @@ export default function SampleList(props){
 
     samples.sort(compare)
 
+    function handleCheck(sample){
+        console.log(`11111111111`, sample)
+
+    }
+
     const displaySamples = samples.map((sample, i) => (
         <div key={i}>
             <h3>{sample.location}</h3> 
+            <div>
+                <input type="checkbox" name="experiment_id" onClick={() => {handleCheck(sample)}} defaultChecked/>
+                <label>Experiment ID</label>
+            </div>  
             <p>Sample ID: {sample.sample_name}</p>
             <p>Experiment ID: {sample.experiment_id}</p>
             <p>Culture Conditions: {sample.culture_condition}</p>

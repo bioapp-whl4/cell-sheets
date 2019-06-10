@@ -26,7 +26,7 @@ export default function Grid(props){
 
         return(
             <div key={i} onMouseOver={() => props.showData(specimens[index])} onMouseOut={props.hideData}>
-                <Square move={props.move} index={index} x={x} y={y} specimen={specimens[index]}>{sample}</Square>
+                <Square move={props.move} index={index} x={x} y={y}>{sample}</Square>
             </div>
         )
     }
