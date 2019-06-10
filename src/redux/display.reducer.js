@@ -9,17 +9,15 @@ const initialState = {
     boxes: false,
     box: false,
     advancedSearch: false,
-<<<<<<< HEAD
     //Adding Specimen
     addFreezerId: null,
     addCaneId: null,
-    addBoxId: null
-=======
+    addBoxId: null,
+    //PickList
     picklist: []
 };
->>>>>>> master
 
-};
+
 //Adding Specimen
 const ADDFREEZERID = 'ADDFREEZERID'
 const ADDCANEID = 'ADDCANEID'

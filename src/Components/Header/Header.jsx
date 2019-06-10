@@ -37,6 +37,7 @@ class Header extends Component {
     }
 }
 const mapStateToProps = reduxState => {
+  const {advancedSearch} = reduxState.display;
   const { user_id, samples, authenticated } = reduxState;
   return { user_id, samples, authenticated };
 };
@@ -48,10 +49,5 @@ const mapDispatchToProps = {
     updateDisplayBoxes, 
     updateDisplayBox}
 
-function mapStateToProps(state) {
-    return {
-        advancedSearch: state.display.advancedSearch
-    }
-}
 
 export default connect(mapStateToProps,mapDispatchToProps)(Header)

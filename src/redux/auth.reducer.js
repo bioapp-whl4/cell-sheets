@@ -91,7 +91,7 @@ export function updateFilterTerm(value) {
   return {
     type: UPDATE_FILTERTERM,
     payload: value
-  };
+  }};
 export function store_filter_results(array) {
   return {
     type: FILTER_RESULTS,
