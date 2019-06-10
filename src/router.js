@@ -6,6 +6,7 @@ import Dashboard from "./Components/Dashboard/Dashboard";
 import AddLocation from "./Components/AddLocation/AddLocation";
 import HeaderSearch from "./Components/Search/HeaderSearch";
 import Filter from './Components/Filter'
+import Picklist from './Components/Picklist_Expanded';
 
 
 // Test Hierarchy
@@ -18,7 +19,8 @@ export default (
     <Route path='/filter' component={Filter} />
     <Route path="/register" component={Register} />
     <Route path="/dashboard" component={Dashboard} />
-   
+    <Route path="/picklist" component={Picklist} />
+    
     <Route path="/addlocation" component={AddLocation} />
     
     {/* Test Component */}

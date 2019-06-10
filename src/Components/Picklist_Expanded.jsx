@@ -1,9 +1,14 @@
 import React, {Component} from 'react'
 import {submit_picklist} from '../redux/display.reducer'
 import {connect} from 'react-redux'
+import {withRouter} from 'react-router-dom'
 
 
 class Picklist_Icon extends Component{
+
+    navigate = () => {
+        this.props.history.goBack()
+    }
 
     render(){
         let samples = this.props.picklist.map((sample, i) => {
@@ -21,6 +26,10 @@ class Picklist_Icon extends Component{
 
         return(
             <div>
+                <div onClick={this.navigate}>
+                    Back
+                </div>
+                asdfsdfsdadsdf
                 {samples}
             </div>
         )
@@ -34,5 +43,5 @@ const mapStateToProps = (reduxState) => {
 const mapDispatchToProps = {
     submit_picklist
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Picklist_Icon)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Picklist_Icon))
 

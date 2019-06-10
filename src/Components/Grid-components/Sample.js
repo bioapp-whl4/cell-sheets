@@ -21,6 +21,7 @@ function collect(connect, monitor){
 
 function Sample(props){
     const {connectDragSource, isDragging} = props
+    console.log(`props`, props)
     if(props.color === 'blue'){
         return connectDragSource(
             <div style={{
