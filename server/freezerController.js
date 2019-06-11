@@ -65,12 +65,7 @@ module.exports = {
   getBox: async (req, res) => {
     const db = req.app.get("db");
     const box_id = parseInt(req.query.id);
-<<<<<<< HEAD
-||||||| merged common ancestors
-    console.log("box_id", box_id);
-=======
     // console.log("box_id", box_id);
->>>>>>> master
     try {
       const data = await db.getBox({ box_id });
       res.status(200).send(data);
