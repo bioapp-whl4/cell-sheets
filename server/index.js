@@ -47,6 +47,7 @@ app.get("/api/cane", freezerCtrl.getCane);
 app.get("/api/cane/boxes", freezerCtrl.getBoxesByCaneId);
 app.get("/api/box", freezerCtrl.getBox);
 app.get("/api/box/samples", freezerCtrl.getSamplesByBoxId);
+app.get("/api/medium", freezerCtrl.getMedium);
 
 //BOX
 app.get("/api/boxgrid/samples", freezerCtrl.getGridSamplesByBoxId);

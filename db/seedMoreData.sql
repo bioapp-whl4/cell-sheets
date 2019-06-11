@@ -31,7 +31,7 @@ INSERT INTO ba.freezer_type(
 --FREEZING MEDIUM
 INSERT INTO ba.freezing_medium(
 	name)
-	VALUES ('Cryostor 100%');
+	VALUES ('Liquid Nitrogen');
 
 --INSERT DATA INTO SAMPLE, WITHOUT CART DATA
 INSERT INTO ba.sample(

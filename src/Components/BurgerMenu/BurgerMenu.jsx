@@ -69,24 +69,24 @@ class BurgerMenu extends Component {
         this.props.updateBoxId(box_id)
     }
   render () {
-      console.log(`this.props.everything`, this.props.everything)
-
-    let freezers = this.props.everything.length === 0 || this.props.everything.length === undefined ? null : (
+   let freezerdisplay;
+    if(this.props.everything) {
+    freezerdisplay = (
         <ul>
             {this.props.everything.map((freezer, i) => {
                 return (
-                    <li>
+                    <li key={i}>
                         <h5 onClick={()=>this.handleFreezer(freezer.freezer_id)}>{freezer.freezer_name} : {freezer.freezer_type}</h5>
                         <ul>
                             {freezer.canes.map((cane, i) => {
                                 return (
-                                    <li >
+                                    <li key={i}>
                                         <h6 onClick={()=>this.handleCane(freezer.freezer_id,cane.cane_id)}> Cane: {cane.cane}</h6>
                                         <ul>
                                             {cane.boxes.map((box, i) => {
                                                 return (
-                                                    <li>
-                                                    <h6 onClick={()=>this.handleBox(freezer.freezer_id,cane.cane_id,box.box_id)}>Box:{box.box_name}</h6> 
+                                                    <li key={i}>
+                                                       <h6 onClick={()=>this.handleBox(freezer.freezer_id,cane.cane_id,box.box_id)}>Box:{box.box_name}</h6> 
                                                     </li>
                                                 )
                                             })}
@@ -100,13 +100,13 @@ class BurgerMenu extends Component {
             })}
         </ul>
     )
-    
+        }
 
     return (
         <div className='burger-menu'>
             <button onClick={this.toggleBurger}>Toggle Burger Menu</button>
             <Menu isOpen={this.props.isOpen}>
-                {freezers}
+                {freezerdisplay}
             </Menu>
       </div>
     );
