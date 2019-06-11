@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 
-export default class SingleAdd extends Component{
+export default class AddSamples extends Component{
     constructor(props){
         super(props)
         this.state = {
@@ -23,6 +23,7 @@ export default class SingleAdd extends Component{
             add5: '',
             locations: [],
             availableLocations: [],
+            selectedLocations: [],
             x: null,
             y: null
         }
@@ -147,6 +148,22 @@ export default class SingleAdd extends Component{
             [e.target.name]: value
         })
     }
+
+    chooseSquare = (x,y) => {
+        let tempArr = this.state.selectedLocations
+        for(let i = 0; i < this.state.selectedLocations.length; i++){
+            if(x === this.state.selectedLocations[i][0] && y === this.state.selectedLocations[i][1]){
+                tempArr.splice(i, 1)
+                this.setState({
+                    selectedLocations: tempArr
+                })
+                return
+            }
+        }
+        this.setState({
+            selectedLocations: [...this.state.selectedLocations, [x,y]]
+        })
+    }
     
     render(){
         let samples = JSON.parse(JSON.stringify(this.state.availableLocations))
@@ -204,8 +221,45 @@ export default class SingleAdd extends Component{
             )
         })
 
+        var displaySquares = []
+        for(let i = 0; i < (this.props.x * this.props.y); i++){
+            const x = i % this.props.x
+            const y = Math.floor(i / this.props.x)
+            let taken = false
+            for(let j = 0; j < this.state.locations.length; j++){
+                if(x === this.state.locations[j][0] && y === this.state.locations[j][1]){
+                   taken = true
+                }
+            }
+            if(taken){
+                displaySquares.push(
+                    <div key={i} style={{border: '1px solid black', width: '100px', height: '100px', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '2rem'}}>
+                        X
+                    </div>
+                )
+            }
+            else if(this.state.selectedLocations.length !== 0){
+                for(let j = 0; j < this.state.selectedLocations.length; j++){
+                    if(x === this.state.selectedLocations[j][0] && y === this.state.selectedLocations[j][1]){
+                        displaySquares.push(
+                            <div key={i} onClick={() => this.chooseSquare(x,y)} style={{border: '1px solid black', width: '100px', height: '100px', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '2rem', cursor: 'pointer'}}>
+                                {'\u2713'}
+                            </div>
+                        )
+                        taken = true
+                    }
+                }
+            }
+            if(!taken){
+                displaySquares.push(
+                    <div key ={i} onClick={() => this.chooseSquare(x,y)} style={{border: '1px solid black', width: '100px', height: '100px', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '3rem', cursor: 'pointer'}}></div>
+                )
+            }
+        }
+
         return(
         <>
+        <div style={{display: 'flex', flexWrap: 'wrap', height: '920px', width: '920px'}}>{displaySquares}</div>
         <form onSubmit={this.submitForm}>
             <input onChange={this.handleInput} value={this.state.name} placeholder='Sample ID' name='name'/>
             <select name='box_position' onChange={this.handleInput} value={this.state.box_position}>
