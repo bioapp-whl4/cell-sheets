@@ -21,6 +21,9 @@
   left: 90%;
 }
 .search {
+  display: flex;
+  justify-content: flex-start;
+  align-content: flex-start;
   color: white;
   font-size: 30px;
   position: relative;
