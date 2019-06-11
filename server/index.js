@@ -58,3 +58,5 @@ app.post("/api/sample", freezerCtrl.addSample);
 //CANE
 app.get("/api/cane", freezerCtrl.getCane);
 app.post("/api/cane", addPartsCtrl.addCane);
+//PICKLIST
+app.post("/api/picklist", controller.picklist);

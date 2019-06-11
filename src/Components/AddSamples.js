@@ -7,7 +7,6 @@ export default class AddSamples extends Component{
         this.state = {
             name: '',
             description: '',
-            box_position: null,
             freeze_date: '',
             cell_vial: null,
             culture_condition: '',
@@ -16,6 +15,8 @@ export default class AddSamples extends Component{
             show1: false,
             show2: false,
             show3: false,
+            show4: false,
+            show5: false,
             add1: '',
             add2: '',
             add3: '',
@@ -71,15 +72,18 @@ export default class AddSamples extends Component{
         //const experiment_name = 'test experiment'
         //test data
         const {box_id} = this.props.box_id
-        const {name, description, box_position, freeze_date, cell_vial, culture_condition, freezing_medium_id, expanded_note, add1, add2, add3, add4, add5} = this.state
-        await axios.post("/api/sample", {name, description, box_id, box_position, freeze_date, cell_vial, culture_condition, freezing_medium_id, expanded_note, add1, add2, add3, add4, add5, /*test data*/ user_key, location_id, freezer_id, cane_id, /*user_id, experiment_name*/})
-
+        const {name, description, freeze_date, cell_vial, culture_condition, freezing_medium_id, expanded_note, add1, add2, add3, add4, add5} = this.state
+        if(this.state.selectedLocations.length === 0) return
+        for(let i = 0; i < this.state.selectedLocations.length; i++){
+            const box_position = this.state.selectedLocations[i]
+            await axios.post("/api/sample", {name, description, box_id, box_position, freeze_date, cell_vial, culture_condition, freezing_medium_id, expanded_note, add1, add2, add3, add4, add5, /*test data*/ user_key, location_id, freezer_id, cane_id, /*user_id, experiment_name*/})
+        }
+        
         this.props.updateSamples()
 
         this.setState({
             name: '',
             description: '',
-            box_position: null,
             freeze_date: '',
             cell_vial: null,
             culture_condition: '',
@@ -215,11 +219,11 @@ export default class AddSamples extends Component{
         this.state.availableLocations.sort(compare)
         samples.sort(compare)
         
-        const options = samples.map((sample, i) => {
-            return(
-                <option key={i} value={this.state.availableLocations[i]}>{`${sample[0]}${sample[1]}`}</option>
-            )
-        })
+        // const options = samples.map((sample, i) => {
+        //     return(
+        //         <option key={i} value={this.state.availableLocations[i]}>{`${sample[0]}${sample[1]}`}</option>
+        //     )
+        // })
 
         var displaySquares = []
         for(let i = 0; i < (this.props.x * this.props.y); i++){
@@ -262,10 +266,10 @@ export default class AddSamples extends Component{
         <div style={{display: 'flex', flexWrap: 'wrap', height: '920px', width: '920px'}}>{displaySquares}</div>
         <form onSubmit={this.submitForm}>
             <input onChange={this.handleInput} value={this.state.name} placeholder='Sample ID' name='name'/>
-            <select name='box_position' onChange={this.handleInput} value={this.state.box_position}>
+            {/* <select name='box_position' onChange={this.handleInput} value={this.state.box_position}>
                 <option value='null'>Position</option>
                 {options}
-            </select>
+            </select> */}
             <input type='date' onChange={this.handleInput} value={this.state.freeze_date} name='freeze_date'/>
             <input onChange={this.handleInput} value={this.state.cell_vial} placeholder='Culture Size' name='cell_vial'/>
             <input onChange={this.handleInput} value={this.state.culture_condition} placeholder='Culture Conditions' name='culture_condition'/>
