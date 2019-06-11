@@ -11,13 +11,13 @@ INSERT INTO ba.experiment(
 
 --BOX
 INSERT INTO ba.box(
-	name)
-	VALUES ( 'KRAS Exp3453');
+	name, cane_id)
+	VALUES ( 'KRAS Exp3', 2);
 
 --CANE
 INSERT INTO ba.cane(
-	name)
-	VALUES ('13');
+	name, freezer_id)
+	VALUES ('cane-3', 2);
 
 --FREEZER
 INSERT INTO ba.freezer(
