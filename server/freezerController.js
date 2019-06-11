@@ -143,5 +143,16 @@ module.exports = {
       console.log(`DB response from getSamples`, data);
       res.status(200).send(data);
     });
+  },
+  getMedium: async (req, res) => {
+    const db = req.app.get("db");
+    try {
+      await db.getMedium().then(data => {
+        res.status(200).send(data);
+      });
+    } catch (err) {
+      console.log(err);
+      res.sendStatus(500);
+    }
   }
 };
