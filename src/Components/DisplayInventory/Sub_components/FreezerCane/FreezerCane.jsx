@@ -36,7 +36,7 @@ class FreezerCane extends Component {
         let displayFreezerCanes = this.state.freezerCanes.map((elem,i)=>{
             return <div onClick={()=> this.updateDisplay(elem.cane_id)} key={i}>
                 <h4>Cane {elem.cane}</h4>
-                <i class="fas fa-layer-group cane"></i>
+                <i className="fas fa-layer-group cane"></i>
                 </div>
         })
         

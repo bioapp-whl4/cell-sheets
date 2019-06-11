@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import AddLocation from '../AddLocation/AddLocation'
+import {addFreezerId,addCaneId,addBoxId} from '../../redux/display.reducer'
+import {connect} from 'react-redux'
 class AddSpecimen extends Component {
     constructor() {
         super();
@@ -21,16 +23,15 @@ class AddSpecimen extends Component {
             add1: '',
             add2: '',
             add3: '',
-            location_id: null, 
-            cane_id: null, 
-            box_id: null, 
             box_position: null
            
         }
     }
-    componentDidMount() {
-
-    }
+    // createSample = () => {
+        
+    //     const {name,description,}
+    //     axios.post('/api/sample')
+    // }
     cancelField = (add,field) => {
         this.setState({[add]: '',[field]: false})
 
@@ -48,7 +49,7 @@ class AddSpecimen extends Component {
         .catch(err=>console.log('err getting freezer mediums',err))
     }
     render () {
-        console.log('aaaaaddddd',this.state.add1)
+        console.log('aaaaaddddd',this.props.boxId)
         let freezingOptions = this.state.freezingMediums.map((elem,i)=>{
             return <option value={elem.freezing_medium_id} key={i}>{elem.freezingMedium}</option>
         })
@@ -107,8 +108,20 @@ class AddSpecimen extends Component {
                 {this.state.field3 &&  <div><h3>Add Third Field</h3><input name='add3'onChange={this.handleChange}/></div>}
 
                 <AddLocation/>
+                {/* <button className='addSpecimen' onClick={this.createSample}>Add Sample</button> */}
             </div>
         )
     }
 }
-export default AddSpecimen
+const mapDispatchToProps = {
+    addFreezerId,
+    addCaneId,
+    addBoxId
+}
+function mapStateToProps(state) {
+    const {freezerId,caneId,boxId} = state.display
+    const {user_id} = state.reducer
+    return { user_id,freezerId,caneId,boxId}
+        
+}
+export default connect(mapStateToProps,mapDispatchToProps)(AddSpecimen)

@@ -12,7 +12,7 @@ const initialState = {
   freezercanes: [],
   freezerboxes: [],
   boxes: [],
-  everything: [],
+  everything: null,
   filterTerm: "",
   filter_results: []
 };
