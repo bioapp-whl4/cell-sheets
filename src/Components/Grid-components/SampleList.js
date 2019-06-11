@@ -1,7 +1,11 @@
 import React from 'react'
+import {submit_picklist} from '../../redux/display.reducer'
+import {connect} from 'react-redux'
+import axios from 'axios'
 
-export default function SampleList(props){
+function SampleList(props){
     var samples = JSON.parse(JSON.stringify(props.specimens))
+
     samples.forEach((sample) => {
         sample.location[1] += 1
         switch(sample.location[0]){
@@ -49,9 +53,27 @@ export default function SampleList(props){
 
     samples.sort(compare)
 
+    function handleCheck(sample){
+        let new_picklist
+        let removed = props.picklist.filter(pl_item => {
+            return pl_item.specimen_id !== sample.specimen_id
+        })
+        if (removed.length === props.picklist.length){
+            new_picklist = [...props.picklist, sample]
+        } else {
+            new_picklist = removed
+        }
+        props.submit_picklist(new_picklist)
+        axios.post('api/picklist', new_picklist)
+    }
+
     const displaySamples = samples.map((sample, i) => (
         <div key={i}>
-            <h3>{sample.location}</h3>
+            <h3>{sample.location}</h3> 
+            <div>
+                <input type="checkbox" name="experiment_id" onClick={() => {handleCheck(sample)}} defaultUnChecked/>
+                <label>Experiment ID</label>
+            </div>  
             <p>Sample ID: {sample.sample_name}</p>
             <p>Experiment ID: {sample.experiment_id}</p>
             <p>Culture Conditions: {sample.culture_condition}</p>
@@ -66,4 +88,14 @@ export default function SampleList(props){
             {displaySamples}
         </div>
     )
+
 }
+
+const mapDispatchToProps = {submit_picklist}
+const mapStateToProps = (reduxState) => {
+    const { picklist } = reduxState.display
+    return { picklist } 
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SampleList)
+

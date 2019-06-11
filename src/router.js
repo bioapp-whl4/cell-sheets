@@ -14,6 +14,7 @@ import FreezerBox from './Components/DisplayInventory/Sub_components/FreezerBox/
 
 // Test Hierarchy
 import Hierarchy from './Components/DisplayInventory/Hierarchy'
+import Picklist from './Components/Picklist_Expanded'
 
 
 export default (
@@ -22,8 +23,8 @@ export default (
     <Route path='/filter' component={Filter} />
     <Route path="/register" component={Register} />
     <Route path="/dashboard" component={Dashboard} />
+    <Route path="/picklist" component={Picklist} />
     
-   
     <Route path="/addlocation" component={AddLocation} />
     
     {/* Test Component */}

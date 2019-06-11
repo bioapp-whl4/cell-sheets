@@ -29,7 +29,7 @@ function Square(props){
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center'
-        }}>
+            }}>
             {children}
         </div>
     )
