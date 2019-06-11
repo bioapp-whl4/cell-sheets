@@ -70,10 +70,10 @@ export function displayFilter(bool) {
         payload: bool
     }
 }
-export function submit_picklist(array){
+export function submit_picklist(specimen){
     return {
         type: PICKLIST,
-        payload: array
+        payload: specimen
     }
 }
 
@@ -98,14 +98,7 @@ export default function display(state = initialState, action) {
         case ADVANCED_SEARCH:
             return{...state, advancedSearch: payload}
         case PICKLIST:
-            let temp = state.picklist.filter(sample => {
-                return sample.specimen_id === payload.specimen_id
-            })
-            if (temp.length === 0) {
-                let newPicklist = {...state.picklist, payload}
-                return {...state, payload: ...state.payload}
-            }
-            return { ...state, picklist: payload}
+            return{...state, picklist: payload}
         default:
             return state
     }

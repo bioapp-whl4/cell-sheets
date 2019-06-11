@@ -53,8 +53,8 @@ export default function SampleList(props){
     samples.sort(compare)
 
     function handleCheck(sample){
-        console.log(`11111111111`, sample)
-
+        submit_picklist(sample)
+        console.log(`asdfasdfasdfasdf`, sample)
     }
 
     const displaySamples = samples.map((sample, i) => (
