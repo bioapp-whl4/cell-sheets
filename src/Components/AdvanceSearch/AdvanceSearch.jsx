@@ -12,8 +12,8 @@ class Filter extends Component {
         sample_id: true,
         experiment_id: true,
         date: false,
-        start_date: '2000-01-01',
-        end_date: '2000-01-01',
+        start_date: '2019-01-01',
+        end_date: '2019-01-01',
         dateContext: '',
         inventory: [],
         samples: []
@@ -25,20 +25,13 @@ class Filter extends Component {
         try{
             let res1 = await axios.get('/api/freezers')
             res1.data.map( async (freezer) => {
-                console.log('f',freezer.freezer_id)
                 let res2 = await axios.get(`/api/freezer/canes?id=${freezer.freezer_id}`)
-                console.log('reso2',res2.data)
                 freezer.canes = res2.data  // add the canes array to the freezer object
-                console.log('freezer.canes',freezer.canes)
                 freezer.canes.forEach( async (cane) => { // get the boxes for each cane
                     let res3 = await axios.get(`/api/cane/boxes?id=${cane.cane_id}`)
-                    console.log('res3',res3)
                     cane.boxes = res3.data // add the boxes to the cane object
-                    console.log('cane',cane.boxes)
-                    cane.boxes.forEach( async (box) => {
-                        console.log('boxID',box.box_id)
+                    cane.boxes.forEach( async (box) => {  
                         let res4 = await axios.get(`/api/box/samples?id=${box.box_id}`)
-                        console.log('res4',res4.data)
                         box.samples = res4.data
                         samples.push(...res4.data)
                         
@@ -77,8 +70,8 @@ class Filter extends Component {
         sample_id: true,
         experiment_id: true,
         date: false,
-        start_date: '2000-01-01',
-        end_date: '2000-01-01',
+        start_date: '2019-01-01',
+        end_date: '2019-01-01',
         dateContext: '',})
     }
     handleInput = event => {
@@ -155,8 +148,6 @@ class Filter extends Component {
                 // </div>
         //     )
         // })
-
-        console.log('samples length, advance search',this.state.samples.length)
         
 
         return(

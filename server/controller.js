@@ -71,5 +71,9 @@ module.exports = {
     } catch (err) {
       res.sendStatus(401);
     }
+  },
+  picklist: (req, res) => {
+    const { session } = req;
+    session.picklist = req.body
   }
 };

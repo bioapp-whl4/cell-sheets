@@ -5,7 +5,6 @@ import SampleList from './SampleList'
 import AddSamples from '../AddSamples'
 import axios from 'axios'
 
-
 export default class GridContainer extends Component {
   constructor(props){
     super(props)
