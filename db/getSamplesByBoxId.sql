@@ -13,7 +13,7 @@ s.updated_at
 	LEFT JOIN ba.location l ON location_id = l.id
 	LEFT JOIN ba.experiment e ON s.experiment_id = e.id
 	LEFT JOIN ba.box ba ON s.box_id = ba.id
-	LEFT JOIN ba.cane c ON cane_id = c.id
+	LEFT JOIN ba.cane c ON s.cane_id = c.id
 	LEFT JOIN ba.freezer f ON s.freeezer_id = f.id
 	LEFT JOIN ba.freezer_type ft ON f.id = ft.freezer_id
 JOIN ba.hierarchy h ON h.parent_id = 5

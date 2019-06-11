@@ -35,7 +35,7 @@ class FreezerBox extends Component {
         let displayFreezerBoxes = this.state.freezerBoxes.map((elem,i)=> {
             return <div onClick={ ()=> this.updateDisplay(elem.box_id)} key={i}>
             <h4>Box: {elem.box_name}</h4>
-            <i class="fas fa-box"></i>
+            <i className="fas fa-box"></i>
             </div>
            
         })
