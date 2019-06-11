@@ -22,13 +22,12 @@
 }
 .search {
   display: flex;
+  justify-content: center;
   justify-content: flex-start;
-  align-content: flex-start;
+  align-content: start;
   color: white;
   font-size: 30px;
   position: relative;
-  top: 60%;
-  left: 5%;
 }
 
 .nav-links {

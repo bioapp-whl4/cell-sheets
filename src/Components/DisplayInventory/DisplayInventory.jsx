@@ -6,6 +6,7 @@ import FreezerCane from "./Sub_components/FreezerCane/FreezerCane";
 import Box from "../GridContextProvider";
 //Advance Search Display
 import AdvanceSearchDisplay from "../AdvanceSearch/AdvanceSearchResults";
+import KeywordSearchDisplay from "../AdvanceSearch/KeywordSearchResults";
 import {
   updateFreezerId,
   updateCaneId,
@@ -43,6 +44,12 @@ class DisplayInventory extends Component {
           <div>
             <h3>Advance Search Results</h3>
             <AdvanceSearchDisplay />
+          </div>
+        )}
+        {this.props.keywordSearch && (
+          <div>
+            <h3>Keyword Search Results</h3>
+            <KeywordSearchDisplay />
           </div>
         )}
         {this.props.freezer && (
@@ -107,7 +114,8 @@ function mapStateToProps(state) {
     cane_id: state.display.caneid,
     box_id: state.display.box_id,
     // Advance Search Results
-    advancedSearch: state.display.advancedSearch
+    advancedSearch: state.display.advancedSearch,
+    keywordSearch: state.display.keywordSearch
   };
 }
 export default connect(
