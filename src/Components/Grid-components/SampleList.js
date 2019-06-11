@@ -62,9 +62,7 @@ function SampleList(props){
         } else {
             new_picklist = removed
         }
-        console.log(`111111`, props.picklist)
         props.submit_picklist(new_picklist)
-        console.log(`2222222`, props.picklist)
     }
 
     const displaySamples = samples.map((sample, i) => (
@@ -98,3 +96,4 @@ const mapStateToProps = (reduxState) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SampleList)
+
