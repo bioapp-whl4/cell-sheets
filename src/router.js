@@ -5,8 +5,8 @@ import Register from "./Components/Register";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import AddLocation from "./Components/AddLocation/AddLocation";
 import HeaderSearch from "./Components/Search/HeaderSearch";
-import Filter from './Components/Filter'
-import Picklist from './Components/Picklist_Expanded';
+import Filter from './Components/AdvanceSearch/AdvanceSearch';
+import AddSpecimen from './Components/Add Specimen/AddSpecimen'
 
 
 // Test Hierarchy
@@ -27,6 +27,7 @@ export default (
     <Route path="/api/test" component={HeaderSearch} />
     {/* Test Hierarchy */}
     <Route path='/api/hierarchy' component={Hierarchy}/>
+    <Route path='/addspecimen'component={AddSpecimen}/>
 
   </Switch>
 );

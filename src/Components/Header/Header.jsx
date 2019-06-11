@@ -1,14 +1,26 @@
 import React, {Component} from 'react'
-import {withRouter} from 'react-router-dom'
+// import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {displayFilter} from '../../redux/display.reducer'
-import Picklist_Icon from '../Picklist_Icon'
+import  {updateAdvanceSearch,updateDisplayFreezer,updateDisplayCane,updateDisplayBoxes, updateDisplayBox} from '../../redux/display.reducer'
+
 
 
 class Header extends Component {
     
     navigate = () => {
-        this.props.displayFilter(!this.props.advancedSearch)
+        if(!this.props.advancedSearch) {
+            this.props.updateDisplayFreezer(false)
+            this.props.updateDisplayCane(false)
+            this.props.updateDisplayBoxes(false)
+            this.props.updateDisplayBox(false)
+            this.props.updateAdvanceSearch(true)
+        } else {this.props.updateAdvanceSearch(false)
+            this.props.updateDisplayFreezer(true)
+            this.props.updateDisplayCane(false)
+            this.props.updateDisplayBoxes(false)
+            this.props.updateDisplayBox(false)
+            this.props.updateAdvanceSearch(false)
+                }
     }
 
     render() {
@@ -18,20 +30,24 @@ class Header extends Component {
                 <div className='nav-links'>
                     <h4 className='logout'>LOG OUT</h4>
                     <i className="fas fa-search search"></i>
-                    <Picklist_Icon/>
-                    <div onClick={this.navigate}>Advanced Search</div>
+                    <div className='advance' onClick={this.navigate}>Advanced Search</div>
                 </div>
             </header>
         )
     }
 }
+const mapStateToProps = reduxState => {
+  const {advancedSearch} = reduxState.display;
+  const { user_id, samples, authenticated } = reduxState;
+  return { user_id, samples, authenticated };
+};
 
-const mapDispatchToProps = {displayFilter}
+const mapDispatchToProps = {
+    updateAdvanceSearch,
+    updateDisplayFreezer,
+    updateDisplayCane,
+    updateDisplayBoxes, 
+    updateDisplayBox}
 
-function mapStateToProps(state) {
-    return {
-        advancedSearch: state.display.advancedSearch
-    }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Header))
+export default connect(mapStateToProps,mapDispatchToProps)(Header)

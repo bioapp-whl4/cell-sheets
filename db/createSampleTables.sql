@@ -7,6 +7,7 @@ CREATE TABLE ba.box (
     id serial NOT NULL  ,
     name varchar(255),
     hierarchy_id int default 5,
+    cane_id int, 
     size_x int default 9,
     size_y int default 9,
     inserted_at timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
@@ -19,6 +20,7 @@ CREATE TABLE ba.cane (
     id serial NOT NULL  ,
     name varchar(255) ,
     hierarchy_id int default 4,
+    freezer_id int, 
     inserted_at timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL ,
     updated_at  timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL ,
     CONSTRAINT pk_cane PRIMARY KEY (id)
@@ -41,6 +43,7 @@ CREATE TABLE ba.freezer (
     name varchar(255)  ,
     temperature decimal(10,2)  ,
 	hierarchy_id int default 3, 
+    lab_id int, 
     inserted_at timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL  ,
     updated_at int,
     CONSTRAINT pk_freezer PRIMARY KEY (id)
@@ -69,6 +72,7 @@ CREATE TABLE ba.freezing_medium (
 CREATE TABLE ba.lab (
     id serial NOT NULL  ,
     name varchar(255)  ,
+    location_id int, 
     inserted_at timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL  ,
     updated_at  timestamp WITH time zone DEFAULT CURRENT_TIMESTAMP NOT NULL  ,
     freezer_id int  ,
@@ -86,6 +90,7 @@ CREATE TABLE ba.location (
     city varchar(200)  ,
     CONSTRAINT pk_location PRIMARY KEY (id)
 );
+
 
 -- Table: order_item
 CREATE TABLE ba.order_item (
