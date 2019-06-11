@@ -9,8 +9,8 @@ export default function Grid(props){
     }
 
     function renderSquare(i, specimens){
-        const x = i % 9
-        const y = Math.floor(i / 9)
+        const x = i % props.x
+        const y = Math.floor(i / props.x)
         var occupied
         var index
         var color
@@ -32,7 +32,8 @@ export default function Grid(props){
     }
     
     var squares = []
-    for(let i = 0; i < 81; i++){
+    const totalLength = props.x * props.y
+    for(let i = 0; i < totalLength; i++){
         squares.push(renderSquare(i, props.specimens))
     }
 
