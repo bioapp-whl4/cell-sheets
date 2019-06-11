@@ -13,7 +13,7 @@ class AdvanceSearchResults extends Component {
             this.props.updateDisplayBox(true)
     }
     render() {
-        console.log(this.props.filterResults)
+        
         let results_display = this.props.filterResults.map((sample, i) => {
 
             return (
