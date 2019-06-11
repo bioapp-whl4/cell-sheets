@@ -8,9 +8,20 @@ const initialState = {
     cane: false,
     boxes: false,
     box: false,
-    advancedSearch: false
+    advancedSearch: false,
+    //Adding Specimen
+    freezerId: null,
+    caneId: null,
+    boxId: null,
+    //PickList
+    picklist: []
 };
 
+
+//Adding Specimen
+const ADDFREEZERID = 'ADDFREEZERID'
+const ADDCANEID = 'ADDCANEID'
+const ADDBOXID = 'ADDBOXID'
 const UPDATE_DISPLAY_FREEZER = 'UPDATE_DISPLAY_FREEZER'
 const UPDATE_DISPLAY_CANE = 'UPDATE_DISPLAY_CANE'
 const UPDATE_DISPLAY_BOXES = 'UPDATE_DISPLAY_BOXES'
@@ -19,7 +30,26 @@ const UPDATE_FREEZER_ID = 'UPDATE_FREEZER_ID'
 const UPDATE_CANE_ID = 'UPDATE_CANE_ID'
 const UPDATE_BOX_ID = 'UPDATE_BOX_ID'
 const ADVANCED_SEARCH = 'ADVANCED_SEARCH'
+const PICKLIST = 'PICKLIST'
 
+export function addFreezerId (id) {
+    return {
+        type: ADDFREEZERID,
+        payload: id
+    }
+}
+export function addCaneId (id) {
+    return {
+        type: ADDCANEID,
+        payload: id
+    }
+}
+export function addBoxId (id) {
+    return {
+        type: ADDBOXID,
+        payload: id
+    }
+}
 export function updateDisplayFreezer (boolean) {
     return {
         type: UPDATE_DISPLAY_FREEZER,
@@ -62,10 +92,16 @@ export function updateBoxId(id) {
         payload: id
     }
 }
-export function displayFilter(bool) {
+export function updateAdvanceSearch(boolean) {
     return{
         type: ADVANCED_SEARCH,
-        payload: bool
+        payload: boolean
+    }
+}
+export function submit_picklist(array){
+    return {
+        type: PICKLIST,
+        payload: array
     }
 }
 
@@ -73,6 +109,14 @@ export default function display(state = initialState, action) {
     const { type, payload } = action
 
     switch (type) {
+        //Adding New Samples
+        case ADDFREEZERID:
+            return {...state,freezerId:payload}
+        case ADDCANEID:
+            return {...state,caneId:payload}
+        case ADDBOXID:
+            return {...state,boxId:payload}
+        //ID for Displays
         case UPDATE_FREEZER_ID:
             return { ...state, freezer_id: payload }
         case UPDATE_CANE_ID:
@@ -89,6 +133,9 @@ export default function display(state = initialState, action) {
             return {...state,box: payload}
         case ADVANCED_SEARCH:
             return{...state, advancedSearch: payload}
+        // Adding a pick list
+        case PICKLIST:
+            return { ...state, picklist: payload}
         default:
             return state
     }

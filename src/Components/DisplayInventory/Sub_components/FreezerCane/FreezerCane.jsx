@@ -36,15 +36,17 @@ class FreezerCane extends Component {
         let displayFreezerCanes = this.state.freezerCanes.map((elem,i)=>{
             return <div onClick={()=> this.updateDisplay(elem.cane_id)} key={i}>
                 <h4>Cane {elem.cane}</h4>
-                <i class="fas fa-layer-group cane"></i>
+                <i className="fas fa-layer-group cane"></i>
                 </div>
         })
         
         return(
             <div>
+                <div className='freezersList'>
                 <h3>Freezer: {this.props.freezer_id}</h3>
                 <h4>Freezer Canes</h4>
-                {displayFreezerCanes}
+                <div className='displayContents'>{displayFreezerCanes}</div>
+                </div>
             </div>
         )
     }

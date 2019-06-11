@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import { updateEverything, store_filter_results } from '../redux/auth.reducer'
+import { updateEverything, store_filter_results } from '../../redux/auth.reducer'
+import {updateAdvanceSearch,updateFreezerId,updateCaneId,updateBoxId,updateDisplayFreezer,updateDisplayCane,updateDisplayBoxes,updateDisplayBox} from '../../redux/display.reducer'
 import axios from 'axios'
 import {withRouter} from 'react-router-dom'
 
@@ -24,15 +25,23 @@ class Filter extends Component {
         try{
             let res1 = await axios.get('/api/freezers')
             res1.data.map( async (freezer) => {
+                console.log('f',freezer.freezer_id)
                 let res2 = await axios.get(`/api/freezer/canes?id=${freezer.freezer_id}`)
+                console.log('reso2',res2.data)
                 freezer.canes = res2.data  // add the canes array to the freezer object
+                console.log('freezer.canes',freezer.canes)
                 freezer.canes.forEach( async (cane) => { // get the boxes for each cane
                     let res3 = await axios.get(`/api/cane/boxes?id=${cane.cane_id}`)
+                    console.log('res3',res3)
                     cane.boxes = res3.data // add the boxes to the cane object
+                    console.log('cane',cane.boxes)
                     cane.boxes.forEach( async (box) => {
+                        console.log('boxID',box.box_id)
                         let res4 = await axios.get(`/api/box/samples?id=${box.box_id}`)
+                        console.log('res4',res4.data)
                         box.samples = res4.data
                         samples.push(...res4.data)
+                        
                     })
                 })
                     freezers.push(freezer) //add each freezer to the freezer array
@@ -42,7 +51,7 @@ class Filter extends Component {
             })
             return freezers
         } catch(err){
-            alert(`Something is wrong`)
+            console.log(`Something is wrong`)
         }
     }
     async componentDidMount(){
@@ -50,6 +59,27 @@ class Filter extends Component {
         this.setState({
             inventory: this.props.everything
         })
+    }
+    // Added Clear Search as well as close display
+    closeDisplay = () => {
+        this.props.updateFreezerId(null)
+        this.props.updateCaneId(null)
+        this.props.updateBoxId(null)
+        this.props.updateDisplayFreezer(true)
+        this.props.updateDisplayCane(false)
+        this.props.updateDisplayBoxes(false)
+        this.props.updateDisplayBox(false)
+        this.props.updateAdvanceSearch(false)
+    }
+    resetSearch = () => {
+        this.setState({search_value: '',
+        description: true,
+        sample_id: true,
+        experiment_id: true,
+        date: false,
+        start_date: '2000-01-01',
+        end_date: '2000-01-01',
+        dateContext: '',})
     }
     handleInput = event => {
         this.setState({
@@ -108,31 +138,34 @@ class Filter extends Component {
                 })
             }
         }
-
+        
         // store filter results in redux
         this.props.store_filter_results(results)
 
         // let results_display = results.map((sample, i) => {
         //     return (
-        //         <div key={i} onClick={() => {this.props.history.push(`/api/cane/boxes/${sample.box_id}`)}}>
-        //             <h6>{sample.sample_name}</h6>
-        //             <ul>
-        //                 <li>Description: {sample.description}</li>
-        //                 <li>Freeze Date: {sample.freeze_date}</li>
-        //                 <li>Experiment ID: {sample.experiment_name}</li>
-        //             </ul>
+                // <div key={i} onClick={() => {this.props.history.push(`/api/cane/boxes/${sample.box_id}`)}}>
+                //     <h6>{sample.sample_name}</h6>
+                //     <ul>
+                //         <li>Description: {sample.description}</li>
+                //         <li>Freeze Date: {sample.freeze_date}</li>
+                //         <li>Experiment ID: {sample.experiment_name}</li>
+                //     </ul>
         
-        //         </div>
+                // </div>
         //     )
         // })
 
-        console.log(this.state.samples.length)
+        console.log('samples length, advance search',this.state.samples.length)
+        
 
         return(
             <div>
-                <input type="text" name='search_value' placeholder='Search for...' onChange={this.handleInput}/>
+                <i onClick={this.closeDisplay} className="fas fa-times exit"></i>
+
+                <input type="text" name='search_value' value={this.state.search_value} placeholder='Search for...' onChange={this.handleInput}/>
                 <div>
-                    <input type="checkbox" name="description" onClick={this.handleCheck} defaultChecked/>
+                    <input type="checkbox" name="description"  onClick={this.handleCheck} defaultChecked/>
                     <label>Description</label>
                 </div>            
                 <div>
@@ -172,6 +205,7 @@ class Filter extends Component {
                         </input>        
                     </div>  
                 )}
+                <button onClick={this.resetSearch}>Clear Search</button>
 
             </div>
         )
@@ -184,6 +218,14 @@ const mapStateToProps = (reduxState) => {
 }
 const mapDispatchToProps = {
     updateEverything,
-    store_filter_results
+    store_filter_results,
+    updateFreezerId,
+    updateCaneId,
+    updateBoxId,
+    updateDisplayFreezer,
+    updateDisplayCane,
+    updateDisplayBoxes,
+    updateDisplayBox,
+    updateAdvanceSearch
 }
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter((Filter)))
