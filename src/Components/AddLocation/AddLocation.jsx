@@ -14,6 +14,7 @@ class AddLocation extends Component {
             freezercanes: [],
             freezerboxes: [],
             box: [],
+
             freezer_id: '',
             freezercane_id: '',
             freezerbox_id: '',
@@ -112,7 +113,7 @@ class AddLocation extends Component {
     }
 
     render() {
-       
+       console.log('booox',this.state.box)
         let freezers = this.state.freezers.map((elem, i) => {
             return <option value={elem.freezer_id} key={i}>{`${elem.freezer_name}: ${elem.freezer_type}`}</option>
         })
@@ -204,6 +205,7 @@ class AddLocation extends Component {
                     )}
                 </Popup>}
                 <select name='freezerbox_id' onChange={this.handleBox}><option value='-1'>Choose a Freezer Box</option>{freezerBoxes}</select>
+                <select name='location' onChange={this.handleChange}></select>
             </div>
         )
     }

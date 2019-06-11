@@ -6,7 +6,10 @@ import Dashboard from "./Components/Dashboard/Dashboard";
 import AddLocation from "./Components/AddLocation/AddLocation";
 import HeaderSearch from "./Components/Search/HeaderSearch";
 import Filter from './Components/AdvanceSearch/AdvanceSearch';
-import AddSpecimen from './Components/Add Specimen/AddSpecimen'
+import AddSpecimen from './Components/Add Specimen/AddSpecimen';
+import DisplayFreezers from './Components/DisplayInventory/Sub_components/DisplayFreezers/DisplayFreezers'
+import FreezerCane from './Components/DisplayInventory/Sub_components/FreezerCane/FreezerCane'
+import FreezerBox from './Components/DisplayInventory/Sub_components/FreezerBox/FreezerBox'
 
 
 // Test Hierarchy
@@ -19,6 +22,7 @@ export default (
     <Route path='/filter' component={Filter} />
     <Route path="/register" component={Register} />
     <Route path="/dashboard" component={Dashboard} />
+    
    
     <Route path="/addlocation" component={AddLocation} />
     
