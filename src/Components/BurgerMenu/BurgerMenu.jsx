@@ -11,7 +11,7 @@ import { updateEverything } from '../../redux/auth.reducer'
 
 
 class BurgerMenu extends Component {
-    componentWillMount(){
+    componentDidMount(){
         this.getInventory()
     }
 
@@ -34,7 +34,7 @@ class BurgerMenu extends Component {
             })
             this.props.updateEverything(freezers) // send data to redux
         } catch(err){
-            alert(`Something is wrong`)
+            alert(`Something is wrong (BurgerMenu.jsx - getInventory)`, err)
         }
     }
 

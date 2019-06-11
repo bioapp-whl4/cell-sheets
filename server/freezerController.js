@@ -3,7 +3,6 @@ module.exports = {
     const db = req.app.get("db");
     try {
       db.getFreezers().then(data => {
-        console.log(`DB response from getFreezers`, data);
         res.status(200).send(data);
       });
     } catch (err) {
@@ -54,12 +53,10 @@ module.exports = {
   getBox: async (req, res) => {
     const db = req.app.get("db");
     const box_id = parseInt(req.query.id);
-    // console.log("box_id", box_id);
     try {
       const data = await db.getBox({ box_id });
       res.status(200).send(data);
     } catch (err) {
-      // console.log(err);
       res.sendStatus(500);
     }
   },
@@ -140,7 +137,6 @@ module.exports = {
   getSamples: (req, res) => {
     const db = req.app.get("db");
     db.getSamples().then(data => {
-      console.log(`DB response from getSamples`, data);
       res.status(200).send(data);
     });
   },
