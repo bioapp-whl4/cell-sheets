@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 import {submit_picklist} from '../redux/display.reducer'
+import axios from 'axios'
 
 
 class Picklist_Icon extends Component{
@@ -21,6 +22,7 @@ class Picklist_Icon extends Component{
             new_picklist = removed
         }
         this.props.submit_picklist(new_picklist)
+        axios.post('api/picklist', new_picklist)
     }
 
     render(){

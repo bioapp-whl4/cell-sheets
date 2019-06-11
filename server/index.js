@@ -52,3 +52,5 @@ app.get("/api/box/samples", freezerCtrl.getSamplesByBoxId);
 app.get("/api/boxgrid/samples", freezerCtrl.getGridSamplesByBoxId);
 //SAMPLE
 app.post("/api/sample", freezerCtrl.addSample);
+//PICKLIST
+app.post("/api/picklist", controller.picklist);

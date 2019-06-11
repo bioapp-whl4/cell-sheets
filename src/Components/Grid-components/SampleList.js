@@ -1,6 +1,7 @@
 import React from 'react'
 import {submit_picklist} from '../../redux/display.reducer'
 import {connect} from 'react-redux'
+import axios from 'axios'
 
 function SampleList(props){
     var samples = JSON.parse(JSON.stringify(props.specimens))
@@ -63,6 +64,7 @@ function SampleList(props){
             new_picklist = removed
         }
         props.submit_picklist(new_picklist)
+        axios.post('api/picklist', new_picklist)
     }
 
     const displaySamples = samples.map((sample, i) => (
