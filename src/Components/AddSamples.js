@@ -73,9 +73,9 @@ export default class AddSamples extends Component{
         //test data
         const {box_id} = this.props.box_id
         const {name, description, freeze_date, cell_vial, culture_condition, freezing_medium_id, expanded_note, add1, add2, add3, add4, add5} = this.state
-        if(selectedLocations.length === 0) return
-        for(let i = 0; i < this.selectedLocations.length; i++){
-            const box_position = this.selectedLocations[i]
+        if(this.state.selectedLocations.length === 0) return
+        for(let i = 0; i < this.state.selectedLocations.length; i++){
+            const box_position = this.state.selectedLocations[i]
             await axios.post("/api/sample", {name, description, box_id, box_position, freeze_date, cell_vial, culture_condition, freezing_medium_id, expanded_note, add1, add2, add3, add4, add5, /*test data*/ user_key, location_id, freezer_id, cane_id, /*user_id, experiment_name*/})
         }
         
