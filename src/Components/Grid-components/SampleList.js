@@ -53,9 +53,18 @@ function SampleList(props){
     samples.sort(compare)
 
     function handleCheck(sample){
-        props.submit_picklist(sample)
-        console.log(`asdfasdfasdfasdf`, sample)
-        console.log(`asdfasdfasdfasdf`, props)
+        let new_picklist
+        let removed = props.picklist.filter(pl_item => {
+            return pl_item.specimen_id !== sample.specimen_id
+        })
+        if (removed.length === props.picklist.length){
+            new_picklist = [...props.picklist, sample]
+        } else {
+            new_picklist = removed
+        }
+        console.log(`111111`, props.picklist)
+        props.submit_picklist(new_picklist)
+        console.log(`2222222`, props.picklist)
     }
 
     const displaySamples = samples.map((sample, i) => (
@@ -82,6 +91,10 @@ function SampleList(props){
 
 }
 
-const mapDispatchToProps = { submit_picklist}
+const mapDispatchToProps = {submit_picklist}
+const mapStateToProps = (reduxState) => {
+    const { picklist } = reduxState.display
+    return { picklist } 
+}
 
-export default connect(null, mapDispatchToProps)(SampleList)
+export default connect(mapStateToProps, mapDispatchToProps)(SampleList)
