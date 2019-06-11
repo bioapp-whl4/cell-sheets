@@ -1,0 +1,1 @@
+select * from ba.freezing_medium;
