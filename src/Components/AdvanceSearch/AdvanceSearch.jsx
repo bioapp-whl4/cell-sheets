@@ -12,8 +12,8 @@ class Filter extends Component {
         sample_id: true,
         experiment_id: true,
         date: false,
-        start_date: '2000-01-01',
-        end_date: '2000-01-01',
+        start_date: '2019-01-01',
+        end_date: '2019-01-01',
         dateContext: '',
         inventory: [],
         samples: []
@@ -43,7 +43,7 @@ class Filter extends Component {
             })
             return freezers
         } catch(err){
-            alert(`Something is wrong`)
+            alert(`Something is wrong (AdvancedSearch.jsx - getInventory)`, err)
         }
     }
     async componentDidMount(){
@@ -69,8 +69,8 @@ class Filter extends Component {
         sample_id: true,
         experiment_id: true,
         date: false,
-        start_date: '2000-01-01',
-        end_date: '2000-01-01',
+        start_date: '2019-01-01',
+        end_date: '2019-01-01',
         dateContext: '',})
     }
     handleInput = event => {

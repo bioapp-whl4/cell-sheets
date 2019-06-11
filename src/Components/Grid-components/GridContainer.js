@@ -5,7 +5,6 @@ import SampleList from './SampleList'
 import AddSamples from '../AddSamples'
 import axios from 'axios'
 
-
 export default class GridContainer extends Component {
   constructor(props){
     super(props)
@@ -127,7 +126,7 @@ getData = async () => {
     return (
       <>
         <Grid move={this.moveItem} get={this.getIndex} showData={this.showData} hideData={this.hideData} specimens={this.state.specimens}/>
-        <SampleList specimens={this.state.specimens}/>
+        <SampleList specimens={this.state.specimens} />
         <button onClick={this.addSample}>Add a sample</button>
         {this.state.addSample && <AddSamples specimens={this.state.specimens} x={9} y={9} box_id={this.props.box_id} updateSamples={this.updateSamples}/>}
       </>

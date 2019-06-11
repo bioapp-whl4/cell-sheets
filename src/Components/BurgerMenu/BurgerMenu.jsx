@@ -11,7 +11,7 @@ import { updateEverything } from '../../redux/auth.reducer'
 
 
 class BurgerMenu extends Component {
-    componentWillMount(){
+    componentDidMount(){
         this.getInventory()
     }
 
@@ -34,7 +34,7 @@ class BurgerMenu extends Component {
             })
             this.props.updateEverything(freezers) // send data to redux
         } catch(err){
-            alert(`Something is wrong`)
+            alert(`Something is wrong (BurgerMenu.jsx - getInventory)`, err)
         }
     }
 
@@ -69,8 +69,9 @@ class BurgerMenu extends Component {
         this.props.updateBoxId(box_id)
     }
   render () {
-    
-    let freezers = (
+      console.log(`this.props.everything`, this.props.everything)
+
+    let freezers = this.props.everything.length === 0 || this.props.everything.length === undefined ? null : (
         <ul>
             {this.props.everything.map((freezer, i) => {
                 return (
@@ -85,7 +86,7 @@ class BurgerMenu extends Component {
                                             {cane.boxes.map((box, i) => {
                                                 return (
                                                     <li>
-                                                       <h6 onClick={()=>this.handleBox(freezer.freezer_id,cane.cane_id,box.box_id)}>Box:{box.box_name}</h6> 
+                                                    <h6 onClick={()=>this.handleBox(freezer.freezer_id,cane.cane_id,box.box_id)}>Box:{box.box_name}</h6> 
                                                     </li>
                                                 )
                                             })}

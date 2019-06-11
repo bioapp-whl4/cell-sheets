@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 // import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
 import  {updateAdvanceSearch,updateDisplayFreezer,updateDisplayCane,updateDisplayBoxes, updateDisplayBox} from '../../redux/display.reducer'
+import Picklist from '../Picklist_Icon'
 
 
 
@@ -30,6 +31,7 @@ class Header extends Component {
                 <div className='nav-links'>
                     <h4 className='logout'>LOG OUT</h4>
                     <i className="fas fa-search search"></i>
+                    <Picklist/>
                     <div className='advance' onClick={this.navigate}>Advanced Search</div>
                 </div>
             </header>

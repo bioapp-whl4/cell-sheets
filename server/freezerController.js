@@ -1,26 +1,14 @@
 module.exports = {
   getFreezers: async (req, res) => {
     const db = req.app.get("db");
-<<<<<<< HEAD
-    db.getFreezers().then(data => {
-      res.status(200).send(data);
-    });
-||||||| merged common ancestors
-    db.getFreezers().then(data => {
-      console.log(`DB response from getFreezers`, data);
-      res.status(200).send(data);
-    });
-=======
     try {
       db.getFreezers().then(data => {
-        console.log(`DB response from getFreezers`, data);
         res.status(200).send(data);
       });
     } catch (err) {
       console.log(err);
       res.sendStatus(500);
     }
->>>>>>> master
   },
   getFreezer: async (req, res) => {
     const db = req.app.get("db");
@@ -65,12 +53,10 @@ module.exports = {
   getBox: async (req, res) => {
     const db = req.app.get("db");
     const box_id = parseInt(req.query.id);
-    // console.log("box_id", box_id);
     try {
       const data = await db.getBox({ box_id });
       res.status(200).send(data);
     } catch (err) {
-      // console.log(err);
       res.sendStatus(500);
     }
   },

@@ -1,8 +1,8 @@
 import React from 'react'
 import {submit_picklist} from '../../redux/display.reducer'
+import {connect} from 'react-redux'
 
-
-export default function SampleList(props){
+function SampleList(props){
     var samples = JSON.parse(JSON.stringify(props.specimens))
 
     samples.forEach((sample) => {
@@ -53,15 +53,16 @@ export default function SampleList(props){
     samples.sort(compare)
 
     function handleCheck(sample){
-        submit_picklist(sample)
+        props.submit_picklist(sample)
         console.log(`asdfasdfasdfasdf`, sample)
+        console.log(`asdfasdfasdfasdf`, props)
     }
 
     const displaySamples = samples.map((sample, i) => (
         <div key={i}>
             <h3>{sample.location}</h3> 
             <div>
-                <input type="checkbox" name="experiment_id" onClick={() => {handleCheck(sample)}} defaultChecked/>
+                <input type="checkbox" name="experiment_id" onClick={() => {handleCheck(sample)}} defaultUnChecked/>
                 <label>Experiment ID</label>
             </div>  
             <p>Sample ID: {sample.sample_name}</p>
@@ -78,4 +79,9 @@ export default function SampleList(props){
             {displaySamples}
         </div>
     )
+
 }
+
+const mapDispatchToProps = { submit_picklist}
+
+export default connect(null, mapDispatchToProps)(SampleList)
