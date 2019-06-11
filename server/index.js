@@ -5,6 +5,7 @@ const express = require("express");
 const controller = require("./controller");
 const sampleCtrl = require("./sampleController");
 const freezerCtrl = require("./freezerController");
+const addPartsCtrl = require("./partsController");
 const { CONNECTION_STRING, SESSION_SECRET, SERVER_PORT } = process.env;
 const app = express();
 
@@ -42,14 +43,18 @@ app.get("/api/samples", sampleCtrl.getSamples);
 //FREEZER-CONTROLLER
 app.get("/api/freezers", freezerCtrl.getFreezers);
 app.get("/api/freezer", freezerCtrl.getFreezer);
+app.post("/api/freezer", addPartsCtrl.addFreezer);
 app.get("/api/freezer/canes", freezerCtrl.getCanesByFID);
-app.get("/api/cane", freezerCtrl.getCane);
 app.get("/api/cane/boxes", freezerCtrl.getBoxesByCaneId);
-app.get("/api/box", freezerCtrl.getBox);
 app.get("/api/box/samples", freezerCtrl.getSamplesByBoxId);
 app.get("/api/medium", freezerCtrl.getMedium);
 
 //BOX
 app.get("/api/boxgrid/samples", freezerCtrl.getGridSamplesByBoxId);
+app.get("/api/box", freezerCtrl.getBox);
+app.post("/api/box", addPartsCtrl.addBox);
 //SAMPLE
 app.post("/api/sample", freezerCtrl.addSample);
+//CANE
+app.get("/api/cane", freezerCtrl.getCane);
+app.post("/api/cane", addPartsCtrl.addCane);
