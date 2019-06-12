@@ -20,12 +20,13 @@ class AddSpecimen extends Component {
             field1: false,
             field2: false,
             field3: false,
-            add1: '',
-            add2: '',
-            add3: '',
+            body1: '',
+            body2: '',
+            body3: '',
             title1: '',
             title2: '',
-            title3: ''
+            title3: '',
+            
         
            
         }
@@ -44,8 +45,8 @@ class AddSpecimen extends Component {
         axios.post('/api/sample',{freezer_id,cane_id,box_id,user_id,name,description,freeze_date,cell_vial,experiment_id,
             culture_condition,freezing_medium_id,expanded_note,add1,add2,add3})
     }
-    cancelField = (add,field) => {
-        this.setState({[add]: '',[field]: false})
+    cancelField = (title,body,field) => {
+        this.setState({[title]: '',[body]:'',[field]: false})
 
     }
     addBoxLocation = (column,row) => {
@@ -62,6 +63,7 @@ class AddSpecimen extends Component {
     handleChange = (e) => {
         this.setState({[e.target.name]:e.target.value})
     }
+    
     getFreezerMediums = () => {
         axios.get("/api/medium").then(res=>this.setState({freezingMediums: res.data}))
         .catch(err=>console.log('err getting freezer mediums',err))
@@ -83,24 +85,26 @@ class AddSpecimen extends Component {
                 <h3>Cell Vial</h3>
                 <input name='cell_vial' placeholder='Enter Cell Count' value={this.state.cell_vial} onChange={this.handleChange}/>
                 <h3>Freeze Date</h3>
-                <input name='freeze_date'placeholder='Enter Sample Freeze Date' value={this.state.freeze_date} onChange={this.handleChange}/>
+                <input name='freeze_date'placeholder='Enter Sample Freeze Date' type='date' value={this.state.freeze_date} onChange={this.handleChange}/>
                 <h3>Culture Condition</h3>
                 <input name='culture_condition' placeholder='Enter Culture Conditions' value={this.state.culture_condition} onChange={this.handleChange}/>
                 <h3>Freezing Medium</h3>
                 <select name='freezing_medium_id' onChange={this.handleChange}><option value=''>Choose Freezer Medium</option>{freezingOptions}</select>
                 <h3>Expanded Notes</h3>
                 <input name='expanded_note' value={this.state.expanded_note} onChange={this.handleChange}/>
+                {/* Adding Additional Fields */}
                 <button name='field1' value={this.state.field1} >
                 {!this.state.field1 && <h3 onClick={()=>this.addNewField('field1')}>ADD NEW FIELD</h3>}
-                {this.state.field1 && <h3  onClick={()=>this.cancelField('add1','field1')}>Cancel</h3>}
+                {this.state.field1 && <h3  onClick={()=>this.cancelField('title1','body1','field1')}>Cancel</h3>}
                 </button>
                 {this.state.field1 &&  <div><h3>Add New Field</h3>
                 <input/>
-                <input name='add1'onChange={this.handleChange}/></div>}
+                <input name='title1' placeholder='Field Name' value={this.state.title1} onChange={this.handleChange}/>
+                <input name='body1' placeholder='Description' value={this.state.body1} onChange={this.handleChange}/></div>}
                 
                 <button name='field2' value={this.state.field2} >
                 {!this.state.field2 && <h3 onClick={()=>this.addNewField('field2')}>Add Second Field</h3>}
-                {this.state.field2 && <h3 onClick={()=>this.cancelField('add2','field2')}>Cancel Second Field</h3>}
+                {this.state.field2 && <h3 onClick={()=>this.cancelField('title2','body2','field2')}>Cancel Second Field</h3>}
                 </button>
                 {this.state.field2 &&  <div><h3>Add Second Field</h3>
                 
@@ -108,7 +112,7 @@ class AddSpecimen extends Component {
 
                 <button name='field3' value={this.state.field3} >
                 {!this.state.field3 && <h3 onClick={()=>this.addNewField('field3')}>Add Third Field</h3>}
-                {this.state.field3 && <h3 onClick={()=>this.cancelField('add3','field3')}>Cancel Third Field</h3>}
+                {this.state.field3 && <h3 onClick={()=>this.cancelField('title3','body3','field3')}>Cancel Third Field</h3>}
                 </button>
                 {this.state.field3 &&  <div><h3>Add Third Field</h3><input name='add3'onChange={this.handleChange}/></div>}
                 <AddLocation/>
