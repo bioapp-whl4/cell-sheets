@@ -1,6 +1,8 @@
+
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { updateFilterTerm } from "../../redux/auth.reducer";
+import Picklist_Icon from '../Picklist_Icon'
 import {
   updateAdvanceSearch,
   updateDisplayFreezer,
@@ -15,9 +17,17 @@ class Header extends Component {
   constructor() {
     super();
     this.state = {
-      filterTerm: ""
+      filterTerm: "",
+      adv_search_icon: true
     };
   }
+
+  toggle_adv = () => {
+    this.setState({
+      adv_search_icon: !this.state.adv_search_icon
+    })
+  }
+
   navigate = () => {
     if (!this.props.keywordSearch) {
       this.props.updateDisplayFreezer(false);
@@ -37,6 +47,7 @@ class Header extends Component {
     }
   };
   advanceSearch = () => {
+    this.toggle_adv()
     if (!this.props.advancedSearch) {
       this.props.updateDisplayFreezer(false);
       this.props.updateDisplayCane(false);
@@ -89,32 +100,28 @@ class Header extends Component {
   };
 
   render() {
+    const minus = <i class="fas fa-minus" onClick={this.advanceSearch}></i>
+    const plus =  <i class="fas fa-plus" onClick={this.advanceSearch}></i>
+
+
     return (
       <header className="Header">
         <h2 className="AppName">CELL SHEETS</h2>
         <div className="nav-links">
-          <h4 className="logout">LOG OUT</h4>
-          <i  onClick={this.pickList} className="fas fa-clipboard-list picklist"></i>
-          <div className="search">
+          <div className="logout">
+          <i class="fas fa-user"></i>
             <div>
-              {" "}
-              <i className="fas fa-search glass"></i>
-              <input
-                onChange={this.handleInput}
-                type="text"
-                name="filterValue"
-                placeholder="Search"
-              />
-              <button onClick={this.search}>Search</button>
-            </div>
-            <div>
-              <input type="checkbox" onClick={this.navigate} defaultUnChecked/>
-              <label>Advanced Search</label>
+              Log Out
             </div>
           </div>
-
-          <div className="advance" onClick={this.advanceSearch}>
-            Advanced Search
+          <div className='picklist-div'>
+            <i  onClick={this.pickList} className="fas fa-clipboard-list picklist"></i>
+            <Picklist_Icon/>
+          </div>
+          <div className="search">
+            <i className="fas fa-search glass" onClick={this.search}></i>
+            <input  onChange={this.handleInput} type="text" name="filterValue" placeholder="Search" />
+            {this.state.adv_search_icon ? plus : minus}
           </div>
         </div>
       </header>
