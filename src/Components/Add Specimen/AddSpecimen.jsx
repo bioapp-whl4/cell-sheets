@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import AddLocation from '../AddLocation/AddLocation'
-import AddSamples from '../AddBoxLocation/AddSamples'
 import {addFreezerId,addCaneId,addBoxId} from '../../redux/display.reducer'
+import AddSamples from '../AddBoxLocation/AddSamples'
 import {connect} from 'react-redux'
 class AddSpecimen extends Component {
     constructor() {
@@ -10,7 +10,6 @@ class AddSpecimen extends Component {
         this.state = {
             name: '',
             description: '',
-            box_position: [],
             freeze_date: '',
             cell_vial: '',
             experiment_id: '',
@@ -26,7 +25,7 @@ class AddSpecimen extends Component {
             body3: '',
             title1: '',
             title2: '',
-            title3: '',
+            title3: ''
             
         
            
@@ -40,10 +39,11 @@ class AddSpecimen extends Component {
         let cane_id = this.props.caneId
         let box_id = this.props.boxId
         let user_id = this.props.user_id
+        let box_position = this.state
         const {name,description,freeze_date,cell_vial,experiment_id,
             culture_condition,freezing_medium_id,expanded_note,add1,add2,add3} = this.state
         
-        axios.post('/api/sample',{freezer_id,cane_id,box_id,user_id,name,description,freeze_date,cell_vial,experiment_id,
+        axios.post('/api/sample',{box_position,freezer_id,cane_id,box_id,user_id,name,description,freeze_date,cell_vial,experiment_id,
             culture_condition,freezing_medium_id,expanded_note,add1,add2,add3})
     }
     cancelField = (title,body,field) => {
@@ -59,7 +59,10 @@ class AddSpecimen extends Component {
     handleChange = (e) => {
         this.setState({[e.target.name]:e.target.value})
     }
-    
+    updateBoxPostion = (arr) => {
+        this.setState({box_position: arr})
+    }
+
     getFreezerMediums = () => {
         axios.get("/api/medium").then(res=>this.setState({freezingMediums: res.data}))
         .catch(err=>console.log('err getting freezer mediums',err))
@@ -111,7 +114,7 @@ class AddSpecimen extends Component {
                 </button>
                 {this.state.field3 &&  <div><h3>Add Third Field</h3><input name='add3'onChange={this.handleChange}/></div>}
                 <AddLocation/>
-                {this.props.boxId && <div><AddSamples x={9} y={9} handleInput={this.handleChange} box_position={this.state.box_position} box_id={this.props.boxId}/></div>}
+                {this.props.boxId && <div><AddSamples box_id={this.props.boxId} x={9} y={9} updateBoxPostion={this.updateBoxPostion}/></div>}
                 <button className='addSpecimen' onClick={this.createSample}>Add Sample</button>
                 <button className='Cancel' onClick={this.backToDash}>Cancel</button>
             </div>

@@ -4,7 +4,7 @@ import DisplayFreezers from "./Sub_components/DisplayFreezers/DisplayFreezers";
 import FreezerBox from "./Sub_components/FreezerBox/FreezerBox";
 import FreezerCane from "./Sub_components/FreezerCane/FreezerCane";
 import Box from "../GridContextProvider";
-import Picklist_Expanded from '../Picklist_Expanded'
+import Picklist from '../Picklist'
 //Advance Search Display
 import AdvanceSearchDisplay from "../AdvanceSearch/AdvanceSearchResults";
 import KeywordSearchDisplay from "../AdvanceSearch/KeywordSearchResults";
@@ -25,7 +25,7 @@ import {
 
 class DisplayInventory extends Component {
   backToFreezer = async () => {
-    this.props.updateDisplayPicklist(false)
+    this.props.updateDisplayPicklist()
     this.props.updateKeywordSearch(false)
     this.props.updateAdvanceSearch(false)
     this.props.updateDisplayCane(false);
@@ -61,7 +61,7 @@ class DisplayInventory extends Component {
         )}
         {this.props.picklist && <div>
             <h3>Pick List</h3>
-            <Picklist_Expanded/>
+            <Picklist/>
             <button className="BackToInventory" onClick={this.backToFreezer}>
               Back to Inventory
             </button>

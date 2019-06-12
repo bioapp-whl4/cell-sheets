@@ -5,6 +5,7 @@ import {addFreezerId,addCaneId,addBoxId} from '../../redux/display.reducer'
 import {connect} from 'react-redux'
 
 
+
 class AddLocation extends Component {
     constructor() {
         super();
@@ -33,6 +34,7 @@ class AddLocation extends Component {
             //box size
             x: 0,
             y:0
+           
 
 
 
@@ -82,6 +84,8 @@ class AddLocation extends Component {
         if (+this.state.freezer_id < 0) {
             this.setState({ freezer_id: '', freezercane_id: '', freezerboxes: [], freezercanes: [] })
             this.props.addFreezerId(null)
+            this.props.addCaneId(null)
+            this.props.addBoxId(null)
         } else {
             let res = await axios.get(`/api/freezer/canes?id=${this.state.freezer_id}`)
             this.setState({ freezercanes: res.data, freezerboxes: [] })
@@ -94,6 +98,8 @@ class AddLocation extends Component {
         if (+this.state.freezer_id < 0) {
             this.setState({ freezer_id: '', freezercane_id: '', freezerboxes: [], freezercanes: [] })
             this.props.addFreezerId(null)
+            this.props.addCaneId(null)
+            this.props.addBoxId(null)
         } else {
             let res = await axios.get(`/api/freezer/canes?id=${this.state.freezer_id}`)
             this.setState({ freezercanes: res.data, freezerboxes: [] })
@@ -129,7 +135,7 @@ class AddLocation extends Component {
     handleBox = async (e) => {
         await this.setState({ [e.target.name]: e.target.value,box: '' })
         if (+this.state.freezerbox_id < 0) {
-            this.setState({ freezerboxes: [], box_id: '',freezerbox_id: ''})
+            this.setState({freezerboxes: [],box_id: '',freezerbox_id: '',box_position: ''})
             this.props.addBoxId(null)
         } else {
             let res = await axios.get(`/api/cane/boxes?id=${this.state.freezercane_id}`)
@@ -159,14 +165,14 @@ class AddLocation extends Component {
         }
         else { this.setState({ x:0,y:0,[field]: true }) }
     }
-    //Handles custom inputs
+    
     handleChange = (e) => {
         this.setState({ [e.target.name]: e.target.value })
 
     }
 
     render() {
-       console.log('booox',this.state.box)
+      console.log('booox popo',this.state.box_position)
      
         let freezers = this.state.freezers.map((elem, i) => {
             return <option value={elem.freezer_id} key={i}>{`${elem.freezer_name}: ${elem.freezer_type}`}</option>
@@ -261,7 +267,6 @@ class AddLocation extends Component {
                     )}
                 </Popup>}
                 <select name='freezerbox_id' onChange={this.handleBox}><option value='-1'>Choose a Freezer Box</option>{freezerBoxes}</select>
-                
             </div>
         )
     }
@@ -271,6 +276,7 @@ const mapDispatchToProps = {
     addFreezerId,
     addCaneId,
     addBoxId
+   
 }
 
 

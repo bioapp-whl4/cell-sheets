@@ -17,7 +17,7 @@ export default class AddSamples extends Component{
     }
 
     async componentDidMount(){
-        console.log('asdasdas', this.props.box_id)
+        
             const {box_id} = this.props
             
             const response = await axios.get(`/api/boxgrid/samples?id=${box_id}`)
@@ -58,7 +58,47 @@ export default class AddSamples extends Component{
         })
     }
 
-
+    async componentDidUpdate  (prevProps) {
+    if(prevProps.box_id !== this.props.box_id) {
+        const {box_id} = this.props
+        const response = await axios.get(`/api/boxgrid/samples?id=${box_id}`)
+        try{
+          const {data} = response
+          this.setState({
+            specimens: data
+          })
+        }
+        catch(err){
+          console.log(err)
+        }
+      
+        let samples = this.state.specimens.map(sample => (
+        sample.location
+    ))
+    const {x,y} = this.props
+    let tempArr = []
+    const totalSpaces = x * y
+    await this.setState({
+        locations: samples,
+    })
+    for(let i = 0; i < totalSpaces; i++){
+        let tempX = i % x
+        let tempY = Math.floor(i / x)
+        var occupied = false
+        for(let j = 0; j < this.state.locations.length; j++){
+            if(tempX === this.state.locations[j][0] && tempY === this.state.locations[j][1]){
+                occupied = true
+            }
+        }
+        if(!occupied){
+            tempArr.push([tempX, tempY])
+        }
+    }
+    this.setState({
+        availableLocations: tempArr
+    })
+    }
+}
 
     handleInput = (e) => {
         var {value} = e.target
@@ -73,27 +113,12 @@ export default class AddSamples extends Component{
             this.setState({
                 box_position: tempValue
             })
+            this.props.updateBoxPostion(tempValue)
             return
         }
        
     }
 
-    chooseSquare = (x,y) => {
-        let tempArr = this.state.selectedLocations
-        for(let i = 0; i < this.state.selectedLocations.length; i++){
-            if(x === this.state.selectedLocations[i][0] && y === this.state.selectedLocations[i][1]){
-                tempArr.splice(i, 1)
-                this.setState({
-                    selectedLocations: tempArr
-                })
-                return
-            }
-        }
-        this.setState({
-            selectedLocations: [...this.state.selectedLocations, [x,y]]
-        })
-    }
-    
     render(){
 
         let samples = JSON.parse(JSON.stringify(this.state.availableLocations))
@@ -157,7 +182,7 @@ export default class AddSamples extends Component{
         return(
         <>
        
-        <select name='box_position' onChange={this.props.handleInput} value={this.props.box_position}>
+        <select name='box_position' onChange={this.handleInput}>
                 <option value='null'>Position</option>
                 {options}
         </select>

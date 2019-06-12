@@ -17,6 +17,7 @@ const initialState = {
   freezerId: null,
   caneId: null,
   boxId: null,
+  box_position: [],
   //PickList
   picklist: []
 };
@@ -40,6 +41,8 @@ const UPDATE_SAMPLE_ID = "UPDATE_SAMPLE_ID";
 const ADVANCED_SEARCH = "ADVANCED_SEARCH";
 const KEYWORD_SEARCH = "KEYWORD_SEARCH";
 const PICKLIST = "PICKLIST";
+// add box location
+const UPDATE_BOX_POSITION = 'UPDATE_BOX_POSITION'
 
 
 export function addFreezerId(id) {
@@ -140,6 +143,12 @@ export function submit_picklist(array) {
     payload: array
   };
 }
+export function updateBoxPosition(arr) {
+  return {
+    type: UPDATE_BOX_POSITION,
+    payload: arr
+  }
+}
 
 export default function display(state = initialState, action) {
   const { type, payload } = action;
@@ -151,6 +160,8 @@ export default function display(state = initialState, action) {
       return { ...state, caneId: payload };
     case ADDBOXID:
       return { ...state, boxId: payload };
+    case UPDATE_BOX_POSITION:
+    return {...state,box_position: payload};
     case UPDATE_FREEZER_ID:
       return { ...state, freezer_id: payload };
     case UPDATE_CANE_ID:
