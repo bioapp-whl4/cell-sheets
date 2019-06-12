@@ -1,9 +1,11 @@
 import React, {Component} from 'react'
 import axios from 'axios'
+import {connect} from 'react-redux'
+import {addBoxId} from '../../redux/display.reducer'
 
-export default class AddSamples extends Component{
-    constructor(props){
-        super(props)
+class AddSamples extends Component{
+    constructor(){
+        super()
         this.state = {
             specimens: [],
             locations: [],
@@ -17,10 +19,8 @@ export default class AddSamples extends Component{
     }
 
     async componentDidMount(){
-        
-            const {box_id} = this.props
             
-            const response = await axios.get(`/api/boxgrid/samples?id=${box_id}`)
+            const response = await axios.get(`/api/boxgrid/samples?id=${this.props.boxId}`)
             try{
               const {data} = response
               this.setState({
@@ -100,12 +100,14 @@ export default class AddSamples extends Component{
     }
 }
 
-    handleInput = (e) => {
+    handleInput = async (e) => {
         var {value} = e.target
         if(e.target.name === "box_position" && value === 'null'){
             this.setState({
                 box_position: null
+               
             })
+            
             return
         }
         if(e.target.name === "box_position"){
@@ -190,3 +192,12 @@ export default class AddSamples extends Component{
         )
     }
 }
+const mapDispatchToProps = {
+    addBoxId
+}
+
+function mapStateToProps(reduxState) {
+    const {boxId} = reduxState.display
+    return {boxId}
+}
+export default connect(mapStateToProps,mapDispatchToProps)(AddSamples)

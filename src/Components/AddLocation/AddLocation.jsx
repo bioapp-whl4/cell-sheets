@@ -54,11 +54,12 @@ class AddLocation extends Component {
     //Add New Tiers
     addNewFreezer = async () => {
          // ${name}, ${temp}, ${lab_id});
-        const {freezer_name,temperature,freezer_type} = this.state
+        const {freezer_name,temperature} = this.state
         let name = freezer_name
-        let temp = temperature
-        let type = freezer_type
-        await axios.post("/api/freezer",{name,temp,type})
+        let temp = +temperature
+        // let type = freezer_type
+        let lab_id = 1
+        await axios.post("/api/freezer",{name,temp,lab_id})
         this.setState({freezer_name:'',temperature:'',freezer_type:'',freezers: []})
         this.getAllFreezers()
     }
@@ -135,12 +136,13 @@ class AddLocation extends Component {
     handleBox = async (e) => {
         await this.setState({ [e.target.name]: e.target.value,box: '' })
         if (+this.state.freezerbox_id < 0) {
-            this.setState({freezerboxes: [],box_id: '',freezerbox_id: '',box_position: ''})
+            this.setState({box_id: '',freezerbox_id: '',box_position: ''})
             this.props.addBoxId(null)
         } else {
             let res = await axios.get(`/api/cane/boxes?id=${this.state.freezercane_id}`)
             this.setState({ freezerboxes: res.data })
             this.props.addBoxId(this.state.freezerbox_id)
+            this.props.updateBoxPostion(null)
             
         }
 
@@ -206,8 +208,8 @@ class AddLocation extends Component {
                                 <h4>Freezer Temperature</h4>
                                 <select name='temperature' onChange={(e) => this.selectChange(e, 'custom_temp')}>
                                     <option value='default'>Choose A Temperature</option>
-                                    <option value='-39C'>-39C</option>
-                                    <option value='-40C'>-40C</option>
+                                    <option value='-39'>-39C</option>
+                                    <option value='-40'>-40C</option>
                                     <option value='custom'>Custom Temperature</option>
                                 </select>
                                 {this.state.custom_temp && <input onChange={this.handleChange} placeholder='Custom Temperature' name='temperature' />}
