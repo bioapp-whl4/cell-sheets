@@ -1,6 +1,8 @@
+
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { updateFilterTerm } from "../../redux/auth.reducer";
+import Picklist_Icon from '../Picklist_Icon'
 import {
   updateAdvanceSearch,
   updateDisplayFreezer,
@@ -8,16 +10,26 @@ import {
   updateDisplayCane,
   updateDisplayBoxes,
   updateDisplayBox,
-  updateDisplayPicklist
+  updateDisplayPicklist,
+  adv_search_display
 } from "../../redux/display.reducer";
 
 class Header extends Component {
   constructor() {
     super();
     this.state = {
-      filterTerm: ""
+      filterTerm: "",
+      adv_search_icon: true
     };
   }
+
+  toggle_adv = () => {
+    this.props.adv_search_display(this.state.adv_search_icon)
+    this.setState({
+      adv_search_icon: !this.state.adv_search_icon
+    })
+  }
+
   navigate = () => {
     if (!this.props.keywordSearch) {
       this.props.updateDisplayFreezer(false);
@@ -37,6 +49,7 @@ class Header extends Component {
     }
   };
   advanceSearch = () => {
+    this.toggle_adv()
     if (!this.props.advancedSearch) {
       this.props.updateDisplayFreezer(false);
       this.props.updateDisplayCane(false);
@@ -89,28 +102,27 @@ class Header extends Component {
   };
 
   render() {
+    const minus = <i class="fas fa-minus" onClick={this.advanceSearch}></i>
+    const plus =  <i class="fas fa-plus" onClick={this.advanceSearch}></i>
+
     return (
       <header className="Header">
-        <h3 className="AppName">CELL SHEETS</h3>
+        <h2 className="AppName">CELL SHEETS</h2>
         <div className="nav-links">
-          <h4 className="logout">LOG OUT</h4>
-          <i  onClick={this.pickList} className="fas fa-clipboard-list picklist"></i>
-          <div className="search">
-            <span>
-              {" "}
-              <i className="fas fa-search glass"></i>
-              <input
-                onChange={this.handleInput}
-                type="text"
-                name="filterValue"
-                placeholder="Search"
-              />
-              <button onClick={this.search}>Search</button>
-            </span>
+          <div className="logout">
+          <i class="fas fa-user"></i>
+            <div>
+              Log Out
+            </div>
           </div>
-
-          <div className="advance" onClick={this.advanceSearch}>
-            Advanced Search
+          <div className='picklist-div'>
+            <i  onClick={this.pickList} className="fas fa-clipboard-list picklist"></i>
+            <Picklist_Icon/>
+          </div>
+          <div className="search">
+            <i className="fas fa-search glass" onClick={this.search}></i>
+            <input  onChange={this.handleInput} type="text" name="filterValue" placeholder="Search" />
+            {this.state.adv_search_icon ? plus : minus}
           </div>
         </div>
       </header>
@@ -118,9 +130,9 @@ class Header extends Component {
   }
 }
 const mapStateToProps = reduxState => {
-  const { advancedSearch,keywordSearch,displayPicklist } = reduxState.display;
+  const { advancedSearch,keywordSearch,displayPicklist, adv_search_display_state } = reduxState.display;
   const { user_id, samples, authenticated } = reduxState;
-  return { user_id, samples, advancedSearch,authenticated,keywordSearch,displayPicklist};
+  return { adv_search_display_state, user_id, samples, advancedSearch,authenticated,keywordSearch,displayPicklist};
 };
 
 const mapDispatchToProps = {
@@ -131,10 +143,8 @@ const mapDispatchToProps = {
   updateAdvanceSearch,
   updateKeywordSearch,
   updateFilterTerm,
-  updateDisplayPicklist
+  updateDisplayPicklist,
+  adv_search_display
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
