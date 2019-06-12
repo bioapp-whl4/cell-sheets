@@ -40,6 +40,7 @@ class Header extends Component {
     this.setState({
       filterTerm: e.target.value
     });
+
     this.props.updateKeywordSearch(true);
     this.props.updateDisplayFreezer(false);
   };

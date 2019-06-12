@@ -1,29 +1,32 @@
-.display {
-  background-color: white;
-  position: absolute;
-  top: 18%;
-  left: 30vw;
-  width: 65vw;
-  height: 80%;
+.tg {
+  border-collapse: collapse;
+  border-spacing: 0;
 }
-.contents {
-  width: 100%;
-  height: 97%;
+.tg td {
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  // padding: 10px 5px;
+  border-style: solid;
+  border-width: 1px;
+  overflow: hidden;
+  word-break: normal;
+  border-color: black;
 }
-.CellInventory {
-  position: relative;
-  margin-right: 0;
-  width: 80%;
-  top: 2%;
-  left: 4%;
+.tg th {
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  font-weight: normal;
+  // padding: 10px 5px;
+  border-style: solid;
+  border-width: 1px;
+  overflow: hidden;
+  word-break: normal;
+  border-color: black;
 }
-.category {
-  position: relative;
-  top: 2%;
-  left: 4%;
+.tg tr {
+  cursor: pointer;
 }
-.cold {
-  position: relative;
-  left: 11%;
-  top: -1.4em;
-}
+// .freezers-list {
+//   cursor: pointer;
+// }
