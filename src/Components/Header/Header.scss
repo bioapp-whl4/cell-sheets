@@ -6,7 +6,24 @@
   width: 100vw;
   opacity: 0.6;
 }
-
+.advance {
+  color: white;
+  position: relative;
+  left: 20%;
+}
+.picklist {
+  position: absolute;
+  right: 20%;
+  color: white;
+  font-size: 50px;
+}
+.picklist:hover {
+  color: grey;
+}
+.glass {
+  position: absolute;
+  left: -40%;
+}
 .AppName {
   color: white;
   position: relative;

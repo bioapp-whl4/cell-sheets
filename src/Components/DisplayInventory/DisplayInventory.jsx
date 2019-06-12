@@ -4,11 +4,14 @@ import DisplayFreezers from "./Sub_components/DisplayFreezers/DisplayFreezers";
 import FreezerBox from "./Sub_components/FreezerBox/FreezerBox";
 import FreezerCane from "./Sub_components/FreezerCane/FreezerCane";
 import Box from "../GridContextProvider";
+import Picklist_Expanded from '../Picklist_Expanded'
 //Advance Search Display
 import AdvanceSearchDisplay from "../AdvanceSearch/AdvanceSearchResults";
 import KeywordSearchDisplay from "../AdvanceSearch/KeywordSearchResults";
 import DisplaySample from "../DisplaySample/DisplaySample";
 import {
+  updateAdvanceSearch,
+  updateKeywordSearch,
   updateFreezerId,
   updateCaneId,
   updateBoxId,
@@ -16,11 +19,15 @@ import {
   updateDisplayCane,
   updateDisplayBoxes,
   updateDisplayBox,
-  updateDisplaySample
+  updateDisplaySample,
+  updateDisplayPicklist
 } from "../../redux/display.reducer";
 
 class DisplayInventory extends Component {
   backToFreezer = async () => {
+    this.props.updateDisplayPicklist(false)
+    this.props.updateKeywordSearch(false)
+    this.props.updateAdvanceSearch(false)
     this.props.updateDisplayCane(false);
     this.props.updateDisplayFreezer(true);
     this.props.updateDisplayBoxes(false);
@@ -47,12 +54,25 @@ class DisplayInventory extends Component {
           <div>
             <h3>Advance Search Results</h3>
             <AdvanceSearchDisplay />
+            <button className="BackToInventory" onClick={this.backToFreezer}>
+              Back to Inventory
+            </button>
           </div>
         )}
+        {this.props.picklist && <div>
+            <h3>Pick List</h3>
+            <Picklist_Expanded/>
+            <button className="BackToInventory" onClick={this.backToFreezer}>
+              Back to Inventory
+            </button>
+          </div>}
         {this.props.keywordSearch && (
           <div>
             <h3>Keyword Search Results</h3>
             <KeywordSearchDisplay />
+            <button className="BackToInventory" onClick={this.backToFreezer}>
+              Back to Inventory
+            </button>
           </div>
         )}
         {this.props.sample && (
@@ -110,7 +130,10 @@ const mapDispatchToProps = {
   updateDisplayCane,
   updateDisplayBoxes,
   updateDisplayBox,
-  updateDisplaySample
+  updateDisplaySample,
+  updateKeywordSearch,
+  updateAdvanceSearch,
+  updateDisplayPicklist
 };
 function mapStateToProps(state) {
   return {
@@ -126,7 +149,9 @@ function mapStateToProps(state) {
     box_id: state.display.box_id,
     // Advance Search Results
     advancedSearch: state.display.advancedSearch,
-    keywordSearch: state.display.keywordSearch
+    keywordSearch: state.display.keywordSearch,
+    //Picklist
+    picklist: state.display.displayPicklist
   };
 }
 export default connect(
