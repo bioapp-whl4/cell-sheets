@@ -96,7 +96,7 @@ class Header extends Component {
           <h4 className="logout">LOG OUT</h4>
           <i  onClick={this.pickList} className="fas fa-clipboard-list picklist"></i>
           <div className="search">
-            <span>
+            <div>
               {" "}
               <i className="fas fa-search glass"></i>
               <input
