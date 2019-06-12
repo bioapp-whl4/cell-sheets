@@ -7,6 +7,7 @@ import Box from "../GridContextProvider";
 //Advance Search Display
 import AdvanceSearchDisplay from "../AdvanceSearch/AdvanceSearchResults";
 import KeywordSearchDisplay from "../AdvanceSearch/KeywordSearchResults";
+import DisplaySample from "../DisplaySample/DisplaySample";
 import {
   updateFreezerId,
   updateCaneId,
@@ -14,7 +15,8 @@ import {
   updateDisplayFreezer,
   updateDisplayCane,
   updateDisplayBoxes,
-  updateDisplayBox
+  updateDisplayBox,
+  updateDisplaySample
 } from "../../redux/display.reducer";
 
 class DisplayInventory extends Component {
@@ -23,6 +25,7 @@ class DisplayInventory extends Component {
     this.props.updateDisplayFreezer(true);
     this.props.updateDisplayBoxes(false);
     this.props.updateDisplayBox(false);
+    this.props.updateDisplaySample(false);
     this.props.updateFreezerId(null);
     this.props.updateCaneId(null);
     this.props.updateBoxId(null);
@@ -50,6 +53,12 @@ class DisplayInventory extends Component {
           <div>
             <h3>Keyword Search Results</h3>
             <KeywordSearchDisplay />
+          </div>
+        )}
+        {this.props.sample && (
+          <div>
+            <h3>Sample </h3>
+            <DisplaySample />
           </div>
         )}
         {this.props.freezer && (
@@ -100,7 +109,8 @@ const mapDispatchToProps = {
   updateDisplayFreezer,
   updateDisplayCane,
   updateDisplayBoxes,
-  updateDisplayBox
+  updateDisplayBox,
+  updateDisplaySample
 };
 function mapStateToProps(state) {
   return {
@@ -109,6 +119,7 @@ function mapStateToProps(state) {
     cane: state.display.cane,
     boxes: state.display.boxes,
     box: state.display.box,
+    sample: state.display.sample,
     // IDs to Search by
     freezer_id: state.display.freezer_id,
     cane_id: state.display.caneid,
