@@ -6,60 +6,26 @@
   width: 100%;
   opacity: 0.6;
 }
-.advance {
-  color: white;
-  position: relative;
-  left: 20%;
-}
 
-.picklist-div{
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  i{
-    padding-right: .5vw;
-  }
-}
-
-.picklist-div:hover {
-  cursor: pointer;
-}
-
-.picklist-icon{
-  color: white;
-}
-
-.picklist {
-  color: white;
-  font-size: 30px;
-}
-.picklist:hover {
-  color: grey;
-  cursor: pointer;
+.AppName, .nav-links {
+  margin: 2vw;
+  align-content: center;
 }
 
 .AppName {
   color: white;
-  font-size: 55px;
-  display: flex;
-  align-items: center;
-  padding-left: 5vw;
+  font-size: 35px;
+  align-content: center;
 }
-
 .logout {
   color: white;
-  width: fit-content;
+  top: 2%;
+  left: 90%;
   display: flex;
   justify-content: right;
-  i{
-    padding-right: .5vw;
+  div{
   }
 }
-
-.logout:hover{
-  cursor: pointer;
-}
-
 .search {
   display: flex;
   justify-content: center;
@@ -68,28 +34,11 @@
   color: white;
   font-size: 30px;
   position: relative;
-  label{
-    font-size: 15px;
-    display: flex;
-    align-content: center;
-  }
-  input, button{
-    border-radius: 12px;
-    text-align: center;
-  }
-  i:hover{
-    cursor: pointer;
-  }
-  i{
-    padding: 0 .5vw 0 .5vw;
-  }
 }
 
 .nav-links {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
   width: fit-content;
   flex-direction: column;
-  padding: 1vw;
 }
