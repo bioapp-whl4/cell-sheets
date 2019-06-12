@@ -71,7 +71,7 @@ function SampleList(props){
         <div key={i}>
             <h3>{sample.location}</h3> 
             <div>
-                <input type="checkbox" name="experiment_id" onClick={() => {handleCheck(sample)}} defaultUnChecked/>
+                <input type="checkbox" name="experiment_id" onClick={() => {handleCheck(sample)}} defaultunchecked/>
                 <label>Experiment ID</label>
             </div>  
             <p>Sample ID: {sample.sample_name}</p>

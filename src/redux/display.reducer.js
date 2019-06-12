@@ -12,12 +12,15 @@ const initialState = {
   advancedSearch: false,
   keywordSearch: false,
   sample: false,
+  displayPicklist: false,
   //Adding Specimen
-  addFreezerId: null,
-  addCaneId: null,
-  addBoxId: null,
+  freezerId: null,
+  caneId: null,
+  boxId: null,
+  box_position: [],
   //PickList
-  picklist: []
+  picklist: [],
+  adv_search_display_state: false
 };
 
 //Adding Specimen
@@ -30,14 +33,19 @@ const UPDATE_DISPLAY_CANE = "UPDATE_DISPLAY_CANE";
 const UPDATE_DISPLAY_BOXES = "UPDATE_DISPLAY_BOXES";
 const UPDATE_DISPLAY_BOX = "UPDATE_DISPLAY_BOX";
 const UPDATE_DISPLAY_SAMPLE = "UPDATE_DISPLAY_SAMPLE";
+const UPDATE_DISPLAY_PICKLIST = "UPDATE_DISPLAY_PICKLIST"
 //
 const UPDATE_FREEZER_ID = "UPDATE_FREEZER_ID";
 const UPDATE_CANE_ID = "UPDATE_CANE_ID";
 const UPDATE_BOX_ID = "UPDATE_BOX_ID";
 const UPDATE_SAMPLE_ID = "UPDATE_SAMPLE_ID";
 const ADVANCED_SEARCH = "ADVANCED_SEARCH";
+const ADV_SEARCH_DISPLAY = `ADV_SEARCH_DISPLAY`
 const KEYWORD_SEARCH = "KEYWORD_SEARCH";
 const PICKLIST = "PICKLIST";
+// add box location
+const UPDATE_BOX_POSITION = 'UPDATE_BOX_POSITION'
+
 
 export function addFreezerId(id) {
   return {
@@ -57,6 +65,12 @@ export function addBoxId(id) {
     payload: id
   };
 }
+export function updateDisplayPicklist(boolean) {
+  return {
+    type: UPDATE_DISPLAY_PICKLIST,
+    payload: boolean
+  };
+} 
 export function updateDisplayFreezer(boolean) {
   return {
     type: UPDATE_DISPLAY_FREEZER,
@@ -131,17 +145,32 @@ export function submit_picklist(array) {
     payload: array
   };
 }
+export function updateBoxPosition(arr) {
+  return {
+    type: UPDATE_BOX_POSITION,
+    payload: arr
+  }
+}
+
+export function adv_search_display(bool){
+  return {
+    type: ADV_SEARCH_DISPLAY,
+    payload: bool
+  }
+}
 
 export default function display(state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
     case ADDFREEZERID:
-      return { ...state, addFreezerId: payload };
+      return { ...state, freezerId: payload };
     case ADDCANEID:
-      return { ...state, addCaneId: payload };
+      return { ...state, caneId: payload };
     case ADDBOXID:
-      return { ...state, addBoxId: payload };
+      return { ...state, boxId: payload };
+    case UPDATE_BOX_POSITION:
+    return {...state,box_position: payload};
     case UPDATE_FREEZER_ID:
       return { ...state, freezer_id: payload };
     case UPDATE_CANE_ID:
@@ -160,12 +189,16 @@ export default function display(state = initialState, action) {
       return { ...state, box: payload };
     case UPDATE_DISPLAY_SAMPLE:
       return { ...state, sample: payload };
+    case UPDATE_DISPLAY_PICKLIST:
+      return {...state,displayPicklist: payload}
     case ADVANCED_SEARCH:
       return { ...state, advancedSearch: payload };
     case KEYWORD_SEARCH:
       return { ...state, keywordSearch: payload };
     case PICKLIST:
       return { ...state, picklist: payload };
+    case ADV_SEARCH_DISPLAY:
+      return {...state, adv_search_display_state: payload}
     default:
       return state;
   }
