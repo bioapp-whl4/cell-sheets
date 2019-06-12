@@ -19,7 +19,8 @@ const initialState = {
   boxId: null,
   box_position: [],
   //PickList
-  picklist: []
+  picklist: [],
+  adv_search_display_state: false
 };
 
 //Adding Specimen
@@ -39,6 +40,7 @@ const UPDATE_CANE_ID = "UPDATE_CANE_ID";
 const UPDATE_BOX_ID = "UPDATE_BOX_ID";
 const UPDATE_SAMPLE_ID = "UPDATE_SAMPLE_ID";
 const ADVANCED_SEARCH = "ADVANCED_SEARCH";
+const ADV_SEARCH_DISPLAY = `ADV_SEARCH_DISPLAY`
 const KEYWORD_SEARCH = "KEYWORD_SEARCH";
 const PICKLIST = "PICKLIST";
 // add box location
@@ -150,6 +152,13 @@ export function updateBoxPosition(arr) {
   }
 }
 
+export function adv_search_display(bool){
+  return {
+    type: ADV_SEARCH_DISPLAY,
+    payload: bool
+  }
+}
+
 export default function display(state = initialState, action) {
   const { type, payload } = action;
 
@@ -188,6 +197,8 @@ export default function display(state = initialState, action) {
       return { ...state, keywordSearch: payload };
     case PICKLIST:
       return { ...state, picklist: payload };
+    case ADV_SEARCH_DISPLAY:
+      return {...state, adv_search_display_state: payload}
     default:
       return state;
   }

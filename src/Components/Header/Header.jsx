@@ -10,7 +10,8 @@ import {
   updateDisplayCane,
   updateDisplayBoxes,
   updateDisplayBox,
-  updateDisplayPicklist
+  updateDisplayPicklist,
+  adv_search_display
 } from "../../redux/display.reducer";
 
 class Header extends Component {
@@ -23,6 +24,7 @@ class Header extends Component {
   }
 
   toggle_adv = () => {
+    this.props.adv_search_display(this.state.adv_search_icon)
     this.setState({
       adv_search_icon: !this.state.adv_search_icon
     })
@@ -103,7 +105,6 @@ class Header extends Component {
     const minus = <i class="fas fa-minus" onClick={this.advanceSearch}></i>
     const plus =  <i class="fas fa-plus" onClick={this.advanceSearch}></i>
 
-
     return (
       <header className="Header">
         <h2 className="AppName">CELL SHEETS</h2>
@@ -129,9 +130,9 @@ class Header extends Component {
   }
 }
 const mapStateToProps = reduxState => {
-  const { advancedSearch,keywordSearch,displayPicklist } = reduxState.display;
+  const { advancedSearch,keywordSearch,displayPicklist, adv_search_display_state } = reduxState.display;
   const { user_id, samples, authenticated } = reduxState;
-  return { user_id, samples, advancedSearch,authenticated,keywordSearch,displayPicklist};
+  return { adv_search_display_state, user_id, samples, advancedSearch,authenticated,keywordSearch,displayPicklist};
 };
 
 const mapDispatchToProps = {
@@ -142,10 +143,8 @@ const mapDispatchToProps = {
   updateAdvanceSearch,
   updateKeywordSearch,
   updateFilterTerm,
-  updateDisplayPicklist
+  updateDisplayPicklist,
+  adv_search_display
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
