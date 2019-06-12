@@ -52,26 +52,23 @@ class Header extends Component {
   render() {
     return (
       <header className="Header">
-        <h3 className="AppName">CELL SHEETS</h3>
+        <h2 className="AppName">CELL SHEETS</h2>
         <div className="nav-links">
-          <h4 className="logout">LOG OUT</h4>
-          <div className="search">
-            <span>
-              {" "}
-              Search Samples:
-              <input
-                onChange={this.handleInput}
-                type="text"
-                name="filterValue"
-                placeholder="Search"
-              />
+          <div className="logout">
+            <i class="fas fa-user"></i>
+            <div>Log Out</div>
+          </div>
+          <div>
+            <div className="search">
+              <input onChange={this.handleInput} type="text" name="filterValue" placeholder="Search" />
               <button onClick={this.search}>Search</button>
-            </span>
+            </div>
+            <div>
+              <input type="checkbox" onClick={this.navigate} defaultUnChecked/>
+              <label>Advanced Search</label>
+            </div>
           </div>
 
-          <div className="advance" onClick={this.navigate}>
-            Advanced Search
-          </div>
         </div>
       </header>
     );

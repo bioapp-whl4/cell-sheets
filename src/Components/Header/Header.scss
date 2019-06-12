@@ -3,22 +3,28 @@
   justify-content: space-between;
   background-color: blue;
   height: 9em;
-  width: 100vw;
+  width: 100%;
   opacity: 0.6;
+}
+
+.AppName, .nav-links {
+  margin: 2vw;
+  align-content: center;
 }
 
 .AppName {
   color: white;
-  position: relative;
-  top: 0.5em;
-  left: 1em;
   font-size: 35px;
+  align-content: center;
 }
 .logout {
   color: white;
-  position: relative;
   top: 2%;
   left: 90%;
+  display: flex;
+  justify-content: right;
+  div{
+  }
 }
 .search {
   display: flex;
@@ -31,5 +37,8 @@
 }
 
 .nav-links {
-  justify-items: left;
+  display: flex;
+  justify-content: space-between;
+  width: fit-content;
+  flex-direction: column;
 }
