@@ -5,7 +5,8 @@ import { updateDisplayBoxes, updateDisplayBox } from '../redux/display.reducer'
 import { connect } from 'react-redux';
 
 export function ContextProvider (props) {
-   
+        
+    
         if (props.box_id) {
             props.updateDisplayBox(true)
           props.updateDisplayBoxes(false)

@@ -125,6 +125,7 @@ class AddLocation extends Component {
 
 
     }
+
     handleBox = async (e) => {
         await this.setState({ [e.target.name]: e.target.value,box: '' })
         if (+this.state.freezerbox_id < 0) {

@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import AddLocation from '../AddLocation/AddLocation'
+import AddSamples from '../AddBoxLocation/AddSamples'
 import {addFreezerId,addCaneId,addBoxId} from '../../redux/display.reducer'
 import {connect} from 'react-redux'
 class AddSpecimen extends Component {
@@ -49,12 +50,7 @@ class AddSpecimen extends Component {
         this.setState({[title]: '',[body]:'',[field]: false})
 
     }
-    addBoxLocation = (column,row) => {
-        let box_location = []
-        box_location.push(column,row)
-        this.setState({box_position:box_location})
-
-    }
+  
     addNewField = (field) => {
         if(!this.state[field]) {
             this.setState({[field]:true})
@@ -69,8 +65,7 @@ class AddSpecimen extends Component {
         .catch(err=>console.log('err getting freezer mediums',err))
     }
     render () {
-        console.log('freezermedium', this.state.freezing_medium_id)
-        console.log('aaaaaddddd',this.props.boxId)
+        console.log('box_position', this.state.box_position)
         let freezingOptions = this.state.freezingMediums.map((elem,i)=>{
             return <option value={elem.id} key={i}>{elem.name}</option>
         })
@@ -116,11 +111,7 @@ class AddSpecimen extends Component {
                 </button>
                 {this.state.field3 &&  <div><h3>Add Third Field</h3><input name='add3'onChange={this.handleChange}/></div>}
                 <AddLocation/>
-                <h3>Add Box Location</h3>
-                <h6>Add Column</h6>
-                <input placeholder='Column' onChange={this.handleChange}/>
-                <h6>Add Row</h6>
-                <input placeholder='Row' onChange={this.handleChange}/>
+                {this.props.boxId && <div><AddSamples x={9} y={9} handleInput={this.handleChange} box_position={this.state.box_position} box_id={this.props.boxId}/></div>}
                 <button className='addSpecimen' onClick={this.createSample}>Add Sample</button>
                 <button className='Cancel' onClick={this.backToDash}>Cancel</button>
             </div>

@@ -21,8 +21,10 @@ export default class GridContainer extends Component {
   }
 
   async componentDidMount(){
+    
     const {box_id} = this.props
     const response = await axios.get(`/api/boxgrid/samples?id=${box_id}`)
+    
     try{
       const {data} = response
       this.setState({
@@ -36,6 +38,7 @@ export default class GridContainer extends Component {
   componentDidUpdate(prevProps) {
     if(prevProps.box_id !== this.props.box_id) {
       this.getData()
+      
     }
   }
   
@@ -123,6 +126,7 @@ getData = async () => {
   }
   
   render(){
+    
     return (
       <>
         <Grid move={this.moveItem} get={this.getIndex} showData={this.showData} hideData={this.hideData} specimens={this.state.specimens} x={9} y={9}/>

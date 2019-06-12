@@ -14,9 +14,9 @@ const initialState = {
   sample: false,
   displayPicklist: false,
   //Adding Specimen
-  addFreezerId: null,
-  addCaneId: null,
-  addBoxId: null,
+  freezerId: null,
+  caneId: null,
+  boxId: null,
   //PickList
   picklist: []
 };
@@ -146,11 +146,11 @@ export default function display(state = initialState, action) {
 
   switch (type) {
     case ADDFREEZERID:
-      return { ...state, addFreezerId: payload };
+      return { ...state, freezerId: payload };
     case ADDCANEID:
-      return { ...state, addCaneId: payload };
+      return { ...state, caneId: payload };
     case ADDBOXID:
-      return { ...state, addBoxId: payload };
+      return { ...state, boxId: payload };
     case UPDATE_FREEZER_ID:
       return { ...state, freezer_id: payload };
     case UPDATE_CANE_ID:
