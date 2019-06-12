@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { updateFilterTerm } from "../../redux/auth.reducer";
 import {
@@ -8,7 +7,8 @@ import {
   updateKeywordSearch,
   updateDisplayCane,
   updateDisplayBoxes,
-  updateDisplayBox
+  updateDisplayBox,
+  updateDisplayPicklist
 } from "../../redux/display.reducer";
 
 class Header extends Component {
@@ -36,10 +36,49 @@ class Header extends Component {
       this.props.updateKeywordSearch(false);
     }
   };
+  advanceSearch = () => {
+    if (!this.props.advancedSearch) {
+      this.props.updateDisplayFreezer(false);
+      this.props.updateDisplayCane(false);
+      this.props.updateDisplayBoxes(false);
+      this.props.updateDisplayBox(false);
+      this.props.updateAdvanceSearch(true);
+      this.props.updateKeywordSearch(false);
+    } else {
+      this.props.updateAdvanceSearch(false);
+      this.props.updateDisplayFreezer(true);
+      this.props.updateDisplayCane(false);
+      this.props.updateDisplayBoxes(false);
+      this.props.updateDisplayBox(false);
+      this.props.updateAdvanceSearch(false);
+      this.props.updateKeywordSearch(false);
+    }
+  };
+  pickList = () => {
+    if (!this.props.displayPicklist) {
+      this.props.updateDisplayPicklist(true)
+      this.props.updateDisplayFreezer(false);
+      this.props.updateDisplayCane(false);
+      this.props.updateDisplayBoxes(false);
+      this.props.updateDisplayBox(false);
+      this.props.updateAdvanceSearch(false);
+      this.props.updateKeywordSearch(false);
+    } else {
+      this.props.updateDisplayPicklist(false)
+      this.props.updateAdvanceSearch(false);
+      this.props.updateDisplayFreezer(true);
+      this.props.updateDisplayCane(false);
+      this.props.updateDisplayBoxes(false);
+      this.props.updateDisplayBox(false);
+      this.props.updateAdvanceSearch(false);
+      this.props.updateKeywordSearch(false);
+    }
+  };
   handleInput = e => {
     this.setState({
       filterTerm: e.target.value
     });
+
     this.props.updateKeywordSearch(true);
     this.props.updateDisplayFreezer(false);
   };
@@ -54,13 +93,18 @@ class Header extends Component {
       <header className="Header">
         <h2 className="AppName">CELL SHEETS</h2>
         <div className="nav-links">
-          <div className="logout">
-            <i class="fas fa-user"></i>
-            <div>Log Out</div>
-          </div>
-          <div>
-            <div className="search">
-              <input onChange={this.handleInput} type="text" name="filterValue" placeholder="Search" />
+          <h4 className="logout">LOG OUT</h4>
+          <i  onClick={this.pickList} className="fas fa-clipboard-list picklist"></i>
+          <div className="search">
+            <span>
+              {" "}
+              <i className="fas fa-search glass"></i>
+              <input
+                onChange={this.handleInput}
+                type="text"
+                name="filterValue"
+                placeholder="Search"
+              />
               <button onClick={this.search}>Search</button>
             </div>
             <div>
@@ -69,15 +113,18 @@ class Header extends Component {
             </div>
           </div>
 
+          <div className="advance" onClick={this.advanceSearch}>
+            Advanced Search
+          </div>
         </div>
       </header>
     );
   }
 }
 const mapStateToProps = reduxState => {
-  const { keywordSearch } = reduxState.display;
+  const { advancedSearch,keywordSearch,displayPicklist } = reduxState.display;
   const { user_id, samples, authenticated } = reduxState;
-  return { user_id, samples, authenticated, keywordSearch };
+  return { user_id, samples, advancedSearch,authenticated,keywordSearch,displayPicklist};
 };
 
 const mapDispatchToProps = {
@@ -87,7 +134,8 @@ const mapDispatchToProps = {
   updateDisplayBox,
   updateAdvanceSearch,
   updateKeywordSearch,
-  updateFilterTerm
+  updateFilterTerm,
+  updateDisplayPicklist
 };
 
 export default connect(

@@ -5,7 +5,7 @@ import {submit_picklist} from '../redux/display.reducer'
 import axios from 'axios'
 
 
-class Picklist_Icon extends Component{
+class Picklist extends Component{
 
     navigate = () => {
         this.props.history.goBack()
@@ -60,5 +60,5 @@ const mapStateToProps = (reduxState) => {
 const mapDispatchToProps = {
     submit_picklist
 }
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Picklist_Icon))
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Picklist))
 

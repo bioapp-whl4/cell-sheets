@@ -23,46 +23,54 @@ class DisplaySample extends Component {
   render() {
     const { sample } = this.state;
     let allSamples = sample.map((elem, i) => (
-      // <div
-
-      // >
-      <tr
-        className="samples-list"
-        onClick={() => this.updateDisplay(elem.sample_id)}
-        // onClick={() =>
-        //   this.displayBox(sample.freezer_id, sample.cane_id, sample.box_id)
-        // }
-        key={i}
-        // onMouseOver={{}}
-        // style={{ cursor: "pointer" }}
-      >
-        {/* <td>{elem.sample_id}</td> */}
-        <td>{elem.user_key}</td>
-        <td>{elem.sample_name}</td>
-        <td>{elem.freezer_id}</td>
-        <td>{elem.box_id}</td>
-        <td>{elem.description}</td>
-        <td>{elem.freeze_date}</td>
-        <td>{elem.cell_vial}</td>
-        <td>{elem.culture_condition}</td>
-      </tr>
-      // </div>
+      <div>
+        <tr>
+          <tr>
+            <td>User Key:</td>
+            <td>{elem.user_key}</td>
+          </tr>
+          <tr>
+            <td>Sample Name:</td>
+            <td>{elem.sample_name}</td>
+          </tr>
+          <tr>
+            <td>Cane ID:</td>
+            <td>{elem.cane_id}</td>
+          </tr>
+          <tr>
+            <td>Freezer ID:</td>
+            <td>{elem.freezer_id}</td>
+          </tr>
+          <tr>
+            <td>Box ID:</td>
+            <td>{elem.box_id}</td>
+          </tr>
+          <tr>
+            <td>Description:</td>
+            <td>{elem.description}</td>
+          </tr>
+          <tr>
+            <td>Freeze Date:</td>
+            <td>{elem.freeze_date}</td>
+          </tr>
+          <tr>
+            <td>Cell/Vial:</td>
+            <td>{elem.cell_vial}</td>
+          </tr>
+          <tr>
+            <td>Culture Condition:</td>
+            <td>{elem.culture_condition}</td>
+          </tr>
+        </tr>
+      </div>
     ));
     return (
       <div>
         {" "}
         <table>
           <tbody className="tg">
-            <tr>
-              <th>User Key</th>
-              <th>Name</th>
-              <th>Freezer ID</th>
-              <th>Box ID</th>
-              <th>Description</th>
-              <th>Freeze Date</th>
-              <th>Cell Vial</th>
-              <th>Culture Condition</th>
-            </tr>
+            <tr />
+
             {allSamples}
           </tbody>
         </table>
