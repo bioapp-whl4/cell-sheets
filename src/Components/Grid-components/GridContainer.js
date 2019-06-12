@@ -128,7 +128,7 @@ getData = async () => {
         <Grid move={this.moveItem} get={this.getIndex} showData={this.showData} hideData={this.hideData} specimens={this.state.specimens} x={9} y={9}/>
         <SampleList specimens={this.state.specimens}/>
         <button onClick={this.addSample}>Add a sample</button>
-        {this.state.addSample && <AddSamples specimens={this.state.specimens} x={9} y={9} box_id={this.props.box_id} updateSamples={this.updateSamples}/>}
+        {this.state.addSample && <AddSamples specimens={this.state.specimens} x={9} y={9} box_id={this.props.box_id} cane_id={this.props.cane_id} freezer_id={this.props.freezer_id} updateSamples={this.updateSamples}/>}
       </>
     );
   }
