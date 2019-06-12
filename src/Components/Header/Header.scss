@@ -6,57 +6,10 @@
   width: 100%;
   opacity: 0.6;
 }
-<<<<<<< HEAD
 
 .AppName, .nav-links {
   margin: 2vw;
   align-content: center;
-||||||| 632dcf8... header styling complete
-.advance {
-  color: white;
-  position: relative;
-  left: 20%;
-}
-
-.picklist-div{
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  i{
-    padding-right: .5vw;
-  }
-}
-
-.picklist-div:hover {
-  cursor: pointer;
-}
-
-.picklist-icon{
-  color: white;
-}
-
-.picklist {
-  color: white;
-  font-size: 30px;
-}
-.picklist:hover {
-  color: grey;
-  cursor: pointer;
-=======
-.advance {
-  color: white;
-  position: relative;
-  left: 20%;
-}
-.picklist {
-  position: absolute;
-  right: 20%;
-  color: white;
-  font-size: 50px;
-}
-.picklist:hover {
-  color: grey;
->>>>>>> parent of 632dcf8... header styling complete
 }
 .glass {
   position: absolute;
