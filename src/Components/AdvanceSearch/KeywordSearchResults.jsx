@@ -4,7 +4,9 @@ import axios from "axios";
 import { updateSamples, updateFilterTerm } from "../../redux/auth.reducer";
 import {
   updateAdvanceSearch,
-  updateKeywordSearch
+  updateKeywordSearch,
+  updateDisplaySample,
+  updateSampleId
 } from "../../redux/display.reducer";
 
 class KeywordSearchResults extends Component {
@@ -12,10 +14,11 @@ class KeywordSearchResults extends Component {
     super();
     this.state = {
       samples: [],
-      filterTerm: ""
+      filterTerm: "",
+      sample_id: null
     };
   }
-  async componentDidUpdate(previousState, previousProps) {
+  async componentDidUpdate() {
     await this.getSamples();
     // if (previousProps.filterTerm !== props.filterTerm) {
     //   console.log("component did update");
@@ -30,12 +33,10 @@ class KeywordSearchResults extends Component {
     this.setState({ samples: res.data });
     this.props.updateSamples(res.data);
   };
-  displayBox = (freezer_id, cane_id, box_id) => {
-    this.props.updateFreezerId(freezer_id);
-    this.props.updateCaneId(cane_id);
-    this.props.updateBoxId(box_id);
-    this.props.updateAdvanceSearch(false);
-    this.props.updateDisplayBox(true);
+  updateDisplay = sample_id => {
+    this.props.updateSampleId(sample_id);
+    this.props.updateKeywordSearch(false);
+    this.props.updateDisplaySample(true);
   };
   //
   render() {
@@ -55,24 +56,46 @@ class KeywordSearchResults extends Component {
       samples = this.state.samples;
     }
     let allSamples = samples.map((elem, i) => (
-      // <Link to={`/api/test/${elem.sample_id}`}>
-      <div key={i}>
-        <h4>Sample{elem.sample_name}</h4>
-        <h4>Experiment id{elem.experiment_id}</h4>
-        <h4>Sample id{elem.sample_id}</h4>
-      </div>
-      // </Link>
+      // <div
+
+      // >
+      <tr
+        className="samples-list"
+        onClick={() => this.updateDisplay(elem.sample_id)}
+        key={i}
+        // onMouseOver={{}}
+        // style={{ cursor: "pointer" }}
+      >
+        {/* <td>{elem.sample_id}</td> */}
+        <td>{elem.user_key}</td>
+        <td>{elem.sample_name}</td>
+        <td>{elem.freezer_id}</td>
+        <td>{elem.box_id}</td>
+        <td>{elem.description}</td>
+        <td>{elem.freeze_date}</td>
+        <td>{elem.cell_vial}</td>
+        <td>{elem.culture_condition}</td>
+      </tr>
+      // </div>
     ));
     return (
       <div>
         {" "}
-        <div className="fas fa-search search">
-          <div className="lists-sample-header" />
-        </div>
-        <ul className="list_samples">
-          <h4>Samples</h4>
-          {allSamples}
-        </ul>
+        <table>
+          <tbody className="tg">
+            <tr>
+              <th>User Key</th>
+              <th>Name</th>
+              <th>Freezer ID</th>
+              <th>Box ID</th>
+              <th>Description</th>
+              <th>Freeze Date</th>
+              <th>Cell Vial</th>
+              <th>Culture Condition</th>
+            </tr>
+            {allSamples}
+          </tbody>
+        </table>
       </div>
     );
   }
@@ -81,7 +104,10 @@ class KeywordSearchResults extends Component {
 const mapDispatchToProps = {
   updateAdvanceSearch,
   updateSamples,
-  updateFilterTerm
+  updateSampleId,
+  updateFilterTerm,
+  updateDisplaySample,
+  updateKeywordSearch
 };
 
 function mapStateToProps(state) {

@@ -37,8 +37,6 @@ app.post("/auth/login", controller.login);
 app.post("/auth/register", controller.register);
 // app.get('/auth/logout',controller.logout)
 // app.get('/auth/session',controller.session)
-//SAMPLE-CONTROLLER
-app.get("/api/samples", sampleCtrl.getSamples);
 
 //FREEZER-CONTROLLER
 app.get("/api/freezers", freezerCtrl.getFreezers);
@@ -54,7 +52,10 @@ app.get("/api/boxgrid/samples", freezerCtrl.getGridSamplesByBoxId);
 app.get("/api/box", freezerCtrl.getBox);
 app.post("/api/box", addPartsCtrl.addBox);
 //SAMPLE
+app.get("/api/samples", sampleCtrl.getSamples);
+app.get("/api/sample", sampleCtrl.getSample);
 app.post("/api/sample", freezerCtrl.addSample);
+app.put("/api/sample", freezerCtrl.addSample);
 //CANE
 app.get("/api/cane", freezerCtrl.getCane);
 app.post("/api/cane", addPartsCtrl.addCane);

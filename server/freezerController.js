@@ -134,6 +134,63 @@ module.exports = {
       res.sendStatus(500);
     }
   },
+  updateDetails: async (req, res) => {
+    const db = req.app.get("db");
+    const sample_id = req.query.id;
+    const {
+      user_id,
+      user_key,
+      name,
+      description,
+      cell_vial,
+      freezer_id,
+      experiment_name, //generate experiment_id
+      location_id,
+      cane_id,
+      box_id,
+      box_position, //location
+      culture_condition,
+      freezing_medium_id,
+      expanded_note,
+      add1,
+      add2,
+      add3,
+      add4,
+      add5
+    } = req.body;
+    try {
+      await db.updateSample({
+        sample_id,
+        user_id,
+        user_key,
+        name,
+        description,
+        cell_vial,
+        freezer_id,
+        experiment_name, //generate experiment_id
+        location_id,
+        cane_id,
+        box_id,
+        box_position,
+        culture_condition,
+        freezing_medium_id,
+        expanded_note,
+        add1,
+        add2,
+        add3,
+        add4,
+        add5
+      });
+      // session.user = {
+      //   first_name: name,
+      //   user_id: id
+      // };
+      res.status(200).send();
+    } catch (err) {
+      // console.log("error", err);
+      res.sendStatus(500);
+    }
+  },
   getSamples: (req, res) => {
     const db = req.app.get("db");
     db.getSamples().then(data => {
