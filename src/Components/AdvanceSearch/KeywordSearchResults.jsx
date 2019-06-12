@@ -56,15 +56,10 @@ class KeywordSearchResults extends Component {
       samples = this.state.samples;
     }
     let allSamples = samples.map((elem, i) => (
-      // <div
-
-      // >
       <tr
         className="samples-list"
         onClick={() => this.updateDisplay(elem.sample_id)}
         key={i}
-        // onMouseOver={{}}
-        // style={{ cursor: "pointer" }}
       >
         {/* <td>{elem.sample_id}</td> */}
         <td>{elem.user_key}</td>
