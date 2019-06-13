@@ -190,7 +190,7 @@ class AddLocation extends Component {
             <div>
                 <h4>Location:</h4>
                 <h4>Freezers</h4>
-                <Popup trigger={<button className='SubmitNew'>Add New Freezer</button>} modal>
+                <Popup trigger={<button className='NewLocations'>Add New Freezer</button>} modal>
                     {close => (
                         <div className="modal">
                             <button onClick={close} className="close">&times;</button>
@@ -223,7 +223,7 @@ class AddLocation extends Component {
                 </Popup>
                 <select name='freezer_id' onChange={this.handleFreezer}><option value='-1'>Choose a Freezer</option>{freezers}</select>
                 <h4>Freezer Cane</h4>
-                {this.state.freezer_id && <Popup trigger={<button>Add New Freezer Cane</button>} modal>
+                {this.state.freezer_id && <Popup trigger={<button className='NewLocations' >Add New Cane</button>} modal>
                     {close => (
                         <div className="modal">
                             <button onClick={close} className="close">&times;</button>
@@ -243,7 +243,7 @@ class AddLocation extends Component {
 
                 <select name='freezercane_id' onChange={this.handleCane}><option value='-1'>Choose a Freezercane</option>{freezerCanes}</select>
                 <h4>Freezer Boxes</h4>
-                {this.state.freezercane_id && <Popup trigger={<button>Add New Freezer Box</button>} modal>
+                {this.state.freezercane_id && <Popup trigger={<button className='NewLocations'>Add New Box</button>} modal>
                     {close => (
                         <div className="modal">
                             <button onClick={close} className="close">&times;</button>

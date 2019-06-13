@@ -49,3 +49,11 @@
     background:    linear-gradient(#e71010, #920404 50%, #e71010);
 
    }
+
+   .NewLocations {
+       width:182px;
+       @extend %button-base;
+   }
+   .NewLocations:hover {
+       @extend %add-base;
+   }

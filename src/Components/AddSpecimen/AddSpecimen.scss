@@ -35,7 +35,7 @@
 }
 .Add:hover {
     font-size: 13px;
-    background:    linear-gradient(#0c8c04, #240303 50%, #0c8c04);
+    background:    linear-gradient(#0c8cb7, #eeeeee);
 
 }
 
@@ -66,6 +66,7 @@
 }
 .FieldButton:hover {
     font-size: 11px;
+    @extend %add-base;
     padding-bottom: 30px;
   
 }
