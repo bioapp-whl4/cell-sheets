@@ -28,7 +28,6 @@ class DisplayFreezers extends Component {
       tempArr[1].temperature = response.data.temperature
       this.setState({freezer1Temp: response.data.temperature, freezers: tempArr})
     
-      console.log('temp',this.state.freezer1Temp)
     }
 
   
@@ -38,7 +37,6 @@ class DisplayFreezers extends Component {
       let tempArr = this.state.freezers
       tempArr[1].temperature = response.data.temperature
       this.setState({freezer1Temp: response.data.temperature, freezers: tempArr})
-      console.log('temp2',this.state.freezer1Temp)
     }, 10000)
     }
   

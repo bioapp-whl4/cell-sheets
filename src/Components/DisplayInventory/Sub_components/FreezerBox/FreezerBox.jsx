@@ -39,8 +39,6 @@ class FreezerBox extends Component {
             </div>
            
         })
-      
-        console.log(this.state.freezerBoxes)
         return(
             <div>   
             <h3>Freezer Cane: {this.props.cane_id}</h3>

@@ -1,4 +1,3 @@
-console.log("this is my reducer");
 const initialState = {
   user_id: null,
   username: "",

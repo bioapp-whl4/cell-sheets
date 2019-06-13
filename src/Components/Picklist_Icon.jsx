@@ -13,7 +13,7 @@ class Picklist_Icon extends Component{
 
     render(){
         return(
-            <div className='picklist-icon' onClick={this.navigate}>
+            <div className='picklist-icon'>
                 {this.props.picklist.length} sample(s)
             </div>
         )

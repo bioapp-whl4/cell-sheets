@@ -36,7 +36,6 @@ class Register extends Component {
         confirm_password: ""
       });
     } else {
-      console.log("mystate", this.state);
       const { firstname, lastname, email, password } = this.state;
       const res = await axios.post("/auth/register", {
         firstname,
@@ -51,10 +50,8 @@ class Register extends Component {
         password: "",
         confirm_password: ""
       });
-      console.log("my user_id", res.data.user_id);
       this.props.updateFirstname(firstname);
       this.props.updateUserId(res.data.user_id);
-      console.log("Submitted Successfully");
     }
   };
 
