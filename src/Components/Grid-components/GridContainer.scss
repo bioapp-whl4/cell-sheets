@@ -1,0 +1,7 @@
+.AddSample {
+  @extend %button-base;
+}
+
+.AddSample:hover {
+  background: linear-gradient(#0c8cb7, #eeeeee);
+}
