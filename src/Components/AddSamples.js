@@ -62,7 +62,7 @@ export default class AddSamples extends Component{
         e.preventDefault()
         
         //test data
-        const user_key = 'Test'
+        const user_key = 'HSCtestKey'
         const location_id = 1
         //const user_id = 1
         //const experiment_name = 'test experiment'
