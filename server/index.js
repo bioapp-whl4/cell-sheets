@@ -69,7 +69,7 @@ app.post('/api/warning',(req,res) => {
   const {freezer_id} = req.body
   client.messages
   .create({ 
-  body: `Freezer ${freezer_id} is about 16C`,
+  body: `Cell Sheets Alert: Freezer ${freezer_id} temperature is above 16C`,
   from: '18058745931',
   to: '8053456125'
   }).then(message => console.log(message.sid))

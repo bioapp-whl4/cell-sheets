@@ -27,7 +27,9 @@ class Dashboard extends Component {
         setInterval(async() => {
             let response = await axios.get('http://192.168.2.142:3333')
             let temp = response.data.temperature
+            let freezer_id = 1
             if(temp > 16 && !this.state.alertFired){
+                axios.post('/api/warning',{freezer_id})
                 swal.fire('Freezer temperature too high!', 'Please relocate samples or adjust freezer temperature.', 'warning')
                 this.setState({
                     alertFired: true
