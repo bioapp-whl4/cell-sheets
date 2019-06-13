@@ -70,6 +70,7 @@ class AddSpecimen extends Component {
         this.props.addFreezerId(null)
         this.props.addCaneId(null)
         this.props.addBoxId(null)
+        this.props.back()
     }
     cancelField = (title, body, field) => {
         this.setState({ [title]: '', [body]: '', [field]: false })
