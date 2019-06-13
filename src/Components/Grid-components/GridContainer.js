@@ -97,7 +97,7 @@ export default class GridContainer extends Component {
     });
   };
 
-  moveItem(x, y, index) {
+  async moveItem (x, y, index) {
     let targetIndex = -1;
     for (let i = 0; i < this.state.specimens.length; i++) {
       if (
