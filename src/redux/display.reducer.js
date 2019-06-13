@@ -20,7 +20,8 @@ const initialState = {
   box_position: [],
   //PickList
   picklist: [],
-  adv_search_display_state: false
+  adv_search_display_state: false,
+  addNew: false
 };
 
 //Adding Specimen
@@ -34,6 +35,7 @@ const UPDATE_DISPLAY_BOXES = "UPDATE_DISPLAY_BOXES";
 const UPDATE_DISPLAY_BOX = "UPDATE_DISPLAY_BOX";
 const UPDATE_DISPLAY_SAMPLE = "UPDATE_DISPLAY_SAMPLE";
 const UPDATE_DISPLAY_PICKLIST = "UPDATE_DISPLAY_PICKLIST"
+const UPDATE_ADDNEW = 'UPDATE_ADDNEW'
 //
 const UPDATE_FREEZER_ID = "UPDATE_FREEZER_ID";
 const UPDATE_CANE_ID = "UPDATE_CANE_ID";
@@ -151,7 +153,12 @@ export function updateBoxPosition(arr) {
     payload: arr
   }
 }
-
+export function updateDisplayAddNew (boolean) {
+  return {
+      type: UPDATE_ADDNEW,
+      payload: boolean
+  }
+}
 export function adv_search_display(bool){
   return {
     type: ADV_SEARCH_DISPLAY,
@@ -163,6 +170,8 @@ export default function display(state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
+    case UPDATE_ADDNEW:
+      return {...state, addNew: payload};
     case ADDFREEZERID:
       return { ...state, freezerId: payload };
     case ADDCANEID:

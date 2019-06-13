@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { updateFilterTerm } from "../../redux/auth.reducer";
 import Picklist_Icon from '../Picklist_Icon'
 import {
+  updateDisplayAddNew,
   updateAdvanceSearch,
   updateDisplayFreezer,
   updateKeywordSearch,
@@ -28,55 +29,44 @@ class Header extends Component {
     this.setState({
       adv_search_icon: !this.state.adv_search_icon
     })
-  }
-
-  navigate = () => {
-    if (!this.props.keywordSearch) {
-      this.props.updateDisplayFreezer(false);
-      this.props.updateDisplayCane(false);
-      this.props.updateDisplayBoxes(false);
-      this.props.updateDisplayBox(false);
-      this.props.updateAdvanceSearch(false);
-      this.props.updateKeywordSearch(true);
-    } else {
-      this.props.updateAdvanceSearch(false);
-      this.props.updateDisplayFreezer(true);
-      this.props.updateDisplayCane(false);
-      this.props.updateDisplayBoxes(false);
-      this.props.updateDisplayBox(false);
-      this.props.updateAdvanceSearch(false);
-      this.props.updateKeywordSearch(false);
-    }
   };
+
   advanceSearch = () => {
     this.toggle_adv()
     if (!this.props.advancedSearch) {
+      this.props.updateDisplayAddNew(false);
       this.props.updateDisplayFreezer(false);
       this.props.updateDisplayCane(false);
       this.props.updateDisplayBoxes(false);
       this.props.updateDisplayBox(false);
       this.props.updateAdvanceSearch(true);
-      this.props.updateKeywordSearch(false);
-    } else {
-      this.props.updateAdvanceSearch(false);
-      this.props.updateDisplayFreezer(true);
-      this.props.updateDisplayCane(false);
-      this.props.updateDisplayBoxes(false);
-      this.props.updateDisplayBox(false);
-      this.props.updateAdvanceSearch(false);
-      this.props.updateKeywordSearch(false);
-    }
+      this.props.updateKeywordSearch(false);}
+    // } else {
+    //   this.props.updateDisplayAddNew(false);
+    //   this.props.updateAdvanceSearch(false);
+    //   this.props.updateDisplayFreezer(true);
+    //   this.props.updateDisplayCane(false);
+    //   this.props.updateDisplayBoxes(false);
+    //   this.props.updateDisplayBox(false);
+    //   this.props.updateAdvanceSearch(false);
+    //   this.props.updateKeywordSearch(false);
+    // }
   };
-  pickList = () => {
-    if (!this.props.displayPicklist) {
-      this.props.updateDisplayPicklist(true)
+
+  addNew = () => {
+   
+    if (!this.props.addNew) {
+      this.props.updateDisplayAddNew(true);
+      this.props.updateDisplayPicklist(false)
       this.props.updateDisplayFreezer(false);
       this.props.updateDisplayCane(false);
       this.props.updateDisplayBoxes(false);
       this.props.updateDisplayBox(false);
       this.props.updateAdvanceSearch(false);
       this.props.updateKeywordSearch(false);
+      
     } else {
+      this.props.updateDisplayAddNew(false);
       this.props.updateDisplayPicklist(false)
       this.props.updateAdvanceSearch(false);
       this.props.updateDisplayFreezer(true);
@@ -87,6 +77,30 @@ class Header extends Component {
       this.props.updateKeywordSearch(false);
     }
   };
+
+  pickList = () => {
+    if (!this.props.displayPicklist) {
+      this.props.updateDisplayAddNew(false);
+      this.props.updateDisplayPicklist(true)
+      this.props.updateDisplayFreezer(false);
+      this.props.updateDisplayCane(false);
+      this.props.updateDisplayBoxes(false);
+      this.props.updateDisplayBox(false);
+      this.props.updateAdvanceSearch(false);
+      this.props.updateKeywordSearch(false);
+    } else {
+      this.props.updateDisplayAddNew(false);
+      this.props.updateDisplayPicklist(false)
+      this.props.updateAdvanceSearch(false);
+      this.props.updateDisplayFreezer(true);
+      this.props.updateDisplayCane(false);
+      this.props.updateDisplayBoxes(false);
+      this.props.updateDisplayBox(false);
+      this.props.updateAdvanceSearch(false);
+      this.props.updateKeywordSearch(false);
+    }
+  };
+
   handleInput = e => {
     this.setState({
       filterTerm: e.target.value
@@ -97,8 +111,15 @@ class Header extends Component {
   };
   search = () => {
     this.props.updateFilterTerm(this.state.filterTerm);
-    this.props.updateKeywordSearch(true);
-    this.props.updateDisplayFreezer(false);
+    if (!this.props.keywordSearch) {
+      this.props.updateDisplayAddNew(false);
+      this.props.updateDisplayFreezer(false);
+      this.props.updateDisplayCane(false);
+      this.props.updateDisplayBoxes(false);
+      this.props.updateDisplayBox(false);
+      this.props.updateAdvanceSearch(false);
+      this.props.updateKeywordSearch(true);
+    } 
   };
 
   render() {
@@ -115,6 +136,7 @@ class Header extends Component {
               Log Out
             </div>
           </div>
+          <i  onClick={this.addNew} class="fas fa-folder-plus topAddSample"></i>
           <div className='picklist-div'>
             <i  onClick={this.pickList} className="fas fa-clipboard-list picklist"></i>
             <Picklist_Icon/>
@@ -130,9 +152,9 @@ class Header extends Component {
   }
 }
 const mapStateToProps = reduxState => {
-  const { advancedSearch,keywordSearch,displayPicklist, adv_search_display_state } = reduxState.display;
+  const { advancedSearch,keywordSearch,displayPicklist, adv_search_display_state,addNew} = reduxState.display;
   const { user_id, samples, authenticated } = reduxState;
-  return { adv_search_display_state, user_id, samples, advancedSearch,authenticated,keywordSearch,displayPicklist};
+  return { adv_search_display_state, user_id, samples, advancedSearch,authenticated,keywordSearch,addNew,displayPicklist};
 };
 
 const mapDispatchToProps = {
@@ -144,7 +166,8 @@ const mapDispatchToProps = {
   updateKeywordSearch,
   updateFilterTerm,
   updateDisplayPicklist,
-  adv_search_display
+  adv_search_display,
+  updateDisplayAddNew
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

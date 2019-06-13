@@ -25,8 +25,6 @@ export default class AddSamples extends Component{
             locations: [],
             availableLocations: [],
             selectedLocations: [],
-            x: null,
-            y: null
         }
         this.componentDidMount = this.componentDidMount.bind(this)
         this.submitForm = this.submitForm.bind(this)
@@ -66,12 +64,10 @@ export default class AddSamples extends Component{
         //test data
         const user_key = 'Test'
         const location_id = 1
-        const cane_id = 1
-        const freezer_id = 1
         //const user_id = 1
         //const experiment_name = 'test experiment'
         //test data
-        const {box_id} = this.props.box_id
+        const {box_id, freezer_id, cane_id} = this.props
         const {name, description, freeze_date, cell_vial, culture_condition, freezing_medium_id, expanded_note, add1, add2, add3, add4, add5} = this.state
         if(this.state.selectedLocations.length === 0) return
         for(let i = 0; i < this.state.selectedLocations.length; i++){

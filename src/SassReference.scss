@@ -1,0 +1,26 @@
+%button-base {
+    
+  
+    background:    linear-gradient(#1413c0, #240303 50%, #1413c0);
+    border-radius: 5px;
+    padding:       8px 37px;
+    color:         #ffffff;
+    display:       inline-block;
+    text-align:    center;
+    text-shadow:   1px 1px #444444;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+
+%addField-base {
+    
+  
+    background:    linear-gradient(#1413c0, #240303 50%, #1413c0);
+    border-radius: 5px;
+    color:         #ffffff;
+    display:       inline-block;
+    text-align:    center;
+    text-shadow:   1px 1px #444444;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
