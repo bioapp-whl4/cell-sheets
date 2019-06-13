@@ -190,7 +190,7 @@ class AddLocation extends Component {
             <div>
                 <h4>Location:</h4>
                 <h4>Freezers</h4>
-                <Popup trigger={<button>Add New Freezer</button>} modal>
+                <Popup trigger={<button className='SubmitNew'>Add New Freezer</button>} modal>
                     {close => (
                         <div className="modal">
                             <button onClick={close} className="close">&times;</button>

@@ -38,7 +38,7 @@
     @extend %button-base;
    }
    .SubmitNew:hover {
-    background:    linear-gradient(#0c8c04, #240303 50%, #0c8c04);
+       @extend %add-base;
    }
 
    .PopUpcancel {
