@@ -7,7 +7,9 @@
   "dependencies": {
     "axios": "^0.19.0",
     "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
     "dotenv": "^8.0.0",
+    "epress": "0.0.1-security",
     "express": "^4.17.1",
     "express-session": "^1.16.1",
     "massive": "^5.10.0",
@@ -29,7 +31,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -46,5 +48,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "cypress": "^3.3.1",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "react-test-renderer": "^16.8.6",
+    "supertest": "^4.0.2"
   }
 }

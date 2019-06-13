@@ -69,6 +69,7 @@ class KeywordSearchResults extends Component {
         {/* <td>{elem.sample_id}</td> */}
         <td>{elem.user_key}</td>
         <td>{elem.sample_name}</td>
+        <td>{elem.cane_id}</td>
         <td>{elem.freezer_id}</td>
         <td>{elem.box_id}</td>
         <td>{elem.description}</td>
@@ -86,6 +87,7 @@ class KeywordSearchResults extends Component {
             <tr>
               <th>User Key</th>
               <th>Name</th>
+              <th>Cane ID</th>
               <th>Freezer ID</th>
               <th>Box ID</th>
               <th>Description</th>
