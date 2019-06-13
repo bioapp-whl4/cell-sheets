@@ -3,7 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import Login from "./Components/login";
 import Register from "./Components/Register";
 import Dashboard from "./Components/Dashboard/Dashboard";
-import AddLocation from "./Components/AddLocation/AddLocation";
+// import AddLocation from "./Components/AddLocation/AddLocation";
 import Filter from "./Components/AdvanceSearch/AdvanceSearch";
 import AddSpecimen from "./Components/Add Specimen/AddSpecimen";
 
@@ -19,7 +19,7 @@ export default (
     <Route path="/dashboard" component={Dashboard} />
     {/* <Route path="/picklist" component={Picklist} /> */}
 
-    <Route path="/addlocation" component={AddLocation} />
+    {/* <Route path="/addlocation" component={AddLocation} /> */}
 
     {/* Test Component */}
     {/* <Route path="/api/test" component={HeaderSearch} /> */}

@@ -188,7 +188,7 @@ class AddLocation extends Component {
         })
         return (
             <div>
-                <h3>Location</h3>
+                <h4>Location:</h4>
                 <h4>Freezers</h4>
                 <Popup trigger={<button>Add New Freezer</button>} modal>
                     {close => (
@@ -257,9 +257,9 @@ class AddLocation extends Component {
                                 </select>
                                 {this.state.custom_size && 
                                 <div>
-                                    <h3>How many Rows</h3>
+                                    <h4>How many Rows</h4>
                                     <input onChange={this.handleChange} type='number'  placeholder='Enter in Rows' name='x' />
-                                    <h3>How many Columns</h3>
+                                    <h4>How many Columns</h4>
                                     <input onChange={this.handleChange} type='number' placeholder='Enter in Columns' name='y' />
                                 </div>}
                                 <button onClick={()=>{this.addNewBox() ; close()}}>Add Box</button>

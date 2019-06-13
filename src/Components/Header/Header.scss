@@ -24,7 +24,13 @@
 .picklist-div:hover {
   cursor: pointer;
 }
-
+.topAddSample {
+  position: absolute;
+  top:5.5%;
+  right: 9%;
+  color: white;
+  font-size: 30px;
+}
 .picklist-icon{
   color: white;
 }

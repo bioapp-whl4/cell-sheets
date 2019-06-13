@@ -98,53 +98,74 @@ class AddSpecimen extends Component {
             return <option value={elem.id} key={i}>{elem.name}</option>
         })
         return (
-            <div>
-                <h3>Sample ID:</h3>
-                <input name='name' placeholder='Enter Sample ID' value={this.state.name} onChange={this.handleChange} />
-                <h3>Sample Description</h3>
+            <div className='NewInventory'>
+            <div className='InputFields'>
+                <div className='SampleId'>
+                <h4 className='title'>Sample ID:</h4>
+                <input className='' name='name' placeholder='Enter Sample ID' value={this.state.name} onChange={this.handleChange} />
+                </div>
+                <div className='SampleDescription'>
+                <h4>Sample Description</h4>
                 <input name='description' placeholder='Enter Sample Description' value={this.state.description} onChange={this.handleChange} />
-                <h3>Experiment ID</h3>
+                </div>
+                <div className='ExperimentId'>
+                <h4>Experiment ID</h4>
                 <input name='experiment_id' placeholder='Enter Experiment ID' value={this.state.experiment_id} onChange={this.handleChange} />
-                <h3>Cell Vial</h3>
+                </div>
+                <div className='CellVial'>
+                <h4>Cell Vial</h4>
                 <input name='cell_vial' placeholder='Enter Cell Count' value={this.state.cell_vial} onChange={this.handleChange} />
-                <h3>Freeze Date</h3>
+                </div>
+                <div className='FreezeDate'>
+                <h4>Freeze Date</h4>
                 <input name='freeze_date' placeholder='Enter Sample Freeze Date' type='date' value={this.state.freeze_date} onChange={this.handleChange} />
-                <h3>Culture Condition</h3>
+                </div>
+                <div className='CultureCondition'>
+                <h4>Culture Condition</h4>
                 <input name='culture_condition' placeholder='Enter Culture Conditions' value={this.state.culture_condition} onChange={this.handleChange} />
-                <h3>Freezing Medium</h3>
+                </div>
+                <div className='FreezingMedium'>
+                <h4>Freezing Medium</h4>
                 <select name='freezing_medium_id' onChange={this.handleChange}><option value=''>Choose Freezer Medium</option>{freezingOptions}</select>
-                <h3>Expanded Notes</h3>
+                </div>
+                <div className='ExpandedNotes'>
+                <h4>Expanded Notes</h4>
                 <input name='expanded_note' value={this.state.expanded_note} onChange={this.handleChange} />
                 {/* Adding Additional Fields */}
-                <button name='field1' value={this.state.field1} >
-                    {!this.state.field1 && <h3 onClick={() => this.addNewField('field1')}>ADD NEW FIELD</h3>}
-                    {this.state.field1 && <h3 onClick={() => this.cancelField('title1', 'body1', 'field1')}>Cancel</h3>}
+                </div>
+                </div>
+                <div className='additionalFields'>
+                <button className='FieldButton'name='field1' value={this.state.field1} >
+                    {!this.state.field1 && <h4 onClick={() => this.addNewField('field1')}>Add New Field</h4>}
+                    {this.state.field1 && <h4 onClick={() => this.cancelField('title1', 'body1', 'field1')}>Cancel</h4>}
                 </button>
-                {this.state.field1 && <div><h3>Add New Field</h3>
+                {this.state.field1 && <div className='NewField'><h4>Add New Field</h4>
           
                     <input name='title1' placeholder='Field Name' value={this.state.title1} onChange={this.handleChange} />
                     <input name='body1' placeholder='Description' value={this.state.body1} onChange={this.handleChange} /></div>}
 
-                <button name='field2' value={this.state.field2} >
-                    {!this.state.field2 && <h3 onClick={() => this.addNewField('field2')}>Add Second Field</h3>}
-                    {this.state.field2 && <h3 onClick={() => this.cancelField('title2', 'body2', 'field2')}>Cancel Second Field</h3>}
+                <button className='FieldButton' name='field2' value={this.state.field2} >
+                    {!this.state.field2 && <h4 onClick={() => this.addNewField('field2')}>Add Second Field</h4>}
+                    {this.state.field2 && <h4 onClick={() => this.cancelField('title2', 'body2', 'field2')}>Cancel Second Field</h4>}
                 </button>
-                {this.state.field2 && <div><h3>Add Second Field</h3>
+                {this.state.field2 && <div className='NewField' ><h4>Add Second Field</h4>
 
                     <input name='title2' placeholder='Field Name' value={this.state.title2} onChange={this.handleChange} />
                     <input name='body2' placeholder='Description' value={this.state.body2} onChange={this.handleChange} /></div>}
 
-                <button name='field3' value={this.state.field3} >
-                    {!this.state.field3 && <h3 onClick={() => this.addNewField('field3')}>Add Third Field</h3>}
-                    {this.state.field3 && <h3 onClick={() => this.cancelField('title3', 'body3', 'field3')}>Cancel Third Field</h3>}
+                <button className='FieldButton' name='field3' value={this.state.field3} >
+                    {!this.state.field3 && <h4 onClick={() => this.addNewField('field3')}>Add Third Field</h4>}
+                    {this.state.field3 && <h4 onClick={() => this.cancelField('title3', 'body3', 'field3')}>Cancel Third Field</h4>}
                 </button>
-                {this.state.field3 && <div><h3>Add Third Field</h3>
+                {this.state.field3 && <div className='NewField' ><h4>Add Third Field</h4>
                     <input name='title3' placeholder='Field Name' value={this.state.title3} onChange={this.handleChange} />
                     <input name='body3' placeholder='Description' value={this.state.body3} onChange={this.handleChange} /></div>}
-                <AddLocation updateBoxPostion={this.updateBoxPostion} />
-                {this.props.boxId && <div><AddSamples x={9} y={9} updateBoxPostion={this.updateBoxPostion} /></div>}
-                <button className='addSpecimen' onClick={this.createSample}>Add Sample</button>
-                <button className='Cancel' onClick={this.backToDash}>Cancel</button>
+                </div>
+                <div className='AddLocation'><AddLocation updateBoxPostion={this.updateBoxPostion} /></div>
+                {this.props.boxId && <div className='addSample'><AddSamples x={9} y={9} updateBoxPostion={this.updateBoxPostion} /></div>}
+                
+                <button className='Add' onClick={this.createSample}>Add Sample</button>
+                <button className='Cancel' onClick={this.props.back}>Cancel</button>
             </div>
         )
     }

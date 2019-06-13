@@ -1,0 +1,77 @@
+.NewInventory {
+    position: absolute;
+    top:2.5%;
+    height: 82vh;
+    width: 65vw;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    overflow: scroll;
+}
+
+.InputFields {
+    margin-left: 5%;
+    display: flex;
+    flex-direction: column;
+}
+.additionalFields {
+    margin-bottom: 5%;
+    position: absolute;
+    left: 24%;
+    height: 50%;
+    width:30%;
+     margin-top: 5%;
+    display: flex;
+    flex-direction: column;
+}
+.Add {
+    height: 5%;
+    width: 12%;
+    position: absolute;
+    top:80%;
+    right: 35%;
+    font-size: 10px;
+    @extend %button-base;
+}
+.Add:hover {
+    font-size: 13px;
+    background:    linear-gradient(#0c8c04, #240303 50%, #0c8c04);
+
+}
+
+.Cancel {
+    height: 5%;
+    width: 12%;
+    font-size: 10px;
+    position: absolute;
+    top:80%;
+    right: 50%;
+    @extend %button-base;
+  }
+  
+.Cancel:hover {
+    font-size: 13px;
+    background:    linear-gradient(#e71010, #920404 50%, #e71010);
+}
+
+.FieldButton {
+    padding-left: 3%;
+    position: relative;
+    font-size: 10px;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    width: 50%;
+    height:10%;
+    @extend %addField-base;
+}
+
+.AddLocation {
+    position: absolute;
+    left:50%;
+   
+}
+.addSample {
+    position: absolute;
+    top:40%;
+    left:50%;
+}
