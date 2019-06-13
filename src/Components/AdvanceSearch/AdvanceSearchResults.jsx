@@ -21,7 +21,7 @@ class AdvanceSearchResults extends Component {
         let results_display = this.props.filterResults.map((sample, i) => {
 
             return (
-                <div onClick={()=>this.displayBox(sample.freezer_id,sample.cane_id,sample.box_id)} key={i}>
+                <div className='AdvanceSearchResults' onClick={()=>this.displayBox(sample.freezer_id,sample.cane_id,sample.box_id)} key={i}>
                     <h6>{sample.sample_name}</h6>
                     <ul>
                         <li>Description: {sample.description}</li>

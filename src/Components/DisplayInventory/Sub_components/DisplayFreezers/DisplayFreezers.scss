@@ -45,25 +45,3 @@
 .icon {
   font-size: 25px;
 }
-.freezersList {
-  margin-top: 1em;
-  padding: 2%;
-  cursor: pointer;
-  text-align: left;
-}
-.freezersList:hover {
-  background-color: rgb(192, 190, 190);
-}
-/* Three image containers (use 25% for four, and 50% for two, etc) */
-.column {
-  float: left;
-  width: 25.33%;
-  padding: 1px;
-}
-
-/* Clear floats after image containers */
-.row::after {
-  content: "";
-  clear: both;
-  display: table;
-}

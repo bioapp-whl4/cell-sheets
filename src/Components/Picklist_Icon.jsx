@@ -7,9 +7,7 @@ import {withRouter} from 'react-router-dom'
 
 class Picklist_Icon extends Component{
 
-    navigate = () => {
-        this.props.history.push('/picklist')
-    }
+    
 
     render(){
         return(
