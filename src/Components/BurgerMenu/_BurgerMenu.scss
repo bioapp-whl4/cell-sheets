@@ -1,10 +1,6 @@
 
-.bm-burger-button{
-    button{
-        height: 0;
-        width: 0;
-        position: relative;
-    }
+.bm-item-list{
+    background: rgba(0, 0, 0, 0.7);
 }
 
 .burger-menu {
@@ -12,18 +8,50 @@
     position: relative;
     width: 0;
     height: 0;
+    color: silver;
 }
 
-.bm-freezer{
-   
-    font-size: .5em;
-    padding: 20px;
+.bm-toggle{
+    color: silver;
+    align-content: center;
+    width: 1.5vw;
+    height: 6vh;
+    background: rgba(0, 0, 0, 0.7);
+    align-items: center;
+    display: flex;
+    padding-left: 1vw;
+}
+.bm-toggle:hover{
+    cursor: pointer;
+    font-weight: bolder;
+}
+
+.bm-freezers{
+    // font-weight: bolder;
+}
+.bm-canes{
+    // font-weight: bolder;
+}
+.bm-boxes{
+
+}
+
+.bm-freezers, .bm-canes, .bm-boxes{
     list-style: none;
-    ul{
-        list-style: none;
+    margin: 0;
+    padding-left: 4vw;
+    div:hover{
+        cursor: pointer;
+        font-weight: bolder;
+        text-decoration: underline;
     }
 }
 
 .bm-overlay{
     display: none;
+}
+
+
+.collapse{
+    padding: 2vw;
 }

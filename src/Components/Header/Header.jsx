@@ -48,6 +48,7 @@ class Header extends Component {
       this.props.updateKeywordSearch(false);
     }
   };
+  
   advanceSearch = () => {
     this.toggle_adv()
     if (!this.props.advancedSearch) {
@@ -67,6 +68,7 @@ class Header extends Component {
       this.props.updateKeywordSearch(false);
     }
   };
+
   pickList = () => {
     if (!this.props.displayPicklist) {
       this.props.updateDisplayPicklist(true)
@@ -87,6 +89,7 @@ class Header extends Component {
       this.props.updateKeywordSearch(false);
     }
   };
+
   handleInput = e => {
     this.setState({
       filterTerm: e.target.value
