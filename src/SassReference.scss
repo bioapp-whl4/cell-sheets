@@ -1,7 +1,7 @@
 %button-base {
     
   
-    background:    linear-gradient(#1413c0, #240303 50%, #1413c0);
+    background:    linear-gradient(#105ea4, #073763);
     border-radius: 5px;
     padding:       8px 37px;
     color:         #ffffff;
@@ -12,10 +12,18 @@
     transition-duration: 0.4s;
 }
 
+%add-base {
+    background:    linear-gradient(#0c8cb7, #eeeeee);
+
+}
+
+%cancel-base {
+    background:    linear-gradient(#e71010, #920404 50%, #e71010);
+
+}
 %addField-base {
-    
   
-    background:    linear-gradient(#1413c0, #240303 50%, #1413c0);
+    background:    linear-gradient(#105ea4, #073763);
     border-radius: 5px;
     color:         #ffffff;
     display:       inline-block;

@@ -6,7 +6,9 @@ const controller = require("./controller");
 const sampleCtrl = require("./sampleController");
 const freezerCtrl = require("./freezerController");
 const addPartsCtrl = require("./partsController");
-const { CONNECTION_STRING, SESSION_SECRET, SERVER_PORT } = process.env;
+const { CONNECTION_STRING, SESSION_SECRET, SERVER_PORT,ACCOUNT_SID,AUTH_TOKEN} = process.env;
+const client = require('twilio')(ACCOUNT_SID,AUTH_TOKEN)
+
 const app = express();
 
 //middleware
@@ -61,3 +63,14 @@ app.get("/api/cane", freezerCtrl.getCane);
 app.post("/api/cane", addPartsCtrl.addCane);
 //PICKLIST
 app.post("/api/picklist", controller.picklist);
+//Freezer warning
+app.post('/api/warning',(req,res) => {
+  const {freezer_id} = req.body
+  client.messages
+  .create({ 
+  body: `Freezer ${freezer_id} is about 16C`,
+  from: '18058745931',
+  to: '8053456125'
+  }).then(message => console.log(message.sid))
+ res.sendStatus(200)
+})
