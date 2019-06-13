@@ -7,13 +7,11 @@ import {withRouter} from 'react-router-dom'
 
 class Picklist_Icon extends Component{
 
-    navigate = () => {
-        this.props.history.push('/picklist')
-    }
+    
 
     render(){
         return(
-            <div className='picklist-icon' onClick={this.navigate}>
+            <div className='picklist-icon'>
                 {this.props.picklist.length} sample(s)
             </div>
         )
