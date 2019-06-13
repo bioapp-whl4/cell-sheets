@@ -33,7 +33,7 @@ class Header extends Component {
 
   advanceSearch = () => {
     this.toggle_adv()
-    if (!this.props.advancedSearch) {
+    if (this.state.adv_search_icon) {
       this.props.updateDisplayAddNew(false);
       this.props.updateDisplayFreezer(false);
       this.props.updateDisplayCane(false);

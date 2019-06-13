@@ -25,7 +25,7 @@ class DisplayFreezers extends Component {
   getFreezerTemperatureInitial = async () => {
       let response = await axios.get('http://192.168.2.142:3333')
       let tempArr = this.state.freezers
-      tempArr[0].temperature = response.data.temperature
+      tempArr[1].temperature = response.data.temperature
       this.setState({freezer1Temp: response.data.temperature, freezers: tempArr})
     
     }
@@ -35,7 +35,7 @@ class DisplayFreezers extends Component {
     setInterval(async () => {
       let response = await axios.get('http://192.168.2.142:3333')
       let tempArr = this.state.freezers
-      tempArr[0].temperature = response.data.temperature
+      tempArr[1].temperature = response.data.temperature
       this.setState({freezer1Temp: response.data.temperature, freezers: tempArr})
     }, 10000)
     }

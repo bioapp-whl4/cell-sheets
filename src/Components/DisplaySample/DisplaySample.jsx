@@ -1,7 +1,15 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
-import { updateSampleId } from "../../redux/display.reducer";
+import {
+  updateDisplaySample,
+  updateKeywordSearch,
+  updateDisplayBox,
+  updateFreezerId,
+  updateCaneId,
+  updateBoxId,
+  updateSampleId
+} from "../../redux/display.reducer";
 
 class DisplaySample extends Component {
   constructor() {
@@ -14,7 +22,19 @@ class DisplaySample extends Component {
   async componentDidMount() {
     await this.getSample();
   }
-
+  displayBox = (freezer_id, cane_id, box_id) => {
+    this.props.updateFreezerId(freezer_id);
+    this.props.updateCaneId(cane_id);
+    this.props.updateBoxId(box_id);
+    this.props.updateKeywordSearch(false);
+    this.props.updateDisplayBox(true);
+    this.updateDisplay();
+  };
+  updateDisplay = sample_id => {
+    this.props.updateSampleId(sample_id);
+    this.props.updateDisplayBox(true);
+    this.props.updateDisplaySample(false);
+  };
   getSample = async () => {
     let res = await axios.get("/api/sample?id=" + this.props.sampleId);
     this.setState({ sample: res.data });
@@ -23,7 +43,12 @@ class DisplaySample extends Component {
   render() {
     const { sample } = this.state;
     let allSamples = sample.map((elem, i) => (
-      <div>
+      <div
+        onClick={() =>
+          this.displayBox(elem.freezer_id, elem.cane_id, elem.box_id)
+        }
+        key={i}
+      >
         <tr>
           <tr>
             <td>Sample ID:</td>
@@ -63,11 +88,18 @@ class DisplaySample extends Component {
             <td>{elem.box_id}</td>
           </tr>
         </tr>
+        {/* <button
+          className="goToBox"
+          onClick={this.displayBox(elem.freezer_id, elem.cane_id, elem.box_id)}
+        >
+          Go to Box
+        </button> */}
       </div>
     ));
     return (
       <div>
         {" "}
+        <div>Click on Table to go to Box</div>
         <table>
           <tbody className="tg">
             <tr />
@@ -87,7 +119,13 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = {
-  updateSampleId
+  updateDisplaySample,
+  updateKeywordSearch,
+  updateSampleId,
+  updateDisplayBox,
+  updateFreezerId,
+  updateCaneId,
+  updateBoxId
 };
 
 export default connect(

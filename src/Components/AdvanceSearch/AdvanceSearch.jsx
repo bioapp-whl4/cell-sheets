@@ -97,6 +97,7 @@ class Filter extends Component {
     render(){
         let results
         if (this.state.search_value){
+            console.log('or else1',results)
             results = this.state.samples.filter(sample => {
                 let search_within = ''
                 search_within += this.state.description && sample.description ? sample.description.toLowerCase() : ''
@@ -106,6 +107,7 @@ class Filter extends Component {
             })
         } else {
             results = this.state.samples
+            console.log('or else2',results)
         }
 
         if (this.state.date){
@@ -131,7 +133,7 @@ class Filter extends Component {
                 })
             }
         }
-        
+        console.log('updating redux',results)
         // store filter results in redux
         this.props.store_filter_results(results)
 
