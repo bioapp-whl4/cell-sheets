@@ -72,21 +72,9 @@ export default class GridContainer extends Component {
       const { data } = response;
       this.setState({
         specimens: data
-<<<<<<< HEAD
-      })
-    }
-    catch(err){
-      alert(err)
-||||||| merged common ancestors
-      })
-    }
-    catch(err){
-      console.log(err)
-=======
       });
     } catch (err) {
       console.log(err);
->>>>>>> 00698e0f7cbac2429ac78aad2b5ce889c8377407
     }
   }
 
