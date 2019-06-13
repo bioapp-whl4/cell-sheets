@@ -42,9 +42,7 @@ class Hierarchy extends Component {
                     )
                 })}
             </ul>
-        )
-        console.log('props everything',this.props.inventory)
-        
+        )        
         return (
            <div>
                <h1>TEST</h1>

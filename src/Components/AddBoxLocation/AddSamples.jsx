@@ -28,7 +28,7 @@ class AddSamples extends Component{
               })
             }
             catch(err){
-              console.log(err)
+              alert(err)
             }
           
             let samples = this.state.specimens.map(sample => (
@@ -69,7 +69,7 @@ class AddSamples extends Component{
           })
         }
         catch(err){
-          console.log(err)
+          alert(err)
         }
       
         let samples = this.state.specimens.map(sample => (

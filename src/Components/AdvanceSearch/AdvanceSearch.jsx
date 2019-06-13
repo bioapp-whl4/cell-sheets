@@ -92,6 +92,7 @@ class Filter extends Component {
     }
 
     render(){
+        console.log(`11111`, this.props.everything, this.state.samples)
         let results
         if (this.state.search_value){
             results = this.state.samples.filter(sample => {
