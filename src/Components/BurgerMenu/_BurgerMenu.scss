@@ -1,6 +1,6 @@
 
 .bm-item-list{
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.5);    
 }
 
 .burger-menu {
@@ -24,6 +24,7 @@
 .bm-toggle:hover{
     cursor: pointer;
     font-weight: bolder;
+    color:white;
 }
 
 .bm-freezers{
@@ -54,4 +55,10 @@
 
 .collapse{
     padding: 2vw;
+}
+.collapse:hover{
+    cursor: pointer;
+    i{
+        color: white;
+    }
 }

@@ -56,7 +56,7 @@ class FreezerNav extends Component {
           key={i}
         >
           <h5>{elem.freezer_name}</h5>
-          <i class="fas fa-temperature-low" />
+          <i className="fas fa-temperature-low" />
           <h6>{elem.temperature}</h6>
           <h6>{elem.freezer_type}</h6>
         </div>
@@ -66,7 +66,7 @@ class FreezerNav extends Component {
       return (
         <button onClick={() => this.getFreezerBox(elem.cane_id)} key={i}>
           <h4>Cane {elem.cane}</h4>
-          <i class="fas fa-layer-group cane" />
+          <i className="fas fa-layer-group cane" />
         </button>
       );
     });
@@ -75,20 +75,19 @@ class FreezerNav extends Component {
         <button onClick={() => this.setState({ box_id: elem.box_id })} key={i}>
           <div>
             <h4>Box: {elem.box_name}</h4>
-            <i class="fas fa-box" />
+            <i className="fas fa-box" />
           </div>
         </button>
       );
     });
 
-    console.log("this state", this.state);
     return (
       <div className="display">
         <div className="contents">
           <h3 className="CellInventory">Cell Inventory</h3>
 
           <h4 onClick={() => this.clearFreezers()}>Freezers</h4>
-          <i class="fas fa-snowflake cold" />
+          <i className="fas fa-snowflake cold" />
           <div className="displayContents">{displayFreezers}</div>
 
     }
@@ -130,7 +129,6 @@ class FreezerNav extends Component {
             </button>
         })
         
-        console.log('this state',this.state)
         return (
             <div className='display'>
                 <div className='contents'>

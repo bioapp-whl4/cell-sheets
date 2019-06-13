@@ -123,28 +123,28 @@ class Header extends Component {
   };
 
   render() {
-    const minus = <i class="fas fa-minus" onClick={this.advanceSearch}></i>
-    const plus =  <i class="fas fa-plus" onClick={this.advanceSearch}></i>
+    const minus = <i className="fas fa-minus" onClick={this.advanceSearch}></i>
+    const plus =  <i className="fas fa-plus" onClick={this.advanceSearch}></i>
 
     return (
       <header className="Header">
         <h2 className="AppName">CELL SHEETS</h2>
         <div className="nav-links">
           <div className="logout">
-          <i class="fas fa-user"></i>
+          <i className="fas fa-user"></i>
             <div>
               Log Out
             </div>
           </div>
-          <i  onClick={this.addNew} class="fas fa-folder-plus topAddSample"></i>
-          <div className='picklist-div'>
-            <i  onClick={this.pickList} className="fas fa-clipboard-list picklist"></i>
+          <i  onClick={this.addNew} className="fas fa-folder-plus topAddSample"></i>
+          <div className='picklist-div' onClick={this.pickList}>
+            <i   className="fas fa-clipboard-list picklist"></i>
             <Picklist_Icon/>
           </div>
           <div className="search">
             <i className="fas fa-search glass" onClick={this.search}></i>
-            <input  onChange={this.handleInput} type="text" name="filterValue" placeholder="Search" />
-            {this.state.adv_search_icon ? plus : minus}
+            <input className='keyword-search-input' onChange={this.handleInput} type="text" name="filterValue" placeholder="Search" />
+            <div className='adv-search-toggle' onClick={this.advanceSearch}>{this.state.adv_search_icon ? plus : minus}</div>
           </div>
         </div>
       </header>

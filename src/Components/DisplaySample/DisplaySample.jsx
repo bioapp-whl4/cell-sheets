@@ -113,7 +113,6 @@ class DisplaySample extends Component {
 }
 
 function mapStateToProps(state) {
-  // console.log(state);
   return {
     sampleId: state.display.sample_id
   };
