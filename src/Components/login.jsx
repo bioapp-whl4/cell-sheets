@@ -38,7 +38,7 @@ class Login extends Component {
         <img
           className="BG"
           alt="labratory"
-          src="http://news.efinancialcareers.com/binaries/content/gallery/efinancial-careers/articles/2018/11/lab.jpg"
+          src="https://cdn.shortpixel.ai/client/q_glossy,ret_img/https://biocomplabs.com/wp-content/uploads/2018/06/biocomp_placeholder.png"
         />
         <div className="loginContents">
           <h1>Cell Sheets</h1>

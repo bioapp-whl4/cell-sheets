@@ -24,7 +24,7 @@ describe("test3", () => {
   });
 });
 describe("test4", () => {
-  it("click enter to submit usernamem password", () => {
+  it("click enter to submit username password", () => {
     const email = "n";
     cy.get(".loginSubmit").click();
   });

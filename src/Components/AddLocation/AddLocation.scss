@@ -1,0 +1,59 @@
+.modal {
+    font-size: 12px;
+   }
+   .PopUpheader {
+    width: 100%;
+    border-bottom: 1px solid ;
+    font-size: 15px;
+    text-align: center;
+    padding: 5px;
+   }
+   .PopUpcontent {
+   
+    width: 100%;
+    padding: 10px 5px;
+    text-align: center;
+   }
+   .PopUpactions {
+    width: 100%;
+    padding: 10px 5px;
+    margin: auto;
+    text-align: center;
+   }
+   .modal > .close {
+    cursor: pointer;
+    position: absolute;
+    display: block;
+    padding: 2px 5px;
+    line-height: 20px;
+    right: -10px;
+    top: -10px;
+    font-size: 24px;
+    background: #ffffff;
+    border-radius: 18px;
+    border: 1px solid #cfcece;
+   }
+   .SubmitNew {
+       
+    @extend %button-base;
+   }
+   .SubmitNew:hover {
+       @extend %add-base;
+   }
+
+   .PopUpcancel {
+    width:15%;
+    @extend %button-base;
+   }
+   .PopUpcancel:hover {
+    background:    linear-gradient(#e71010, #920404 50%, #e71010);
+
+   }
+
+   .NewLocations {
+       width:182px;
+       @extend %button-base;
+   }
+   .NewLocations:hover {
+       @extend %add-base;
+   }

@@ -26,13 +26,15 @@
     "reactjs-popup": "^1.4.1",
     "redux": "^4.0.1",
     "redux-burger-menu": "^0.2.8",
-    "sweetalert2": "^8.11.7"
+    "sweetalert2": "^8.11.7",
+    "twilio": "^3.32.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "jest",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cypress": "cypress open"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -49,11 +51,5 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "cypress": "^3.3.1",
-    "enzyme": "^3.10.0",
-    "enzyme-adapter-react-16": "^1.14.0",
-    "react-test-renderer": "^16.8.6",
-    "supertest": "^4.0.2"
-  }
+  "devDependencies": {}
 }
