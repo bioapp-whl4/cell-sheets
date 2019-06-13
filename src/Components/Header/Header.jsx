@@ -29,28 +29,8 @@ class Header extends Component {
     this.setState({
       adv_search_icon: !this.state.adv_search_icon
     })
-  }
-
-  navigate = () => {
-    if (!this.props.keywordSearch) {
-      this.props.updateDisplayAddNew(false);
-      this.props.updateDisplayFreezer(false);
-      this.props.updateDisplayCane(false);
-      this.props.updateDisplayBoxes(false);
-      this.props.updateDisplayBox(false);
-      this.props.updateAdvanceSearch(false);
-      this.props.updateKeywordSearch(true);
-    } else {
-      this.props.updateDisplayAddNew(false);
-      this.props.updateAdvanceSearch(false);
-      this.props.updateDisplayFreezer(true);
-      this.props.updateDisplayCane(false);
-      this.props.updateDisplayBoxes(false);
-      this.props.updateDisplayBox(false);
-      this.props.updateAdvanceSearch(false);
-      this.props.updateKeywordSearch(false);
-    }
   };
+
   advanceSearch = () => {
     this.toggle_adv()
     if (!this.props.advancedSearch) {
@@ -60,21 +40,21 @@ class Header extends Component {
       this.props.updateDisplayBoxes(false);
       this.props.updateDisplayBox(false);
       this.props.updateAdvanceSearch(true);
-      this.props.updateKeywordSearch(false);
-    } else {
-      this.props.updateDisplayAddNew(false);
-      this.props.updateAdvanceSearch(false);
-      this.props.updateDisplayFreezer(true);
-      this.props.updateDisplayCane(false);
-      this.props.updateDisplayBoxes(false);
-      this.props.updateDisplayBox(false);
-      this.props.updateAdvanceSearch(false);
-      this.props.updateKeywordSearch(false);
-    }
+      this.props.updateKeywordSearch(false);}
+    // } else {
+    //   this.props.updateDisplayAddNew(false);
+    //   this.props.updateAdvanceSearch(false);
+    //   this.props.updateDisplayFreezer(true);
+    //   this.props.updateDisplayCane(false);
+    //   this.props.updateDisplayBoxes(false);
+    //   this.props.updateDisplayBox(false);
+    //   this.props.updateAdvanceSearch(false);
+    //   this.props.updateKeywordSearch(false);
+    // }
   };
 
   addNew = () => {
-    console.log('display',this.props.addNew)
+   
     if (!this.props.addNew) {
       this.props.updateDisplayAddNew(true);
       this.props.updateDisplayPicklist(false)
@@ -84,7 +64,7 @@ class Header extends Component {
       this.props.updateDisplayBox(false);
       this.props.updateAdvanceSearch(false);
       this.props.updateKeywordSearch(false);
-      console.log('display2',this.props.addNew)
+      
     } else {
       this.props.updateDisplayAddNew(false);
       this.props.updateDisplayPicklist(false)
@@ -99,6 +79,7 @@ class Header extends Component {
   };
   pickList = () => {
     if (!this.props.displayPicklist) {
+      this.props.updateDisplayAddNew(false);
       this.props.updateDisplayPicklist(true)
       this.props.updateDisplayFreezer(false);
       this.props.updateDisplayCane(false);
@@ -107,6 +88,7 @@ class Header extends Component {
       this.props.updateAdvanceSearch(false);
       this.props.updateKeywordSearch(false);
     } else {
+      this.props.updateDisplayAddNew(false);
       this.props.updateDisplayPicklist(false)
       this.props.updateAdvanceSearch(false);
       this.props.updateDisplayFreezer(true);
@@ -127,8 +109,15 @@ class Header extends Component {
   };
   search = () => {
     this.props.updateFilterTerm(this.state.filterTerm);
-    this.props.updateKeywordSearch(true);
-    this.props.updateDisplayFreezer(false);
+    if (!this.props.keywordSearch) {
+      this.props.updateDisplayAddNew(false);
+      this.props.updateDisplayFreezer(false);
+      this.props.updateDisplayCane(false);
+      this.props.updateDisplayBoxes(false);
+      this.props.updateDisplayBox(false);
+      this.props.updateAdvanceSearch(false);
+      this.props.updateKeywordSearch(true);
+    } 
   };
 
   render() {
