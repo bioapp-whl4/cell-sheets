@@ -97,7 +97,7 @@ export default class GridContainer extends Component {
     });
   };
 
-  moveItem(x, y, index) {
+  async moveItem(x, y, index) {
     let targetIndex = -1;
     for (let i = 0; i < this.state.specimens.length; i++) {
       if (
@@ -120,16 +120,16 @@ export default class GridContainer extends Component {
     await this.setState({
       specimens: tempArr,
       originIndex: null
-    })
+    });
 
-    for(let i = 0; i < this.state.specimens.length; i++){
-      const box_position = this.state.specimens[i].location
-      const sample_id = this.state.specimens[i].specimen_id
-      await axios.put("/api/boxgrid/samples", {box_position, sample_id})
+    for (let i = 0; i < this.state.specimens.length; i++) {
+      const box_position = this.state.specimens[i].location;
+      const sample_id = this.state.specimens[i].specimen_id;
+      await axios.put("/api/boxgrid/samples", { box_position, sample_id });
     }
   }
-  
-  render(){
+
+  render() {
     return (
       <>
         <Grid
@@ -142,9 +142,7 @@ export default class GridContainer extends Component {
           y={9}
         />
         <SampleList specimens={this.state.specimens} />
-        <button className="AddSample" onClick={this.addSample}>
-          Add a sample
-        </button>
+        <button onClick={this.addSample}>Add a sample</button>
         {this.state.addSample && (
           <AddSamples
             specimens={this.state.specimens}
