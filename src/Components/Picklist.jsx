@@ -7,9 +7,9 @@ import axios from 'axios'
 
 class Picklist extends Component{
 
-    navigate = () => {
-        this.props.history.goBack()
-    }
+    // navigate = () => {
+    //     this.props.history.goBack()
+    // }
 
     deleteSample = (sample) => {
         let new_picklist
@@ -44,9 +44,9 @@ class Picklist extends Component{
 
         return(
             <div>
-                <div onClick={this.navigate}>
+                {/* <div onClick={this.navigate}>
                     Back
-                </div>
+                </div> */}
                 {samples}
             </div>
         )
