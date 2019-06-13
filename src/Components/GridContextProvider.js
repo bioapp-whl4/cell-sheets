@@ -16,7 +16,7 @@ export function ContextProvider (props) {
         return (<div>
           
                 <h3>Box: {props.box_id}</h3>
-                <GridContainer box_id={props.box_id} />
+                <GridContainer box_id={props.box_id} cane_id={props.cane_id} freezer_id={props.freezer_id} />
             
             </div>
         )
@@ -30,7 +30,9 @@ const mapDispatchtoProps = {
 function mapStateToProp(state) {
     return {
         box_id: state.display.box_id,
-        boxDisplay: state.display.displayBox
+        boxDisplay: state.display.displayBox,
+        cane_id: state.display.cane_id,
+        freezer_id: state.display.freezer_id,
     }
 }
 export default connect(mapStateToProp, mapDispatchtoProps)(ContextProvider)
