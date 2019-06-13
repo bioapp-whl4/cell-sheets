@@ -137,8 +137,8 @@ class Header extends Component {
             </div>
           </div>
           <i  onClick={this.addNew} className="fas fa-folder-plus topAddSample"></i>
-          <div className='picklist-div'>
-            <i  onClick={this.pickList} className="fas fa-clipboard-list picklist"></i>
+          <div className='picklist-div' onClick={this.pickList}>
+            <i   className="fas fa-clipboard-list picklist"></i>
             <Picklist_Icon/>
           </div>
           <div className="search">
