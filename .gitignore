@@ -26,3 +26,4 @@ yarn-error.log*
 
 .env
 examples/*/cypress/logs
+TestFiles
