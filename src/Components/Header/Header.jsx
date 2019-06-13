@@ -105,8 +105,8 @@ class Header extends Component {
   };
 
   render() {
-    const minus = <i class="fas fa-minus" onClick={this.advanceSearch}></i>
-    const plus =  <i class="fas fa-plus" onClick={this.advanceSearch}></i>
+    const minus = <i class="fas fa-minus"></i>
+    const plus =  <i class="fas fa-plus"></i>
 
     return (
       <header className="Header">
@@ -124,8 +124,8 @@ class Header extends Component {
           </div>
           <div className="search">
             <i className="fas fa-search glass" onClick={this.search}></i>
-            <input  onChange={this.handleInput} type="text" name="filterValue" placeholder="Search" />
-            {this.state.adv_search_icon ? plus : minus}
+            <input className='keyword-search-input' onChange={this.handleInput} type="text" name="filterValue" placeholder="Search" />
+            <div className='adv-search-toggle' onClick={this.advanceSearch}>{this.state.adv_search_icon ? plus : minus}</div>
           </div>
         </div>
       </header>
