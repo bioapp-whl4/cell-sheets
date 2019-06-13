@@ -30,3 +30,6 @@
 // .freezers-list {
 //   cursor: pointer;
 // }
+.goToBox {
+  @extend %button-base;
+}
