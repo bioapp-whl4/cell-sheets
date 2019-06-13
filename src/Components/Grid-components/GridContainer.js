@@ -1,144 +1,171 @@
-import React, {Component} from 'react';
-import Grid from './Grid'
+import React, { Component } from "react";
+import Grid from "./Grid";
 // import AddSpecimens from './AddSpecimens'
-import SampleList from './SampleList'
-import AddSamples from '../AddSamples'
-import axios from 'axios'
+import SampleList from "./SampleList";
+import AddSamples from "../AddSamples";
+import axios from "axios";
 
 export default class GridContainer extends Component {
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
       specimens: [],
       originIndex: null,
       showData: null,
       addSample: false
-    }
-    this.componentDidMount = this.componentDidMount.bind(this)
-    this.moveItem = this.moveItem.bind(this)
-    this.getSpecimens = this.getSpecimens.bind(this)
-    this.updateSamples = this.updateSamples.bind(this)
+    };
+    this.componentDidMount = this.componentDidMount.bind(this);
+    this.moveItem = this.moveItem.bind(this);
+    this.getSpecimens = this.getSpecimens.bind(this);
+    this.updateSamples = this.updateSamples.bind(this);
   }
 
-  async componentDidMount(){
-    
-    const {box_id} = this.props
-    const response = await axios.get(`/api/boxgrid/samples?id=${box_id}`)
-    
-    try{
-      const {data} = response
+  async componentDidMount() {
+    const { box_id } = this.props;
+    const response = await axios.get(`/api/boxgrid/samples?id=${box_id}`);
+
+    try {
+      const { data } = response;
       this.setState({
         specimens: data
-      })
-    }
-    catch(err){
-      alert(err)
+      });
+    } catch (err) {
+      console.log(err);
     }
   }
 
   componentDidUpdate(prevProps) {
-    if(prevProps.box_id !== this.props.box_id) {
-      this.getData()
-      
+    if (prevProps.box_id !== this.props.box_id) {
+      this.getData();
     }
   }
-  
-getData = async () => {
-  const {box_id} = this.props
-  const response = await axios.get(`/api/boxgrid/samples?id=${box_id}`)
-  try{
-    const {data} = response
-    this.setState({
-      specimens: data
-    })
-  }
-  catch(err){
-    alert(err)
-  }
-}
 
-  async getSpecimens(specimens){
-    await this.setState({
-      specimens
-    })
-  }
-
-  addSample =() => {
-    this.setState({
-      addSample: !this.state.addSample
-    })
-  }
-
-  async updateSamples(){
-    const{box_id} = this.props
-    const response = await axios.get(`/api/boxgrid/samples?id=${box_id}`)
-    try{
-      const {data} = response
+  getData = async () => {
+    const { box_id } = this.props;
+    const response = await axios.get(`/api/boxgrid/samples?id=${box_id}`);
+    try {
+      const { data } = response;
       this.setState({
         specimens: data
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  async getSpecimens(specimens) {
+    await this.setState({
+      specimens
+    });
+  }
+
+  addSample = () => {
+    this.setState({
+      addSample: !this.state.addSample
+    });
+  };
+
+  async updateSamples() {
+    const { box_id } = this.props;
+    const response = await axios.get(`/api/boxgrid/samples?id=${box_id}`);
+    try {
+      const { data } = response;
+      this.setState({
+        specimens: data
+<<<<<<< HEAD
       })
     }
     catch(err){
       alert(err)
+||||||| merged common ancestors
+      })
+    }
+    catch(err){
+      console.log(err)
+=======
+      });
+    } catch (err) {
+      console.log(err);
+>>>>>>> 00698e0f7cbac2429ac78aad2b5ce889c8377407
     }
   }
 
-  showData = (specimen) => {
-    if(!specimen) return
+  showData = specimen => {
+    if (!specimen) return;
     this.setState({
       showData: specimen
-    })
-  }
+    });
+  };
 
   hideData = () => {
     this.setState({
       showData: null
-    })
-  }
+    });
+  };
 
-  getIndex = (index) => {
+  getIndex = index => {
     this.setState({
       originIndex: index
-    })
-  }
+    });
+  };
 
-  async moveItem(x, y, index){
-    let targetIndex = -1
-    for(let i = 0; i < this.state.specimens.length; i++){
-      if(this.state.specimens[i].location[0] === x && this.state.specimens[i].location[1] === y){
-        targetIndex = i
+  async moveItem(x, y, index) {
+    let targetIndex = -1;
+    for (let i = 0; i < this.state.specimens.length; i++) {
+      if (
+        this.state.specimens[i].location[0] === x &&
+        this.state.specimens[i].location[1] === y
+      ) {
+        targetIndex = i;
       }
     }
-    let tempArr = this.state.specimens
-    if(targetIndex !== -1){
-      const target = this.state.specimens[targetIndex]
-      const origin = this.state.specimens[this.state.originIndex]
-      tempArr[this.state.originIndex] = target
-      tempArr[index] = origin
-    }
-    else{
-      tempArr[this.state.originIndex].location = [x,y]
+    let tempArr = this.state.specimens;
+    if (targetIndex !== -1) {
+      const target = this.state.specimens[targetIndex];
+      const origin = this.state.specimens[this.state.originIndex];
+      tempArr[this.state.originIndex] = target;
+      tempArr[index] = origin;
+    } else {
+      tempArr[this.state.originIndex].location = [x, y];
     }
 
     await this.setState({
       specimens: tempArr,
       originIndex: null
-    })
+    });
 
-    for(let i = 0; i < this.state.specimens.length; i++){
-      const box_position = this.state.specimens[i].location
-      const sample_id = this.state.specimens[i].specimen_id
-      await axios.put("/api/boxgrid/samples", {box_position, sample_id})
+    for (let i = 0; i < this.state.specimens.length; i++) {
+      const box_position = this.state.specimens[i].location;
+      const sample_id = this.state.specimens[i].specimen_id;
+      await axios.put("/api/boxgrid/samples", { box_position, sample_id });
     }
   }
-  
-  render(){
+
+  render() {
     return (
       <>
-        <Grid move={this.moveItem} get={this.getIndex} showData={this.showData} hideData={this.hideData} specimens={this.state.specimens} x={9} y={9}/>
-        <SampleList specimens={this.state.specimens}/>
+        <Grid
+          move={this.moveItem}
+          get={this.getIndex}
+          showData={this.showData}
+          hideData={this.hideData}
+          specimens={this.state.specimens}
+          x={9}
+          y={9}
+        />
+        <SampleList specimens={this.state.specimens} />
         <button onClick={this.addSample}>Add a sample</button>
-        {this.state.addSample && <AddSamples specimens={this.state.specimens} x={9} y={9} box_id={this.props.box_id} cane_id={this.props.cane_id} freezer_id={this.props.freezer_id} updateSamples={this.updateSamples}/>}
+        {this.state.addSample && (
+          <AddSamples
+            specimens={this.state.specimens}
+            x={9}
+            y={9}
+            box_id={this.props.box_id}
+            cane_id={this.props.cane_id}
+            freezer_id={this.props.freezer_id}
+            updateSamples={this.updateSamples}
+          />
+        )}
       </>
     );
   }
