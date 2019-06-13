@@ -29,7 +29,7 @@ class Dashboard extends Component {
             let response = await axios.get('http://192.168.2.142:3333')
             let temp = response.data.temperature
             if(temp > 16 && !this.state.alertFired){
-                //swal.fire('Freezer1 temperature too high!', 'Please relocate samples or adjust freezer temperature.', 'warning')
+                swal.fire('Freezer temperature too high!', 'Please relocate samples or adjust freezer temperature.', 'warning')
                 this.setState({
                     alertFired: true
                 })
