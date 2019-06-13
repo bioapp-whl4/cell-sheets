@@ -174,8 +174,6 @@ class AddLocation extends Component {
     }
 
     render() {
-        console.log('booox popo', this.state.box_position)
-
         let freezers = this.state.freezers.map((elem, i) => {
             return <option value={elem.freezer_id} key={i}>{`${elem.freezer_name}: ${elem.freezer_type}`}</option>
         })

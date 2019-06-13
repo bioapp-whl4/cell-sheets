@@ -1,0 +1,44 @@
+.advanceSearch{
+    margin-top: 12px;
+    margin-right: 12px;
+}
+
+.adv-search{
+    div, input{
+        display: flex;
+        align-content: center;
+        height: 20px;
+    }    
+    input{
+        border-radius: 5px 5px 0 0;
+    }
+}
+
+.date-options{
+    display: flex;
+    flex-direction: column;
+}
+
+.date-filter{
+    display: flex;
+    flex-direction: column;
+}
+
+.exit{
+    color: blue;
+}
+
+.adv-search-input{
+    display: flex;
+    align-items: center;
+    i, input{
+        height: 20px;
+    }
+}
+.adv-search-input:hover{
+    cursor: pointer;
+}
+
+.login-input, .pass-input{
+    text-align: center;
+}

@@ -28,7 +28,6 @@ massive(CONNECTION_STRING)
   .then(db => {
     app.set("db", db);
     console.log(`DATABASE: Connected`);
-    //console.log(db.listTables());
     app.listen(SERVER_PORT, () => {
       console.log(`SERVER_PORT: ${SERVER_PORT}`);
     });

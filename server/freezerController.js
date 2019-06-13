@@ -6,7 +6,6 @@ module.exports = {
         res.status(200).send(data);
       });
     } catch (err) {
-      console.log(err);
       res.sendStatus(500);
     }
   },
@@ -130,7 +129,6 @@ module.exports = {
       });
       res.sendStatus(200); //send data for web visual of cart ?
     } catch (err) {
-      console.log(err);
       res.sendStatus(500);
     }
   },
@@ -187,7 +185,6 @@ module.exports = {
       // };
       res.status(200).send();
     } catch (err) {
-      // console.log("error", err);
       res.sendStatus(500);
     }
   },
@@ -204,7 +201,6 @@ module.exports = {
         res.status(200).send(data);
       });
     } catch (err) {
-      console.log(err);
       res.sendStatus(500);
     }
   },
