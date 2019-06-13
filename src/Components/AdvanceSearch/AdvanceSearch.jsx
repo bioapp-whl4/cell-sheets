@@ -129,76 +129,60 @@ class Filter extends Component {
             }
         }
         
-        // store filter results in redux
         this.props.store_filter_results(results)
-
-        // let results_display = results.map((sample, i) => {
-        //     return (
-                // <div key={i} onClick={() => {this.props.history.push(`/api/cane/boxes/${sample.box_id}`)}}>
-                //     <h6>{sample.sample_name}</h6>
-                //     <ul>
-                //         <li>Description: {sample.description}</li>
-                //         <li>Freeze Date: {sample.freeze_date}</li>
-                //         <li>Experiment ID: {sample.experiment_name}</li>
-                //     </ul>
         
-                // </div>
-        //     )
-        // })
-        
-
         return(
             <div className='adv-search'>
                 <i onClick={this.closeDisplay} className="fas fa-times exit"></i>
-
-                <div className='main-options'>
-                    <input type="text" name='search_value' value={this.state.search_value} placeholder='Search for...' onChange={this.handleInput}/>
-                    <div className='adv-search-checkboxes'>
-                        <div>
-                            <input type="checkbox" name="description"  onClick={this.handleCheck} defaultChecked/>
-                            <label>Description</label>
-                        </div>            
-                        <div>
-                            <input type="checkbox" name="sample_id" onClick={this.handleCheck} defaultChecked/>
-                            <label>Sample ID</label>
-                        </div>            
-                        <div>
-                            <input type="checkbox" name="experiment_id" onClick={this.handleCheck} defaultChecked/>
-                            <label>Experiment ID</label>
-                        </div> 
-                    </div>
-                </div> 
-
+                <button onClick={this.resetSearch}>Clear Search</button>
+                <input type="text" name='search_value' value={this.state.search_value} placeholder='Search for...' onChange={this.handleInput}/>
                 <div>
-                    <label>Search by date:</label>
-                    <input type="date" name="start_date" value={this.state.start_date} onChange={this.handleDate}>
-                    </input>        
+                    <input type="checkbox" name="description"  onClick={this.handleCheck} defaultChecked/>
+                    <label>Description</label>
+                </div>            
+                <div>
+                    <input type="checkbox" name="sample_id" onClick={this.handleCheck} defaultChecked/>
+                    <label>Sample ID</label>
+                </div>            
+                <div>
+                    <input type="checkbox" name="experiment_id" onClick={this.handleCheck} defaultChecked/>
+                    <label>Experiment ID</label>
                 </div> 
                 <div>
                     <input type="checkbox" name="date" onClick={this.handleCheck} />
                     <label>Filter by Date </label>
                 </div>  
-                <div>
-                    <input type="radio" name="drone" id='before' onClick={this.dateContext}/>
-                    <label>Before</label>
+                <div className='date-filter'>
+                    {this.state.date ? (
+                    <div className='date-options'>
+                        <div>
+                            <input type="date" name="start_date" value={this.state.start_date} onChange={this.handleDate}>
+                            </input>        
+                        </div> 
+                        <div>
+                            <input type="radio" name="drone" id='before' onClick={this.dateContext}/>
+                            <label>Before</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="drone" id='after' onClick={this.dateContext}/>
+                            <label>After</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="drone" id='between' onClick={this.dateContext}/>
+                            <label>Between</label>
+                        </div> 
+                    </div> ) : null }
+                    
+
+                    { this.state.dateContext !== 'between' ? null : (
+                        <div>
+                            <label>End date:</label>
+                            <input type="date" name="end_date" value={this.state.end_date} onChange={this.handleDate}>
+                            </input>        
+                        </div>  
+                    )}
                 </div>
 
-                <div>
-                    <input type="radio" name="drone" id='after' onClick={this.dateContext}/>
-                    <label>After</label>
-                </div>
-                <div>
-                    <input type="radio" name="drone" id='between' onClick={this.dateContext}/>
-                    <label>Between</label>
-                </div>
-                {this.state.dateContext !== 'between' ? null : (
-                    <div>
-                        <label>End date:</label>
-                        <input type="date" name="end_date" value={this.state.end_date} onChange={this.handleDate}>
-                        </input>        
-                    </div>  
-                )}
-                <button onClick={this.resetSearch}>Clear Search</button>
 
             </div>
         )
