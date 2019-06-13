@@ -20,9 +20,6 @@ class KeywordSearchResults extends Component {
   }
   async componentDidUpdate() {
     await this.getSamples();
-    // if (previousProps.filterTerm !== props.filterTerm) {
-    //   console.log("component did update");
-    // }
   }
   async componentDidMount() {
     this.setState({ filterValue: this.props.filterTerm });
@@ -61,35 +58,30 @@ class KeywordSearchResults extends Component {
         onClick={() => this.updateDisplay(elem.sample_id)}
         key={i}
       >
-        {/* <td>{elem.sample_id}</td> */}
         <td>{elem.user_key}</td>
-        <td>{elem.sample_name}</td>
-        <td>{elem.cane_id}</td>
-        <td>{elem.freezer_id}</td>
-        <td>{elem.box_id}</td>
         <td>{elem.description}</td>
+        <td>{elem.experiment_id}</td>
         <td>{elem.freeze_date}</td>
-        <td>{elem.cell_vial}</td>
-        <td>{elem.culture_condition}</td>
+        <td>{elem.box_position}</td>
+        <td>{elem.freezer_id}</td>
+        <td>{elem.cane_id}</td>
+        <td>{elem.box_id}</td>
       </tr>
-      // </div>
     ));
     return (
       <div>
         {" "}
         <table>
           <tbody className="tg">
-            <tr>
-              <th>User Key</th>
-              <th>Name</th>
-              <th>Cane ID</th>
-              <th>Freezer ID</th>
-              <th>Box ID</th>
-              <th>Description</th>
-              <th>Freeze Date</th>
-              <th>Cell Vial</th>
-              <th>Culture Condition</th>
-            </tr>
+            <th>Sample ID</th>
+            <th>Description</th>
+            <th>Experiment ID</th>
+            <th>Freeze Date</th>
+            <th>Location in Box</th>
+            <th>Freezer ID</th>
+            <th>Cane ID</th>
+            <th>Box ID</th>
+
             {allSamples}
           </tbody>
         </table>

@@ -1,0 +1,46 @@
+.displayInventory {
+  position: relative;
+  top: -1.3em;
+  height: 79vh;
+  opacity: .7;
+}
+
+.NavigateBack {
+  position: absolute;
+  left: 2%;
+  bottom: 5%;
+  background-color: blue;
+  width: 15%;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.NavigateBack:hover {
+  background-color: #12067e;
+}
+
+.BackToInventory:hover {
+  background-color: #12067e;
+}
+
+.BackToInventory {
+  position: absolute;
+  left: 18%;
+  bottom: 5%;
+  background-color: blue;
+  height: 6%;
+  width: 17%;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+/*# sourceMappingURL=DisplayInventory.css.map */

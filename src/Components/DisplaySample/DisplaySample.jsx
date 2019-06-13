@@ -26,40 +26,41 @@ class DisplaySample extends Component {
       <div>
         <tr>
           <tr>
-            <td>User Key:</td>
+            <td>Sample ID:</td>
             <td>{elem.user_key}</td>
-          </tr>
-          <tr>
-            <td>Sample Name:</td>
-            <td>{elem.sample_name}</td>
-          </tr>
-          <tr>
-            <td>Cane ID:</td>
-            <td>{elem.cane_id}</td>
-          </tr>
-          <tr>
-            <td>Freezer ID:</td>
-            <td>{elem.freezer_id}</td>
-          </tr>
-          <tr>
-            <td>Box ID:</td>
-            <td>{elem.box_id}</td>
           </tr>
           <tr>
             <td>Description:</td>
             <td>{elem.description}</td>
           </tr>
           <tr>
+            <td>Experiment ID:</td>
+            <td>{elem.experiment_id}</td>
+          </tr>
+          <tr>
             <td>Freeze Date:</td>
             <td>{elem.freeze_date}</td>
           </tr>
           <tr>
-            <td>Cell/Vial:</td>
-            <td>{elem.cell_vial}</td>
+            <td>Location in Box</td>
+            <td>{elem.box_position}</td>
           </tr>
           <tr>
-            <td>Culture Condition:</td>
-            <td>{elem.culture_condition}</td>
+            <td>Sample Name:</td>
+            <td>{elem.sample_name}</td>
+          </tr>
+          <tr>
+            <td>Freezer ID:</td>
+            <td>{elem.freezer_id}</td>
+          </tr>
+          <tr>
+            <td>Cane ID:</td>
+            <td>{elem.cane_id}</td>
+          </tr>
+
+          <tr>
+            <td>Box ID:</td>
+            <td>{elem.box_id}</td>
           </tr>
         </tr>
       </div>
