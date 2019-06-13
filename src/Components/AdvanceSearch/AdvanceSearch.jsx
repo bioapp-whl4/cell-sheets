@@ -51,16 +51,16 @@ class Filter extends Component {
         })
     }
     // Added Clear Search as well as close display
-    closeDisplay = () => {
-        this.props.updateFreezerId(null)
-        this.props.updateCaneId(null)
-        this.props.updateBoxId(null)
-        this.props.updateDisplayFreezer(true)
-        this.props.updateDisplayCane(false)
-        this.props.updateDisplayBoxes(false)
-        this.props.updateDisplayBox(false)
-        this.props.updateAdvanceSearch(false)
-    }
+    // closeDisplay = () => {
+    //     this.props.updateFreezerId(null)
+    //     this.props.updateCaneId(null)
+    //     this.props.updateBoxId(null)
+    //     this.props.updateDisplayFreezer(true)
+    //     this.props.updateDisplayCane(false)
+    //     this.props.updateDisplayBoxes(false)
+    //     this.props.updateDisplayBox(false)
+    //     this.props.updateAdvanceSearch(false)
+    // }
     resetSearch = () => {
         this.setState({search_value: '',
         description: true,
@@ -148,8 +148,8 @@ class Filter extends Component {
         
 
         return(
-            <div className='adv-search'>
-                <i onClick={this.closeDisplay} className="fas fa-times exit"></i>
+            <div>
+                {/* <i onClick={this.closeDisplay} className="fas fa-times exit"></i> */}
 
                 <div className='main-options'>
                     <input type="text" name='search_value' value={this.state.search_value} placeholder='Search for...' onChange={this.handleInput}/>

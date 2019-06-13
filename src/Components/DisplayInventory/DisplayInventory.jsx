@@ -4,12 +4,14 @@ import DisplayFreezers from "./Sub_components/DisplayFreezers/DisplayFreezers";
 import FreezerBox from "./Sub_components/FreezerBox/FreezerBox";
 import FreezerCane from "./Sub_components/FreezerCane/FreezerCane";
 import Box from "../GridContextProvider";
-import Picklist from '../Picklist'
+import Picklist from '../Picklist';
+import AddNew from '../AddSpecimen/AddSpecimen'
 //Advance Search Display
 import AdvanceSearchDisplay from "../AdvanceSearch/AdvanceSearchResults";
 import KeywordSearchDisplay from "../AdvanceSearch/KeywordSearchResults";
 import DisplaySample from "../DisplaySample/DisplaySample";
 import {
+  updateDisplayAddNew,
   updateAdvanceSearch,
   updateKeywordSearch,
   updateFreezerId,
@@ -25,7 +27,8 @@ import {
 
 class DisplayInventory extends Component {
   backToFreezer = async () => {
-    this.props.updateDisplayPicklist()
+    this.props.updateDisplayAddNew(false);
+    this.props.updateDisplayPicklist(false);
     this.props.updateKeywordSearch(false)
     this.props.updateAdvanceSearch(false)
     this.props.updateDisplayCane(false);
@@ -105,6 +108,9 @@ class DisplayInventory extends Component {
             </button>
           </div>
         )}
+        {this.props.addNew && <div>
+          <AddNew back={this.backToFreezer}/>
+        </div>}
         {this.props.box && (
           <div>
             <Box />
@@ -133,7 +139,8 @@ const mapDispatchToProps = {
   updateDisplaySample,
   updateKeywordSearch,
   updateAdvanceSearch,
-  updateDisplayPicklist
+  updateDisplayPicklist,
+  updateDisplayAddNew
 };
 function mapStateToProps(state) {
   return {
@@ -151,7 +158,8 @@ function mapStateToProps(state) {
     advancedSearch: state.display.advancedSearch,
     keywordSearch: state.display.keywordSearch,
     //Picklist
-    picklist: state.display.displayPicklist
+    picklist: state.display.displayPicklist,
+    addNew: state.display.addNew
   };
 }
 export default connect(
