@@ -55,16 +55,20 @@
 }
 
 .FieldButton {
-    padding-left: 3%;
+    padding-left: 2%;
     position: relative;
-    font-size: 10px;
+    font-size: 9px;
     margin-top: 5%;
     margin-bottom: 5%;
     width: 50%;
     height:10%;
     @extend %addField-base;
 }
-
+.FieldButton:hover {
+    font-size: 11px;
+    padding-bottom: 30px;
+  
+}
 .AddLocation {
     position: absolute;
     left:50%;
