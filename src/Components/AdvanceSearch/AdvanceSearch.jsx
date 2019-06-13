@@ -21,6 +21,7 @@ class Filter extends Component {
 
     getInventory = async () => {
         let freezers = []
+        let all_samples
         try{
             let res1 = await axios.get('/api/freezers')
             res1.data.map( async (freezer) => {
@@ -32,11 +33,14 @@ class Filter extends Component {
                     cane.boxes.forEach( async (box) => {
                         let res4 = await axios.get(`/api/samples`)
                         box.samples = res4.data
+                        all_samples.push(...res4.data)
                     })
                 })
                     freezers.push(freezer) //add each freezer to the freezer array
             })
-            this.props.updateEverything(freezers) // send data to redux
+            this.setState({
+                samples: all_samples
+            })
         } catch(err){
             alert(`Something is wrong (BurgerMenu.jsx - getInventory)`, err)
         }
@@ -92,19 +96,24 @@ class Filter extends Component {
     }
 
     render(){
-        console.log(`11111`, this.props.everything, this.state.samples)
         let results
         if (this.state.search_value){
-            results = this.state.samples.filter(sample => {
+            console.log(`state.search_value`, this.state.search_value)
+            console.log(`this.state.all_samples`, this.state.all_samples)
+            results = this.state.all_samples.filter(sample => {
                 let search_within = ''
                 search_within += this.state.description && sample.description ? sample.description.toLowerCase() : ''
                 search_within += this.state.experiment_id && sample.experiment_name ? sample.experiment_name.toLowerCase() : ''
                 search_within += this.state.sample_id && sample.sample_name ? sample.sample_name.toLowerCase() : ''
+                console.log(`search_within`,search_within)
                 return search_within.includes(this.state.search_value.toLowerCase())
             })
         } else {
-            results = this.state.samples
+            results = this.state.all_samples
         }
+
+        console.log(`results`, results)
+
 
         if (this.state.date){
             let start_date = Date.parse(new Date(this.state.start_date))
@@ -129,8 +138,8 @@ class Filter extends Component {
                 })
             }
         }
-        
         this.props.store_filter_results(results)
+
         return(
             <div className='adv-search'>
                 <div className='adv-search-input'>
