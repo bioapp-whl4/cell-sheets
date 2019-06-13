@@ -130,12 +130,12 @@ class Filter extends Component {
         }
         
         this.props.store_filter_results(results)
-        
         return(
             <div className='adv-search'>
-                <i onClick={this.closeDisplay} className="fas fa-times exit"></i>
-                <button onClick={this.resetSearch}>Clear Search</button>
-                <input type="text" name='search_value' value={this.state.search_value} placeholder='Search for...' onChange={this.handleInput}/>
+                <div className='adv-search-input'>
+                    <input type="text" name='search_value' value={this.state.search_value} placeholder='Search for...' onChange={this.handleInput}/>
+                    {/* <i onClick={this.resetSearch} class="fas fa-times"></i> */}
+                </div>
                 <div>
                     <input type="checkbox" name="description"  onClick={this.handleCheck} defaultChecked/>
                     <label>Description</label>
@@ -171,16 +171,14 @@ class Filter extends Component {
                             <input type="radio" name="drone" id='between' onClick={this.dateContext}/>
                             <label>Between</label>
                         </div> 
-                    </div> ) : null }
                     
-
                     { this.state.dateContext !== 'between' ? null : (
                         <div>
-                            <label>End date:</label>
                             <input type="date" name="end_date" value={this.state.end_date} onChange={this.handleDate}>
                             </input>        
                         </div>  
                     )}
+                    </div> ) : null }
                 </div>
 
 
