@@ -1,0 +1,60 @@
+.registerForm {
+  font-size: 11px;
+  position: relative;
+  text-align: left;
+  top: 22vh;
+  left: 33vw;
+  height: 60vh;
+  width: 30vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.registerBG {
+  position: absolute;
+  background-color: white;
+  width: 45%;
+  height: 62vh;
+  left: 26vw;
+  top: 20vh;
+  opacity: .9;
+  z-index: -1;
+}
+
+.registerButton {
+  position: relative;
+  background-color: blue;
+  width: 60%;
+  left: 20%;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.backButton {
+  position: relative;
+  left: 20%;
+  background-color: red;
+  width: 60%;
+  margin-top: 0;
+  margin-bottom: .5em;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+/*# sourceMappingURL=Register.css.map */
