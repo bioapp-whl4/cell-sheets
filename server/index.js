@@ -52,6 +52,7 @@ app.get("/api/medium", freezerCtrl.getMedium);
 app.get("/api/boxgrid/samples", freezerCtrl.getGridSamplesByBoxId);
 app.get("/api/box", freezerCtrl.getBox);
 app.post("/api/box", addPartsCtrl.addBox);
+app.put("/api/boxgrid/samples", freezerCtrl.updateSampleLocations)
 //SAMPLE
 app.get("/api/samples", sampleCtrl.getSamples);
 app.get("/api/sample", sampleCtrl.getSample);

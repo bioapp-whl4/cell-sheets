@@ -203,5 +203,17 @@ module.exports = {
     } catch (err) {
       res.sendStatus(500);
     }
+  },
+  updateSampleLocations: (req, res) => {
+    const db = req.app.get('db')
+    const {box_position, sample_id} = req.body
+    try{
+      db.updateSampleLocations({box_position, sample_id}).then(() => {
+        res.sendStatus(200)
+      })
+    } catch (err){
+      console.log(err)
+      res.sendStatus(500)
+    }
   }
 };
