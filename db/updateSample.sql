@@ -17,5 +17,5 @@ UPDATE ba.sample
              add2=${add2}, 
              add3=${add3}, 
              add4=${add4}, 
-             add5=$add5
+             add5=${add5}
 WHERE id = ${sample_id}

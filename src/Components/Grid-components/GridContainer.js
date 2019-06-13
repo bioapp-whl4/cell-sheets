@@ -35,6 +35,7 @@ export default class GridContainer extends Component {
       console.log(err)
     }
   }
+
   componentDidUpdate(prevProps) {
     if(prevProps.box_id !== this.props.box_id) {
       this.getData()
@@ -101,7 +102,7 @@ getData = async () => {
     })
   }
 
-  moveItem(x, y, index){
+  async moveItem(x, y, index){
     let targetIndex = -1
     for(let i = 0; i < this.state.specimens.length; i++){
       if(this.state.specimens[i].location[0] === x && this.state.specimens[i].location[1] === y){
@@ -119,14 +120,19 @@ getData = async () => {
       tempArr[this.state.originIndex].location = [x,y]
     }
 
-    this.setState({
+    await this.setState({
       specimens: tempArr,
       originIndex: null
     })
+
+    for(let i = 0; i < this.state.specimens.length; i++){
+      const box_position = this.state.specimens[i].location
+      const sample_id = this.state.specimens[i].specimen_id
+      await axios.put("/api/boxgrid/samples", {box_position, sample_id})
+    }
   }
   
   render(){
-    
     return (
       <>
         <Grid move={this.moveItem} get={this.getIndex} showData={this.showData} hideData={this.hideData} specimens={this.state.specimens} x={9} y={9}/>
