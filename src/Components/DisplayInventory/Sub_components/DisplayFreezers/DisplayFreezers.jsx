@@ -63,7 +63,7 @@ class DisplayFreezers extends Component {
           key={i}
         >
           <h3>Freezer: {elem.freezer_name}</h3>
-          <h4>Temperature: {elem.temperature}</h4>
+          <h4>Temperature: {elem.temperature} C</h4>
           <h4>Type: {elem.freezer_type}</h4>
           <i className="fas fa-temperature-low icon" />
         </div>
