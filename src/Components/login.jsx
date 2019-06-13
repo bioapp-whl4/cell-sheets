@@ -31,7 +31,6 @@ class Login extends Component {
   };
 
   render() {
-    console.log("the state of things", this.state);
     return (
       <div className="login">
         <div className="loginBG" />

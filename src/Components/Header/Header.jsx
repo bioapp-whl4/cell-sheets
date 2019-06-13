@@ -123,20 +123,20 @@ class Header extends Component {
   };
 
   render() {
-    const minus = <i class="fas fa-minus" onClick={this.advanceSearch}></i>
-    const plus =  <i class="fas fa-plus" onClick={this.advanceSearch}></i>
+    const minus = <i className="fas fa-minus" onClick={this.advanceSearch}></i>
+    const plus =  <i className="fas fa-plus" onClick={this.advanceSearch}></i>
 
     return (
       <header className="Header">
         <h2 className="AppName">CELL SHEETS</h2>
         <div className="nav-links">
           <div className="logout">
-          <i class="fas fa-user"></i>
+          <i className="fas fa-user"></i>
             <div>
               Log Out
             </div>
           </div>
-          <i  onClick={this.addNew} class="fas fa-folder-plus topAddSample"></i>
+          <i  onClick={this.addNew} className="fas fa-folder-plus topAddSample"></i>
           <div className='picklist-div'>
             <i  onClick={this.pickList} className="fas fa-clipboard-list picklist"></i>
             <Picklist_Icon/>

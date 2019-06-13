@@ -32,7 +32,7 @@ export default class GridContainer extends Component {
       })
     }
     catch(err){
-      console.log(err)
+      alert(err)
     }
   }
   componentDidUpdate(prevProps) {
@@ -52,7 +52,7 @@ getData = async () => {
     })
   }
   catch(err){
-    console.log(err)
+    alert(err)
   }
 }
 
@@ -78,7 +78,7 @@ getData = async () => {
       })
     }
     catch(err){
-      console.log(err)
+      alert(err)
     }
   }
 
