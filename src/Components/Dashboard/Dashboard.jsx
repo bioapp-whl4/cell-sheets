@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux";
 import Header from '../Header/Header'
-import {Link} from 'react-router-dom'
 import DisplayInventory from '../DisplayInventory/DisplayInventory'
 import {DragDropContextProvider} from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
@@ -19,10 +18,6 @@ class Dashboard extends Component {
             {this.props.adv_search_display_state ? <div className='advanceSearch'><AdvanceSearch/></div> : null}
             <div className='display'><DisplayInventory/></div>
            
-            <Link to='/addspecimen'>Add</Link>
-            <Link to='/api/hierarchy'>HIERARCHY TEST</Link>
-            <Link to='/addlocation'>ADD STUFF</Link>
-            <Link to='/api/test'>SINGLE VIEW</Link>
             <BurgerMenu/>
         </div>
             </DragDropContextProvider>

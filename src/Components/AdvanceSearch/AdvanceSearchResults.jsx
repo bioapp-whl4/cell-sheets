@@ -5,6 +5,11 @@ import {
 
 class AdvanceSearchResults extends Component {
 
+    componentDidUpdate(prevProps) {
+        if(this.props.filterResults !== prevProps.filterResults) {
+            
+        }
+    }
     displayBox = (freezer_id, cane_id, box_id) => {
             this.props.updateFreezerId(freezer_id)
             this.props.updateCaneId(cane_id)
@@ -13,7 +18,7 @@ class AdvanceSearchResults extends Component {
             this.props.updateDisplayBox(true)
     }
     render() {
-        
+        console.log('props on adv search',this.props.filterResults)
         let results_display = this.props.filterResults.map((sample, i) => {
 
             return (
