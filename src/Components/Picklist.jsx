@@ -26,6 +26,7 @@ class Picklist extends Component{
     }
 
     render(){
+        console.log('list',this.props.picklist)
         let samples = this.props.picklist.map((sample, i) => {
             return (
                 <div key={i} >

@@ -70,6 +70,7 @@ class AddSpecimen extends Component {
         this.props.addFreezerId(null)
         this.props.addCaneId(null)
         this.props.addBoxId(null)
+        this.props.back()
     }
     cancelField = (title, body, field) => {
         this.setState({ [title]: '', [body]: '', [field]: false })
@@ -93,7 +94,6 @@ class AddSpecimen extends Component {
             .catch(err => console.log('err getting freezer mediums', err))
     }
     render() {
-        console.log('box_position', this.state.box_position)
         let freezingOptions = this.state.freezingMediums.map((elem, i) => {
             return <option value={elem.id} key={i}>{elem.name}</option>
         })

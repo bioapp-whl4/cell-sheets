@@ -73,7 +73,7 @@ class BurgerMenu extends Component {
     if(this.props.everything) {
     freezerdisplay = (
         <div>
-            <div className='collapse' onClick={this.toggleBurger}><i class="fas fa-caret-left"></i></div>
+            <div className='collapse' onClick={this.toggleBurger}><i className="fas fa-caret-left"></i></div>
             <ul className='bm-freezers'>
                 {this.props.everything.map((freezer, i) => {
                     return (
@@ -108,7 +108,7 @@ class BurgerMenu extends Component {
 
     return (
         <div className='burger-menu'>
-            <div className={bmToggle} onClick={this.toggleBurger}><i class="fas fa-caret-right"></i></div>
+            <div className={bmToggle} onClick={this.toggleBurger}><i className="fas fa-caret-right"></i></div>
             <Menu isOpen={this.props.isOpen}>
                 {freezerdisplay}
             </Menu>
