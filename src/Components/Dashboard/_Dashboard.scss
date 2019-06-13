@@ -12,7 +12,10 @@
     right:0;
     z-index: 2;
     background-color: white;
-    width:15%;
+    width: fit-content;
     height: 100vh;
+}
+.adv-search-checkboxes{
+    display: flex;
 }
 

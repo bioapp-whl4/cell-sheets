@@ -69,42 +69,46 @@ class BurgerMenu extends Component {
         this.props.updateBoxId(box_id)
     }
   render () {
-   let freezerdisplay;
+   let freezerdisplay
     if(this.props.everything) {
     freezerdisplay = (
-        <ul>
-            {this.props.everything.map((freezer, i) => {
-                return (
-                    <li key={i}>
-                        <h5 onClick={()=>this.handleFreezer(freezer.freezer_id)}>{freezer.freezer_name} : {freezer.freezer_type}</h5>
-                        <ul>
-                            {freezer.canes.map((cane, i) => {
-                                return (
-                                    <li key={i}>
-                                        <h6 onClick={()=>this.handleCane(freezer.freezer_id,cane.cane_id)}> Cane: {cane.cane}</h6>
-                                        <ul>
-                                            {cane.boxes.map((box, i) => {
-                                                return (
-                                                    <li key={i}>
-                                                       <h6 onClick={()=>this.handleBox(freezer.freezer_id,cane.cane_id,box.box_id)}>Box:{box.box_name}</h6> 
-                                                    </li>
-                                                )
-                                            })}
-                                        </ul>
-                                    </li>
-                                )
-                            })}
-                        </ul>
-                    </li>
-                )
-            })}
-        </ul>
-    )
-        }
+        <div>
+            <div className='collapse' onClick={this.toggleBurger}><i class="fas fa-caret-left"></i></div>
+            <ul className='bm-freezers'>
+                {this.props.everything.map((freezer, i) => {
+                    return (
+                        <li key={i}>
+                            <div onClick={()=>this.handleFreezer(freezer.freezer_id)}>{freezer.freezer_name} : {freezer.freezer_type}</div>
+                            <ul className='bm-canes'>
+                                {freezer.canes.map((cane, i) => {
+                                    return (
+                                        <li key={i}>
+                                            <div onClick={()=>this.handleCane(freezer.freezer_id,cane.cane_id)}> Cane: {cane.cane}</div>
+                                            <ul className='bm-boxes'>
+                                                {cane.boxes.map((box, i) => {
+                                                    return (
+                                                        <li key={i}>
+                                                        <div onClick={()=>this.handleBox(freezer.freezer_id,cane.cane_id,box.box_id)}>Box:{box.box_name}</div> 
+                                                        </li>
+                                                    )
+                                                })}
+                                            </ul>
+                                        </li>
+                                    )
+                                })}
+                            </ul>
+                        </li>
+                    )
+                })}
+            </ul>
+        </div>
+    )}
+
+    const bmToggle = this.props.isOpen ? `hide` : `bm-toggle`
 
     return (
         <div className='burger-menu'>
-            <button onClick={this.toggleBurger}>Toggle Burger Menu</button>
+            <div className={bmToggle} onClick={this.toggleBurger}><i class="fas fa-caret-right"></i></div>
             <Menu isOpen={this.props.isOpen}>
                 {freezerdisplay}
             </Menu>
@@ -115,7 +119,8 @@ class BurgerMenu extends Component {
 
 const mapStateToProps = (reduxState) => {
     const { everything } = reduxState.reducer
-    return { everything } 
+    const {isOpen } = reduxState.burgerMenu
+    return { everything, isOpen } 
 }
 const mapDispatchToProps = {
     updateEverything,
