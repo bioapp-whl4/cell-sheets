@@ -21,7 +21,6 @@ class Filter extends Component {
 
     getInventory = async () => {
         let freezers = []
-        let samples = []
         try{
             let res1 = await axios.get('/api/freezers')
             res1.data.map( async (freezer) => {
@@ -30,25 +29,23 @@ class Filter extends Component {
                 freezer.canes.forEach( async (cane) => { // get the boxes for each cane
                     let res3 = await axios.get(`/api/cane/boxes?id=${cane.cane_id}`)
                     cane.boxes = res3.data // add the boxes to the cane object
-                    cane.boxes.forEach( async (box) => {  
-                        let res4 = await axios.get(`/api/box/samples?id=${box.box_id}`)
+                    cane.boxes.forEach( async (box) => {
+                        let res4 = await axios.get(`/api/samples`)
                         box.samples = res4.data
-                        samples.push(...res4.data)
-                        
                     })
                 })
                     freezers.push(freezer) //add each freezer to the freezer array
             })
-            this.setState({
-                samples: samples
-            })
-            return freezers
+            this.props.updateEverything(freezers) // send data to redux
         } catch(err){
-            console.log(`Something is wrong`)
+            alert(`Something is wrong (BurgerMenu.jsx - getInventory)`, err)
         }
     }
+
     async componentDidMount(){
-        this.props.updateEverything( await this.getInventory())
+        if (this.props.everything.length === 0){
+            this.props.updateEverything( await this.getInventory())
+        }
         this.setState({
             inventory: this.props.everything
         })
@@ -154,19 +151,24 @@ class Filter extends Component {
             <div>
                 {/* <i onClick={this.closeDisplay} className="fas fa-times exit"></i> */}
 
-                <input type="text" name='search_value' value={this.state.search_value} placeholder='Search for...' onChange={this.handleInput}/>
-                <div>
-                    <input type="checkbox" name="description"  onClick={this.handleCheck} defaultChecked/>
-                    <label>Description</label>
-                </div>            
-                <div>
-                    <input type="checkbox" name="sample_id" onClick={this.handleCheck} defaultChecked/>
-                    <label>Sample ID</label>
-                </div>            
-                <div>
-                    <input type="checkbox" name="experiment_id" onClick={this.handleCheck} defaultChecked/>
-                    <label>Experiment ID</label>
-                </div>  
+                <div className='main-options'>
+                    <input type="text" name='search_value' value={this.state.search_value} placeholder='Search for...' onChange={this.handleInput}/>
+                    <div className='adv-search-checkboxes'>
+                        <div>
+                            <input type="checkbox" name="description"  onClick={this.handleCheck} defaultChecked/>
+                            <label>Description</label>
+                        </div>            
+                        <div>
+                            <input type="checkbox" name="sample_id" onClick={this.handleCheck} defaultChecked/>
+                            <label>Sample ID</label>
+                        </div>            
+                        <div>
+                            <input type="checkbox" name="experiment_id" onClick={this.handleCheck} defaultChecked/>
+                            <label>Experiment ID</label>
+                        </div> 
+                    </div>
+                </div> 
+
                 <div>
                     <label>Search by date:</label>
                     <input type="date" name="start_date" value={this.state.start_date} onChange={this.handleDate}>
