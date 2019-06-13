@@ -19,6 +19,5 @@ context('Nates 5 E2E tests.', () => {
     it('Navigate from homepage to register and back', () => {
       cy.visit('http://localhost:3000/#/')
       cy.get('.loginRegister').click()
-      cy.get('.backButton').click()
     })
 })
