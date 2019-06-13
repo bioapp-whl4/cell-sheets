@@ -33,6 +33,7 @@ export default class GridContainer extends Component {
       console.log(err);
     }
   }
+
   componentDidUpdate(prevProps) {
     if (prevProps.box_id !== this.props.box_id) {
       this.getData();
@@ -116,13 +117,19 @@ export default class GridContainer extends Component {
       tempArr[this.state.originIndex].location = [x, y];
     }
 
-    this.setState({
+    await this.setState({
       specimens: tempArr,
       originIndex: null
-    });
-  }
+    })
 
-  render() {
+    for(let i = 0; i < this.state.specimens.length; i++){
+      const box_position = this.state.specimens[i].location
+      const sample_id = this.state.specimens[i].specimen_id
+      await axios.put("/api/boxgrid/samples", {box_position, sample_id})
+    }
+  }
+  
+  render(){
     return (
       <>
         <Grid
