@@ -1,43 +1,43 @@
 .displayInventory {
-    position: relative;
-    top: -1.3em;
-    height: 79vh;
-    
-  
+  position: relative;
+  top: -1.3em;
+  height: 79vh;
 }
 .NavigateBack {
-    position: absolute;
-    left: 2%;
-    bottom: 5%;
-    background-color: blue;
-    width:15%;
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
+  // position: absolute;
+  // left: 2%;
+  // bottom: 5%;
+  // background-color: blue;
+  // width: 15%;
+  // border: none;
+  // color: white;
+  // padding: 15px 32px;
+  // text-align: center;
+  // text-decoration: none;
+  // display: inline-block;
+  // font-size: 16px;
+  @extend %button-base;
 }
 
 .NavigateBack:hover {
-    background-color:rgb(18, 6, 126);
+  background: linear-gradient(#0c8cb7, #eeeeee);
 }
 .BackToInventory:hover {
-    background-color:rgb(18, 6, 126);
+  background: linear-gradient(#0c8cb7, #eeeeee);
 }
 .BackToInventory {
-    position: absolute;
-    left: 18%;
-    bottom: 5%;
-    background-color: blue;
-    height: 6%;
-    width:17%;
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
+  // position: absolute;
+  // left: 18%;
+  // bottom: 5%;
+  // background-color: blue;
+  // height: 6%;
+  // width: 17%;
+  // border: none;
+  // color: white;
+  // padding: 15px 32px;
+  // text-align: center;
+  // text-decoration: none;
+  // display: inline-block;
+  // font-size: 16px;
+  @extend %button-base;
 }
