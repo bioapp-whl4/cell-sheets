@@ -12,7 +12,7 @@ const client = require('twilio')(ACCOUNT_SID,AUTH_TOKEN)
 const app = express();
 
 //middleware
-
+app.use( express.static( `${__dirname}/../build` ) );
 app.use(express.json());
 app.use(
   session({
