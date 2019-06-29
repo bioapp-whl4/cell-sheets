@@ -6,13 +6,19 @@ const controller = require("./controller");
 const sampleCtrl = require("./sampleController");
 const freezerCtrl = require("./freezerController");
 const addPartsCtrl = require("./partsController");
-const { CONNECTION_STRING, SESSION_SECRET, SERVER_PORT,ACCOUNT_SID,AUTH_TOKEN} = process.env;
-const client = require('twilio')(ACCOUNT_SID,AUTH_TOKEN)
+const {
+  CONNECTION_STRING,
+  SESSION_SECRET,
+  SERVER_PORT,
+  ACCOUNT_SID,
+  AUTH_TOKEN
+} = process.env;
+const client = require("twilio")(ACCOUNT_SID, AUTH_TOKEN);
 
 const app = express();
 
 //middleware
-app.use( express.static( `${__dirname}/../build` ) );
+app.use(express.static(`${__dirname}/../build`));
 app.use(express.json());
 app.use(
   session({
@@ -37,7 +43,7 @@ massive(CONNECTION_STRING)
 
 app.post("/auth/login", controller.login);
 app.post("/auth/register", controller.register);
-// app.get('/auth/logout',controller.logout)
+app.get("/auth/logout", controller.logout);
 // app.get('/auth/session',controller.session)
 
 //FREEZER-CONTROLLER
@@ -53,7 +59,7 @@ app.get("/api/medium", freezerCtrl.getMedium);
 app.get("/api/boxgrid/samples", freezerCtrl.getGridSamplesByBoxId);
 app.get("/api/box", freezerCtrl.getBox);
 app.post("/api/box", addPartsCtrl.addBox);
-app.put("/api/boxgrid/samples", freezerCtrl.updateSampleLocations)
+app.put("/api/boxgrid/samples", freezerCtrl.updateSampleLocations);
 //SAMPLE
 app.get("/api/samples", sampleCtrl.getSamples);
 app.get("/api/sample", sampleCtrl.getSample);
@@ -65,13 +71,14 @@ app.post("/api/cane", addPartsCtrl.addCane);
 //PICKLIST
 app.post("/api/picklist", controller.picklist);
 //Freezer warning
-app.post('/api/warning',(req,res) => {
-  const {freezer_id} = req.body
+app.post("/api/warning", (req, res) => {
+  const { freezer_id } = req.body;
   client.messages
-  .create({ 
-  body: `Cell Sheets Alert: Freezer ${freezer_id} temperature is above 16C`,
-  from: '18058745931',
-  to: '8053456125'
-  }).then(message => console.log(message.sid))
- res.sendStatus(200)
-})
+    .create({
+      body: `Cell Sheets Alert: Freezer ${freezer_id} temperature is above 16C`,
+      from: "18058745931",
+      to: "8053456125"
+    })
+    .then(message => console.log(message.sid));
+  res.sendStatus(200);
+});

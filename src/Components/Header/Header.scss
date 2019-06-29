@@ -4,7 +4,7 @@
   background-color: blue;
   height: 9em;
   width: 100%;
-  opacity: .6;
+  opacity: 0.6;
 }
 .advance {
   color: white;
@@ -12,12 +12,12 @@
   left: 20%;
 }
 
-.picklist-div{
+.picklist-div {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  i{
-    padding-right: .5vw;
+  i {
+    padding-right: 0.5vw;
   }
 }
 
@@ -26,15 +26,15 @@
 }
 .topAddSample {
   position: absolute;
-  top:5.5%;
+  top: 5.5%;
   right: 9%;
   color: white;
   font-size: 30px;
 }
 .topAddSample:hover {
-color: grey;
+  color: grey;
 }
-.picklist-icon{
+.picklist-icon {
   color: white;
 }
 
@@ -55,17 +55,17 @@ color: grey;
   padding-left: 5vw;
 }
 
-.logout {
+.newLogout {
   color: white;
   width: fit-content;
   display: flex;
   justify-content: right;
-  i{
-    padding-right: .5vw;
+  i {
+    padding-right: 0.5vw;
   }
 }
 
-.logout:hover{
+.newLogout:hover {
   cursor: pointer;
 }
 
@@ -77,20 +77,21 @@ color: grey;
   color: white;
   font-size: 30px;
   position: relative;
-  label{
+  label {
     font-size: 15px;
     display: flex;
     align-content: center;
   }
-  input, button{
+  input,
+  button {
     border-radius: 12px;
     text-align: center;
   }
-  i:hover{
+  i:hover {
     cursor: pointer;
   }
-  i{
-    padding: 0 .5vw 0 .5vw;
+  i {
+    padding: 0 0.5vw 0 0.5vw;
   }
 }
 

@@ -59,8 +59,12 @@ module.exports = {
       res.sendStatus(401);
     }
   },
+  logout: (req, res) => {
+    req.session.destroy();
+    res.sendStatus(200);
+  },
   picklist: (req, res) => {
     const { session } = req;
-    session.picklist = req.body
+    session.picklist = req.body;
   }
 };
