@@ -1,4 +1,4 @@
 const cToF = require("./CelcToFerin");
-test("convert 0 celsius to 32 Fahrenheit", () => {
-  expect(cToF(0)).toBe(32);
+test("convert 60 celsius to 140 Fahrenheit", () => {
+  expect(cToF(60)).toBe(140);
 });
