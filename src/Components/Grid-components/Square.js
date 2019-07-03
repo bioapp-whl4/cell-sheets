@@ -24,8 +24,8 @@ function Square(props){
     return connectDropTarget(
         <div style={{
             border: '1px solid black', 
-            width: '100px', 
-            height: '100px',
+            width: '70px', 
+            height: '70px',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center'

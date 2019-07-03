@@ -91,6 +91,8 @@ export default class AddSamples extends Component{
             add4: '',
             add5: ''
         })
+
+        this.props.hideAdd()
     }
 
     addField = () => {

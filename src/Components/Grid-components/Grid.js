@@ -41,8 +41,8 @@ export default function Grid(props){
         <div style={{
             display: 'flex',
             flexWrap: 'wrap',
-            width: '920px',
-            height: '920px'
+            width: '680px',
+            height: '645px'
         }}>
             {squares}
         </div>

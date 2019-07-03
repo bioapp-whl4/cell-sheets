@@ -40,6 +40,12 @@ export default class GridContainer extends Component {
     }
   }
 
+  hideAdd = () => {
+    this.setState({
+      addSample: false
+    })
+  }
+
   getData = async () => {
     const { box_id } = this.props;
     const response = await axios.get(`/api/boxgrid/samples?id=${box_id}`);
@@ -131,7 +137,7 @@ export default class GridContainer extends Component {
 
   render() {
     return (
-      <>
+      <div style={{display: 'flex'}}>
         <Grid
           move={this.moveItem}
           get={this.getIndex}
@@ -141,20 +147,27 @@ export default class GridContainer extends Component {
           x={9}
           y={9}
         />
-        <SampleList specimens={this.state.specimens} />
+        <div style={{height: '690px', overflowY: 'scroll'}}>
+          <SampleList style={{}} specimens={this.state.specimens} />
+        </div>
+        
         <button onClick={this.addSample}>Add a sample</button>
         {this.state.addSample && (
-          <AddSamples
-            specimens={this.state.specimens}
-            x={9}
-            y={9}
-            box_id={this.props.box_id}
-            cane_id={this.props.cane_id}
-            freezer_id={this.props.freezer_id}
-            updateSamples={this.updateSamples}
-          />
+          <div >
+            <AddSamples
+              specimens={this.state.specimens}
+              x={9}
+              y={9}
+              box_id={this.props.box_id}
+              cane_id={this.props.cane_id}
+              freezer_id={this.props.freezer_id}
+              updateSamples={this.updateSamples}
+              hideAdd={this.hideAdd}
+            />
+          </div>
+          
         )}
-      </>
+      </div>
     );
   }
 }
